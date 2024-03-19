@@ -33,12 +33,15 @@ docker run --name babycon -p 80:3000 babystep
 ```
 docker push wasishah102/babystep
 ```
-7. Create a pod
+7. Login to AKS
 ```
 az aks get-credentials -n mycluster -g aksrg
+```
+8. Create a pod
+```
 kubectl run babypod --image=wasishah102/babystep
 ```
-8. Expose pod on the internet through Load Balancer on AKS
+9. Expose pod on the internet through Load Balancer on AKS
 ```
 kubectl expose pod babypod  --type=LoadBalancer --port=80 --name=babylb
 ```
