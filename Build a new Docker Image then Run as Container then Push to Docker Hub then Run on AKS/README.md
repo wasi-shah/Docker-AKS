@@ -27,7 +27,7 @@ docker run --name mynginx1 -p 80:80 -d wasishah102/mycustomnginx_image
 ## Tag & push the Docker image to docker hub
 ```
 Replace your docker hub account Id
-docker tag wasishah102/mycustomnginx_image:v1 wasishah102/mycustomnginx_image:v1-release
-docker push wasishah102/mycustomnginx_image:v1-release
+docker tag wasishah102/mycustomnginx_image wasishah102/mycustomnginx_image
+docker push wasishah102/mycustomnginx_image
 ```
 Check on Docker Hub to verify the image push successfully.
