@@ -49,8 +49,8 @@ If container uses a different port, then mention a target port in Load blancer d
 ```
 kubectl expose pod babypod  --type=LoadBalancer --port=80  --name=babylb --dry-run=client -o yaml > lb.yaml
 vim lb.yaml
+---
 
------
 apiVersion: v1
 kind: Service
 metadata:
@@ -62,13 +62,13 @@ spec:
   ports:
   - port: 80
     protocol: TCP
-    targetPort: **3000**
+    targetPort: 3000
   selector:
     run: babypod
   type: LoadBalancer
 status:
   loadBalancer: {}
------
+---
 
 kubectl apply -f lb.yaml
 ```
