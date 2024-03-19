@@ -133,4 +133,44 @@ status:
 
 kubectl apply -f lb.yaml
 ```
+# Validating Outcome
+Get Service Info
+'''
+kubectl get service
+kubectl get svc
+'''
+Describe Service
+'''
+kubectl describe service my-first-service
+'''
+Access Application
+'''
+http://<External-IP-from-get-service-output>
+'''
+Verify the following after LB Service creation
+* Azure Standard Load Balancer created for Azure AKS Cluster
+* Frontend IP Configuration
+* Load Balancing Rules
+* Azure Public IP
+View the resources in Azure AKS Cluster - Resources section from Azure Portal Management Console
+Interact with a Pod
 
+# Clean-Up
+Get all Objects in default namespace
+```
+kubectl get all
+```
+
+Delete Services
+```
+kubectl delete svc babylb
+```
+Delete Pod
+```
+kubectl delete pod babypod
+```
+Get all Objects in default namespace
+```
+kubectl get all
+```
+Delete all resources inside azure 
