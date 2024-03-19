@@ -16,7 +16,7 @@ COPY index.html /usr/share/nginx/html
 ```
 3. Create index.html in the same folder
 ```
-<b> This is my custom nginx image.
+<b> This is my custom nginx image. </b>
 ```
 ## Build Docker Image & run it
 Replace your docker hub account Id
