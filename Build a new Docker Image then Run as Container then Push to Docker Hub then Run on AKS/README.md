@@ -31,3 +31,16 @@ docker tag wasishah102/mycustomnginx_image wasishah102/mycustomnginx_image
 docker push wasishah102/mycustomnginx_image
 ```
 Check on Docker Hub to verify the image push successfully.
+
+##Login to AKS
+```
+az aks get-credentials -n mycluster -g aksrg
+```
+## Create a pod
+```
+kubectl run custompod --image=wasishah102/mycustomnginx_image
+```
+## Expose pod on the internet through Load Balancer on AKS
+```
+kubectl expose pod custompod  --type=LoadBalancer --port=80 --name=customlb
+```
