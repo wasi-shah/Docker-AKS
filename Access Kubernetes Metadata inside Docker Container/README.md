@@ -97,6 +97,12 @@ Browse
 Or display nginx default html file contents on termianl without creating LoadBalancer service
 ```
 kubectl exec -it kubernetes-to-container -c=nginx  -- cat /usr/share/nginx/html/index.html
+Result:
+MY_POD_IP:10.224.0.104
+MY_POD_NAME:kubernetes-to-container
+MY_POD_NAMESPACE:default
+MY_NODE_NAME:aks-agentpool-37305774-vmss000000
+MY_POD_SERVICE_ACCOUNT:default
 ```
 
 YAML file that used pod and node meta data as env variables
