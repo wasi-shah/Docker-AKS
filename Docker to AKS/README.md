@@ -45,8 +45,15 @@ kubectl run babypod --image=wasishah102/babystep
 ```
 kubectl expose pod babypod  --type=LoadBalancer --port=80 --name=babylb
 ```
-If container uses a different port, then mention a target port in Load blancer definition. Create YAML from imperitive comamnd.
+If container uses a different port, then you can mention a target port imperatively or in Load blancer definition.
 ```
+
+# Method 1: Create a service which serves on port 80 and connects to the containers on port 3000
+kubectl expose pod babypod  --type=LoadBalancer --port=80 --target-port=3000 --name=babylb
+```
+
+```
+# Method 2: Define target port by creating YAML from imperative comamnd.
 kubectl expose pod babypod  --type=LoadBalancer --port=80  --name=babylb --dry-run=client -o yaml > lb.yaml
 vim lb.yaml
 ---
@@ -106,7 +113,7 @@ kubectl run babypod --image=wasishah102/babystep
 ```
 kubectl expose pod babypod  --type=LoadBalancer --port=80 --name=babylb
 ```
-If container uses a different port, then mention a target port in Load blancer definition. Create YAML from imperitive comamnd.
+If container uses a different port, then mention a target port in Load blancer definition. Create YAML from imperative comamnd.
 ```
 kubectl expose pod babypod  --type=LoadBalancer --port=80  --name=babylb --dry-run=client -o yaml > lb.yaml
 vim lb.yaml
