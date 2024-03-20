@@ -83,16 +83,24 @@ A container's ephemeral-storage limit
 A container's ephemeral-storage request
 # Use NGINX Docker image to display POD and Node meta data details
 Create a pod using Nginx 
-```kubectl apply f  kubernetes-to-container.yaml```
+```
+kubectl apply f  kubernetes-to-container.yaml
+```
 
-Expose a pod using LoadBalancer service 
-```kubectl expose pod kubernetes-to-container --type=LoadBalancer --port=80 --name=k2clb```
+Expose a pod using LoadBalancer service
+```
+kubectl expose pod kubernetes-to-container --type=LoadBalancer --port=80 --name=k2clb
+```
 
 Access the webpage using external IP
-```kubectl get svc```
+```
+kubectl get svc
+```
 
 Browse
-```http://EXTERNAL-IP/```
+```
+http://EXTERNAL-IP/
+```
 
 Or display nginx default html file contents on termianl without creating LoadBalancer service
 ```
