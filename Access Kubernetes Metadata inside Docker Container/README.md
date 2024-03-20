@@ -81,7 +81,8 @@ A container's ephemeral-storage limit
 
 ```resource: requests.ephemeral-storage```
 A container's ephemeral-storage request
-# Use NGINX Docker image to display POD and Node meta data details
+
+# POD: Use NGINX Docker image to display POD and Node meta data details
 Create a pod using Nginx 
 ```
 kubectl apply f  kubernetes-pod-to-container.yaml
@@ -89,7 +90,7 @@ kubectl apply f  kubernetes-pod-to-container.yaml
 
 Expose a pod using LoadBalancer service
 ```
-kubectl expose pod kubernetes-to-container --type=LoadBalancer --port=80 --name=k2clb
+kubectl expose pod kubernetes-to-container --type=LoadBalancer --port=80 --name=pod-lb
 ```
 
 Access the webpage using external IP
@@ -165,11 +166,35 @@ spec:
   - name: workdir
     emptyDir: {}
 ```
+# Deployment with replicas: Use NGINX Docker image deployment through deployment to display POD and Node meta data details
+Create a pod using Nginx 
+```
+kubectl apply f  kubernetes-deployment-to-container.yaml
+```
+
+Expose a pod using LoadBalancer service
+```
+kubectl expose pod kubernetes-to-container --type=LoadBalancer --port=80 --name=deployment-lb
+```
+
+Access the webpage using external IP
+```
+kubectl get svc
+```
+
+Browse - open multiple browser and you will get different pod name  
+```
+http://EXTERNAL-IP/
+```
+
 
 # Clean Up!
 ```
 kubectl delete pod kubernetes-to-container
-kubectl delete svc k2clb
+kubectl delete svc pod-lb
+
+kubectl delete deployment nginx-deployment
+kubectl delet svc deployment-lb
 ```
 
 
