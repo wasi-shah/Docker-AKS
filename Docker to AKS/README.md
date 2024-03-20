@@ -17,7 +17,7 @@ docker tag babystep wasishah102/babystep
 docker push wasishah102/babystep
 ```
 
-## Create an project, create an image, push to docker, run as Kubernetes pod and expose pod with Load Balancer service
+## Create a project, create an image, push to docker, run as Kubernetes pod and expose pod with Load Balancer service
 1. Install Docker
 2. Create a project in a folder
 3. Add or modify Dockerfile
