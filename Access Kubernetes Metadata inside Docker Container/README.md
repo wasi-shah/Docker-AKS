@@ -158,3 +158,10 @@ spec:
     emptyDir: {}
 ```
 
+# Clean Up!
+```
+kubectl delete pod kubernetes-to-container
+kubectl delete svc k2clb
+```
+```
+
