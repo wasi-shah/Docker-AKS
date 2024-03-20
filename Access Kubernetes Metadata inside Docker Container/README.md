@@ -84,7 +84,7 @@ A container's ephemeral-storage request
 # Use NGINX Docker image to display POD and Node meta data details
 Create a pod using Nginx 
 ```
-kubectl apply f  kubernetes-to-container.yaml
+kubectl apply f  kubernetes-pod-to-container.yaml
 ```
 
 Expose a pod using LoadBalancer service
@@ -113,7 +113,7 @@ MY_NODE_NAME:aks-agentpool-37305774-vmss000000
 MY_POD_SERVICE_ACCOUNT:default
 ```
 
-YAML file that used pod and node meta data as env variables
+kubernetes-pod-to-container.yaml file that used pod and node meta data as env variables
 ```
 apiVersion: v1
 kind: Pod
