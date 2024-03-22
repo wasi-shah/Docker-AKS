@@ -162,6 +162,9 @@ kubectl expose pod frontend  --type=LoadBalancer --port=80 --target-port=80 --na
 kubectl get svc
 ## Now you can browse using frontend public IP address
 ```
+> [!CAUTION]
+> If you delete the [my-backend-service] then the frontend will stop working, even if you recreate the [my-backend-service] the frontend will still not work because the binding only happens on creation, hence the pod is bound to the previous [my-backend-service] Cluster IP.
+> You now have to recreate a pod to connect to the new [my-backend-service] Cluster IP.
 
 ## Clean up.
 ```
