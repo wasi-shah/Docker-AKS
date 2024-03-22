@@ -1,7 +1,7 @@
 # YAML Basics
 
 ## YAML Comments
-* Space after the colon is mandatory to differentiate key and value
+* Use # to add comments
 ```
 # Defining simple key-value pairs
 name: John Smith
