@@ -4,8 +4,7 @@
 * Use # to add comments
 ```
 # Defining simple key-value pairs
-name: John Smith
-age: 23
+
 ```
 ## Key-Value Pairs
 * Space after the colon is mandatory to differentiate key and value
