@@ -3,7 +3,7 @@ kind: Pod # String
 metadata: # Dictionary
   name: myapp-pod
   labels: # Dictionary
-    app: myapp  # Key value paids
+    app: myapp  # Key value pairs and used in service definition selector field or matchLabels field 
 spec:
   containers: # List
     - name: myapp # container name
