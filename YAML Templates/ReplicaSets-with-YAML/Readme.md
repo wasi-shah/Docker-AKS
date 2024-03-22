@@ -28,7 +28,7 @@ spec:
 ## Create ReplicaSet
 ```
 # Create ReplicaSet
-kubectl apply -f 02-replicaset-definition.yml
+kubectl apply -f replicaset-definition.yml
 
 # List Replicasets
 kubectl get rs
@@ -63,7 +63,7 @@ spec:
 ## Create LoadBalancer Service for ReplicaSet & Test
 ```
 # Create LoadBalancer Service
-kubectl apply -f 03-replicaset-LoadBalancer-servie.yml
+kubectl apply -f replicaset-LoadBalancer-servie.yml
 
 # List LoadBalancer Service
 kubectl get svc
