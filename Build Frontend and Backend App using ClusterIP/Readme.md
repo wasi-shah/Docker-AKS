@@ -1,4 +1,4 @@
-# Create an app which is split into the following
+# Create a client/server app in Kubernetes using ClusterIP
 * Frontend app - An nginx app which connects to the backend app using proxy_pass
 * Frontend Loadbalancer service: To display the result on the web browser through public IP
 * Backend app - An nginx app which displays Node and Pod details
