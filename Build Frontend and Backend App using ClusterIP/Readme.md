@@ -170,6 +170,6 @@ kubectl get svc
 ```
 kubectl delete pod frontend
 kubectl delete deployment backend-deployment
-delete svc my-backend-service
-delete svc frontendlb
+kubectl delete svc my-backend-service
+kubectldelete svc frontendlb
 ```
