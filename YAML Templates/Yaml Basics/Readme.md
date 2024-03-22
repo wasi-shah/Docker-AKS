@@ -7,6 +7,13 @@
 name: John Smith
 age: 23
 ```
+## Key-Value Pairs
+* Space after the colon is mandatory to differentiate key and value
+```
+# Defining simple key-value pairs
+name: John Smith
+age: 23
+```
 
 ## YAML  Dictionary Or Map
 * Set of properties grouped after an item
