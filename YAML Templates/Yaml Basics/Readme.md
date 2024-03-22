@@ -9,6 +9,20 @@
 ## Adding multiple files together
 Use '---' three dashes to create a separation. Contents before and after '---' will be treated as different files and executed in sequence. 
 
+```
+apiVersion: v1
+kind: Pod
+metadata:
+.....
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+....
+
+```
+
 ## Key-Value Pairs
 * Space after the colon is mandatory to differentiate key and value
 ```
