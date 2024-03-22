@@ -5,7 +5,8 @@
 * Cluster IP (for backend app): To allow the frontend app to communicate to the backend app
 
 ## Create a backend nginx app
-### The backend nginx app uses [proxy_pass http://my-backend-service:8080;] in default.conf to access the backend app.
+> [!WARNING]
+> The backend nginx app uses [proxy_pass http://my-backend-service:8080;] in default.conf to access the backend app.
 ```
 # default.conf
 server {
