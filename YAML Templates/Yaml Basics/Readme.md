@@ -3,7 +3,7 @@
 ## YAML Comments
 * Use # to add comments
 ```
-# Defining simple key-value pairs
+# Add your comments here
 
 ```
 ## Key-Value Pairs
