@@ -6,6 +6,9 @@
 # Add your comments here
 
 ```
+## Adding multiple files together
+Use '---' three dashes to create a separation. Contents before and after '---' will be treated as different files and executed in sequence. 
+
 ## Key-Value Pairs
 * Space after the colon is mandatory to differentiate key and value
 ```
