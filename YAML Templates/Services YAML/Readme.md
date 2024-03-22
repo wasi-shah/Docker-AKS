@@ -42,3 +42,16 @@ spec:
   type: ExternalName
   externalName: my.database.example.com
 ```
+## LoadBalancer (To Internet)
+Exposes the Service (nodePort) externally using an external load balancer. Kubernetes does not directly offer a load balancing component; you must provide one, or you can integrate your Kubernetes cluster with a cloud provider.
+
+type: LoadBalancer
+
+On cloud providers which support external load balancers, setting the type field to LoadBalancer provisions a load balancer for your Service. 
+
+The actual creation of the load balancer happens asynchronously, and information about the provisioned balancer is published in the Service's .status.loadBalancer field.
+
+Traffic from the external load balancer is directed at the backend Pods. The cloud provider decides how it is load-balanced.
+
+To implement a Service of type: LoadBalancer, Kubernetes typically starts off by making the changes that are equivalent to you requesting a 
+Service of type: NodePort. The cloud-controller-manager component then configures the external load balancer to forward traffic to that assigned node port.
