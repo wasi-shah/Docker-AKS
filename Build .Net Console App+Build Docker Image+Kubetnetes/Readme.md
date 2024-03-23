@@ -1,4 +1,6 @@
 # Running a .NET console application in Kubernetes
+This document explains how you can create a basic hello world .net console app, create a docker image locally, push the image to your docker registry and publish it using Kubernetes.
+
 ## Prerequisites
 Before we begin, make sure you have the following prerequisites in place:
 
@@ -66,16 +68,80 @@ Let’s break down this command and explain each part:
 
 1. **dotnet publish**: This is a .NET CLI (Command-Line Interface) command used to build and publish a .NET project. Publishing a project means generating the necessary files and assemblies that can be deployed and run on a target environment.
 2. **-c Release**: The -c (or --configuration) option is used to specify the build configuration for the project. In this case, it is set to “Release.” The build configuration determines how the project is built, and it can typically be one of the following:
+
 **Debug**: This configuration is optimized for debugging and includes additional debugging information. It is suitable for development and testing environments.
+
 **Release**: This configuration is optimized for production deployment. It typically includes optimizations like code minification, removal of debug symbols, and other performance-related optimizations to make the application run efficiently in a production environment.
 
+> [!NOTE]
+> ## When you run dotnet publish -c Release, the .NET CLI will perform the following steps:
+> 1. Build the project: It compiles the source code, resolves dependencies, and generates intermediate build artifacts.
+> 2. Apply Release optimizations: The build process applies optimizations appropriate for a production environment. These optimizations may vary depending on the project type and the specific settings in the project file.
+> 3. Create a publish directory: It generates a directory (often named “publish” or “bin/Release/netX.X/publish”) containing all the files necessary to run the application. This includes the compiled application code, dependencies, configuration files, and any other required assets.
 
+> [!IMPORTANT]
+> **The output of the dotnet publish command is a self-contained, ready-to-deploy version of your .NET application, optimized for production use. You can then take the contents of the publish directory and deploy them to your production environment, whether it’s a server, container, or cloud platform.**
+
+
+# Docker - Create Dockerfile > build image > tag image > publish to dcoker hub.
+## Step 1: Create Dockerfile
+This Dockerfile is composed of two stages:
+
+1. Building stage: based on the official .NET 8.0 SDK image will build the released version of the project.
+2. Building runtime image stage: based on the official ASP.NET 7.0 image, copy the runtime files from the build stage and set the command dotnet helloworld.dll as entrypoint.
+
+```
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
+WORKDIR /App
+ 
+# Copy everything
+COPY . ./ 
+# Restore as distinct layers
+RUN dotnet restore
+# Build and publish a release
+RUN dotnet publish -c Release -o out
+ 
+# Build the runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
+WORKDIR /App
+COPY --from=build-env /App/out .
+ENTRYPOINT ["dotnet", "helloworld.dll"]
+```
+## Step 2: Build a docker image
+Build the Docker image for your application using the following commands:
+```
 docker build -t aspnet-cousole-counter-image -f Dockerfile .
+```
+
+## Step 3: Tag & Push the image to a docker hub
 docker tag aspnet-cousole-counter-image wasishah102/aspnet-cousole-counter-image
 docker push wasishah102/aspnet-cousole-counter-image
 
+
+# Deploy to Kubernetes
+Deploy your application to the Kubernetes cluster with the following command:
+```
+# Login to ASK
 az aks get-credentials -n mycluster -g aksrg
 
-
+# Create a pod from your image
 kubectl run consoleapp --image=wasishah102/aspnet-cousole-counter-image
+
+#Check the logs
 kubectl logs consoleapp -f
+
+#output
+Hello: 1
+Hello: 2
+Hello: 3
+Hello: 4
+Hello: 5
+Hello: 6
+Hello: 7
+Hello: 8
+Hello: 9
+Hello: 10
+Hello: 11
+...
+
+```
