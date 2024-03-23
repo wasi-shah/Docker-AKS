@@ -131,6 +131,77 @@ Remove all unused images
 docker image prune
 ```
 
+## Commonly used commands
+
+
+
+### Build a Docker Image from the source code & run it
+
+```
+docker build -t <imagename> location
+For example, if your project and Dockerfile are in the current folder and you wish to create an image named 'mycustomnginx_image' then run:
+docker build -t mycustomnginx_image .
+```
+## Tag & push the Docker image to the Docker hub
+```
+Replace your docker hub account ID
+docker tag wasishah102/mycustomnginx_image wasishah102/mycustomnginx_image
+docker push wasishah102/mycustomnginx_image
+```
+
+### Pull Image from Docker Hub
+
+```
+docker pull wasishah102/mycustomnginx_image
+```
+
+
+### Run the downloaded Docker Image & Access the Application
+
+```
+docker run --name app1 -p 80:8080 -d wasishah102/mycustomnginx_image
+http://localhost/
+
+```
+
+
+
+### List Running Containers
+
+```
+docker ps
+docker ps -a
+docker ps -a -q
+```
+
+###  Connect to Container Terminal
+
+```
+docker exec -it <container-name> /bin/sh
+```
+
+### Container Stop, Start
+
+```
+docker stop <container-name>
+docker start  <container-name>
+```
+
+### Remove Container
+
+```
+docker stop <container-name> 
+docker rm <container-name>
+```
+
+### Remove Image
+
+```
+docker images
+docker rmi  <image-id>
+```
+
+
 
 # Docker sample application
 ## Create Dockerfile and copy our customized index.html
