@@ -43,6 +43,92 @@ A container is a runtime instance of a docker image. A container will always run
 
 A container is a runnable instance of an image. You can create, start, stop, move, or delete a container using the Docker API or CLI. You can connect a container to one or more networks, attach storage to it, or even create a new image based on its current state.
 
-By default, a container is relatively well isolated from other containers and its host machine. You can control how isolated a container's network, storage, or other underlying subsystems are from other containers or from the host machine.
+By default, a container is relatively well isolated from other containers and its host machine. You can control how isolated a container's network, storage, or other underlying subsystems are from other containers or the host machine.
 
 A container is defined by its image as well as any configuration options you provide to it when you create or start it. When a container is removed, any changes to its state that aren't stored in persistent storage disappear.
+
+## Docker Commands
+### GENERAL COMMANDS
+```
+Start the docker daemon
+docker -d
+
+Get help with Docker. Can also use –help on all subcommands
+docker --help
+
+Display system-wide information
+docker info
+```
+
+### DOCKER HUB COMMANDS
+```
+Login into Docker
+docker login -u <username>
+
+Publish an image to Docker Hub
+docker push <username>/<image_name>
+
+Search Hub for an image
+docker search <image_name>
+
+Pull an image from a Docker Hub
+docker pull <image_name>
+
+```
+
+### CONTAINERS COMMANDS
+```
+Create and run a container from an image, with a custom name:
+docker run --name <container_name> <image_name>
+
+Run a container with and publish a container’s port(s) to the host.
+docker run -p <host_port>:<container_port> <image_name>
+
+Run a container in the background
+docker run -d <image_name>
+
+Start or stop an existing container:
+docker start|stop <container_name> (or <container-id>)
+
+Remove a stopped container:
+docker rm <container_name>
+
+Open a shell inside a running container:
+docker exec -it <container_name> sh
+
+Fetch and follow the logs of a container:
+docker logs -f <container_name>
+
+To inspect a running container:
+docker inspect <container_name> (or <container_id>)
+
+To list currently running containers:
+docker ps
+
+List all docker containers (running and stopped):
+docker ps --all
+
+View resource usage stats
+docker container stats
+
+```
+
+### IMAGES COMMANDS
+```
+Build an Image from a Dockerfile
+docker build -t <image_name>
+
+Build an Image from a Dockerfile without the cache
+docker build -t <image_name> . –no-cache
+
+List local images
+docker images
+
+Delete an Image
+docker rmi <image_name>
+
+Remove all unused images
+docker image prune
+```
+https://www.docker.com/resources/cli-cheat-sheet/
+
