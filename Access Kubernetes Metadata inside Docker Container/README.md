@@ -186,6 +186,10 @@ Browse - open multiple browser and you will get different pod name
 ```
 http://EXTERNAL-IP/
 ```
+# Expose Pod Information to Containers Through Files
+> [!TIP]
+> This page shows how a Pod can use a downwardAPI volume, to expose information about itself to containers running in the Pod. A downwardAPI volume can expose Pod fields and container fields.
+> https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/
 
 
 # Clean Up!
