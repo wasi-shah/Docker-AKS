@@ -130,5 +130,34 @@ docker rmi <image_name>
 Remove all unused images
 docker image prune
 ```
+
+
+# Docker sample application
+## Create Dockerfile and copy our customized index.html
+1. Create a folder
+2. Add file Dockerfile and add the following code
+```
+FROM nginx
+COPY index.html /usr/share/nginx/html
+```
+3. Create index.html in the same folder
+```
+<b> This is my custom Nginx image. </b>
+```
+## Build Docker Image & run it
+Replace your docker hub account ID
+```
+docker build -t wasishah102/mycustomnginx_image .
+docker run --name mynginx1 -p 80:80 -d wasishah102/mycustomnginx_image
+```
+## Tag & push the Docker image to the Docker hub
+```
+Replace your docker hub account ID
+docker tag wasishah102/mycustomnginx_image wasishah102/mycustomnginx_image
+docker push wasishah102/mycustomnginx_image
+```
+Check on Docker Hub to verify the image push successfully.
+
+
 https://www.docker.com/resources/cli-cheat-sheet/
 
