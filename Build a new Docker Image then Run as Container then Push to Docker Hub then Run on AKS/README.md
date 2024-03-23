@@ -1,4 +1,4 @@
-# Run the base Nginx container with default page
+# Run the base Nginx container with the default page
 ```
 docker run --name mynginxdefault -p 80:80 -d nginx
 docker ps
@@ -6,10 +6,10 @@ docker stop mynginxdefault
 ```
 Access the URL http://localhost
 
-# Create custom image drived from NGINX image and change the index page with your csutom page
+# Create a custom image derived from NGINX image and change the index page with your custom page
 ## Create Dockerfile and copy our customized index.html
 1. Create a folder
-2. Add file Dockerfile and add following code
+2. Add file Dockerfile and add the following code
 ```
 FROM nginx
 COPY index.html /usr/share/nginx/html
@@ -24,7 +24,7 @@ Replace your docker hub account Id
 docker build -t wasishah102/mycustomnginx_image .
 docker run --name mynginx1 -p 80:80 -d wasishah102/mycustomnginx_image
 ```
-## Tag & push the Docker image to docker hub
+## Tag & push the Docker image to Docker hub
 ```
 Replace your docker hub account Id
 docker tag wasishah102/mycustomnginx_image wasishah102/mycustomnginx_image
