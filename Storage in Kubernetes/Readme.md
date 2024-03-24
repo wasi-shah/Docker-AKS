@@ -3,6 +3,27 @@
 * Persistance Volumes
 * Storage Class
 
+## Kubetctl commands
+```
+# List Storage Classes
+kubectl get sc
+
+# List PVC
+kubectl get pvc 
+
+# List PV
+kubectl get pv
+
+# List pods
+kubectl get pods
+
+# Connect to MYSQL Database
+kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h mysql -pdbpassword11
+
+# Verify usermgmt schema got created which we provided in ConfigMap
+mysql> show schemas;
+
+```
 
 ## Volumes
 Volume is a temporary solution which lets the pods share data among their containers and if restarts, at least get the previous state saves to reload.
