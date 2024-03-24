@@ -90,27 +90,22 @@ downwardAPI volume makes downward API data available to applications. Within the
 * If you delete the pod/node the PV still lives until you delete the cluster.
  
 ### Types of storage attachment 
-* Direct Mount without claim
+* **Direct Mount without claim**
    - Create a PV
    - Assign a PV name inside the pod definition
-* Through claim with default available storage class in AKS
+* **Through claim with default available storage class in AKS**
   -	A PersistentVolumeClaim (PVC) is a request for storage by a user/pod.
   -	In the claim you define how much space you need.
   -	The claim then binds to available PV. It only binds to a PV which can satisfy the claim needs.
   -	It attaches a pod to a required available persistence storage.
   -	The name of the PV is not known to a pod.
-#### Attach a pod to a volume through the claim
-##### Step 2: Create a Persistent Volume Claim for a default Azure Disk mounted on AKS Cluster
+#### Attach a pod to a volume through the claim with the default Azure Storage class managed-premium
+##### Step 1: Create a Persistent Volume Claim for a default Azure Disk mounted on AKS Cluster
+> [!IMPORTANT]
+> **managed-premium ** is already available in AKS as a storage class which lets you create and use Azure disk
+
 > [!NOTE]
 > PVC name is **azure-managed-disk-pvc**
-> [IMPORTANT]
-> **managed-premium ** is already available in AKS as a storage class which lets you create and use Azure disk
-> [!NOTE]
-> What is a Storage Classes
-> *	The storage dynamically provisioned/creates storage to satisfy a PersistentVolumeClaim (PVC).
-> *	It creates the PV automatically.
-> *	Its an on-demand PV
-> *	In StorageClass definition you define the storage provider as ‘provisioner’  for example Google or Azure.
 
 ````
 apiVersion: v1
@@ -124,6 +119,100 @@ spec:
   resources:
     requests:
       storage: 5Gi    
+````
+##### Step 2: Create and then attach a claim to a deployment
+> [!NOTE]
+> A deployment is attached to a PVC name  **azure-managed-disk-pvc**
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  strategy:
+    type: Recreate 
+  template: 
+    metadata: 
+      labels: 
+        app: mysql
+    spec: 
+      containers:
+        - name: mysql
+          image: mysql:5.6
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: dbpassword11
+          ports:
+            - containerPort: 3306
+              name: mysql    
+          volumeMounts:
+            - name: mysql-persistent-storage
+              mountPath: /var/lib/mysql    
+            - name: usermanagement-dbcreation-script
+              mountPath: /docker-entrypoint-initdb.d #https://hub.docker.com/_/mysql Refer Initializing a fresh instance                                            
+      volumes: 
+        - name: mysql-persistent-storage
+          persistentVolumeClaim:
+            claimName: azure-managed-disk-pvc
+        - name: usermanagement-dbcreation-script
+          configMap:
+            name: usermanagement-dbcreation-script
+```
+
+* **Through claim with your own custom storage class**
+  - Define a storage class
+  -	Create a Presestance Volume Claim and mention the storage class name.
+  -	In the claim you define how much space you need.
+  -	The claim then binds to the mentioned storage class. 
+  -	It attaches a pod to a required available persistence storage.
+  -	The name of the PV is not known to a pod.
+#### Attach a pod to a volume through the claim with the custom Azure Storage class managed-premium
+##### Step 1: Create/Extend your own storage class
+> [!NOTE]
+> What is a Storage Classes
+> *	The storage dynamically provisioned/creates storage to satisfy a PersistentVolumeClaim (PVC).
+> *	It creates the PV automatically.
+> *	It is an on-demand PV
+> *	In StorageClass definition you define the storage provider as a ‘provisioner’  for example Google or Azure.
+
+> [!NOTE]
+> PVC name is **managed-premium-retain-sc**
+> Provisioner is **provisioner: kubernetes.io/azure-disk**
+> reclaim policy is **reclaimPolicy: Retain** which means if you delete the cluster the disk keeps alive.
+```
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: managed-premium-retain-sc
+provisioner: kubernetes.io/azure-disk
+reclaimPolicy: Retain  # Default is Delete, recommended is retain
+volumeBindingMode: WaitForFirstConsumer # Default is Immediate, recommended is WaitForFirstConsumer
+allowVolumeExpansion: true  
+parameters:
+  storageaccounttype: Premium_LRS # or we can use Standard_LRS
+  kind: managed # Default is shared (Other two are managed and dedicated)
+
+```
+##### Step 2: Create a Persistent Volume Claim for a default Azure Disk mounted on AKS Cluster
+> [!NOTE]
+> the storage class name is **managed-premium-retain-sc** which is your own storage class.
+
+````
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: azure-managed-disk-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: managed-premium-retain-sc
+  resources:
+    requests:
+      storage: 5Gi     
 ````
 ##### Step 3: Create and then attach a claim to a deployment
 > [!NOTE]
@@ -168,11 +257,3 @@ spec:
             name: usermanagement-dbcreation-script
 ```
 
-* Through claim with storage class
-  - Define a storage class
-  -	Create a Presestance Volume Claim and mention the storage class name.
-  -	In the claim you define how much space you need.
-  -	The claim then binds to the mentioned storage class. 
-  -	It attaches a pod to a required available persistence storage.
-  -	The name of the PV is not known to a pod.
- 
