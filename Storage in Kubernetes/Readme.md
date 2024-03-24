@@ -93,7 +93,7 @@ downwardAPI volume makes downward API data available to applications. Within the
 * **Direct Mount without claim**
    - Create a PV
    - Assign a PV name inside the pod definition
-* **Through claim with default available storage class in AKS**
+### Through claim with default available storage class in AKS
   -	A PersistentVolumeClaim (PVC) is a request for storage by a user/pod.
   -	In the claim you define how much space you need.
   -	The claim then binds to available PV. It only binds to a PV which can satisfy the claim needs.
@@ -163,7 +163,7 @@ spec:
             name: usermanagement-dbcreation-script
 ```
 
-* **Through claim with your own custom storage class**
+### Through claim with your own custom storage class
   - Define a storage class
   -	Create a Presestance Volume Claim and mention the storage class name.
   -	In the claim you define how much space you need.
