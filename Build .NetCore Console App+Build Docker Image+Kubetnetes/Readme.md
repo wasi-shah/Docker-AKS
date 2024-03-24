@@ -88,7 +88,7 @@ Let’s break down this command and explain each part:
 This Dockerfile is composed of two stages:
 
 1. Building stage: based on the official .NET 8.0 SDK image will build the released version of the project.
-2. Building runtime image stage: based on the official ASP.NET 7.0 image, copy the runtime files from the build stage and set the command dotnet helloworld.dll as entrypoint.
+2. Building runtime image stage: based on the official ASP.NET 8.0 image, copy the runtime files from the build stage and set the command dotnet helloworld.dll as entrypoint.
 
 ```
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
