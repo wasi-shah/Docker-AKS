@@ -392,3 +392,26 @@ spec:
     - port: 80
       targetPort: 80
 ```
+
+## Create two custom html files
+```
+# file1.html
+<!DOCTYPE html>
+<html>
+   <body style="background-color:rgb(250, 210, 210);">
+      <h1>Welcome to custom html file uploaded through Azure Files share - File 1</h1>
+      <p>Azure Files Demo</p>
+      <p>Application Version: V1</p>
+   </body>
+</html>
+
+# file2.html
+<!DOCTYPE html>
+<html>
+   <body style="background-color:rgb(250, 210, 210);">
+      <h1>Welcome to custom html file uploaded through Azure Files share - File 1</h1>
+      <p>Azure Files Demo</p>
+      <p>Application Version: V1</p>
+   </body>
+</html>
+```
