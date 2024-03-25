@@ -289,24 +289,28 @@ spec:
             name: usermanagement-dbcreation-script
 ```
 
-# Azure Files
+# Azure Files as volumes
 
 ## With default AKS-created storage classes only below two options are available for us.
-Standard_LRS - standard locally redundant storage (LRS)
-Premium_LRS - premium locally redundant storage (LRS)
-Important Note: Azure Files support premium storage in AKS clusters that run Kubernetes 1.13 or higher, minimum premium file share is 100GB
+* Standard_LRS - standard locally redundant storage (LRS)
+* Premium_LRS - premium locally redundant storage (LRS)
+
+> [!note]
+> Important Note: Azure Files support premium storage in AKS clusters that run Kubernetes 1.13 or higher, minimum premium file share is 100GB
 
 ## Custom Storage Class
 We can create our own custom storage class with desired permissions
-Standard_LRS - standard locally redundant storage (LRS)
-Standard_GRS - standard geo-redundant storage (GRS)
-Standard_ZRS - standard zone redundant storage (ZRS)
-Standard_RAGRS - standard read-access geo-redundant storage (RA-GRS)
-Premium_LRS - premium locally redundant storage (LRS)
-kube-manifests-v2: AKS defined default storage class
+* Standard_LRS - standard locally redundant storage (LRS)
+* Standard_GRS - standard geo-redundant storage (GRS)
+* Standard_ZRS - standard zone redundant storage (ZRS)
+* Standard_RAGRS - standard read-access geo-redundant storage (RA-GRS)
+* Premium_LRS - premium locally redundant storage (LRS)
+
+Defined custom storage class
 
 ## Create a custom Azure Files storage class
 ```
+# Azure-Files-Custom-Storage-Class.yml
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
@@ -322,9 +326,10 @@ mountOptions:
 parameters:
   skuName: Standard_LRS
 ```
-
+## Create a PVC against the custom Azure Files storage class
 Create PVC against your Azure Files custom storage class
 ```
+# Azure-Files-Persistent-Volume-Claim.yml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -336,4 +341,54 @@ spec:
   resources:
     requests:
       storage: 5Gi
+```
+## Create deployment definition 
+```
+# Nginx-Deployment.yml
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: azure-files-nginx-deployment
+  labels:
+    app: azure-files-nginx-app
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: azure-files-nginx-app
+  template:  
+    metadata:
+      labels: 
+        app: azure-files-nginx-app
+    spec:
+      containers:
+        - name: azure-files-nginx-app
+          image: stacksimplify/kube-nginxapp1:1.0.0
+          imagePullPolicy: Always
+          ports: 
+            - containerPort: 80         
+          volumeMounts:
+            - name: my-azurefile-volume
+              mountPath: "/usr/share/nginx/html/app1"
+      volumes:
+        - name: my-azurefile-volume
+          persistentVolumeClaim:
+            claimName: my-azurefile-pvc              
+
+```
+## Nginx Deployment Cluster IP Service
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: azure-files-nginx-service
+  labels: 
+    app: azure-files-nginx-app
+spec:
+  type: LoadBalancer
+  selector:
+    app: azure-files-nginx-app
+  ports: 
+    - port: 80
+      targetPort: 80
 ```
