@@ -417,6 +417,36 @@ spec:
 ```
 
 ## Create Azure File share application
-Create Storage Class, PVC, Deployment and Lod Balancer Service
-PV will be created automatically when the pod requests space through PVC
+Create Storage Class, PVC, Deployment and Lod Balancer Service.
 
+PV will be created automatically when the pod requests space through the PVC.
+
+```
+kubectl apply -f Azure-Files-Custom-Storage-Class.yml
+kubectl apply -f Azure-Files-Persistent-Volume-Claim.yml
+kubectl apply -f Nginx-Deployment.yml
+kubectl apply -f Nginx-Service.yaml
+
+kubectl get svc
+
+# Access Application
+http://<External-IP-from-get-service-output>
+http://<External-IP-from-get-service-output>/app1/file1.html # result in 404 because the files are not uploaded to Azure Files yet
+```
+
+## Upload Nginx Files to Azure File Share
+
+* Go to Storage Accounts
+* Select and Open a storage account under resource group mc_aks-rg1_aksdemo1_eastus
+* In Overview, go to File Shares
+* Open File share with a name which starts as kubernetes-dynamic-pv-xxxxxx
+* Click on Upload and upload
+   - file1.html
+   - file2.html
+ 
+## Access Application & Test
+```
+# URLs
+http://<External-IP-from-get-service-output>/app1/file1.html
+http://<External-IP-from-get-service-output>/app1/file2.html
+```
