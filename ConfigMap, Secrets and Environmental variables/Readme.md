@@ -139,3 +139,44 @@ Kubectl create -f mysecuritydefinition.yaml
 ```
 
 
+## ConfigMaps
+### Create a ConfigMaps Imperative way
+
+Fetch configMap
+```
+Kubectl get configmaps
+```
+Create configmap from imperative command
+```
+Kubectl create configmap myconfigmap --from-literal=App_Color=pink --from- literal=App_DbName=MyProdDb --from-literal=App_Password=Password000!
+```
+
+Create configmap from a text file
+```
+Kubectl create configmap myconfigmap --from-file=myfile.properties
+```
+
+The contents of myconfigmapfile.properties
+```
+App_Color: pink
+App_DbName: MyProdDb
+App_Color: Password000!
+```
+
+### Create a ConfigMap Declarative way
+
+Create a definition file
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+ name: myconfigmap
+data:
+ App_Color: pink
+ App_DbName: MyProdDb
+ App_Password: Password000!
+```
+Create a config map from a file
+```
+Kubectl create -f myconfigmap.yaml
+```
