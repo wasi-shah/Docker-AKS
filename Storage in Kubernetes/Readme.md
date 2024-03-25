@@ -125,6 +125,9 @@ downwardAPI volume makes downward API data available to applications. Within the
 > [!IMPORTANT]
 > **managed-premium ** is already available in AKS as a storage class which lets you create and use Azure disk
 
+> [!CAUTION]
+> One one pad can connect to Azure Disk at a time so use Azure Files instead.
+
 > [!NOTE]
 > PVC name is **azure-managed-disk-pvc**
 
