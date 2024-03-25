@@ -415,3 +415,8 @@ spec:
    </body>
 </html>
 ```
+
+## Create Azure File share application
+Create Storage Class, PVC, Deployment and Lod Balancer Service
+PV will be created automatically when the pod requests space through PVC
+
