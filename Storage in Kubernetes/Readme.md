@@ -450,3 +450,28 @@ http://<External-IP-from-get-service-output>/app1/file1.html # result in 404 bec
 http://<External-IP-from-get-service-output>/app1/file1.html
 http://<External-IP-from-get-service-output>/app1/file2.html
 ```
+
+## Clean up
+
+Delete Load Balancer
+```
+kubectl delete - Nginx-Service.yaml
+```
+
+Delete Nginx-Deployment
+```
+kubectl delete -f Nginx-Deployment.yml
+```
+
+Delete Azure-Files-Persistent-Volume-Claim.yml
+> [!caution]
+> **This will also delete the file share because the default Retain value is Delete**
+
+```
+kubectl delete -f Azure-Files-Persistent-Volume-Claim.yml
+```
+
+Delete Azure Files Custom Storage Class
+```
+kubectl delete -f Azure-Files-Custom-Storage-Class.yml
+```
