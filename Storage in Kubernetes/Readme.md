@@ -111,10 +111,10 @@ downwardAPI volume makes downward API data available to applications. Within the
 * If you delete the pod/node the PV still lives until you delete the cluster.
  
 ### Types of storage attachment 
-* **Direct Mount without claim**
+### Direct Mount without claim
    - Create a PV
    - Assign a PV name inside the pod definition
-### Through claim with default available storage class in AKS
+### Through claim with default available storage class in AKS (AZURE Disk)
   -	A PersistentVolumeClaim (PVC) is a request for storage by a user/pod.
   -	In the claim you define how much space you need.
   -	The claim then binds to available PV. It only binds to a PV which can satisfy the claim needs.
@@ -126,6 +126,8 @@ downwardAPI volume makes downward API data available to applications. Within the
 > **managed-premium ** is already available in AKS as a storage class which lets you create and use Azure disk
 
 > [!CAUTION]
+> **Azure Disk**
+> 
 > **Only one pod can connect to Azure Disk at a time so use Azure Files instead.**
 
 > [!Note]
@@ -193,7 +195,7 @@ spec:
             name: usermanagement-dbcreation-script
 ```
 
-### Through claim with your own custom storage class
+### Through claim with your own custom storage class (AZURE Disk)
   - Define a storage class
   -	Create a Presestance Volume Claim and mention the storage class name.
   -	In the claim you define how much space you need.
