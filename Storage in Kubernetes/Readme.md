@@ -3,7 +3,6 @@
 * Persistance Volumes
 * Storage Class
 
-
 ## Kubetctl commands
 ```
 # List Storage Classes
