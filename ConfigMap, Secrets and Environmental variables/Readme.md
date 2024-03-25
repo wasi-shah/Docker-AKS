@@ -221,6 +221,13 @@ envFrom:
 - secretRef: 
    name: mysecuritykeys
 ```
+## Displaying all pod environment variables
+```
+kubectl exec envar-demo -- printenv
+or
+kubectl exec -it envar-demo -- /bin/bash
+root> printenv
+```
 
 # Passing Secrete as volume
 ```
@@ -257,3 +264,11 @@ Run apply command
 ```
 Kubectl apply -f combine-pod-and-secrete-as-volume.yaml
 ```
+
+## Validate if the secrete is created 
+```
+kubectl exec -it secret-test-pod -- /bin/bash
+root@secret-test-pod:/# cd /etc/secret-volume
+root@secret-test-pod:/# ls
+```
+
