@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+ name: myconfigmap
+data:
+ App_Color: pink
+ App_DbName: MyProdDb
+ App_Password: Password000!
