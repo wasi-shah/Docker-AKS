@@ -180,3 +180,45 @@ Create a config map from a file
 ```
 Kubectl create -f myconfigmap.yaml
 ```
+
+## Using Env, ConfigMap and Secrets values in POD/Containers
+You can pass values to the pod as environment or as volume. This configuration is called an app environment.
+Typical pod definition structure for environment variables
+*	Command
+* Args
+* env
+* envFrom
+  -	configMapRef
+  -	secretRef
+*	volumeMounts
+*	volumes
+
+> [!note]
+> You can pass values to the pod as environment or as volume.
+
+## Passing Values as Environment (directly provide values in pod definition)
+```
+- env:
+	- name: App_Color
+	  value: pink 
+	- name: App_DbName
+	  value: MyProdDB
+	- name: App_DbPassword
+  value: Password000!!
+
+```
+
+## From configMap
+```
+envFrom:
+-  configMapRef: 
+    name: myconfigmap 
+```
+
+## From secretKey
+```
+envFrom:
+- secretRef: 
+   name: mysecuritykeys
+```
+
