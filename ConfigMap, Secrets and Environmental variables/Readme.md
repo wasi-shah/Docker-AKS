@@ -204,7 +204,7 @@ Typical pod definition structure for environment variables
 	- name: App_DbName
 	  value: MyProdDB
 	- name: App_DbPassword
-  value: Password000!!
+          value: Password000!!
 
 ```
 
@@ -222,3 +222,38 @@ envFrom:
    name: mysecuritykeys
 ```
 
+# Passing Secrete as volume
+```
+# combine-pod-and-secrete-as-volume.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: dotfile-secret
+data:
+  .secret-file: dmFsdWUtMg0KDQo=
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: secret-dotfiles-pod
+spec:
+  volumes:
+    - name: secret-volume
+      secret:
+        secretName: dotfile-secret
+  containers:
+    - name: dotfile-test-container
+      image: registry.k8s.io/busybox
+      command:
+        - ls
+        - "-l"
+        - "/etc/secret-volume"
+      volumeMounts:
+        - name: secret-volume
+          readOnly: true
+          mountPath: "/etc/secret-volume"
+```
+Run apply command
+```
+Kubectl apply -f combine-pod-and-secrete-as-volume.yaml
+```
