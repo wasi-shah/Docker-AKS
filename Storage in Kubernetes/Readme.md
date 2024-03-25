@@ -289,3 +289,51 @@ spec:
             name: usermanagement-dbcreation-script
 ```
 
+# Azure Files
+
+## With default AKS-created storage classes only below two options are available for us.
+Standard_LRS - standard locally redundant storage (LRS)
+Premium_LRS - premium locally redundant storage (LRS)
+Important Note: Azure Files support premium storage in AKS clusters that run Kubernetes 1.13 or higher, minimum premium file share is 100GB
+
+## Custom Storage Class
+We can create our own custom storage class with desired permissions
+Standard_LRS - standard locally redundant storage (LRS)
+Standard_GRS - standard geo-redundant storage (GRS)
+Standard_ZRS - standard zone redundant storage (ZRS)
+Standard_RAGRS - standard read-access geo-redundant storage (RA-GRS)
+Premium_LRS - premium locally redundant storage (LRS)
+kube-manifests-v2: AKS defined default storage class
+
+## Create a custom Azure Files storage class
+```
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: my-azurefile-sc
+provisioner: kubernetes.io/azure-file
+mountOptions:
+  - dir_mode=0777
+  - file_mode=0777
+  - uid=0
+  - gid=0
+  - mfsymlinks
+  - cache=strict
+parameters:
+  skuName: Standard_LRS
+```
+
+Create PVC against your Azure Files custom storage class
+```
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-azurefile-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: my-azurefile-sc
+  resources:
+    requests:
+      storage: 5Gi
+```
