@@ -126,7 +126,13 @@ downwardAPI volume makes downward API data available to applications. Within the
 > **managed-premium ** is already available in AKS as a storage class which lets you create and use Azure disk
 
 > [!CAUTION]
-> One one pad can connect to Azure Disk at a time so use Azure Files instead.
+> **Only one pod can connect to Azure Disk at a time so use Azure Files instead.**
+
+> [!Note]
+> **Azure Files**
+> 
+> Azure Files offers fully managed file shares in the cloud that are accessible via the industry standard Server Message Block (SMB) protocol, Network File System (NFS) protocol, and Azure Files REST API.
+> An Azure file share is a convenient place for cloud applications to write their logs, metrics, and crash dumps. Logs can be written by the application instances via the File REST API, and developers can access them by mounting the file share on their local machine. 
 
 > [!NOTE]
 > PVC name is **azure-managed-disk-pvc**
