@@ -67,12 +67,30 @@ There are two ways to deploy AGIC for your AKS cluster. The first way is through
 > 
 
 # Install Application Gateway Ingress Controller (Addon)
+Install AGIC add-on to expose your Kubernetes application in an existing AKS cluster through an existing application gateway deployed in separate virtual networks. 
+
+> [!important]
+> It's a Brownfield Deployment because technically when you are installing an AGIC on an existing Application gateway that exists in a different vNet.
+
+
+ 
 ## Step 1: Manually Create Resource Group aksrg
 ## Step 2: Manually Create Cluster mycluster 
 Create a cluster manually if you are on a free trial
 
 > [!Note]
-> This cluster does not have any Application Gateway at the moment so it's a **Greenfield Deployment**
+> This cluster does not have any Application Gateway at the moment so it's a **Brownfield Deployment**
+
+
+> [!important]
+> **simulate having an existing application gateway**
+> 
+> You'll now deploy a new application gateway, to simulate having an existing application gateway that you want to use to load balance traffic to your AKS cluster, myCluster.
+> 
+> The name of the application gateway will be myApplicationGateway, but you'll need to first create a public IP resource, named myPublicIp, and a new virtual network called myVnet with address space 10.0.0.0/16, and a subnet with address space 10.0.0.0/24 called mySubnet, and deploy your application gateway in mySubnet using myPublicIp.
+
+> [!caution]
+> When you use an AKS cluster and application gateway in separate virtual networks, the address spaces of the two virtual networks must not overlap. The default address space that an AKS cluster deploys in is 10.224.0.0/12.
 
 
 ## Step 3: Create a new IP [myPublicIp] in [aksrg]
@@ -88,6 +106,7 @@ az network vnet create -n myVnet -g aksrg --address-prefix 10.0.0.0/16 --subnet-
 
 
 ## Step 5: Create an Application Gateway called myApplicationGateway in [aksrg] Resource Group
+
 ```
 az network application-gateway create -n myApplicationGateway -g aksrg --sku Standard_v2 --public-ip-address myPublicIp --vnet-name myVnet --subnet mySubnet --priority 100
 ```
@@ -104,6 +123,11 @@ az network application-gateway create -n myApplicationGateway -g aksrg --sku Sta
 
 > [!note]
 > This block installs the Application Gateway Ingress Controller (Addon)
+
+> [!note]
+> Enable the AGIC add-on in the existing AKS cluster through Azure CLI
+
+
 ```
 # First find the Application Gateway ID 
 appgwId=$(az network application-gateway show -n myApplicationGateway -g aksrg -o tsv --query "id") 
@@ -116,6 +140,12 @@ az aks enable-addons -n myCluster -g aksrg -a ingress-appgw --appgw-id $appgwId
 ```
 
 ## Step 7: Configure Peer the two virtual networks together
+
+Since you deployed the AKS cluster in its own virtual network and the Application gateway in another virtual network, you'll need to peer the two virtual networks together for traffic to flow from the Application gateway to the pods in the cluster. Peering the two virtual networks requires running the Azure CLI command two separate times, to ensure that the connection is bi-directional. The first command will create a peering connection from the Application gateway virtual network to the AKS virtual network; the second command will create a peering connection in the other direction.
+
+> [!important]
+> Since you deployed the AKS cluster in its own virtual network and the Application gateway in another virtual network, you'll need to peer the two virtual networks together for traffic to flow from the Application gateway to the pods in the cluster.
+
 
 ```
 # Find infra resource group name
