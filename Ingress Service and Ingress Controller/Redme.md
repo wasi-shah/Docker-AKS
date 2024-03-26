@@ -40,6 +40,28 @@ The Application Gateway Ingress Controller (AGIC) is a Kubernetes application, w
 > 
 > * End-to-end TLS
 > 
-> * Support for public, private, and hybrid web sites
+> * Support for public, private, and hybrid websites
 > 
 > * Integrated web application firewall
+
+## How to install Application Gateway Ingress Controller
+There are two ways to deploy AGIC for your AKS cluster. The first way is through Helm; the second is through AKS as an add-on
+* Helm
+  - Difficult to install
+  - Support both Greenfield Deployment and Brownfield Deployment
+* AKS as an add-on
+  - Easy to install
+  - The add-on is also a fully managed service, which provides added benefits such as automatic updates and increased support.
+  - Since AGIC add-on is a managed service, customers are automatically updated to the latest version of AGIC add-on, unlike AGIC deployed through Helm where the customer must manually update AGIC.
+  - Support both Greenfield Deployment and Brownfield Deployment
+
+> [!Important]
+> **Greenfield Deployment**
+> 
+> Installing AGIC, AKS, and Application Gateway on blank-slate infrastructure.
+
+> [!Important]
+> **Brownfield Deployment**
+> 
+> Install AGIC on an AKS cluster with an existing Application Gateway.
+> 
