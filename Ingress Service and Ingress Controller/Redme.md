@@ -65,3 +65,101 @@ There are two ways to deploy AGIC for your AKS cluster. The first way is through
 > 
 > Install AGIC on an AKS cluster with an existing Application Gateway.
 > 
+
+# Install Application Gateway Ingress Controller (Addon)
+## Step 1: Manually Create Resource Group aksrg
+## Step 2: Manually Create Cluster mycluster 
+Create a cluster manually if you are on a free trial
+
+> [!Note]
+> This cluster does not have any Application Gateway at the moment so it's a **Greenfield Deployment**
+
+
+## Step 3: Create a new IP [myPublicIp] in [aksrg]
+```
+az network public-ip create -n myPublicIp -g aksrg --allocation-method Static --sku Standard
+```
+
+
+## Step 4: Create vnet called myVnet in [aksrg]	Resource Group
+```
+az network vnet create -n myVnet -g aksrg --address-prefix 10.0.0.0/16 --subnet-name mySubnet --subnet-prefix 10.0.0.0/24 
+```
+
+
+## Step 5: Create an Application Gateway called myApplicationGateway in [aksrg] Resource Group
+```
+az network application-gateway create -n myApplicationGateway -g aksrg --sku Standard_v2 --public-ip-address myPublicIp --vnet-name myVnet --subnet mySubnet --priority 100
+```
+
+
+## Step 6: Create Managed Identity ingressapplicationgateway-mycluster in [Infrastructure Group]
+> [!Important]
+> * The [az aks enable-addons] create deployment inside AKS Cluster [mycluster]
+> * The deployment name is ingress-appgw-deployment inside AKS Cluster [mycluster]
+> * This deployment is in 'kube-system' namespace
+> * Azure application gateway ingress controller AGIC runs as a pod so if you run get pods in kube-system ns you will pods
+> * Kubectl get pods -n kube-system
+> * If you run you will see the ingress has an external IP
+
+> [!note]
+> This block installs the Application Gateway Ingress Controller (Addon)
+```
+# First find the Application Gateway ID 
+appgwId=$(az network application-gateway show -n myApplicationGateway -g aksrg -o tsv --query "id") 
+echo $appgwId
+# /subscriptions/bd541b3c-91be-477e-b030-4c5f3f2530be/resourceGroups/aksrg/providers/Microsoft.Network/applicationGateways/myApplicationGateway
+
+#Run [az aks enable-addons] to Install Application Gateway Ingress Controller (Addon)
+az aks enable-addons -n myCluster -g aksrg -a ingress-appgw --appgw-id $appgwId
+
+```
+
+## Step 7: Configure Peer the two virtual networks together
+
+```
+# Find infra resource group name
+nodeResourceGroup=$(az aks show -n myCluster -g aksrg -o tsv --query "nodeResourceGroup")
+echo $nodeResourceGroup
+# infra-rg
+
+# Find vNet name
+aksVnetName=$(az network vnet list -g $nodeResourceGroup -o tsv --query "[0].name")
+echo $aksVnetName
+# aks-vnet-14560875
+
+# Find vNetID
+aksVnetId=$(az network vnet show -n $aksVnetName -g $nodeResourceGroup -o tsv --query "id")
+echo $aksVnetId
+# /subscriptions/bd541b3c-91be-477e-b030-4c5f3f2530be/resourceGroups/infra-rg/providers/Microsoft.Network/virtualNetworks/aks-vnet-14560875
+
+# Create the first vnet peering 
+az network vnet peering create -n AppGWtoAKSVnetPeering -g aksrg --vnet-name myVnet --remote-vnet $aksVnetId --allow-vnet-access
+appGWVnetId=$(az network vnet show -n myVnet -g aksrg -o tsv --query "id")
+echo $appGWVnetId
+#/subscriptions/bd541b3c-91be-477e-b030-4c5f3f2530be/resourceGroups/aksrg/providers/Microsoft.Network/virtualNetworks/myVnet
+
+# Create the second vnet peering 
+az network vnet peering create -n AKStoAppGWVnetPeering -g $nodeResourceGroup --vnet-name $aksVnetName --remote-vnet $appGWVnetId --allow-vnet-access
+
+# The above will configure two vnet peering.
+
+```
+## Step 8: Login and run app
+```
+az aks get-credentials -n myCluster -g aksrg
+
+kubectl apply -f https://raw.githubusercontent.com/Azure/application-gateway-kubernetes-ingress/master/docs/examples/aspnetapp.yaml 
+
+# pod/aspnetapp created
+# service/aspnetapp created
+# ingress.networking.k8s.io/aspnetapp created
+
+# Check if Cluster IP service is created.
+Kubectl get svc
+
+# Check if the Ingress service is created 
+Kubectl get ingress
+# Browse the website with external IP
+
+```
