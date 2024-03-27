@@ -36,7 +36,7 @@ kubectl get svc
 kubectl get ingress
 
 ```
-## Step 3: Step-05: Access Applications
+## Step 3: Access Applications
 ```
 # Access default
 http://<Public-IP-created-for-Ingress>/
