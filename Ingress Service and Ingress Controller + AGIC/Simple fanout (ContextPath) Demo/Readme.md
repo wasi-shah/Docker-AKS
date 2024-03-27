@@ -17,7 +17,7 @@
 ## Step 1: Setup 
 * Create Resource Group
 * Create ASK Cluster
-* configure AGIC addon
+* Configure AGIC addon
 * Setup peering if AGIC and other resources are in different resource group
 
  ## Step 2: Deploy and Verify
