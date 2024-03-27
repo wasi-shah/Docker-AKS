@@ -6,6 +6,85 @@ Ingress may be configured to give
 * Terminate SSL / TLS
 * And offer name-based virtual hosting.
 
+## Types of Ingress
+* ### Simple fanout (Context path route-based)
+  - A fanout configuration routes traffic from a single IP address to more than one Service, based on the HTTP URI being requested.
+  - Decide destination based on directory name
+
+> [!Note]
+> #### Fanout DEMO 
+> 
+> **[MYCUSTOMDOMAIN.com/foo]** to cluster service **[service1:80]**
+> 
+> **[MYCUSTOMDOMAIN.com/bar]** to cluster service **[service2:80]**
+
+```
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: aspnetapp
+  # annotations:
+  #   kubernetes.io/ingress.class: azure/application-gateway
+spec:
+  ingressClassName: azure-application-gateway
+  rules:
+  - host: MYCUSTOMDOMAIN.com
+    http:
+      paths:
+      - path: /foo
+        backend:
+          serviceName: service1
+          servicePort: 80
+      - path: /bar
+        backend:
+          serviceName: service2
+          servicePort: 80
+
+```
+  
+* ### Name-based virtual hosting (Domain name-based)
+  - Name-based virtual hosts support routing HTTP traffic to multiple host names (domain names) at the same IP address.
+  - Decide destination based on directory name
+
+> [!Note]
+> #### Name-based virtual hosting (Domain name-based) DEMO 
+> 
+> **[MYCUSTOMDOMAIN-ONE.com]** to cluster service **[service1:80]**
+> 
+> **[MYCUSTOMDOMAIN-TWO.com]** to cluster service **[service2:80]**
+
+```
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: aspnetapp
+  # annotations:
+  #   kubernetes.io/ingress.class: azure/application-gateway
+spec:
+  ingressClassName: azure-application-gateway
+  rules:
+  - host: MYCUSTOMDOMAIN-ONE.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: service1
+            port:
+              number: 80
+  - host: MYCUSTOMDOMAIN-TWO.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: service2
+            port:
+              number: 80
+
+```
 
 # What is an Ingress Controller?
 For the Ingress resource to work, the cluster must have an ingress controller running.
