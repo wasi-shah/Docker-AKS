@@ -18,9 +18,12 @@
 * Create Resource Group
 * Create ASK Cluster
 * Configure AGIC addon
-* Setup peering if AGIC and other resources are in different resource group
+* Setup peering if AGIC and other resources are in different resource groups
 
  ## Step 2: Deploy and Verify
+> [!note]
+> Note the annotation of appgw.ingress.kubernetes.io/backend-path-prefix: “/” , this is required as the paths defined above do not exist on the backends, without this annotation we will receive 502 Bad Gateway errors.
+ 
 
 ```
 # Deploy Apps
