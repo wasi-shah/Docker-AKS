@@ -25,6 +25,16 @@
 ```
 # Deploy Apps
 kubectl apply -f Files/
+# pod/mycustomnginx created
+# service/mycustomnginx-service created
+# pod/app1 created
+# service/app1-service created
+# pod/app2 created
+# service/app2-service created
+# pod/app3 created
+# service/app3-service created
+# ingress.networking.k8s.io/fanout-demo created
+
 
 # List Pods
 kubectl get pods
@@ -34,6 +44,11 @@ kubectl get svc
 
 # List Ingress
 kubectl get ingress
+
+kubectl describe ingress fanout
+# Output
+
+
 
 ```
 ## Step 3: Access Applications
