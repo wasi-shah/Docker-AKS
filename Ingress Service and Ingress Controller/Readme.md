@@ -75,8 +75,16 @@ Install AGIC add-on to expose your Kubernetes application in an existing AKS clu
 
  
 ## Step 1: Manually Create Resource Group aksrg
+Manually create a resource group or use 
+```
+az group create --name aksrg --location uksouth
+```
 ## Step 2: Manually Create Cluster mycluster 
-Create a cluster manually if you are on a free trial
+Create a cluster manually if you are on a free trial. 
+If you are on a paid subscription with no restriction on the VM size then us the following command
+```
+az aks create -n mycluster -g aksrg --network-plugin azure --enable-managed-identity --generate-ssh-keys
+```
 
 > [!Note]
 > This cluster does not have any Application Gateway at the moment so it's a **Brownfield Deployment**
