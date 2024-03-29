@@ -103,11 +103,11 @@ az account show --query "id"
 #### Create azure.json file
 ```
 {
-  "tenantId": "c81f465b-99f9-42d3-a169-8082d61c677a",
-  "subscriptionId": "82808767-144c-4c66-a320-b30791668b0a",
+  "tenantId": " tenantId here ",
+  "subscriptionId": " subscriptionId here ",
   "resourceGroup": "Domains", 
   "useManagedIdentityExtension": true,
-  "userAssignedIdentityID": "404b0cc1-ba04-4933-bcea-7d002d184436" # Managed Service Identity client id noted in previous step
+  "userAssignedIdentityID": " Managed Identity Client ID here " # Managed Service Identity client id noted in the previous step
 }
 ```
 #### Create external-dns.yml
