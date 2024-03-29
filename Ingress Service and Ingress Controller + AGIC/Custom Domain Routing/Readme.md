@@ -65,9 +65,12 @@ nslookup -type=NS 123door.co.uk
 * Click on Create
   
 ### Add Azure Role Assignment in MSI
-* Opem MSI -> **aks-externaldns-access-to-dnszones**
+> [Important]
+> Here we connect this [Managed Identity] to our Domains [DNS Zone] resource group.
+
+* Open MSI -> **aks-externaldns-access-to-dnszones**
 * Click on Azure Role Assignments -> Add role assignment
-* Scope: Resource group
+* Scope: Resource Group
 * Subscription: Pay-as-you-go or Free trial
 * Resource group: **Domains**
 * Role: Contributor
