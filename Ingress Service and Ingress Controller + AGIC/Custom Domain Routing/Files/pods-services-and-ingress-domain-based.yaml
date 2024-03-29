@@ -1,0 +1,82 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mycustomnginx
+  labels:
+    app: mycustomnginx
+spec:
+  containers:
+  - image: "wasishah102/mycustomnginx_image"
+    name: mycustomnginx
+    ports:
+    - containerPort: 80
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mycustomnginx-service
+spec:
+  selector:
+    app: mycustomnginx
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app1
+  labels:
+    app: app1
+spec:
+  containers:
+  - image: "wasishah102/app1"
+    name: app1
+    ports:
+    - containerPort: 80
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: app1-service
+spec:
+  selector:
+    app: app1
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+---
+
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: fanout-demo
+  annotations:
+    appgw.ingress.kubernetes.io/backend-path-prefix: "/"
+spec:
+  ingressClassName: azure-application-gateway
+  rules:
+  - host: 123door.co.uk  
+  - http:
+      paths:
+        - path: /app1
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: app1-service
+              port: 
+                number: 80
+          - path: /
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: mycustomnginx-service
+              port: 
+                number: 80                             

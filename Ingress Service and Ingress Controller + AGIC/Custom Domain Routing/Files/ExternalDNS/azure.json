@@ -1,0 +1,7 @@
+{
+    "tenantId": "56cafd09-f42b-409e-85d5-0f6f48244c48",
+    "subscriptionId": "bd541b3c-91be-477e-b030-4c5f3f2530be",
+    "resourceGroup": "Domains", 
+    "useManagedIdentityExtension": true,
+    "userAssignedIdentityID": "af46965b-75c9-48b9-9cdd-2e803091fa3b"
+  }
