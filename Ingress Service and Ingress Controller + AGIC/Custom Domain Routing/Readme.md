@@ -25,19 +25,19 @@ External DNS is an addon which runs as a pod inside the Kubernetes cluster. You 
 > [!Note]
 > We are going to use MSI for providing necessary permissions here which is the latest and greatest in Azure as of today.
 >
-# Step 1: Install Cluster and AGIC using the previous lecture
+## Step 1: Install Cluster and AGIC using the previous lecture
 
-# Step 2: Create DNS Zones
+## Step 2: Create DNS Zones
 Here you will bring your domain to Azure.
 
 * Go to Service -> DNS Zones
-* Subscription: StackSimplify-Paid-Subscription (You need to have a paid subscription for this)
-* Resource Group: Domains
-* Name: kubeoncloud.com
+* Subscription: Paid-Subscription (You need to have a paid subscription for this)
+* Resource Group: **Domains**
+* Name: 123door.co.uk
 * Resource Group Location: UK South
 * Click on Review + Create
 
-# Step 3: Make a note of Azure Nameservers
+## Step 3: Make a note of Azure Nameservers
 Go to Services -> DNS Zones -> 123door.co.uk
 Make a note of Nameservers
 ```
@@ -48,4 +48,129 @@ Name server 4: ns4-35.azure-dns.info.
 
 ```
 
+## Step 4: Go to your registrar and update name servers.
+Verify before updation
+```
+nslookup -type=SOA 123door.co.uk
+nslookup -type=NS 123door.co.uk
+```
 
+## Step 5: Create MSI - Managed Service Identity for External DNS to access Azure DNS Zones
+###Create Managed Service Identity (MSI)
+* Go to All Services -> Managed Identities -> Add
+* Resource Name: **aks-externaldns-access-to-dnszones**
+* Subscription: Pay-as-you-go
+* Resource group: **aksrg**
+* Location: UK South
+* Click on Create
+  
+### Add Azure Role Assignment in MSI
+* Opem MSI -> **aks-externaldns-access-to-dnszones**
+* Click on Azure Role Assignments -> Add role assignment
+* Scope: Resource group
+* Subscription: Pay-as-you-go or Free trial
+* Resource group: **Domains**
+* Role: Contributor
+
+> [!Note]
+> **Go to Overview -> Make a note of **Client ID"**
+
+## Step 6: Create ExternalDNS required files
+### Create azure.json file
+> [!Note]
+> azure.json will be used to create a secret for example:
+> 
+> kubectl create secret generic **azure-config-file** --from-file=**azure.json**
+> 
+> Also, this secret will then be mounted with external-dns yaml file
+```
+      volumes:
+        - name: azure-config-file
+          secret:
+            secretName: azure-config-file
+```
+#### Gather Information Required for azure.json file
+```
+# To get Azure Tenant ID
+az account show --query "tenantId"
+
+# To get Azure Subscription ID
+az account show --query "id"
+```
+#### Create azure.json file
+```
+{
+  "tenantId": "c81f465b-99f9-42d3-a169-8082d61c677a",
+  "subscriptionId": "82808767-144c-4c66-a320-b30791668b0a",
+  "resourceGroup": "Domains", 
+  "useManagedIdentityExtension": true,
+  "userAssignedIdentityID": "404b0cc1-ba04-4933-bcea-7d002d184436" # Managed Service Identity client id noted in previous step
+}
+```
+#### Create external-dns.yml
+```
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: external-dns
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: external-dns
+rules:
+  - apiGroups: [""]
+    resources: ["services","endpoints","pods", "nodes"]
+    verbs: ["get","watch","list"]
+  - apiGroups: ["extensions","networking.k8s.io"]
+    resources: ["ingresses"]
+    verbs: ["get","watch","list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: external-dns-viewer
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: external-dns
+subjects:
+  - kind: ServiceAccount
+    name: external-dns
+    namespace: default
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: external-dns
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: external-dns
+  template:
+    metadata:
+      labels:
+        app: external-dns
+    spec:
+      serviceAccountName: external-dns
+      containers:
+        - name: external-dns
+          image: registry.k8s.io/external-dns/external-dns:v0.14.0
+          args:
+            - --source=service
+            - --source=ingress
+            #- --domain-filter=example.com # (optional) limit to only example.com domains; change to match the zone created above.
+            - --provider=azure
+            #- --azure-resource-group=MyDnsResourceGroup # (optional) use the DNS zones from the tutorial's resource group
+            - --txt-prefix=externaldns-
+          volumeMounts:
+            - name: azure-config-file
+              mountPath: /etc/kubernetes
+              readOnly: true
+      volumes:
+        - name: azure-config-file
+          secret:
+            secretName: azure-config-file
+```
