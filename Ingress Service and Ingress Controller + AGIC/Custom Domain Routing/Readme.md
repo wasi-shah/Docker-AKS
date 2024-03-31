@@ -232,9 +232,37 @@ Rules:
 Annotations:     appgw.ingress.kubernetes.io/backend-path-prefix: /
 Events:          <none>
 
-
 ```
-
+> [!Important]
+>  The above ingress confirms our definition which is 
+```
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: fanout-demo
+  annotations:
+    appgw.ingress.kubernetes.io/backend-path-prefix: "/"
+spec:
+  ingressClassName: azure-application-gateway
+  rules:
+  - host: 123door.co.uk  
+  - http:
+      paths:
+        - path: /app1
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: app1-service
+              port: 
+                number: 80
+          - path: /
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: mycustomnginx-service
+              port: 
+                number: 80       
+```
 
 ### Check external-dns pod for possible errors
 * Wait for 3 to 5 minutes for Record Set update in DNZ Zones
