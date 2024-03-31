@@ -110,6 +110,14 @@ az account show --query "id"
   "userAssignedIdentityID": " Managed Identity Client ID here " # Managed Service Identity client id noted in the previous step
 }
 ```
+### Create a Secret 'azure-config-file' to mount at external-dns.yml so External DNS can access and modify DNS Zone entries
+```
+kubectl create secret generic azure-config-file --from-file=azure.json
+
+# List Secrets
+kubectl get secrets
+```
+
 #### Create external-dns.yml
 ```
 apiVersion: v1
