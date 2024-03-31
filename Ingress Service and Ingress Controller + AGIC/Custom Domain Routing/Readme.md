@@ -88,19 +88,7 @@ nslookup -type=NS 123door.co.uk
 
 
 ## Step 6: Create ExternalDNS required files
-### Create azure.json file
-> [!Note]
-> azure.json will be used to create a secret for example:
-> 
-> kubectl create secret generic **azure-config-file** --from-file=**azure.json**
-> 
-> Also, this secret will then be mounted with external-dns yaml file
-```
-      volumes:
-        - name: azure-config-file
-          secret:
-            secretName: azure-config-file
-```
+
 #### Gather Information Required for azure.json file
 ```
 # To get Azure Tenant ID
@@ -119,6 +107,20 @@ az account show --query "id"
   "userAssignedIdentityID": " Managed Identity Client ID here " # Managed Service Identity client id noted in the previous step
 }
 ```
+### Create azure.json file
+> [!Note]
+> azure.json will be used to create a secret for example:
+> 
+> kubectl create secret generic **azure-config-file** --from-file=**azure.json**
+> 
+> Also, this secret will then be mounted with external-dns yaml file
+```
+      volumes:
+        - name: azure-config-file
+          secret:
+            secretName: azure-config-file
+```
+
 ### Create a Secret 'azure-config-file' to mount at external-dns.yml so External DNS can access and modify DNS Zone entries
 ```
 kubectl create secret generic azure-config-file --from-file=azure.json
@@ -193,4 +195,120 @@ spec:
         - name: azure-config-file
           secret:
             secretName: azure-config-file
+```
+
+## Step 7: Deploy Application and Test
+
+### Deploy Application
+```
+ls custom-domain/
+# Output
+# azure.json
+# external-dns.yml
+# pods-services-and-ingress-domain-based.yaml
+
+# Deploy Application, Cluster IP Service and Ingress 
+kubectl apply -f custom-domain/.
+
+# Check objects
+kubectl get po,svc,ingress,sa,secret
+
+# Describe the ingress to check for the backend ingress rules and context paths
+
+Kubectl describe ingress
+
+Name:             fanout-demo
+Labels:           <none>
+Namespace:        default
+Address:          51.143.179.172
+Ingress Class:    azure-application-gateway
+Default backend:  <default>
+Rules:
+  Host           Path  Backends
+  ----           ----  --------
+  123door.co.uk  
+                 /app1   app1-service:80 (10.224.0.218:80)
+                 /       mycustomnginx-service:80 (10.224.0.185:80)
+Annotations:     appgw.ingress.kubernetes.io/backend-path-prefix: /
+Events:          <none>
+
+
+```
+
+
+### Check external-dns pod for possible errors
+* Wait for 3 to 5 minutes for Record Set update in DNZ Zones
+```
+kubectl describe  pod $(kubectl get po | egrep -o 'external-dns[A-Za-z0-9-]+')
+kubectl logs -f $(kubectl get po | egrep -o 'external-dns[A-Za-z0-9-]+')
+kubectl events  $(kubectl get po | egrep -o 'external-dns[A-Za-z0-9-]+')
+```
+
+### Successful Log entries should look like below
+```
+time="2024-03-31T12:57:03Z" level=info msg="Instantiating new Kubernetes client"
+time="2024-03-31T12:57:03Z" level=info msg="Using inCluster-config based on serviceaccount-token"
+time="2024-03-31T12:57:03Z" level=info msg="Created Kubernetes client https://10.0.0.1:443"
+time="2024-03-31T12:57:03Z" level=info msg="Using managed identity extension to retrieve access token for Azure API."
+time="2024-03-31T12:57:04Z" level=info msg="Ignoring changes to 'externaldns-123door.co.uk' because a suitable Azure DNS zone was not found."
+time="2024-03-31T12:57:04Z" level=info msg="Ignoring changes to 'externaldns-a-123door.co.uk' because a suitable Azure DNS zone was not found."
+time="2024-03-31T12:57:04Z" level=info msg="Updating A record named '@' to '51.143.179.172' for Azure DNS zone '123door.co.uk'."
+```
+
+### Check A record DNS entry
+The ingress IP should be created as A record inside the domain DNS records
+
+```
+az network dns record-set a list -g Domains -z 123door.co.uk
+
+nslookup 123door.co.uk
+
+wasi [ ~ ]$ nslookup 123door.co.uk
+Server:         168.63.129.16
+Address:        168.63.129.16#53
+
+Non-authoritative answer:
+Name:   123door.co.uk
+Address: 51.143.179.172
+
+```
+
+### Recreate pods if necessary by deleting the pod
+```
+kubectl delete pod  $(kubectl get po | egrep -o 'external-dns[A-Za-z0-9-]+')
+```
+
+### Describe ingress to check the endpoints
+
+```
+Kubectl describe ingress
+
+Name:             fanout-demo
+Labels:           <none>
+Namespace:        default
+Address:          51.143.179.172
+Ingress Class:    azure-application-gateway
+Default backend:  <default>
+Rules:
+  Host           Path  Backends
+  ----           ----  --------
+  123door.co.uk  
+                 /app1   app1-service:80 (10.224.0.218:80)
+                 /       mycustomnginx-service:80 (10.224.0.185:80)
+Annotations:     appgw.ingress.kubernetes.io/backend-path-prefix: /
+Events:          <none>
+
+```
+
+### Access Application and Test
+```
+# Access Application
+http://123door.co.uk/
+http://123door.co.uk/app1
+```
+
+## Clean Up!
+```
+kubectl delete -f custom-domain/.
+kubectl delete secret azure-config-file
 ```
