@@ -78,6 +78,11 @@ nslookup -type=NS 123door.co.uk
 > [!Note]
 > **Go to Overview -> Make a note of **Client ID"**
 
+### Associate MSI in AKS Cluster VMSS
+* Go to All Services -> Virtual Machine Scale Sets (VMSS) -> Open demo related VMSS (aks-agentpool-27193923-vmss)
+* Go to Security -> Identity -> User assigned -> Add -> **aks-externaldns-access-to-dnszones**
+
+
 ## Step 6: Create ExternalDNS required files
 ### Create azure.json file
 > [!Note]
