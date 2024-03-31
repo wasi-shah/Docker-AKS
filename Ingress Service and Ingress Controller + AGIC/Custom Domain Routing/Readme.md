@@ -79,8 +79,12 @@ nslookup -type=NS 123door.co.uk
 > **Go to Overview -> Make a note of **Client ID"**
 
 ### Associate MSI in AKS Cluster VMSS
+> [!important]
+> Any pod deployment into the VMSS can not access the DNS zone and update dns entries.
 * Go to All Services -> Virtual Machine Scale Sets (VMSS) -> Open demo related VMSS (aks-agentpool-27193923-vmss)
 * Go to Security -> Identity -> User assigned -> Add -> **aks-externaldns-access-to-dnszones**
+
+
 
 
 ## Step 6: Create ExternalDNS required files
