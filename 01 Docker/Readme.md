@@ -65,6 +65,14 @@ docker info
 Login into Docker
 docker login -u <username>
 
+# Login to ACR
+docker login YOUR-REGISTRY-URL
+docker login myregistryname.azurecr.io
+
+# OR Save your registry URL in a variable 
+export ACR_REGISTRY=myregistryname.azurecr.io
+docker login $ACR_REGISTRY
+
 Publish an image to Docker Hub
 docker push <username>/<image_name>
 
