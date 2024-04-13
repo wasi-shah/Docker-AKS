@@ -4,7 +4,16 @@
 Select organization 
 Settings / Agent pools / Default
 Click New Agent
-Download File
+On the Get the agent dialog box, choose Windows.
+
+On the left pane, select the processor architecture of the installed Windows OS version on your machine. The x64 agent version is intended for 64-bit Windows, whereas the x86 version is intended for 32-bit Windows. If you aren't sure which version of Windows is installed, follow these instructions to find out.
+
+On the right pane, click the Download button.
+
+Follow the instructions on the page to download the agent.
+
+Unpack the agent into the directory of your choice. Make sure that the path to the directory contains no spaces because tools and scripts don't always properly escape spaces. A recommended folder is C:\agents. Extracting in the download folder or other user folders may cause permission issues.
+
 
 Start an elevated (PowerShell) window and set the location to where you unpacked the agent.
 for example create an 'agent' folder on c\:
