@@ -1,5 +1,12 @@
 ## Create Self-hosted Windows agents
 
+Default agent pools
+The following agent pools are provided by default:
+
+Default pool: Use it to register self-hosted agents that you've set up.
+Azure Pipelines hosted pool with various Windows, Linux, and macOS images. For a complete list of the available images and their installed software, see Microsoft-hosted agents.
+
+## Create a Self hosted agent pool
 ```
 Select organization 
 Settings / Agent pools / Default
@@ -99,6 +106,16 @@ Copy
 
 ## Attache Agent to Pipeline
 ```
+Designate a pool in your pipeline
+
+To choose a Microsoft-hosted agent from the Azure Pipelines pool in your Azure DevOps Services YAML pipeline, specify the name of the image, using the YAML VM Image Label from this table.
+pool:
+  vmImage: ubuntu-latest # This is the default if you don't specify a pool or vmImage.
+
+To use a private pool with no demands:
+pool: MyPool
+
+
 Pool and agent names
 Open pipe line and replace the pool entry with 
 Pipelines / pipeline name/ click Edit
@@ -111,5 +128,32 @@ Note: You will need to do this for both your build and release pipelines.
 --pool <pool> - pool name for the agent to join
 --agent <agent> - agent name
 --replace - replace the agent in a pool. If another agent is listening by the same name, it will start failing with a conflict
+
+```
+
+Self hosted agent Maintenance job
+```
+You can configure agent pools to periodically clean stale working directories and repositories. This should reduce the potential for the agents to run out of disk space. Maintenance jobs are configured at the organization level in agent pool settings.
+
+To configure maintenance job settings:
+
+Sign in to your organization (https://dev.azure.com/{yourorganization}).
+
+Choose Azure DevOps, Organization settings.
+
+Choose Organization settings.
+
+Choose Agent pools.
+
+Choose Agent pools tab.
+
+Choose the desired pool and choose Settings to configure maintenance job settings for that agent pool.
+Configure your desired settings and choose Save.
+
+Select Maintenance History to see the maintenance job history for the current agent pool. You can download and review logs to see the cleaning steps and actions taken.
+
+Maintenance job history
+
+The maintenance is done per agent pool, not per machine; so if you have multiple agent pools on a single machine, you may still run into disk space issues.
 
 ```
