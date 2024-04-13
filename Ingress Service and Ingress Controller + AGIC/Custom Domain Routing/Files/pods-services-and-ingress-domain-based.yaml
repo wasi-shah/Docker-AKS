@@ -64,19 +64,19 @@ spec:
   ingressClassName: azure-application-gateway
   rules:
   - host: 123door.co.uk  
-  - http:
-      paths:
-        - path: /app1
-          pathType: ImplementationSpecific
-          backend:
-            service:
-              name: app1-service
-              port: 
-                number: 80
-          - path: /
-          pathType: ImplementationSpecific
-          backend:
-            service:
-              name: mycustomnginx-service
-              port: 
-                number: 80                             
+    - http:
+        paths:
+          - path: /app1
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: app1-service
+                port: 
+                  number: 80
+            - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: mycustomnginx-service
+                port: 
+                  number: 80                             
