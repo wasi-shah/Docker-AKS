@@ -179,3 +179,27 @@ variables:
 - name: config
   value: debug
 ```
+
+
+## System variables
+In addition to user-defined variables, Azure Pipelines has system variables with predefined values. For example, the predefined variable Build.BuildId gives the ID of each build and can be used to identify different pipeline runs. You can use the Build.BuildId variable in scripts or tasks when you need to a unique value.
+
+https://learn.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops&tabs=yaml
+
+
+If you're using classic release pipelines, see release variables.
+
+System variables get set with their current value when you run the pipeline. Some variables are set automatically. As a pipeline author or end user, you change the value of a system variable before the pipeline runs.
+
+System variables are read-only.
+
+## Environment variables
+
+Environment variables are specific to the operating system you're using. They're injected into a pipeline in platform-specific ways. The format corresponds to how environment variables get formatted for your specific scripting platform.
+
+On UNIX systems (macOS and Linux), environment variables have the format $NAME. On Windows, the format is %NAME% for batch and $env:NAME in PowerShell.
+
+> [!Note]
+> System and user-defined variables also get injected as environment variables for your platform.
+> When variables convert into environment variables, variable names become uppercase, and periods turn into underscores.
+>For example, the variable name any.variable becomes the variable name $ANY_VARIABLE.
