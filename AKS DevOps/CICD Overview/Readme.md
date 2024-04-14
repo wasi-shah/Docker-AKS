@@ -60,6 +60,7 @@ Pipelines are made of stages, jobs and steps.
   - A job can attached to a custom agent 
   - A job can also be an agent less for example a 30 seconds delay.
   - A job represents an execution boundary of a set of steps.
+  - A job is a collection of steps run by an agent or on a server or on client custom host machine .
 
 - Pipeline > Stage > Job > Step/Tasks - A step can be a task or script and is the smallest building block of a pipeline.
   - For example: A test can be
@@ -68,6 +69,19 @@ Pipelines are made of stages, jobs and steps.
     - Build artifact 
     - Publish artifact 
     - Invoke an API  
+
+A typical pipeline hierarchy 
+```
+- Pipeline
+  - Stages
+    - Stage : Build
+        - Jobs
+            - Job 1
+                - Steps
+                    - Task 2
+                    - Task 2
+
+```
 
 ## Run
 A run represents one execution of a pipeline. It collects the logs associated with running the steps and the results of running tests. During a run, Azure Pipelines will first process the pipeline and then send the run to one or more agents.
@@ -203,3 +217,13 @@ On UNIX systems (macOS and Linux), environment variables have the format $NAME. 
 > System and user-defined variables also get injected as environment variables for your platform.
 > When variables convert into environment variables, variable names become uppercase, and periods turn into underscores.
 >For example, the variable name any.variable becomes the variable name $ANY_VARIABLE.
+
+## List variables
+You can list all of the variables in your pipeline with the az pipelines variable list command.
+```
+az pipelines variable list [--org]
+                           [--pipeline-id]
+                           [--pipeline-name]
+                           [--project]
+```
+
