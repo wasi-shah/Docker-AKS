@@ -130,6 +130,9 @@ Note: You will need to do this for both your build and release pipelines.
 --replace - replace the agent in a pool. If another agent is listening by the same name, it will start failing with a conflict
 
 ```
+# Stop the agent on Windows 
+
+if you want to stop the agent, you can end the task for Agent.Listener.exe in Task Manager.
 
 Self hosted agent Maintenance job
 ```
