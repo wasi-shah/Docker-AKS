@@ -81,7 +81,14 @@ When your build or deployment runs, the system begins one or more jobs. An agent
 ## Environment
 An environment is a collection of resources where you deploy your application. One environment can contain one or more virtual machines, containers, web apps, or any service. Pipelines deploy to one or more environments after a build is completed and tests are run.
 
-## Variables
+# Variables 
+There are three types of variables flows in the pipeline
+1. User-defined Variables
+2. System variables
+3. Environment variables
+
+
+## User-defined Variables
 Variables give you a convenient way to get key bits of data into various parts of the pipeline. The most common use of variables is to define a value that you can then use in your pipeline. All variables are strings and are mutable. 
 
 > [!Note]
@@ -90,6 +97,7 @@ Variables give you a convenient way to get key bits of data into various parts o
 ### Variable scopes
 In the YAML file, you can set a variable at various scopes:
 
+- You can also specify variables outside of a YAML pipeline in the UI. When you set a variable in the UI, that variable can be encrypted and set as secret.
 - At the root level, to make it available to all jobs in the pipeline.
 - At the stage level, to make it available only to a specific stage.
 - At the job level, to make it available only to a specific job.
@@ -100,3 +108,74 @@ In the YAML file, you can set a variable at various scopes:
 > - a variable defined at the job level can override a variable set at the stage level. 
 > - A variable defined at the stage level overrides a variable set at the pipeline root level. 
 > - A variable set in the pipeline root level overrides a variable set in the Pipeline settings UI. 
+
+```
+variables:
+  global_variable: value    # this is available to all jobs
+
+jobs:
+- job: job1
+  pool:
+    vmImage: 'ubuntu-latest'
+  variables:
+    job_variable1: value1    # this is only available in job1
+  steps:
+  - bash: echo $(global_variable)
+  - bash: echo $(job_variable1)
+  - bash: echo $JOB_VARIABLE1 # variables are available in the script environment too
+
+- job: job2
+  pool:
+    vmImage: 'ubuntu-latest'
+  variables:
+    job_variable2: value2    # this is only available in job2
+  steps:
+  - bash: echo $(global_variable)
+  - bash: echo $(job_variable2)
+  - bash: echo $GLOBAL_VARIABLE
+  ```
+
+  Output
+  ```
+# job1
+value 
+value1
+value1
+
+# job2
+value
+value2
+value
+  ```
+
+### Variable groups and templates
+
+#### Variable groups
+Variable groups are a set of variables that you can use across multiple pipelines. They allow you to manage and organize variables that are common to various stages in one place.
+
+#### Variable templates
+With templates, variables can be defined in one YAML and included in another YAML file.
+Use templates to define variables in one file that are used in multiple pipelines.
+
+
+Sample using variables, group and templates
+```
+variables:
+# a regular variable
+- name: myvariable
+  value: myvalue
+# a variable group
+- group: myvariablegroup
+# a reference to a variable template
+- template: build.yml
+```
+build.yml
+```
+variables:
+- name: vmImage
+  value: vs2017-win2016
+- name: arch
+  value: x64
+- name: config
+  value: debug
+```
