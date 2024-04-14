@@ -112,8 +112,22 @@ To choose a Microsoft-hosted agent from the Azure Pipelines pool in your Azure D
 pool:
   vmImage: ubuntu-latest # This is the default if you don't specify a pool or vmImage.
 
-To use a private pool with no demands:
-pool: MyPool
+Make sure you have set the pipeline to use a private pool with no demands:
+
+# For build
+  jobs:
+  - job: Build
+    displayName: Build
+    pool: Default
+
+# For deployment 
+  jobs:
+  - deployment: Deploy
+    condition: and(succeeded(), not(startsWith(variables['Build.SourceBranch'], 'refs/pull/')))
+    displayName: Deploy
+    pool: Default
+
+
 
 
 Pool and agent names
