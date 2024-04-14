@@ -105,7 +105,7 @@ Copy
 ```
 
 ## Make sure the docker client is Open on Windows client (or running in system try)
- [!Important]
+> [!Important]
  > ##[error]The process 'C:\Program Files\Docker\Docker\resources\bin\docker.exe' failed with exit code 1
 Make sure the docker is running on Windows where you have installed the agent 
 Also, make sure the path variabl is set to load all dependencies.
