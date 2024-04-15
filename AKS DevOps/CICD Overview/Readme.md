@@ -352,7 +352,7 @@ The syntax of referencing output variables with dependencies varies depending on
 - Stage to stage dependency (deployment job with resource)
   - dependencies.<stage-name>.outputs['<deployment-job-name>.<Deploy_resource-name>.<step-name>.<variable-name>']
 
-#### Use outputs in the same job      
+### Use outputs in the same job      
 ```
 steps:
 - task: MyTask@1  # this step generates the output variable
