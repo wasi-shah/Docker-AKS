@@ -44,7 +44,11 @@ echo "# My First Commit" >> README.md
 git add .
 ```
 
-###  Do local Commit
+###  Do  Commit
+The git commit command captures a snapshot of the project's currently staged changes. Committed snapshots can be thought of as “safe” versions of a project—Git will never change them unless you explicitly ask it to.
+
+> [!important]
+> Prior to the execution of git commit, the git add command is used to promote or 'stage' changes to the project that will be stored in a commit. These two commands git commit and git add are two of the most frequently used.
 ```
 git commit -am "V1 Base Commit"
 ```
@@ -87,3 +91,18 @@ git commit -am "V2 Commit for index.html"
 git push
 ```
 
+### Check status to find staged, unstaged, and untracked files
+```
+git status
+```
+
+### Clone a Repo
+The git clone command copies an existing Git repository.
+> [!important]
+> As a convenience, cloning automatically creates a remote connection called "origin" pointing back to the original repository. This makes it very easy to interact with a central repository. This automatic connection is established by creating Git refs to the remote branch heads under
+
+```
+git clone ssh:your url here 
+cd my-project 
+# Start working on the project
+```
