@@ -286,3 +286,64 @@ az pipelines variable list [--org]
                            [--project]
 ```
 
+# YAML pipeline editor & management
+> [!Note]
+> Azure Pipelines provides a YAML pipeline editor that you can use to author and edit your pipelines. The YAML editor is based on the Monaco Editor. The editor provides tools like Intellisense support and a task assistant to provide guidance while you edit a pipeline.
+
+
+## Edit a YAML pipeline
+To access the YAML pipeline editor, do the following steps.
+
+1. Sign in to your organization (https://dev.azure.com/{yourorganization}).
+2. Select your project, choose Pipelines, and then select the pipeline you want to edit. 
+
+## Use keyboard shortcuts
+The YAML pipeline editor provides several keyboard shortcuts, which we show in the following examples.
+
+- Choose Ctrl+Space for Intellisense support while you're editing the YAML pipeline.
+- Choose F1 (Fn+F1 on Mac) to display the command palette and view the available keyboard shortcuts.
+
+## Use task assistant
+The task assistant provides a method for adding tasks to your YAML pipeline.
+
+To display the task assistant, edit your YAML pipeline and choose Show assistant.
+
+## Manage pipeline variables
+
+You can manage pipeline variables both from within your 
+1. YAML pipeline 
+2. and from the pipeline settings UI.
+
+### To manage pipeline variables, do the following steps.
+
+1. Edit your YAML pipeline and choose Variables to manage pipeline variables.
+2. Manage pipeline variables button.
+3. Choose from the following functions:
+- New variable: to add your first variable.
+- Add  : to add subsequent variables.
+- Variable name to edit a variable.
+- Delete  : to delete a variable.
+
+### Manage pipeline variables in the YAML editor.
+
+To manage pipelines variables in the pipeline settings UI, do the following steps.
+
+1. Edit the pipeline and choose More actions > Triggers.
+2. Pipeline settings UI menu.
+3. Choose Variables.
+
+## Configure the default agent pool
+If a YAML pipeline doesn't specify an agent pool, the agent pool configured in the Default agent pool for YAML setting is used. This pool is also used for post-run cleanup tasks.
+
+To view and configure the Default agent pool for YAML setting:
+
+1. Edit the pipeline and choose More actions > Triggers.
+
+2. Screenshot of the pipeline settings UI menu.
+
+3. Choose YAML, and select the desired agent pool using the Default agent pool for YAML dropdown list.
+
+4. Screenshot of the default agent pool for YAML pipelines.
+
+> [!note]
+> Default agent pool for YAML is configured on a per-pipeline basis.
