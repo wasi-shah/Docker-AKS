@@ -69,7 +69,7 @@ git pull
 
 ```
 
-### Pull github repo, Make changes to file, commit to local and push changes to git repo
+### Pull github repo, Add file or Make changes to file, commit to local and push changes to git repo
 ```
 git pull
 
