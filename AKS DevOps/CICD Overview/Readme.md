@@ -49,28 +49,30 @@ If you use private projects, you can run up to 1,800 minutes (30 hours) of pipel
 ## Pipeline Hierarchy 
 Pipelines are made of stages, jobs and steps.
 
-- Pipeline > Stage - A stage is a way to logically dividing your pipeline
+- Pipeline > Stage - A stage is a way to logically divide your pipeline
   - A stage is a logical boundary in the pipeline.
-  - It can be used to mark separation of concerns (for example, Build, QA, and production).
-  - For example you could have a stage for Build, Test and Deploy
+  - It can be used to mark the separation of concerns (for example, Build, QA, and production).
+  - For example, you could have a stage for Build, Test and Deploy
   - Inside each stage is one or more jobs
-  - a stage can depends on another stage
+  - a stage can depend on another stage
 
 - Pipeline > Stage > Job - Each job runs on one agent. A job can also be agentless.
   - A job can attached to a custom agent 
   - A job can also be an agent less for example a 30 seconds delay.
   - A job represents an execution boundary of a set of steps.
-  - A job is a collection of steps run by an agent or on a server or on client custom host machine .
+  - A job is a collection of steps run by an agent on a server or client custom host machine.
 
 - Pipeline > Stage > Job > Step/Tasks - A step can be a task or script and is the smallest building block of a pipeline.
   - For example: A test can be
-    - A Task is a pre-packaged scrip that performs an action
+    - A Task is a pre-packaged script that performs an action
     - All of the steps run together on the same agent. 
     - Build artifact 
     - Publish artifact 
     - Invoke an API  
 
 A typical pipeline hierarchy 
+![image](https://github.com/wasi-shah/Docker-AKS/assets/51749920/34356325-ac1e-4e2f-93cd-c93d6710c39a)
+
 ```
 
 - Pipeline
