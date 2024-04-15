@@ -154,6 +154,71 @@ When your build or deployment runs, the system begins one or more jobs. An agent
 ## Environment
 An environment is a collection of resources where you deploy your application. One environment can contain one or more virtual machines, containers, web apps, or any service. Pipelines deploy to one or more environments after a build is completed and tests are run.
 
+
+# Parameters
+Unlike variables, pipeline parameters can't be changed by a pipeline while it's running.
+
+Parameters are only available at template parsing time. Parameters are expanded just before the pipeline runs so that values surrounded by ${{ }} are replaced with parameter values. 
+> [!note]
+> Use variables if you need your values to be more widely available during your pipeline run.
+
+> [!important]
+> Parameters must contain a name and data type. Parameters can't be optional. A default value needs to be assigned in your YAML file or when you run your pipeline. If you don't assign a default value or set default to false, the first available value is used.
+
+> [!important]
+> use ${{ parameter.name }} to display parameters for example ${{ parameters.image }}
+
+## Using parameter in pipeline Yaml
+```
+parameters:
+- name: image
+  displayName: Pool Image
+  type: string
+  default: ubuntu-latest
+  values:
+  - windows-latest
+  - ubuntu-latest
+  - macOS-latest
+
+trigger: none
+
+jobs:
+- job: build
+  displayName: build
+  pool: 
+    vmImage: ${{ parameters.image }}
+  steps:
+  - script: echo building $(Build.BuildNumber) with ${{ parameters.image }}
+```
+
+When the pipeline runs, you select the Pool Image. If you don't make a selection, the default option, ubuntu-latest gets used.
+
+## Use conditionals with parameters
+You can also use parameters as part of conditional logic. With conditionals, part of a YAML runs if it meets the if criteria.
+```
+parameters:
+- name: configs
+  type: string
+  default: 'x86,x64'
+
+trigger: none
+
+jobs:
+- ${{ if contains(parameters.configs, 'x86') }}:
+  - job: x86
+    steps:
+    - script: echo Building x86...
+- ${{ if contains(parameters.configs, 'x64') }}:
+  - job: x64
+    steps:
+    - script: echo Building x64...
+- ${{ if contains(parameters.configs, 'arm') }}:
+  - job: arm
+    steps:
+    - script: echo Building arm...
+```
+
+
 # Variables 
 There are three types of variables flows in the pipeline
 1. User-defined Variables
@@ -221,6 +286,23 @@ value2
 value
   ```
 
+### How to use variables in Bash, PowerShell, and a script task
+> [!note]
+> - bash: echo $(projectName)
+> - powershell: echo $(projectName)
+> - script: echo $(projectName)
+
+```
+variables:
+ - name: projectName
+   value: contoso
+
+steps: 
+- bash: echo $(projectName)
+- powershell: echo $(projectName)
+- script: echo $(projectName)
+```
+
 ### Variable groups and templates
 
 #### Variable groups
@@ -253,6 +335,85 @@ variables:
   value: debug
 ```
 
+### Share variables across pipelines
+Some tasks define output variables, which you can consume in downstream steps, jobs, and stages. In YAML, you can access variables across jobs and stages by using dependencies.
+
+Dependency syntax overview
+The syntax of referencing output variables with dependencies varies depending on the circumstances. Here's an overview of the most common scenarios. Note that there may be times when alternate syntax also works.
+
+- stage to stage dependency (different stages)
+  - stageDependencies.<stage-name>.outputs['<job-name>.<step-name>.<variable-name>']
+- job to job dependency (same stage)
+  - dependencies.<stage-name>.outputs['<step-name>.<variable-name>']
+- Job to stage dependency (different stages)
+  - stageDependencies.<stage-name>.<job-name>.outputs['<step-name>.<variable-name>']
+- Stage to stage dependency (deployment job)
+  - dependencies.<stage-name>.outputs['<deployment-job-name>.<deployment-job-name>.<step-name>.<variable-name>']
+- Stage to stage dependency (deployment job with resource)
+  - dependencies.<stage-name>.outputs['<deployment-job-name>.<Deploy_resource-name>.<step-name>.<variable-name>']
+
+#### Use outputs in the same job      
+```
+steps:
+- task: MyTask@1  # this step generates the output variable
+  name: ProduceVar  # because we're going to depend on it, we need to name the step
+- script: echo $(ProduceVar.MyVar) # this step uses the output variable
+```
+
+### Use outputs in a different job
+> [!note]
+> $[ dependencies.A.outputs['ProduceVar.MyVar'] ]
+```
+jobs:
+- job: A
+  steps:
+  # assume that MyTask generates an output variable called "MyVar"
+  # (you would learn that from the task's documentation)
+  - task: MyTask@1
+    name: ProduceVar  # because we're going to depend on it, we need to name the step
+- job: B
+  dependsOn: A
+  variables:
+    # map the output variable from A into this job
+    varFromA: $[ dependencies.A.outputs['ProduceVar.MyVar'] ]
+  steps:
+  - script: echo $(varFromA) # this step uses the mapped-in variable
+```
+### Use outputs in a different stage
+> [!note]
+> stageDependencies.STAGE.JOB.outputs['TASK.VARIABLE']
+```
+stages:
+- stage: One
+  jobs:
+  - job: A
+    steps:
+    - task: MyTask@1  # this step generates the output variable
+      name: ProduceVar  # because we're going to depend on it, we need to name the step
+
+- stage: Two
+  dependsOn:
+  - One
+  jobs:
+  - job: B
+    variables:
+      # map the output variable from A into this job
+      varFromA: $[ stageDependencies.One.A.outputs['ProduceVar.MyVar'] ]
+    steps:
+    - script: echo $(varFromA) # this step uses the mapped-in variable
+
+- stage: Three
+  dependsOn:
+  - One
+  - Two
+  jobs:
+  - job: C
+    variables:
+      # map the output variable from A into this job
+      varFromA: $[ stageDependencies.One.A.outputs['ProduceVar.MyVar'] ]
+    steps:
+    - script: echo $(varFromA) # this step uses the mapped-in variable
+```
 
 ## System variables
 In addition to user-defined variables, Azure Pipelines has system variables with predefined values. For example, the predefined variable Build.BuildId gives the ID of each build and can be used to identify different pipeline runs. You can use the Build.BuildId variable in scripts or tasks when you need to a unique value.
@@ -276,6 +437,19 @@ On UNIX systems (macOS and Linux), environment variables have the format $NAME. 
 > System and user-defined variables also get injected as environment variables for your platform.
 > When variables convert into environment variables, variable names become uppercase, and periods turn into underscores.
 >For example, the variable name any.variable becomes the variable name $ANY_VARIABLE.
+
+### Access variables through the environment
+Notice that variables are also made available to scripts through environment variables. The syntax for using these environment variables depends on the scripting language.
+
+
+The name is upper-cased, and the . is replaced with the _. This is automatically inserted into the process environment. Here are some examples:
+> [!note]
+> Batch script: %VARIABLE_NAME%
+
+> PowerShell script: $env:VARIABLE_NAME
+
+> Bash script: $VARIABLE_NAME
+
 
 ## List variables
 You can list all of the variables in your pipeline with the az pipelines variable list command.
