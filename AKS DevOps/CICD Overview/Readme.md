@@ -523,70 +523,105 @@ az pipelines variable list [--org]
 
 ## List all variables in pipeline
 ```
-jobs:
-- job: PrintPipelineInfo
-  displayName: 'Print Pipeline Information'
-  steps:
-  - script: |
-      echo "Pipeline Information:"
-      echo "---------------------"
-      echo "Azure DevOps Organization: $(System.CollectionUri)"
-      echo "Azure DevOps Project: $(System.TeamProject)"
-      echo "Pipeline Triggered By: $(Build.RequestedFor)"
-      echo "Triggered By User Email: $(Build.RequestedForEmail)"
-      echo "Triggered By User ID: $(Build.RequestedForId)"
-      echo "Triggered By User Display Name: $(Build.RequestedForDisplayName)"
-      echo "Triggered By User Username: $(Build.RequestedForUsername)"
-      echo "Triggered By User Teams ID: $(Build.RequestedForTeamsId)"
-      echo "Pipeline Execution Directory: $(System.DefaultWorkingDirectory)"
-      echo "Build Source Branch: $(Build.SourceBranch)"
-      echo "Build Repository Name: $(Build.Repository.Name)"
-      echo "Build Repository ID: $(Build.Repository.ID)"
-      echo "Build Repository Type: $(Build.Repository.Provider)"
-      echo "Build Repository URL: $(Build.Repository.Uri)"
-      echo "Build Repository Default Branch: $(Build.Repository.DefaultBranch)"
-      echo "Build Definition Name: $(Build.DefinitionName)"
-      echo "Build Definition ID: $(Build.DefinitionID)"
-      echo "Build Build Number: $(Build.BuildNumber)"
-      echo "Build Build ID: $(Build.BuildID)"
-      echo "Build Build URI: $(Build.BuildUri)"
-      echo "Build Source Version: $(Build.SourceVersion)"
-      echo "Build Source Version Message: $(Build.SourceVersionMessage)"
-      echo "Build Source Branch Name: $(Build.SourceBranchName)"
-      echo "Build Source Version Author: $(Build.SourceVersionAuthor)"
-      echo "Build Reason: $(Build.Reason)"
-      echo "Build Source Provider: $(Build.SourceProvider)"
-      echo "Build Repository Clean: $(Build.Repository.Clean)"
-      echo "------------------"
-  
-      echo "Agent Information:"
-      echo "------------------"
-      echo "Agent.Name: $(Agent.Name)"
-      echo "Agent.OS: $(Agent.OS)"
-      echo "Agent.Version: $(Agent.Version)"
-      echo "Agent.WorkFolder: $(Agent.WorkFolder)"
-      echo "Agent.ToolsDirectory: $(Agent.ToolsDirectory)"
-      echo "Agent.TempDirectory: $(Agent.TempDirectory)"
-      echo "Agent.HomeDirectory: $(Agent.HomeDirectory)"
-      echo "Agent.ContainerId: $(Agent.ContainerId)"
-      echo "------------------"
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- none
+
+parameters:
+- name: image
+  displayName: Pool Image
+  type: string
+  default: ubuntu-latest
+  values:
+  - windows-latest
+  - ubuntu-latest
+  - macOS-latest
+
+variables:
+  myVar: "My Data"
+
+
+
+stages:
+- stage: VariableTesting
+  displayName: Just a test to check how variable are set and access
+  jobs:
+  - job: TestJob
+    displayName: Test-Job Sample Name
+    pool: Default
+    steps:
+    - script: echo My parameter value is ${{ parameters.image }}
+      displayName: 'My Parameters'
       
-      echo "Other variables:"
-      echo "env:HOME: $(env:HOME)"
-      echo "------------------"
+    - script: echo My variable value is $(myVar)
+      displayName: 'My Variable'
 
-      echo "Environment Variables:"
-      echo "------------------"
-      printenv
-    displayName: 'Print Pipeline Information'
+    - script: |
+        echo System Variable BuildNumber is $(Build.BuildNumber) and $(Build.BuildId)
+        echo "Pipeline Information:"
+        echo "---------------------"
+        echo "Azure DevOps Organization: $(System.CollectionUri)"
+        echo "Azure DevOps Project: $(System.TeamProject)"
+        echo "Pipeline Triggered By: $(Build.RequestedFor)"
+        echo "Triggered By User Email: $(Build.RequestedForEmail)"
+        echo "Triggered By User ID: $(Build.RequestedForId)"
+        echo "Triggered By User Display Name: $(Build.RequestedForDisplayName)"
+        echo "Triggered By User Username: $(Build.RequestedForUsername)"
+        echo "Triggered By User Teams ID: $(Build.RequestedForTeamsId)"
+        echo "Pipeline Execution Directory: $(System.DefaultWorkingDirectory)"
+        echo "Build Source Branch: $(Build.SourceBranch)"
+        echo "Build Repository Name: $(Build.Repository.Name)"
+        echo "Build Repository ID: $(Build.Repository.ID)"
+        echo "Build Repository Type: $(Build.Repository.Provider)"
+        echo "Build Repository URL: $(Build.Repository.Uri)"
+        echo "Build Repository Default Branch: $(Build.Repository.DefaultBranch)"
+        echo "Build Definition Name: $(Build.DefinitionName)"
+        echo "Build Definition ID: $(Build.DefinitionID)"
+        echo "Build Build Number: $(Build.BuildNumber)"
+        echo "Build Build ID: $(Build.BuildID)"
+        echo "Build Build URI: $(Build.BuildUri)"
+        echo "Build Source Version: $(Build.SourceVersion)"
+        echo "Build Source Version Message: $(Build.SourceVersionMessage)"
+        echo "Build Source Branch Name: $(Build.SourceBranchName)"
+        echo "Build Source Version Author: $(Build.SourceVersionAuthor)"
+        echo "Build Reason: $(Build.Reason)"
+        echo "Build Source Provider: $(Build.SourceProvider)"
+        echo "Build Repository Clean: $(Build.Repository.Clean)"
+        echo "------------------"
 
-    
-  - script: |
-      # Display the directory structure of $(Agent.BuildDirectory) recursively
-      tree $(Agent.BuildDirectory)
-      echo "----------------------"
-      ls -la $(Build.SourcesDirectory)
-    displayName: 'Print Directory Structure'
+      displayName: 'My System variables'
+
+    - script: |
+       echo ENv variable Agent Name is $(Agent.Name)
+       echo "Agent Information:"
+       echo "------------------"
+       echo "Agent.Name: $(Agent.Name)"
+       echo "Agent.OS: $(Agent.OS)"
+       echo "Agent.Version: $(Agent.Version)"
+       echo "Agent.WorkFolder: $(Agent.WorkFolder)"
+       echo "Agent.ToolsDirectory: $(Agent.ToolsDirectory)"
+       echo "Agent.TempDirectory: $(Agent.TempDirectory)"
+       echo "Agent.HomeDirectory: $(Agent.HomeDirectory)"
+       echo "Agent.ContainerId: $(Agent.ContainerId)"
+       echo "------------------"
+       echo "Other variables:"
+       echo "env:HOME: $(env:HOME)"
+       echo "------------------"
+      displayName: 'My Env variables'
+
+
+    - script: |
+        # Display the directory structure of $(Agent.Name) / $(Agent.BuildDirectory) recursively
+        tree $(Agent.BuildDirectory)
+        echo "----------------------"
+        # ls -la $(Build.SourcesDirectory)
+        cd $(Build.SourcesDirectory)
+        dir
+      displayName: 'Display the directory structure'
 ```
 
 # YAML pipeline editor & management
