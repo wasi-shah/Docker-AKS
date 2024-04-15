@@ -611,6 +611,11 @@ stages:
        echo "Other variables:"
        echo "env:HOME: $(env:HOME)"
        echo "------------------"
+
+       echo "Environment Variables Complete List:"
+       echo "------------------"
+       # printenv
+       set
       displayName: 'My Env variables'
 
 
