@@ -522,6 +522,25 @@ az pipelines variable list [--org]
 ```
 
 ## List all variables in pipeline
+### To add variable in GUI
+- To set variable in the web interface, follow these steps:
+- Go to the Pipelines page, select the appropriate pipeline, and then select Edit.
+- Locate the Variables for this pipeline.
+- Add or update the variable. for example myguivar
+- Save the pipeline.
+
+### To add a secret in GUI
+To set secrets in the web interface, follow these steps:
+
+- Go to the Pipelines page, select the appropriate pipeline, and then select Edit.
+- Locate the Variables for this pipeline.
+- Add or update the variable. for example myguisecret
+- Select the option to Keep this value secret to store the variable in an encrypted manner.
+- Save the pipeline.
+
+> [!Important]
+> Secret value appears as *** when you display it on output window
+> For example $(myguisecret) will show *** in Output window 
 ```
 # Starter pipeline
 # Start with a minimal pipeline that you can customize to build and deploy your code.
@@ -559,10 +578,17 @@ stages:
       
     - script: echo My variable value is $(myVar)
       displayName: 'My Variable'
+      
+    - script: echo My variable set through GUI value is $(myguivar)
+      displayName: 'My GUI Variable'
+
+    - script: echo My secret set through GUI value is $(myguisecret)
+      displayName: 'My GUI Secret'
+
 
     - script: |
         echo System Variable BuildNumber is $(Build.BuildNumber) and $(Build.BuildId)
-        echo "Pipeline Information:"
+        echo "System Pipeline Information:"
         echo "---------------------"
         echo "Azure DevOps Organization: $(System.CollectionUri)"
         echo "Azure DevOps Project: $(System.TeamProject)"
