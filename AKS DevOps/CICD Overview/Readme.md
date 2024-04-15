@@ -541,6 +541,22 @@ To set secrets in the web interface, follow these steps:
 > [!Important]
 > Secret value appears as *** when you display it on output window
 > For example $(myguisecret) will show *** in Output window 
+
+### Variable Groups
+
+#### Create a Group and variable
+To use a variable group, open your pipeline. Select Variables > Variable groups, and then choose Link variable group. In a build pipeline, you see a list of available groups. In a release pipeline, for example, you also see a drop-down list of stages in the pipeline. Link the variable group to one or more of these stages in the pipeline.
+
+Group name: MyNewVariableGroup
+Group variable name: myvariableinsideagroup
+
+#### Authorize a variable group
+To work with a variable group, you must authorize the group. If you only name the variable group in YAML, then anyone who can push code to your repository could extract the contents of secrets in the variable group. To authorize the group, use one of the following techniques:
+
+To authorize any pipeline to use the variable group, go to Azure Pipelines. This might be a good option if you don't have any secrets in the group. Select Library > Variable groups, and then select the variable group in question and enable the setting Allow access to all pipelines.
+
+To authorize a variable group for a specific pipeline, open the pipeline, select Edit, and then queue a build manually. You see a resource authorization error and an "Authorize resources" action on the error. Choose this action to explicitly add the pipeline as an authorized user of the variable group.
+
 ```
 # Starter pipeline
 # Start with a minimal pipeline that you can customize to build and deploy your code.
@@ -564,7 +580,6 @@ variables:
   myVar: "My Data"
 
 
-
 stages:
 - stage: VariableTesting
   displayName: Just a test to check how variable are set and access
@@ -572,6 +587,8 @@ stages:
   - job: TestJob
     displayName: Test-Job Sample Name
     pool: Default
+    variables:
+     group: MyNewVariableGroup
     steps:
     - script: echo My parameter value is ${{ parameters.image }}
       displayName: 'My Parameters'
@@ -584,6 +601,10 @@ stages:
 
     - script: echo My secret set through GUI value is $(myguisecret)
       displayName: 'My GUI Secret'
+
+    - script: echo My variable from a variable group set through GUI value is $(myvariableinsideagroup)
+      displayName: 'My GUI group variable '
+      
 
 
     - script: |
