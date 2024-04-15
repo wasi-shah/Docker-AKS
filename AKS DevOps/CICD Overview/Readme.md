@@ -427,9 +427,46 @@ System variables get set with their current value when you run the pipeline. Som
 
 System variables are read-only.
 
+```
+  - script: |
+      echo "Pipeline Information:"
+      echo "---------------------"
+      echo "Azure DevOps Organization: $(System.CollectionUri)"
+      echo "Azure DevOps Project: $(System.TeamProject)"
+      echo "Pipeline Triggered By: $(Build.RequestedFor)"
+      echo "Triggered By User Email: $(Build.RequestedForEmail)"
+      echo "Triggered By User ID: $(Build.RequestedForId)"
+      echo "Triggered By User Display Name: $(Build.RequestedForDisplayName)"
+      echo "Triggered By User Username: $(Build.RequestedForUsername)"
+      echo "Triggered By User Teams ID: $(Build.RequestedForTeamsId)"
+      echo "Pipeline Execution Directory: $(System.DefaultWorkingDirectory)"
+      echo "Build Source Branch: $(Build.SourceBranch)"
+      echo "Build Repository Name: $(Build.Repository.Name)"
+      echo "Build Repository ID: $(Build.Repository.ID)"
+      echo "Build Repository Type: $(Build.Repository.Provider)"
+      echo "Build Repository URL: $(Build.Repository.Uri)"
+      echo "Build Repository Default Branch: $(Build.Repository.DefaultBranch)"
+      echo "Build Definition Name: $(Build.DefinitionName)"
+      echo "Build Definition ID: $(Build.DefinitionID)"
+      echo "Build Build Number: $(Build.BuildNumber)"
+      echo "Build Build ID: $(Build.BuildID)"
+      echo "Build Build URI: $(Build.BuildUri)"
+      echo "Build Source Version: $(Build.SourceVersion)"
+      echo "Build Source Version Message: $(Build.SourceVersionMessage)"
+      echo "Build Source Branch Name: $(Build.SourceBranchName)"
+      echo "Build Source Version Author: $(Build.SourceVersionAuthor)"
+      echo "Build Reason: $(Build.Reason)"
+      echo "Build Source Provider: $(Build.SourceProvider)"
+      echo "Build Repository Clean: $(Build.Repository.Clean)"
+      echo "------------------"
+  
+```
+
 ## Environment variables
 
 Environment variables are specific to the operating system you're using. They're injected into a pipeline in platform-specific ways. The format corresponds to how environment variables get formatted for your specific scripting platform.
+
+Environment variables also provide insights into the capabilities of the agent executing the pipeline. For instance, variables like Agent.OS and Agent.Version reveal the operating system and agent version, respectively, aiding in writing platform-agnostic pipeline scripts or conditionally executing tasks based on agent capabilities.
 
 On UNIX systems (macOS and Linux), environment variables have the format $NAME. On Windows, the format is %NAME% for batch and $env:NAME in PowerShell.
 
@@ -438,6 +475,30 @@ On UNIX systems (macOS and Linux), environment variables have the format $NAME. 
 > When variables convert into environment variables, variable names become uppercase, and periods turn into underscores.
 >For example, the variable name any.variable becomes the variable name $ANY_VARIABLE.
 
+```
+echo "Agent Information:"
+  - script: |
+      echo "Agent Information:"
+      echo "------------------"
+      echo "Agent.Name: $(Agent.Name)"
+      echo "Agent.OS: $(Agent.OS)"
+      echo "Agent.Version: $(Agent.Version)"
+      echo "Agent.WorkFolder: $(Agent.WorkFolder)"
+      echo "Agent.ToolsDirectory: $(Agent.ToolsDirectory)"
+      echo "Agent.TempDirectory: $(Agent.TempDirectory)"
+      echo "Agent.HomeDirectory: $(Agent.HomeDirectory)"
+      echo "Agent.ContainerId: $(Agent.ContainerId)"
+      echo "------------------"
+```
+
+Or
+
+```
+  - script: |
+      echo "Environment Variables:"
+      echo "------------------"
+      printenv
+```
 ### Access variables through the environment
 Notice that variables are also made available to scripts through environment variables. The syntax for using these environment variables depends on the scripting language.
 
@@ -451,13 +512,81 @@ The name is upper-cased, and the . is replaced with the _. This is automatically
 > Bash script: $VARIABLE_NAME
 
 
-## List variables
+## List variables is CLI
 You can list all of the variables in your pipeline with the az pipelines variable list command.
 ```
 az pipelines variable list [--org]
                            [--pipeline-id]
                            [--pipeline-name]
                            [--project]
+```
+
+## List all variables in pipeline
+```
+jobs:
+- job: PrintPipelineInfo
+  displayName: 'Print Pipeline Information'
+  steps:
+  - script: |
+      echo "Pipeline Information:"
+      echo "---------------------"
+      echo "Azure DevOps Organization: $(System.CollectionUri)"
+      echo "Azure DevOps Project: $(System.TeamProject)"
+      echo "Pipeline Triggered By: $(Build.RequestedFor)"
+      echo "Triggered By User Email: $(Build.RequestedForEmail)"
+      echo "Triggered By User ID: $(Build.RequestedForId)"
+      echo "Triggered By User Display Name: $(Build.RequestedForDisplayName)"
+      echo "Triggered By User Username: $(Build.RequestedForUsername)"
+      echo "Triggered By User Teams ID: $(Build.RequestedForTeamsId)"
+      echo "Pipeline Execution Directory: $(System.DefaultWorkingDirectory)"
+      echo "Build Source Branch: $(Build.SourceBranch)"
+      echo "Build Repository Name: $(Build.Repository.Name)"
+      echo "Build Repository ID: $(Build.Repository.ID)"
+      echo "Build Repository Type: $(Build.Repository.Provider)"
+      echo "Build Repository URL: $(Build.Repository.Uri)"
+      echo "Build Repository Default Branch: $(Build.Repository.DefaultBranch)"
+      echo "Build Definition Name: $(Build.DefinitionName)"
+      echo "Build Definition ID: $(Build.DefinitionID)"
+      echo "Build Build Number: $(Build.BuildNumber)"
+      echo "Build Build ID: $(Build.BuildID)"
+      echo "Build Build URI: $(Build.BuildUri)"
+      echo "Build Source Version: $(Build.SourceVersion)"
+      echo "Build Source Version Message: $(Build.SourceVersionMessage)"
+      echo "Build Source Branch Name: $(Build.SourceBranchName)"
+      echo "Build Source Version Author: $(Build.SourceVersionAuthor)"
+      echo "Build Reason: $(Build.Reason)"
+      echo "Build Source Provider: $(Build.SourceProvider)"
+      echo "Build Repository Clean: $(Build.Repository.Clean)"
+      echo "------------------"
+  
+      echo "Agent Information:"
+      echo "------------------"
+      echo "Agent.Name: $(Agent.Name)"
+      echo "Agent.OS: $(Agent.OS)"
+      echo "Agent.Version: $(Agent.Version)"
+      echo "Agent.WorkFolder: $(Agent.WorkFolder)"
+      echo "Agent.ToolsDirectory: $(Agent.ToolsDirectory)"
+      echo "Agent.TempDirectory: $(Agent.TempDirectory)"
+      echo "Agent.HomeDirectory: $(Agent.HomeDirectory)"
+      echo "Agent.ContainerId: $(Agent.ContainerId)"
+      echo "------------------"
+      
+      echo "Other variables:"
+      echo "env:HOME: $(env:HOME)"
+      echo "------------------"
+
+      echo "Environment Variables:"
+      echo "------------------"
+      printenv
+    displayName: 'Print Pipeline Information'
+
+    
+  - script: |
+      # Display the directory structure of $(Agent.BuildDirectory) recursively
+      tree $(Agent.BuildDirectory)
+      echo "----------------------"
+      ls -la $(Build.SourcesDirectory)
+    displayName: 'Print Directory Structure'
 ```
 
 # YAML pipeline editor & management
