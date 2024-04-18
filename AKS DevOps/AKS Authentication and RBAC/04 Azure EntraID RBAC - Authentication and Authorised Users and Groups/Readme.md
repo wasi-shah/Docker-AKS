@@ -1,1 +1,0 @@
-02 Azure EntraID Authentication for AKS Cluster Admins

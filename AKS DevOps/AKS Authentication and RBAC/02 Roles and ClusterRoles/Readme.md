@@ -38,7 +38,7 @@ AKS_CLUSTER_ID=$(az aks show --resource-group aks-rg3 --name aksdemo3 --query id
 echo $AKS_CLUSTER_ID
 
 # Create Azure AD Group
-DEV_AKS_GROUP_ID=$(az ad group create --display-name devaksteam --mail-nickname devaksteam --query objectId -o tsv)    
+DEV_AKS_GROUP_ID=$(az ad group create --display-name devaksteam --mail-nickname devaksteam --query id -o tsv)   
 echo $DEV_AKS_GROUP_ID
 ```
 > #### 2 Assign Azure Kubernetes Service Cluster User Role to Group
