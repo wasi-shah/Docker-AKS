@@ -28,6 +28,15 @@ Assign roles to users for a given namespace using RoleBindings. With RoleBinding
 > [!Note]
 > To obtain the object ID follow these setps
 > #### 1  - Create Azure AD Group
+```
+# Get Azure AKS Cluster Id
+AKS_CLUSTER_ID=$(az aks show --resource-group aks-rg3 --name aksdemo3 --query id -o tsv)
+echo $AKS_CLUSTER_ID
+
+# Create Azure AD Group
+DEV_AKS_GROUP_ID=$(az ad group create --display-name devaksteam --mail-nickname devaksteam --query objectId -o tsv)    
+echo $DEV_AKS_GROUP_ID
+```
 > #### 2 Assign Azure Kubernetes Service Cluster User Role
 > #### 3 Create user 
 > #### 4 Associate user to the group
