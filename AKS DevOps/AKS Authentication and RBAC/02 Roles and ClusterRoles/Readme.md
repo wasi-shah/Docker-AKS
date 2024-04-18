@@ -5,6 +5,8 @@ With the Azure RBAC integration, AKS will use a Kubernetes Authorization webhook
 ## Roles
 Before assigning permissions to users with Kubernetes RBAC, you'll define user permissions as a Role. Grant permissions within a namespace using roles.
 Kubernetes roles grant permissions; they don't deny permissions.
+![aks RB fundamentals](https://github.com/wasi-shah/Docker-AKS/assets/51749920/4f39c4be-5568-41cd-a7d9-3f593de0a768)
+
 ```
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
@@ -24,6 +26,8 @@ rules:
 ```
 ## RoleBindings
 Assign roles to users for a given namespace using RoleBindings. With RoleBindings, you can logically segregate a single AKS cluster, only enabling users to access the application resources in their assigned namespace.
+![AKS Roles mapping](https://github.com/wasi-shah/Docker-AKS/assets/51749920/69a57ab0-8588-4ada-83d1-0b857c4d5232)
+
 
 > [!Note]
 > To obtain the object ID follow these setps
