@@ -37,10 +37,30 @@ echo $AKS_CLUSTER_ID
 DEV_AKS_GROUP_ID=$(az ad group create --display-name devaksteam --mail-nickname devaksteam --query objectId -o tsv)    
 echo $DEV_AKS_GROUP_ID
 ```
-> #### 2 Assign Azure Kubernetes Service Cluster User Role
+> #### 2 Assign Azure Kubernetes Service Cluster User Role to Group
+```
+# Create Role Assignment 
+az role assignment create \
+  --assignee $DEV_AKS_GROUP_ID \
+  --role "Azure Kubernetes Service Cluster User Role" \
+  --scope $AKS_CLUSTER_ID
+```
 > #### 3 Create user 
+```
+# Create Dev User
+DEV_AKS_USER_OBJECT_ID=$(az ad user create \
+  --display-name "AKS Dev1" \
+  --user-principal-name aksdev1@your-sub-domain.onmicrosoft.com \
+  --password @AKSDemo123 \
+  --query objectId -o tsv)
+echo $DEV_AKS_USER_OBJECT_ID 
+```
 > #### 4 Associate user to the group
-
+```
+# Associate Dev User to Dev AKS Group
+az ad group member add --group devaksteam --member-id $DEV_AKS_USER_OBJECT_ID
+```
+#### Now you can create a role in AKS cluster and use the same DEV_AKS_USER_OBJECT_ID as Name
 ```
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
