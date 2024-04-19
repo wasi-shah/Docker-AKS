@@ -239,32 +239,33 @@ In this article, we'll create two user roles to show how Kubernetes RBAC and Mic
 In production environments, you can use existing users and groups within a Microsoft Entra tenant.
 
 1. First, get the resource ID of your AKS cluster using the az aks show command. Then, assign the resource ID to a variable named AKS_ID so it can be referenced in other commands.
-
+```
 AKS_ID=$(az aks show \
     --resource-group $myResourceGroup  \
     --name $myAKSCluster \
     --query id -o tsv)
 
+```
 
 2. Create the first example group in Microsoft Entra ID for the application developers using the az ad group create command. The following example creates a group named appdev:
-
+```
 APPDEV_ID=$(az ad group create --display-name appdev --mail-nickname appdev --query id -o tsv)
-
+```
 
 3. Create an Azure role assignment for the appdev group using the az role assignment create command. This assignment lets any member of the group use kubectl to interact with an AKS cluster by granting them the Azure Kubernetes Service Cluster User Role.
-
+```
 az role assignment create --assignee $APPDEV_ID --role "Azure Kubernetes Service Cluster User Role" --scope $AKS_ID
-
+```
 
 4. Create a second example group for SREs named opssre.
-
+```
 OPSSRE_ID=$(az ad group create --display-name opssre --mail-nickname opssre --query id -o tsv)
-
+```
 
 5. Create an Azure role assignment to grant members of the group the Azure Kubernetes Service Cluster User Role.
-
+```
 az role assignment create --assignee $OPSSRE_ID --role "Azure Kubernetes Service Cluster User Role" --scope $AKS_ID
-
+```
 
 Create demo users in Microsoft Entra ID
 Now that we have two example groups created in Microsoft Entra ID for our application developers and SREs, we'll create two example users. To test the Kubernetes RBAC integration at the end of the article, you'll sign in to the AKS cluster with these accounts.
@@ -273,46 +274,52 @@ Set the user principal name and password for application developers
 Set the user principal name (UPN) and password for the application developers. The UPN must include the verified domain name of your tenant, for example aksdev@contoso.com.
 
 The following command prompts you for the UPN and sets it to AAD_DEV_UPN so it can be used in a later command:
-
+```
 echo "Please enter the UPN for application developers: " && read AAD_DEV_UPN
-
+```
 The following command prompts you for the password and sets it to AAD_DEV_PW for use in a later command:
-
+```
 echo "Please enter the secure password for application developers: " && read AAD_DEV_PW
-
+```
 
 Create the user accounts
 1. Create the first user account in Microsoft Entra ID using the az ad user create command. The following example creates a user with the display name AKS Dev and the UPN and secure password using the values in AAD_DEV_UPN and AAD_DEV_PW:
-
+```
 AKSDEV_ID=$(az ad user create --display-name "AKS Dev" --user-principal-name $AAD_DEV_UPN --password $AAD_DEV_PW --query id -o tsv)
-
+```
 2. Add the user to the appdev group created in the previous section using the az ad group member add command.
+```
 az ad group member add --group appdev --member-id $AKSDEV_ID
-
+```
 3. Set the UPN and password for SREs. The UPN must include the verified domain name of your tenant, for example akssre@contoso.com. The following command prompts you for the UPN and sets it to AAD_SRE_UPN for use in a later command:
+```
 echo "Please enter the UPN for SREs: " && read AAD_SRE_UPN
-
+```
 4. The following command prompts you for the password and sets it to AAD_SRE_PW for use in a later command:
+```
 echo "Please enter the secure password for SREs: " && read AAD_SRE_PW
-
+```
 5. Create a second user account. The following example creates a user with the display name AKS SRE and the UPN and secure password using the values in AAD_SRE_UPN and AAD_SRE_PW:
+```
 # Create a user for the SRE role
 AKSSRE_ID=$(az ad user create --display-name "AKS SRE" --user-principal-name $AAD_SRE_UPN --password $AAD_SRE_PW --query id -o tsv)
 
 # Add the user to the opssre Azure AD group
 az ad group member add --group opssre --member-id $AKSSRE_ID
+```
 
 Create AKS cluster resources for app devs
 
 We have our Microsoft Entra groups, users, and Azure role assignments created. Now, we'll configure the AKS cluster to allow these different groups access to specific resources.
 
 1. Get the cluster admin credentials using the az aks get-credentials command. In one of the following sections, you get the regular user cluster credentials to see the Microsoft Entra authentication flow in action.
-
+```
 az aks get-credentials --resource-group $myResourceGroup  --name $myAKSCluster --admin
-
+```
 2. Create a namespace in the AKS cluster using the kubectl create namespace command. The following example creates a namespace name dev:
+```
 kubectl create namespace dev
-
+```
 3. Create a Role for the dev namespace, which grants full permissions to the namespace. In production environments, you can specify more granular permissions for different users or groups. Create a file named role-dev-namespace.yaml and paste the following YAML manifest:
 
 
