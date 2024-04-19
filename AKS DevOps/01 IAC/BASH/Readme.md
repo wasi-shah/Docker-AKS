@@ -21,8 +21,8 @@ az aks create \
   --name $myAKSCluster \
   --node-count 1 \
   --node-vm-size "Standard_Standard_D2s_v3" \
-  --load-balancer-sku basic
-  --enable-aad
+  --load-balancer-sku basic \
+  --enable-aad \
   --aad-admin-group-object-ids ed0188a4-b16a-4202-856e-6063cca49abc
 
 # List all clusters
