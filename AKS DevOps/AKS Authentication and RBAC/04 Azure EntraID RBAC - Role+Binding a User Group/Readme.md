@@ -147,15 +147,22 @@ kubectl get rolebinding -n dev
 ```
 # Validating Dev user access 
 
-## Logout from Admin and  Access Dev Namespace using aksdev1 AD User
+Logout from Admin and  Access Dev Namespace using aksdev1 AD User
 ## Overwrite kubectl credentials
 ```
 az aks get-credentials --resource-group aksrg --name mycluster --overwrite-existing
 #
 Merged "mycluster" as current context in /home/hamna/.kube/config
 
-## Now check if you can access any pod (without login as Dev)
+# Now check if you can access any pod (without login as Dev)
 kubectl get pods
+
+
+# Check directly while logged in as admin
+Kubectl auth can-I create deployment
+kubectl auth can-i create deployment -n dev
+kubectl auth can-i create deployment -n qa
+Kubectl auth can-I create deployment --as e6dcdae4-e9ff-4261-81e6-0d08537c4cf8
 ```
 
 # Clean-Up
