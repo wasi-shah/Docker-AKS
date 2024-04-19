@@ -13,16 +13,18 @@ Enable RBAC with Azure Entra ID in AKS
 Before you enable - check the auth mode set in cluster
 
 ```
+For Managed AKS cluster
+az aks show -g aksrg -n mycluster -o yaml | grep enableAzureRbac 
+# If it's enabled, the output shows the value for enableAzureRbac is false.
+```
+
+```
+# For non AKS cluster 
 kubectl api-versions
 kubectl cluster-info dump | grep authorization-mode
 Output
 blank
 
-
-# The best way is to check the cluster's resource details at resources.azure.com. If you can spot "enableRBAC": true, your cluster has RBAC enabled. 
-az resource show -g aksrg -n mycluster --resource-type Microsoft.ContainerService/ManagedClusters --query properties.enableRBAC
-Output
-true
 
 # You can check this by executing the command kubectl api-versions; if RBAC is enabled you should see the API version .rbac.authorization.k8s.io/v1.
 kubectl api-versions | grep rbac

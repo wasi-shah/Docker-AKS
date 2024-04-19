@@ -42,8 +42,7 @@ nginx   1/1     Running   0          80s
 # Get Azure AKS Cluster Id
 AKS_CLUSTER_ID=$(az aks show --resource-group aksrg --name mycluster --query id -o tsv)
 echo $AKS_CLUSTER_ID
-#
-/subscriptions/e3b7fac9-cc7a-4e30-898f-087b8f741932/resourcegroups/aksrg/providers/Microsoft.ContainerService/managedClusters/mycluster
+
 
 # Create Azure AD Group
 # Note: Id filed represents object id
@@ -63,7 +62,7 @@ az role assignment create \
 ```
 # Create Dev User
 # Note: Id filed represents object id
-note: create user using user name and domain/sub domain name aksdev1@your-sub-domain.onmicrosoft.com
+# Note: create user using user name and domain/sub domain name aksdev1@your-sub-domain.onmicrosoft.com
 DEV_AKS_USER_OBJECT_ID=$(az ad user create \
   --display-name "AKS Dev1" \
   --user-principal-name aksdev1@HS728.onmicrosoft.com \
@@ -80,23 +79,46 @@ az ad group member add --group devaksteam --member-id $DEV_AKS_USER_OBJECT_ID
 # In GUI
 >Portal > Entra ID, Select user, Azure role assignments
 
-## 6 - Get Object Id for devaksteam AD Group or user DEV_AKS_GROUP_ID from previous steps
+## 6 Test if group can create deployment (before creating role and rolebinding)
 ```
-# Get Object ID for AD Group devaksteam
-az ad group show --group devaksteam --query id -o tsv
+# Note: reference to default name space
+kubectl auth can-i create deployment --as $DEV_AKS_GROUP_ID
+# no
 
-# Output
-e6dcdae4-e9ff-4261-81e6-0d08537c4cf8
+kubectl auth can-i create deployment -n dev --as $DEV_AKS_GROUP_ID
+# no
+
+kubectl auth can-i create deployment -n qa --as $DEV_AKS_GROUP_ID
+# no
+
+kubectl auth can-i get pod -n dev --as $DEV_AKS_GROUP_ID
+# 
 ```
-
-## Test Dev User Authentication to Portal
-URL: https://portal.azure.com
-Username: aksdev1@HS728.onmicrosoft.com
-Password: @AKSDemo123
 
 
 ## Now you can create a role in AKS cluster and use the same DEV_AKS_USER_OBJECT_ID as Name
 ```
+# role-dev-namespace.yaml
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: dev-user-full-access-role
+  namespace: dev
+rules:
+- apiGroups: ["", "extensions", "apps"]
+  resources: ["*"]
+  verbs: ["*"]
+- apiGroups: ["batch"]
+  resources:
+  - jobs
+  - cronjobs
+  verbs: ["*"]
+
+```
+## Now you can create a binding in AKS cluster
+
+```
+# rolebinding-dev-namespace.yaml
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
@@ -110,35 +132,18 @@ subjects:
 - kind: Group
   namespace: dev
   #name: groupObjectId # Your Azure AD Group Object ID: devaksteam
-  name: "e6dcdae4-e9ff-4261-81e6-0d08537c4cf8" 
+  name: "e6dcdae4-e9ff-4261-81e6-0d08537c4cf8"  # Your group Id here
 
 ```
+
 
 # Create Kubernetes RBAC Role & Role Binding for Dev Namespace
-## As AKS Cluster Admin (--admin)
-```
-az aks get-credentials --resource-group aks-rg3 --name aksdemo3 --admin
-```
+
 
 ## Create Kubernetes Role and Role Binding
 ```
 kubectl apply -f kube-manifests/role-dev-namespace.yaml
-#
-role.rbac.authorization.k8s.io/dev-user-full-access-role created
-
-kubectl get role -n dev
-#
-NAME                        CREATED AT
-dev-user-full-access-role   2024-04-18T16:12:45Z
-#
-
 kubectl apply -f kube-manifests/rolebinding-dev-namespace.yaml
-#
-rolebinding.rbac.authorization.k8s.io/dev-user-access-rolebinding created
-kubectl get rolebinding -n dev
-#
-NAME                          ROLE                             AGE
-dev-user-access-rolebinding   Role/dev-user-full-access-role   25s
 
 ## Verify Role and Role Binding (Again)
 kubectl get role -n dev
