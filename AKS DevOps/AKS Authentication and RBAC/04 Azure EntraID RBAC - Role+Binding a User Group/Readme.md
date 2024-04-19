@@ -244,12 +244,13 @@ AKS_ID=$(az aks show \
     --resource-group $myResourceGroup  \
     --name $myAKSCluster \
     --query id -o tsv)
-
+echo $AKS_ID
 ```
 
 2. Create the first example group in Microsoft Entra ID for the application developers using the az ad group create command. The following example creates a group named appdev:
 ```
 APPDEV_ID=$(az ad group create --display-name appdev --mail-nickname appdev --query id -o tsv)
+echo $APPDEV_ID
 ```
 
 3. Create an Azure role assignment for the appdev group using the az role assignment create command. This assignment lets any member of the group use kubectl to interact with an AKS cluster by granting them the Azure Kubernetes Service Cluster User Role.
@@ -260,6 +261,7 @@ az role assignment create --assignee $APPDEV_ID --role "Azure Kubernetes Service
 4. Create a second example group for SREs named opssre.
 ```
 OPSSRE_ID=$(az ad group create --display-name opssre --mail-nickname opssre --query id -o tsv)
+echo $OPSSRE_ID
 ```
 
 5. Create an Azure role assignment to grant members of the group the Azure Kubernetes Service Cluster User Role.
