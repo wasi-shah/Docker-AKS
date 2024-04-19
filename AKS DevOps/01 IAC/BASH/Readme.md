@@ -19,9 +19,6 @@ az group list --output table
 az aks create \
   --resource-group $myResourceGroup \
   --name $myAKSCluster \
-  --enable-managed-identity \
-  --node-count 1 \
-  --generate-ssh-keys
   --node-count 1 \
   --node-vm-size "Standard_Standard_D2s_v3" \
   --load-balancer-sku basic
@@ -41,5 +38,6 @@ az aks get-credentials -g aksrg -n mycluster
 ## Delete 
 ```
 az group delete --name $myResourceGroup --yes --no-wait
+az group delete --name 'MC_'$myResourceGroup'_mycluster_uksouth' --yes --no-wait
+az group delete --name NetworkWatcherRG  --yes --no-wait
 ```
-````
