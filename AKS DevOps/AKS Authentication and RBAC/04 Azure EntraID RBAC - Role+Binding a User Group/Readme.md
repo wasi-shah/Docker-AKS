@@ -333,6 +333,9 @@ az aks get-credentials --resource-group $myResourceGroup  --name $myAKSCluster -
 2. Create a namespace in the AKS cluster using the kubectl create namespace command. The following example creates a namespace name dev:
 ```
 kubectl create namespace dev
+# check if you can access the dev namespace as dev group 
+
+kubectl auth can-i list deploy -n dev --as $APPDEV_ID
 ```
 3. Create a Role for the dev namespace, which grants full permissions to the namespace. In production environments, you can specify more granular permissions for different users or groups. Create a file named role-dev-namespace.yaml and paste the following YAML manifest:
 
@@ -354,7 +357,7 @@ rules:
   - cronjobs
   verbs: ["*"]
   ---
-
+  ```
   4. Create the Role using the kubectl apply command and specify the filename of your YAML manifest.
   ```
   kubectl apply -f role-dev-namespace.yaml
