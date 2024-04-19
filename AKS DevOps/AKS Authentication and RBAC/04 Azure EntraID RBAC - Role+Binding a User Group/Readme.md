@@ -204,6 +204,7 @@ az ad user delete --id $DEV_AKS_USER_OBJECT_ID
 
 # New config
 
+```
 myResourceGroup="aksrg"
 echo $myResourceGroup 
 
@@ -225,6 +226,7 @@ az aks create \
   --load-balancer-sku basic \
   --enable-aad \
   --aad-admin-group-object-ids ed0188a4-b16a-4202-856e-6063cca49abc
+```
 
 Create demo groups in Microsoft Entra ID
 In this article, we'll create two user roles to show how Kubernetes RBAC and Microsoft Entra ID control access to cluster resources. The following two example roles are used:
