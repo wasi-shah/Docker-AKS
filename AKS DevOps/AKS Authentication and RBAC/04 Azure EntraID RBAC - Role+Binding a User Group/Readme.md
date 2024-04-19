@@ -286,10 +286,12 @@ Set the user principal name (UPN) and password for the application developers. T
 The following command prompts you for the UPN and sets it to AAD_DEV_UPN so it can be used in a later command:
 ```
 echo "Please enter the UPN for application developers: " && read AAD_DEV_UPN
+echo $AAD_DEV_UPN
 ```
 The following command prompts you for the password and sets it to AAD_DEV_PW for use in a later command:
 ```
 echo "Please enter the secure password for application developers: " && read AAD_DEV_PW
+echo $AAD_DEV_PW
 ```
 
 Create the user accounts
@@ -304,10 +306,12 @@ az ad group member add --group appdev --member-id $AKSDEV_ID
 3. Set the UPN and password for SREs. The UPN must include the verified domain name of your tenant, for example akssre@contoso.com. The following command prompts you for the UPN and sets it to AAD_SRE_UPN for use in a later command:
 ```
 echo "Please enter the UPN for SREs: " && read AAD_SRE_UPN
+echo $AAD_SRE_UPN
 ```
 4. The following command prompts you for the password and sets it to AAD_SRE_PW for use in a later command:
 ```
 echo "Please enter the secure password for SREs: " && read AAD_SRE_PW
+echo $AAD_SRE_PW
 ```
 5. Create a second user account. The following example creates a user with the display name AKS SRE and the UPN and secure password using the values in AAD_SRE_UPN and AAD_SRE_PW:
 ```
