@@ -30,7 +30,7 @@ Output
 rbac.authorization.k8s.io/v1
 ```
 
-Ste 2: Enable Azure managed identity authentication for Kubernetes clusters
+## Step 2: Enable Azure managed identity authentication for Kubernetes clusters
 
 Create an AKS cluster and enable administration access for your Microsoft Entra group using the az aks create command.
 ```
@@ -40,7 +40,7 @@ az aks create -g myResourceGroup -n myManagedCluster --enable-aad --aad-admin-gr
 az aks update -g MyResourceGroup -n myManagedCluster --enable-aad --aad-admin-group-object-ids <id-1>,<id-2> [--aad-tenant-id <id>]
 ```
 
-Step 3: Enable using GUI / Allow users to become KS admin
+## Step 3: Enable using GUI / Allow users to become KS admin
 ```
 Go to All Services -> Kubernetes Services -> aksdemo3 -> Settings -> Configuration
 Authentication and Authorization
@@ -49,7 +49,7 @@ Choose admin group
 Click on SAVE
 ```
 
-Step 4: Re-login with different user to test kubectl
+## Step 4: Re-login with different user to test kubectl
 ```
 # Overwrite kubectl credentials 
 az aks get-credentials --resource-group aks-rg3 --name aksdemo3 --overwrite-existing
