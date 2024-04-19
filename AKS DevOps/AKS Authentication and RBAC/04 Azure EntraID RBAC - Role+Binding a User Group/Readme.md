@@ -244,6 +244,7 @@ AKS_ID=$(az aks show \
     --resource-group $myResourceGroup  \
     --name $myAKSCluster \
     --query id -o tsv)
+    
 echo $AKS_ID
 ```
 
