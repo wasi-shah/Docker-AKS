@@ -88,6 +88,13 @@ az ad group show --group devaksteam --query id -o tsv
 # Output
 e6dcdae4-e9ff-4261-81e6-0d08537c4cf8
 ```
+
+## Test Dev User Authentication to Portal
+URL: https://portal.azure.com
+Username: aksdev1@HS728.onmicrosoft.com
+Password: @AKSDemo123
+
+
 ## Now you can create a role in AKS cluster and use the same DEV_AKS_USER_OBJECT_ID as Name
 ```
 kind: RoleBinding
