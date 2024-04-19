@@ -116,9 +116,12 @@ subjects:
 
 # Create Kubernetes RBAC Role & Role Binding for Dev Namespace
 ## As AKS Cluster Admin (--admin)
+```
 az aks get-credentials --resource-group aks-rg3 --name aksdemo3 --admin
+```
 
 ## Create Kubernetes Role and Role Binding
+```
 kubectl apply -f kube-manifests/role-dev-namespace.yaml
 #
 role.rbac.authorization.k8s.io/dev-user-full-access-role created
@@ -141,14 +144,47 @@ dev-user-access-rolebinding   Role/dev-user-full-access-role   25s
 kubectl get role -n dev
 kubectl get rolebinding -n dev
 
+```
 # Validating Dev user access 
 
 ## Logout from Admin and  Access Dev Namespace using aksdev1 AD User
 ## Overwrite kubectl credentials
+```
 az aks get-credentials --resource-group aksrg --name mycluster --overwrite-existing
 #
 Merged "mycluster" as current context in /home/hamna/.kube/config
 
 ## Now check if you can access any pod (without login as Dev)
 kubectl get pods
+```
 
+# Clean-Up
+
+Login as admin in AKS and cleanup following AKS resources
+
+Delete namespaces 
+```
+kubectl delete ns dev
+kubectl delete ns qa
+```
+
+Delete Role and RoleBinding
+```
+kubectl delete -f kube-manifests/rolebinding-dev-namespace.yaml
+kubectl delete -f kube-manifests/rolebinding-dev-namespace.yaml
+```
+
+Delete Entra Id Group and users
+```
+# Delete Group
+DEV_AKS_GROUP_ID=$(az ad group show --group devaksteam --query id -o tsv)
+echo $DEV_AKS_GROUP_ID
+az ad group delete -g $DEV_AKS_GROUP_ID
+
+# Delete User
+
+DEV_AKS_USER_OBJECT_ID=$(az ad user show --id aksdev1@HS728.onmicrosoft.com --query id -o tsv)
+echo $DEV_AKS_USER_OBJECT_ID
+az ad user delete --id $DEV_AKS_USER_OBJECT_ID
+
+```
