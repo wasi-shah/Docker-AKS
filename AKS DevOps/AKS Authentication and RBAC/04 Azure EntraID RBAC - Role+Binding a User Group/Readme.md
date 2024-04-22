@@ -280,8 +280,8 @@ az role assignment create --assignee $OPSSRE_ID --role "Azure Kubernetes Service
 ## Create demo users in Microsoft Entra ID
 Now that we have two example groups created in Microsoft Entra ID for our application developers and SREs, we'll create two example users. To test the Kubernetes RBAC integration at the end of the article, you'll sign in to the AKS cluster with these accounts.
 
-Set the user principal name and password for application developers
-Set the user principal name (UPN) and password for the application developers. The UPN must include the verified domain name of your tenant, for example aksdev@contoso.com.
+
+## Create AKS Dev user account & assign to appdev group
 
 The following command prompts you for the UPN and sets it to AAD_DEV_UPN so it can be used in a later command:
 ```
@@ -294,26 +294,30 @@ echo "Please enter the secure password for application developers: " && read AAD
 echo $AAD_DEV_PW
 ```
 
-## Create the user accounts
-1. Create the first user account in Microsoft Entra ID using the az ad user create command. The following example creates a user with the display name AKS Dev and the UPN and secure password using the values in AAD_DEV_UPN and AAD_DEV_PW:
+Create a user with the display name AKS Dev and the UPN and secure password using the values in AAD_DEV_UPN and AAD_DEV_PW:
 ```
 AKSDEV_ID=$(az ad user create --display-name "AKS Dev" --user-principal-name $AAD_DEV_UPN --password $AAD_DEV_PW --query id -o tsv)
 ```
-2. Add the user to the appdev group created in the previous section using the az ad group member add command.
+
+Add the user to the appdev group created in the previous section using the az ad group member add command.
 ```
 az ad group member add --group appdev --member-id $AKSDEV_ID
 ```
-3. Set the UPN and password for SREs. The UPN must include the verified domain name of your tenant, for example akssre@contoso.com. The following command prompts you for the UPN and sets it to AAD_SRE_UPN for use in a later command:
+
+## Create AKS SRE user account & assign to opssre group
+Set the UPN and password for SREs. The UPN must include the verified domain name of your tenant, for example akssre@contoso.com. The following command prompts you for the UPN and sets it to AAD_SRE_UPN for use in a later command:
 ```
 echo "Please enter the UPN for SREs: " && read AAD_SRE_UPN
 echo $AAD_SRE_UPN
 ```
-4. The following command prompts you for the password and sets it to AAD_SRE_PW for use in a later command:
+
+The following command prompts you for the password and sets it to AAD_SRE_PW for use in a later command:
 ```
 echo "Please enter the secure password for SREs: " && read AAD_SRE_PW
 echo $AAD_SRE_PW
 ```
-5. Create a second user account. The following example creates a user with the display name AKS SRE and the UPN and secure password using the values in AAD_SRE_UPN and AAD_SRE_PW:
+
+Create a second user account. The following example creates a user with the display name AKS SRE and the UPN and secure password using the values in AAD_SRE_UPN and AAD_SRE_PW:
 ```
 # Create a user for the SRE role
 AKSSRE_ID=$(az ad user create --display-name "AKS SRE" --user-principal-name $AAD_SRE_UPN --password $AAD_SRE_PW --query id -o tsv)
