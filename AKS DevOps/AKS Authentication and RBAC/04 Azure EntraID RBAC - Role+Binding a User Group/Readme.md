@@ -8,7 +8,7 @@ In addition, we can also configure Kubernetes role-based access control (RBAC) t
 > In this section we will learn how to limit a user to a single namespace using Role and Role binding
 ![aks RB fundamentals](https://github.com/wasi-shah/Docker-AKS/assets/51749920/4f39c4be-5568-41cd-a7d9-3f593de0a768)
 
-# Deploy App in twp Namespaces (As admin)
+# Deploy App in two Namespaces (As admin)
 ```
 # Create Namespaces dev and qa
 kubectl create namespace dev
@@ -22,7 +22,7 @@ namespace/qa created
 kubectl run nginx --image=nginx -n dev
 kubectl run nginx --image=nginx -n qa
 
-# Check if asn admin can access the pod in both dev and qa
+# Check if an admin can access the pod in both dev and qa
 
 kubectl get pod -n dev
 NAME    READY   STATUS    RESTARTS   AGE
@@ -62,7 +62,7 @@ az role assignment create \
 ```
 # Create Dev User
 # Note: Id filed represents object id
-# Note: create user using user name and domain/sub domain name aksdev1@your-sub-domain.onmicrosoft.com
+# Note: create a user using the user name and domain/subdomain name aksdev1@your-sub-domain.onmicrosoft.com
 DEV_AKS_USER_OBJECT_ID=$(az ad user create \
   --display-name "AKS Dev1" \
   --user-principal-name aksdev1@HS728.onmicrosoft.com \
@@ -79,9 +79,9 @@ az ad group member add --group devaksteam --member-id $DEV_AKS_USER_OBJECT_ID
 # In GUI
 >Portal > Entra ID, Select user, Azure role assignments
 
-## 6 Test if group can create deployment (before creating role and rolebinding)
+## 6 Test if the group can create deployment (before creating role and rolebinding)
 ```
-# Note: reference to default name space
+# Note: reference to default namespace
 kubectl auth can-i create deployment --as $DEV_AKS_GROUP_ID
 # no
 
