@@ -290,7 +290,9 @@ Now that we have two example groups created in Microsoft Entra ID for our applic
 
 ## Create AKS Dev user account & assign to appdev group
 
-The following command prompts you for the UPN and sets it to AAD_DEV_UPN so it can be used in a later command:
+The following command prompts you for the UPN and sets it to AAD_DEV_UPN so it can be used in a later 
+for example user@your-subdomain.onmicrosoft.com
+command:
 ```
 echo "Please enter the UPN for application developers: " && read AAD_DEV_UPN
 echo $AAD_DEV_UPN
@@ -312,7 +314,7 @@ az ad group member add --group appdev --member-id $AKSDEV_ID
 ```
 
 ## Create AKS SRE user account & assign to opssre group
-Set the UPN and password for SREs. The UPN must include the verified domain name of your tenant, for example akssre@contoso.com. The following command prompts you for the UPN and sets it to AAD_SRE_UPN for use in a later command:
+Set the UPN and password for SREs. The UPN must include the verified domain name of your tenant, for example for example user@your-subdomain.onmicrosoft.com. The following command prompts you for the UPN and sets it to AAD_SRE_UPN for use in a later command:
 ```
 echo "Please enter the UPN for SREs: " && read AAD_SRE_UPN
 echo $AAD_SRE_UPN
