@@ -401,7 +401,7 @@ subjects:
 kubectl apply -f rolebinding-dev-namespace.yaml
 ```
 
-Create the AKS cluster resources for SREs
+## Create the AKS cluster resources for SREs
 Now, we'll repeat the previous steps to create a namespace, Role, and RoleBinding for the SREs.
 
 1. Create a namespace for sre using the kubectl create namespace command.
