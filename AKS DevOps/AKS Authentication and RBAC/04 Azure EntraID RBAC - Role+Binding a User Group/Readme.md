@@ -235,7 +235,7 @@ az aks create \
 az aks show -g aksrg -n mycluster -o yaml | grep enableAzureRbac
 ```
 
-Create demo groups in Microsoft Entra ID
+## Create demo groups in Microsoft Entra ID
 In this article, we'll create two user roles to show how Kubernetes RBAC and Microsoft Entra ID control access to cluster resources. The following two example roles are used:
 
 - Application developer
@@ -277,7 +277,7 @@ echo $OPSSRE_ID
 az role assignment create --assignee $OPSSRE_ID --role "Azure Kubernetes Service Cluster User Role" --scope $AKS_ID
 ```
 
-Create demo users in Microsoft Entra ID
+## Create demo users in Microsoft Entra ID
 Now that we have two example groups created in Microsoft Entra ID for our application developers and SREs, we'll create two example users. To test the Kubernetes RBAC integration at the end of the article, you'll sign in to the AKS cluster with these accounts.
 
 Set the user principal name and password for application developers
@@ -294,7 +294,7 @@ echo "Please enter the secure password for application developers: " && read AAD
 echo $AAD_DEV_PW
 ```
 
-Create the user accounts
+## Create the user accounts
 1. Create the first user account in Microsoft Entra ID using the az ad user create command. The following example creates a user with the display name AKS Dev and the UPN and secure password using the values in AAD_DEV_UPN and AAD_DEV_PW:
 ```
 AKSDEV_ID=$(az ad user create --display-name "AKS Dev" --user-principal-name $AAD_DEV_UPN --password $AAD_DEV_PW --query id -o tsv)
@@ -322,7 +322,7 @@ AKSSRE_ID=$(az ad user create --display-name "AKS SRE" --user-principal-name $AA
 az ad group member add --group opssre --member-id $AKSSRE_ID
 ```
 
-Create AKS cluster resources for app devs
+## Create AKS cluster resources for app devs
 
 We have our Microsoft Entra groups, users, and Azure role assignments created. Now, we'll configure the AKS cluster to allow these different groups access to specific resources.
 
