@@ -544,8 +544,8 @@ kubectl delete namespace sre
 
 # Delete the Azure AD user accounts for aksdev and akssre.
 
-az ad user delete --upn-or-object-id $AKSDEV_ID
-az ad user delete --upn-or-object-id $AKSSRE_ID
+az ad user delete --id $AKSDEV_ID
+az ad user delete --id $AKSSRE_ID
 
 # You can find $AKSDEV_ID if you don't have 
 # AKSDEV_ID=$(az ad group show --group devaksteam --query id -o tsv) 
