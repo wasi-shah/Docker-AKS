@@ -530,34 +530,32 @@ no
 # check if you can deply app in dev 
 kubectl run nginx-dev --image=mcr.microsoft.com/oss/nginx/nginx:1.15.5-alpine --namespace dev
 kubectl get pods --namespace dev
-
+```
 # Clean-Up
-
-Login as admin in AKS and cleanup following AKS resources
-
-Delete namespaces 
 ```
-kubectl delete ns dev
-kubectl delete ns qa
-```
+# Get the admin kubeconfig context to delete the necessary cluster resources.
 
-Delete Role and RoleBinding
-```
-kubectl delete -f kube-manifests/rolebinding-dev-namespace.yaml
-kubectl delete -f kube-manifests/rolebinding-dev-namespace.yaml
-```
+az aks get-credentials --resource-group myResourceGroup --name myAKSCluster --admin
 
-Delete Entra Id Group and users
-```
-# Delete Group
-DEV_AKS_GROUP_ID=$(az ad group show --group devaksteam --query id -o tsv)
-echo $DEV_AKS_GROUP_ID
-az ad group delete -g $DEV_AKS_GROUP_ID
+# Delete the dev and sre namespaces. This also deletes the pods, Roles, and RoleBindings.
 
-# Delete User
+kubectl delete namespace dev
+kubectl delete namespace sre
 
-DEV_AKS_USER_OBJECT_ID=$(az ad user show --id aksdev1@HS728.onmicrosoft.com --query id -o tsv)
-echo $DEV_AKS_USER_OBJECT_ID
-az ad user delete --id $DEV_AKS_USER_OBJECT_ID
+# Delete the Azure AD user accounts for aksdev and akssre.
 
+az ad user delete --upn-or-object-id $AKSDEV_ID
+az ad user delete --upn-or-object-id $AKSSRE_ID
+
+# You can find $AKSDEV_ID if you don't have 
+# AKSDEV_ID=$(az ad group show --group devaksteam --query id -o tsv) 
+# echo $AKSDEV_ID
+# az ad group delete -g $AKSDEV_ID 
+
+
+
+# Delete the Azure AD groups for appdev and opssre. This also deletes the Azure role assignments.
+
+az ad group delete --group appdev
+az ad group delete --group opssre
 ```
