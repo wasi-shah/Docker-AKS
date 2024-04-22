@@ -558,4 +558,11 @@ az ad user delete --id $AKSSRE_ID
 
 az ad group delete --group appdev
 az ad group delete --group opssre
+
+Delete AKs resources
+az group delete --name $myResourceGroup --yes --no-wait
+az group delete --name 'MC_'$myResourceGroup'_mycluster_uksouth' --yes --no-wait
+az group delete --name NetworkWatcherRG  --yes --no-wait
+
 ```
+
