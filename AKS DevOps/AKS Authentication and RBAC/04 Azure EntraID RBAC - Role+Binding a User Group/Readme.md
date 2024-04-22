@@ -335,7 +335,10 @@ az aks get-credentials --resource-group $myResourceGroup  --name $myAKSCluster -
 kubectl create namespace dev
 # check if you can access the dev namespace as dev group 
 
+# Get $APPDEV_ID if you not already have it - az ad group show --group appdev --query id -o tsv
 kubectl auth can-i list deploy -n dev --as $APPDEV_ID
+
+
 ```
 3. Create a Role for the dev namespace, which grants full permissions to the namespace. In production environments, you can specify more granular permissions for different users or groups. Create a file named role-dev-namespace.yaml and paste the following YAML manifest:
 
@@ -418,7 +421,7 @@ rules:
   - jobs
   - cronjobs
   verbs: ["*"]
-````
+```
 
 3. Create the Role using the kubectl apply command and specify the filename of your YAML manifest.
 ```
@@ -431,6 +434,7 @@ az ad group show --group opssre --query id -o tsv
 
 5. Create a RoleBinding for the opssre group to use the previously created Role for namespace access. Create a file named rolebinding-sre-namespace.yaml and paste the following YAML manifest. On the last line, replace groupObjectId with the group object ID output from the previous command.
 ```
+# rolebinding-sre-namespace.yaml
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
@@ -449,3 +453,59 @@ subjects:
 ```
 kubectl apply -f rolebinding-sre-namespace.yaml
 ```
+
+## Interact with cluster resources using Microsoft Entra identities
+Now, we'll test that the expected permissions work when you create and manage resources in an AKS cluster. In these examples, we'll schedule and view pods in the user's assigned namespace, and try to schedule and view pods outside of the assigned namespace.
+
+###  Test the Dev access to the AKS cluster resources
+1. Login in a private mode and login through user dev@HS728.onmicrosoft.com
+>[!Note>]
+Assign storage contributor role to appdev and opssre group so they can access the storage account and resource group
+```
+az aks get-credentials --resource-group $myResourceGroup --name $myAKSCluster --overwrite-existing
+or
+az aks get-credentials --resource-group aksrg --name mycluster
+
+kubectl auth can-i list deploy -n dev
+# To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code DHLH7BFJ3 to authenticate.
+yes
+kubectl auth can-i list deploy -n sre
+no
+
+# check if you can deply app in dev 
+kubectl run nginx-dev --image=mcr.microsoft.com/oss/nginx/nginx:1.15.5-alpine --namespace dev
+kubectl get pods --namespace dev
+
+# Try to view pods outside of the dev namespace. Use the kubectl get pods command again, this time to see --all-namespaces.
+kubectl get pods --all-namespaces
+Error from server (Forbidden): pods is forbidden: User "aksdev@contoso.com" cannot list resource "pods" in API group "" at the cluster scope
+
+# In the same way, try to schedule a pod in a different namespace, such as the sre namespace. The user's group membership doesn't align with a Kubernetes Role and RoleBinding to grant these permissions, as shown in the following example output:
+
+$ kubectl run nginx-dev --image=mcr.microsoft.com/oss/nginx/nginx:1.15.5-alpine --namespace sre
+
+Error from server (Forbidden): pods is forbidden: User "aksdev@contoso.com" cannot create resource "pods" in API group "" in the namespace "sre"
+```
+
+### Test the SRE access to the AKS cluster resources
+To confirm that our Microsoft Entra group membership and Kubernetes RBAC work correctly between different users and groups, try the previous commands when signed in as the opssre user.
+
+1. Login in a private mode and login through user ops@HS728.onmicrosoft.com
+>[!Note>]
+Assign storage contributor role to appdev and opssre group so they can access the storage account and resource group
+```
+az aks get-credentials --resource-group $myResourceGroup --name $myAKSCluster --overwrite-existing
+or
+az aks get-credentials --resource-group aksrg --name mycluster
+
+
+kubectl auth can-i list deploy -n sre
+# To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code DHLH7BFJ3 to authenticate.
+yes
+kubectl auth can-i list deploy -n dev
+no
+
+# check if you can deply app in dev 
+kubectl run nginx-dev --image=mcr.microsoft.com/oss/nginx/nginx:1.15.5-alpine --namespace dev
+kubectl get pods --namespace dev
+
