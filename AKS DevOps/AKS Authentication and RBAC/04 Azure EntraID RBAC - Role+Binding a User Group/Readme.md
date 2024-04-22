@@ -467,10 +467,16 @@ subjects:
 kubectl apply -f rolebinding-sre-namespace.yaml
 ```
 
+## Assign storage group resource id access to dev and sre group to access azure cli
+To allow user access the CLi you must grant them access to storage resource group IAM storage contributor access. The must create their own file share to keep context separate.
+
+Alternately, they can use portal > choose cluster > run command 
+
 ## Interact with cluster resources using Microsoft Entra identities
 Now, we'll test that the expected permissions work when you create and manage resources in an AKS cluster. In these examples, we'll schedule and view pods in the user's assigned namespace, and try to schedule and view pods outside of the assigned namespace.
 
 ###  Test the Dev access to the AKS cluster resources
+
 1. Login in a private mode and login through user dev@HS728.onmicrosoft.com
 >[!Note>]
 Assign storage contributor role to appdev and opssre group so they can access the storage account and resource group
@@ -478,6 +484,9 @@ Assign storage contributor role to appdev and opssre group so they can access th
 az aks get-credentials --resource-group $myResourceGroup --name $myAKSCluster --overwrite-existing
 or
 az aks get-credentials --resource-group aksrg --name mycluster
+
+# check which user is logged in 
+kubectl config get-users
 
 kubectl auth can-i list deploy -n dev
 # To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code DHLH7BFJ3 to authenticate.
@@ -522,3 +531,33 @@ no
 kubectl run nginx-dev --image=mcr.microsoft.com/oss/nginx/nginx:1.15.5-alpine --namespace dev
 kubectl get pods --namespace dev
 
+# Clean-Up
+
+Login as admin in AKS and cleanup following AKS resources
+
+Delete namespaces 
+```
+kubectl delete ns dev
+kubectl delete ns qa
+```
+
+Delete Role and RoleBinding
+```
+kubectl delete -f kube-manifests/rolebinding-dev-namespace.yaml
+kubectl delete -f kube-manifests/rolebinding-dev-namespace.yaml
+```
+
+Delete Entra Id Group and users
+```
+# Delete Group
+DEV_AKS_GROUP_ID=$(az ad group show --group devaksteam --query id -o tsv)
+echo $DEV_AKS_GROUP_ID
+az ad group delete -g $DEV_AKS_GROUP_ID
+
+# Delete User
+
+DEV_AKS_USER_OBJECT_ID=$(az ad user show --id aksdev1@HS728.onmicrosoft.com --query id -o tsv)
+echo $DEV_AKS_USER_OBJECT_ID
+az ad user delete --id $DEV_AKS_USER_OBJECT_ID
+
+```
