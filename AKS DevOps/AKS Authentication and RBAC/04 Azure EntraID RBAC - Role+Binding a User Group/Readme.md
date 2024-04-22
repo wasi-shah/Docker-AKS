@@ -245,7 +245,8 @@ In this article, we'll create two user roles to show how Kubernetes RBAC and Mic
 
 In production environments, you can use existing users and groups within a Microsoft Entra tenant.
 
-1. First, get the resource ID of your AKS cluster using the az aks show command. Then, assign the resource ID to a variable named AKS_ID so it can be referenced in other commands.
+> [!note]
+> First, get the resource ID of your AKS cluster using the az aks show command. Then, assign the resource ID to a variable named AKS_ID so it can be referenced in other commands.
 ```
 AKS_ID=$(az aks show \
     --resource-group $myResourceGroup  \
@@ -254,25 +255,31 @@ AKS_ID=$(az aks show \
 
 echo $AKS_ID
 ```
+## Create appdev AAD group and assign role [Azure Kubernetes Service Cluster User Role]
+Create the first example group in Microsoft Entra ID for the application developers using the az ad group create command. 
 
-2. Create the first example group in Microsoft Entra ID for the application developers using the az ad group create command. The following example creates a group named appdev:
+### Create adddev group
+The following example creates a group named appdev:
 ```
 APPDEV_ID=$(az ad group create --display-name appdev --mail-nickname appdev --query id -o tsv)
 echo $APPDEV_ID
 ```
 
-3. Create an Azure role assignment for the appdev group using the az role assignment create command. This assignment lets any member of the group use kubectl to interact with an AKS cluster by granting them the Azure Kubernetes Service Cluster User Role.
+### Assign role [Azure Kubernetes Service Cluster User Role]
+
+Create an Azure role assignment for the appdev group using the az role assignment create command. This assignment lets any member of the group use kubectl to interact with an AKS cluster by granting them the Azure Kubernetes Service Cluster User Role.
 ```
 az role assignment create --assignee $APPDEV_ID --role "Azure Kubernetes Service Cluster User Role" --scope $AKS_ID
 ```
-
-4. Create a second example group for SREs named opssre.
+## Create SREs AAD group and assign role [Azure Kubernetes Service Cluster User Role]
+### Create SREs group
+Create a second example group for SREs named opssre.
 ```
 OPSSRE_ID=$(az ad group create --display-name opssre --mail-nickname opssre --query id -o tsv)
 echo $OPSSRE_ID
 ```
-
-5. Create an Azure role assignment to grant members of the group the Azure Kubernetes Service Cluster User Role.
+### Assign role [Azure Kubernetes Service Cluster User Role]
+Create an Azure role assignment to grant members of the group the Azure Kubernetes Service Cluster User Role.
 ```
 az role assignment create --assignee $OPSSRE_ID --role "Azure Kubernetes Service Cluster User Role" --scope $AKS_ID
 ```
