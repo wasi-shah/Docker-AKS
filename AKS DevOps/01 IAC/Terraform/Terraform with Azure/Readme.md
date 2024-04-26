@@ -130,13 +130,30 @@ Terraform supports a number of different methods for authenticating to Azure:
 
 - ### Authenticating to Azure using the Azure CLI
 Azure CLI when running Terraform locally.
-
+```
+az login
+```
 - ### Authenticating to Azure using Managed Service Identity
 Use Managed Service Identity when running Terraform non-interactively (such as when running Terraform in a CI server) 
+```
+az login --identity
+or
+az login --identity --username "CLIENT_ID"
+```
 - ### Authenticating to Azure using a Service Principal and a Client Certificate
 Use Service Principal when running Terraform non-interactively (such as when running Terraform in a CI server) 
+```
+az login --service-principal -u "CLIENT_ID" -p "CERTIFICATE_PEM" --tenant "TENANT_ID"
+```
 - ### Authenticating to Azure using a Service Principal and a Client Secret
+```
+az login --service-principal -u "CLIENT_ID" -p "CLIENT_SECRET" --tenant "TENANT_ID"
+```
 - ### Authenticating to Azure using OpenID Connect
+```
+# Service Principal with Open ID Connect (for use in CI / CD):
+az login --service-principal -u "CLIENT_ID" --tenant "TENANT_ID"
+```
 - ### Authenticating to Azure using AKS Workload Identity
 AKS Workload Identity can be used to authenticate to services that support Azure Active Directory (Azure AD) authentication when running in Azure Kubernetes Service clusters.
 
@@ -312,52 +329,3 @@ provider "azurerm" {
 ```
 > [!Important]
 > At this point running either terraform plan or terraform apply should allow Terraform to run using the Service Principal to authenticate.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# old
-User Account:
-```
-az login
-```
-
-Service Principal with a Secret:
-```
-az login --service-principal -u "CLIENT_ID" -p "CLIENT_SECRET" --tenant "TENANT_ID"
-```
-
-Service Principal with a Certificate:
-```
-az login --service-principal -u "CLIENT_ID" -p "CERTIFICATE_PEM" --tenant "TENANT_ID"
-```
-
-Service Principal with Open ID Connect (for use in CI / CD):
-```
-az login --service-principal -u "CLIENT_ID" --tenant "TENANT_ID"
-```
-
-Managed Identity:
-```
-az login --identity
-or
-az login --identity --username "CLIENT_ID"
-```
-
-Once logged in - it's possible to list the Subscriptions associated with the account via:
-```
-az account list
-```
