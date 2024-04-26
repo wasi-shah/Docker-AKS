@@ -75,6 +75,31 @@ There are several Terraform providers that enable the management of Azure infras
 - AzureStack: Manage Azure Stack Hub resources such as virtual machines, DNS, virtual networks, and storage.
 
 
+# Benefits of Terraform with Azure
+This section describes the benefits of using Terraform to manage Azure infrastructure.
+
+## Common IaC tool
+Terraform Azure providers enable you to manage all of your Azure infrastructure using the same declarative syntax and tooling. Using these providers you can:
+
+- Configure core platform capabilities such as management groups, policies, users, groups, and policies. For more information, see Terraform implementation of Cloud Adoption Framework Enterprise-scale.
+- Configure Azure DevOps projects and pipelines to automate regular infrastructure and application deployments.
+- Deploy Azure resources required by your applications.
+
+## Automate infrastructure management
+The Terraform template-based configuration file syntax enables you to configure Azure resources in a repeatable and predictable manner. Automating infrastructure includes the following benefits:
+
+- Lowers the potential for human errors while deploying and managing infrastructure.
+- Deploys the same template multiple times to create identical development, test, and production environments.
+- Reduces the cost of development and test environments by creating them on-demand.
+
+## Understand infrastructure changes before being applied
+As a resource topology becomes complex, understanding the meaning and impact of infrastructure changes can be difficult.
+
+The Terraform CLI enables users to validate and preview infrastructure changes before application of the plan. Previewing infrastructure changes in a safe manner has several benefits:
+
+- Team members can collaborate more effectively by understanding proposed changes and their impact.
+- Unintended changes can be caught early in the development process.
+
 # Writing Terraform code
 You can write terraform code using HCL or any other language using CDK for Terraform
 Cloud Development Kit for Terraform (CDKTF).
