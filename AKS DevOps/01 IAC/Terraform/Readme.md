@@ -36,10 +36,24 @@ The Terraform Registry is integrated directly into Terraform so you can directly
 Providers are how Terraform integrates with any upstream API.
 For example Azure, AWS and GCP
 > [!note]
-> Providers allow Terraform to interact with cloud providers, SaaS providers, and other APIs. 
+> - Providers allow Terraform to interact with cloud providers, SaaS providers, and other APIs. 
+> - Each provider adds a set of resource types and/or data sources that Terraform can manage.
+> - Every resource type is implemented by a provider; without providers, Terraform can't manage any kind of infrastructure.
 
 
 # Modules
 Modules are self-contained packages of Terraform configurations that are managed as a group.
 > [!Note]
 > For example, [aks] module is a Terraform Module for deploying an AKS cluster
+
+
+# Terraform Use Cases
+## Parallel Environments
+You may have staging or QA environments that you use to test new applications before releasing them in production. As the production environment grows larger and more complex, it can be increasingly difficult to maintain an up-to-date environment for each stage of the development process. Terraform lets you rapidly spin up and decommission infrastructure for development, test, QA, and production. Using Terraform to create disposable environments as needed is more cost-efficient than maintaining each one indefinitely.
+
+
+## Software Demos
+You can use Terraform to create, provision, and bootstrap a demo on various cloud providers. This lets end users easily try the software on their own infrastructure and even enables them to adjust parameters like cluster size to more rigorously test tools at any scale.
+
+## Kubernetes
+Kubernetes is an open-source workload scheduler for containerized applications. Terraform lets you both deploy a Kubernetes cluster and manage its resources (e.g., pods, deployments, services, etc.). You can also use the Kubernetes Operator for Terraform to manage cloud and on-prem infrastructure through a Kubernetes Custom Resource Definition (CRD) and HCP Terraform.
