@@ -280,7 +280,7 @@ provider "azurerm" {
 
 # Your code goes here
 ```
-> [!Important>]
+> [!Important]
 > At this point running either terraform plan or terraform apply should allow Terraform to run using the Service Principal to authenticate.
 
 ### Using variable to pass client_secret
@@ -310,7 +310,7 @@ provider "azurerm" {
   subscription_id = "20000000-0000-0000-0000-000000000000"
 }
 ```
-> [!Important>]
+> [!Important]
 > At this point running either terraform plan or terraform apply should allow Terraform to run using the Service Principal to authenticate.
 
 
