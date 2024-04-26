@@ -191,6 +191,7 @@ az account list --query "[?user.name=='<microsoft_account_email>'].{Name:name, I
 
 # To use a specific Azure subscription, run az account set.
 az account set --subscription "<subscription_id_or_subscription_name>"
+az logout
 ```
 
 ## Authenticate via a service principal
@@ -198,7 +199,11 @@ Automated tools that deploy or use Azure services - such as Terraform - should a
 
 The most common pattern is to interactively sign in to Azure, create a service principal, test the service principal, and then use that service principal for future authentication (either interactively or from your scripts).
 
+
 ```
+# Login as user with full rights to create service principle.
+az login
+
 # To create a service principal, run az ad sp create-for-rbac.
 az ad sp create-for-rbac --name <service_principal_name> --role Contributor --scopes /subscriptions/<subscription_id>
 
@@ -210,10 +215,103 @@ az ad sp create-for-rbac --name <service_principal_name> --role Contributor --sc
 # - For this article, a service principal with a Contributor role is being used. For more information about Role-Based Access Control (RBAC) roles, see RBAC: Built-in roles.
 # - The output from creating the service principal includes sensitive credentials. Be sure that you don't include these credentials in your code or check the credentials into your source control.
 
-
+# This command will output 5 values:
+{
+  "appId": "00000000-0000-0000-0000-000000000000",
+  "displayName": "azure-cli-2017-06-05-10-41-15",
+  "name": "http://azure-cli-2017-06-05-10-41-15",
+  "password": "0000-0000-0000-0000-000000000000",
+  "tenant": "00000000-0000-0000-0000-000000000000"
+}
 ```
 
+These values map to the Terraform variables like so:
 
+- appId is the client_id defined above.
+- password is the client_secret defined above.
+- tenant is the tenant_id defined above.
+
+### Finally, it's possible to test these values work as expected by first logging in:
+```
+az login --service-principal -u CLIENT_ID -p CLIENT_SECRET --tenant TENANT_ID
+
+# Once logged in as the Service Principal - we should be able to list the VM sizes by specifying an Azure region, for example here we use the West US region:
+
+az vm list-sizes --location westus
+```
+
+### Specify service principal credentials in environment variables
+Once you create a service principal, you can specify its credentials to Terraform via environment variables.
+```
+# Edit the ~/.bashrc file by adding the following environment variables.
+export ARM_SUBSCRIPTION_ID="<azure_subscription_id>"
+export ARM_TENANT_ID="<azure_subscription_tenant_id>"
+export ARM_CLIENT_ID="<service_principal_appid>"
+export ARM_CLIENT_SECRET="<service_principal_password>"
+
+# To execute the ~/.bashrc script, run source ~/.bashrc (or its abbreviated equivalent . ~/.bashrc). You can also exit and reopen Cloud Shell for the script to run automatically.
+. ~/.bashrc
+
+# Once the environment variables have been set, you can verify their values as follows:
+printenv | grep ^ARM*
+# or on Windows
+Set
+```
+### Specify service principal credentials in a Terraform provider block
+The Azure provider block defines syntax that allows you to specify your Azure subscription's authentication information.
+```
+terraform {
+  required_providers {
+    azurerm = {
+      source = "hashicorp/azurerm"
+      version = "~>2.0"
+    }
+  }
+}
+
+provider "azurerm" {
+  features {}
+
+  subscription_id   = "<azure_subscription_id>"
+  tenant_id         = "<azure_subscription_tenant_id>"
+  client_id         = "<service_principal_appid>"
+  client_secret     = "<service_principal_password>"
+}
+
+# Your code goes here
+```
+> [!Important>]
+> At this point running either terraform plan or terraform apply should allow Terraform to run using the Service Principal to authenticate.
+
+### Using variable to pass client_secret
+It's also possible to configure these variables either in-line or from using variables in Terraform (as the client_secret is in this example), like so:
+```
+variable "client_secret" {
+}
+
+# We strongly recommend using the required_providers block to set the
+# Azure Provider source and version being used
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "=3.0.0"
+    }
+  }
+}
+
+# Configure the Microsoft Azure Provider
+provider "azurerm" {
+  features {}
+
+  client_id       = "00000000-0000-0000-0000-000000000000"
+  client_secret   = var.client_secret
+  tenant_id       = "10000000-0000-0000-0000-000000000000"
+  subscription_id = "20000000-0000-0000-0000-000000000000"
+}
+```
+> [!Important>]
+> At this point running either terraform plan or terraform apply should allow Terraform to run using the Service Principal to authenticate.
 
 
 
