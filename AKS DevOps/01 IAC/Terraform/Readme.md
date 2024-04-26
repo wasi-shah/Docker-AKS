@@ -57,3 +57,14 @@ You can use Terraform to create, provision, and bootstrap a demo on various clou
 
 ## Kubernetes
 Kubernetes is an open-source workload scheduler for containerized applications. Terraform lets you both deploy a Kubernetes cluster and manage its resources (e.g., pods, deployments, services, etc.). You can also use the Kubernetes Operator for Terraform to manage cloud and on-prem infrastructure through a Kubernetes Custom Resource Definition (CRD) and HCP Terraform.
+
+# Writing Terraform code
+You can write terraform code using HCL or any other language using CDK for Terraform
+Cloud Development Kit for Terraform (CDKTF).
+
+
+> [!note]
+> Cloud Development Kit for Terraform (CDKTF) allows you to use familiar programming languages to define and provision infrastructure. This gives you access to the entire Terraform ecosystem without learning HashiCorp Configuration Language (HCL) and lets you leverage the power of your existing toolchain for testing, dependency management, etc.
+
+> Terraform support 
+> - TypeScript, Python, Java, C#, and Go.
