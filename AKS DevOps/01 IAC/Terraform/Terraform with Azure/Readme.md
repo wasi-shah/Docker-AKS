@@ -145,9 +145,93 @@ When a service account and pod are configured to use AKS Workload Identity, a fe
 
 > [!Important]
 > Use a service principal or a managed identity when running Terraform non-interactively (such as when running Terraform in a CI/CD pipeline)
-## Connecting to Terraform 
 
 
+# Install Terraform on Windows
+
+1. Install the Azure CLI
+Install Azure cli - https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows
+2. Install Terraform for Windows
+   - Install Terraform on local PC - https://www.terraform.io/downloads.html
+   - From the download, extract the executable to a directory of your choosing (for example, c:\terraform).
+   - Update your system's global PATH environment variable to include the directory that contains the executable.
+   - Open a terminal window.
+   - Verify the global path configuration with the terraform command. 
+   ```
+   terraform -version
+   ```
+
+# Authenticate Terraform to Azure
+> [!Note]
+> Terraform only supports authenticating to Azure via the Azure CLI. Authenticating using Azure PowerShell isn't supported. 
+
+## Authenticate via a Microsoft account
+A Microsoft account is a username (associated with an email and its credentials) that is used to sign in to Microsoft services - such as Azure. A Microsoft account can be associated with one or more Azure subscriptions, with one of those subscriptions being the default.
+
+The following steps show you how:
+
+- Sign in to Azure interactively using a Microsoft account
+- List the account's associated Azure subscriptions (including the default)
+- Set the current subscription.
+
+```
+# Open a command line that has access to the Azure CLI.
+
+# Run az login without any parameters and follow the instructions to sign in to Azure.
+
+az login
+
+# To confirm the current Azure subscription, run az account show.
+az account show
+
+# To view all the Azure subscription names and IDs for a specific Microsoft account, run az account list.
+az account list --query "[?user.name=='<microsoft_account_email>'].{Name:name, ID:id, Default:isDefault}" --output Table
+
+# Note: Replace the <microsoft_account_email> placeholder with the Microsoft account email address whose Azure subscriptions you want to list.
+
+# To use a specific Azure subscription, run az account set.
+az account set --subscription "<subscription_id_or_subscription_name>"
+```
+
+## Authenticate via a service principal
+Automated tools that deploy or use Azure services - such as Terraform - should always have restricted permissions. Instead of having applications sign in as a fully privileged user, Azure offers service principals.
+
+The most common pattern is to interactively sign in to Azure, create a service principal, test the service principal, and then use that service principal for future authentication (either interactively or from your scripts).
+
+```
+# To create a service principal, run az ad sp create-for-rbac.
+az ad sp create-for-rbac --name <service_principal_name> --role Contributor --scopes /subscriptions/<subscription_id>
+
+# Key points:
+
+# - You can replace the <service-principal-name> with a custom name for your environment or omit the parameter entirely. If you omit the parameter, the service principal name is generated based on the current date and time.
+# - Upon successful completion, az ad sp create-for-rbac displays several values. The appId, password, and tenant values are used in the next step.
+# - The password can't be retrieved if lost. As such, you should store your password in a safe place. If you forget your password, you can reset the service principal credentials.
+# - For this article, a service principal with a Contributor role is being used. For more information about Role-Based Access Control (RBAC) roles, see RBAC: Built-in roles.
+# - The output from creating the service principal includes sensitive credentials. Be sure that you don't include these credentials in your code or check the credentials into your source control.
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# old
 User Account:
 ```
 az login
