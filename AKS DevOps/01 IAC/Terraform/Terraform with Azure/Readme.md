@@ -14,7 +14,10 @@ Use Managed Service Identity when running Terraform non-interactively (such as w
 Use Service Principal when running Terraform non-interactively (such as when running Terraform in a CI server) 
 - ### Authenticating to Azure using a Service Principal and a Client Secret
 - ### Authenticating to Azure using OpenID Connect
+- ### Authenticating to Azure using AKS Workload Identity
 
+> [!Important]
+> Use a service principal or a managed identity when running Terraform non-interactively (such as when running Terraform in a CI/CD pipeline)
 ## Connecting to Terraform 
 
 
