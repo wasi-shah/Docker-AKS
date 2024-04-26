@@ -102,6 +102,10 @@ Use Service Principal when running Terraform non-interactively (such as when run
 - ### Authenticating to Azure using a Service Principal and a Client Secret
 - ### Authenticating to Azure using OpenID Connect
 - ### Authenticating to Azure using AKS Workload Identity
+AKS Workload Identity can be used to authenticate to services that support Azure Active Directory (Azure AD) authentication when running in Azure Kubernetes Service clusters.
+
+When a service account and pod are configured to use AKS Workload Identity, a federated identity token is injected into the pod at run-time, along with environment variables to use that identity.
+
 
 > [!Important]
 > Use a service principal or a managed identity when running Terraform non-interactively (such as when running Terraform in a CI/CD pipeline)
