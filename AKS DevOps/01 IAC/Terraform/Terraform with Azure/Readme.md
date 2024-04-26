@@ -64,6 +64,17 @@ You can use Terraform to create, provision, and bootstrap a demo on various clou
 ## Kubernetes
 Kubernetes is an open-source workload scheduler for containerized applications. Terraform lets you both deploy a Kubernetes cluster and manage its resources (e.g., pods, deployments, services, etc.). You can also use the Kubernetes Operator for Terraform to manage cloud and on-prem infrastructure through a Kubernetes Custom Resource Definition (CRD) and HCP Terraform.
 
+
+# Terraform providers for Azure infrastructure
+There are several Terraform providers that enable the management of Azure infrastructure:
+
+- AzureRM: Manage stable Azure resources and functionality such as virtual machines, storage accounts, and networking interfaces.
+- AzureAD: Manage Microsoft Entra resources such as groups, users, service principals, and applications.
+- AzureDevops: Manage Azure DevOps resources such as agents, repositories, projects, pipelines, and queries.
+- AzAPI: Manage Azure resources and functionality using the Azure Resource Manager APIs directly. This provider compliments the AzureRM provider by enabling the management of Azure resources that aren't released. For more information about the AzAPI provider, see Terraform AzAPI provider.
+- AzureStack: Manage Azure Stack Hub resources such as virtual machines, DNS, virtual networks, and storage.
+
+
 # Writing Terraform code
 You can write terraform code using HCL or any other language using CDK for Terraform
 Cloud Development Kit for Terraform (CDKTF).
