@@ -70,3 +70,11 @@ Cloud Development Kit for Terraform (CDKTF).
 > - TypeScript, Python, Java, C#, and Go.
 ![image](https://github.com/wasi-shah/Docker-AKS/assets/51749920/fbfff318-0e80-45ae-b30d-a1985e548bc9)
 
+
+# Terraform Files
+Files containing Terraform code are often called configuration files.
+Code in the Terraform language is stored in plain text files with the .tf file extension. There is also a JSON-based variant of the language that is named with the .tf.json file extension.
+
+https://developer.hashicorp.com/terraform/language/files
+
+
