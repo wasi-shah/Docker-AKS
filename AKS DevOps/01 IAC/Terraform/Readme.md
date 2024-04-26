@@ -1,1 +1,45 @@
-Test
+# Terraform
+HashiCorp Terraform is an infrastructure as code tool that lets you define both cloud and on-prem resources in human-readable configuration files that you can version, reuse, and share. You can then use a consistent workflow to provision and manage all of your infrastructure throughout its lifecycle. Terraform can manage low-level components like compute, storage, and networking resources, as well as high-level components like DNS entries and SaaS features.
+
+# Terraform workflow
+The core Terraform workflow consists of three stages:
+
+## Write:
+You define resources, which may be across multiple cloud providers and services. For example, you might create a configuration to deploy an application on virtual machines in a Virtual Private Cloud (VPC) network with security groups and a load balancer.
+
+## Plan:
+Terraform creates an execution plan describing the infrastructure it will create, update, or destroy based on the existing infrastructure and your configuration.
+
+## Apply:
+On approval, Terraform performs the proposed operations in the correct order, respecting any resource dependencies. For example, if you update the properties of a VPC and change the number of virtual machines in that VPC, Terraform will recreate the VPC before scaling the virtual machines.
+
+# Terraform resource graph
+Terraform builds a resource graph to determine resource dependencies and creates or modifies non-dependent resources in parallel.
+> [!note]
+> You do not need to write step-by-step instructions to create resources because Terraform handles the underlying dependencies logic.
+
+
+# Terraform state file
+Terraform generates a plan and prompts you for your approval before modifying your infrastructure. It also keeps track of your real infrastructure in a state file, which acts as a source of truth for your environment. Terraform uses the state file to determine the changes to make to your infrastructure so that it will match your configuration.
+> [!note]
+> Terraform keeps track of your real infrastructure in a state file
+
+
+# Terraform Registry
+browsable and searchable interface for finding providers, and makes it possible for Terraform CLI to automatically install any of the providers it hosts
+
+The Terraform Registry is integrated directly into Terraform so you can directly specify providers and modules.
+> [!note]
+> The Terraform Registry is the main source for publicly available Terraform providers. It offers a 
+
+# Providers
+Providers are how Terraform integrates with any upstream API.
+For example Azure, AWS and GCP
+> [!note]
+> Providers allow Terraform to interact with cloud providers, SaaS providers, and other APIs. 
+
+
+# Modules
+Modules are self-contained packages of Terraform configurations that are managed as a group.
+> [!Note]
+> For example, [aks] module is a Terraform Module for deploying an AKS cluster
