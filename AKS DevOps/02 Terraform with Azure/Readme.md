@@ -519,3 +519,22 @@ terraform apply main.destroy.tfplan
 
 ```
 </details>
+
+
+<details>
+<summary>Delete a specific resource from state</summary>
+
+### terraform destroy -target=azurerm_resource_group.rg
+
+> [!Important]
+> The -target option is not for routine use, and is provided only for exceptional situations such as recovering from errors or mistakes, or when Terraform specifically suggests to use it as part of an error message.
+
+```HCL
+cd 02-demo-resource-group
+terraform init
+
+# find name from main.tf file > resource "azurerm_resource_group" "rg" 
+# use . in between 
+terraform destroy -target=azurerm_resource_group.rg
+```
+</details>
