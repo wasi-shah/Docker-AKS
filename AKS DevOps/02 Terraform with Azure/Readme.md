@@ -365,3 +365,16 @@ provider "azurerm" {
 ```
 > [!Important]
 > At this point running either terraform plan or terraform apply should allow Terraform to run using the Service Principal to authenticate.
+
+# Demos
+
+<details>
+<summary>Provider Only</summary>
+### Add [azurerm] as provider
+```
+cd 01-demo-provider-only>terraform init
+terraform init
+terraform plan
+terraform apply
+```
+</details>
