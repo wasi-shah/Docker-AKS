@@ -430,14 +430,14 @@ resource "azurerm_resource_group" "rg" {
 }
 ```
 
-> [!note]
-> following block is added / uncomment in the code
-> # Add Tags
->  tags = {
->    "environment" = "k8sdev"
->    "demotag"     = "refreshtest"
->  }
 
+Following block is added / uncomment in the code
+```
+  tags = {
+    "environment" = "k8sdev"
+    "demotag"     = "refreshtest"
+  }
+```
 
 ```HCL
 cd 02-demo-resource-group-edit
