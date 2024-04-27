@@ -19,6 +19,17 @@ Terraform creates an execution plan describing the infrastructure it will create
 ### Apply: Builds or change infrastructure 
 On approval, Terraform performs the proposed operations in the correct order, respecting any resource dependencies. For example, if you update the properties of a VPC and change the number of virtual machines in that VPC, Terraform will recreate the VPC before scaling the virtual machines.
 
+## Terraform basic / essential commands
+## Main commands
+| commands  | Action |
+| ------------- | ------------- |
+|  init |  Prepare your working directory for other commands |
+|  validate | Check whether the configuration is valid  |
+|  plan |  Show changes required by the current configuration |
+|  apply | Create or update infrastructure  |
+|  destroy | Destroy previously-created infrastructure  |
+
+
 ## Terraform resource graph
 Terraform builds a resource graph to determine resource dependencies and creates or modifies non-dependent resources in parallel.
 > [!note]
