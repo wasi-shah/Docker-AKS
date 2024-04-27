@@ -383,9 +383,9 @@ terraform destroy
 </details>
 
 <details>
-<summary>Crete resource group with random name</summary>
+<summary>Create an Azure resource group using Terraform</summary>
 
-### Add [azurerm] as provider
+### Create resource group with random name
 
 https://learn.microsoft.com/en-us/azure/developer/terraform/create-resource-group?tabs=azure-cli
 
