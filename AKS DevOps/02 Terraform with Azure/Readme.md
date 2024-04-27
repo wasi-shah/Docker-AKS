@@ -526,7 +526,6 @@ terraform apply main.destroy.tfplan
 
 ### terraform destroy -target=azurerm_resource_group.rg
 
-> [!Important]
 > The -target option is not for routine use, and is provided only for exceptional situations such as recovering from errors or mistakes, or when Terraform specifically suggests to use it as part of an error message.
 
 ```HCL
