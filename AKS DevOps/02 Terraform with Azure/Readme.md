@@ -430,7 +430,7 @@ resource "azurerm_resource_group" "rg" {
 }
 ```
 
->[!note]
+> [!note]
 > following block is added / uncomment in the code
 > # Add Tags
 >  tags = {
