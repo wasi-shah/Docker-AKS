@@ -464,6 +464,7 @@ terraform apply main.destroy.tfplan
 
 <details>
 <summary>Sync Current State and Desired</summary>
+
 - Desired State: Local Terraform Manifest (main.tf)
 - Current State: Real Resources present in your cloud
 
