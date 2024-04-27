@@ -371,6 +371,7 @@ provider "azurerm" {
 <details>
 <summary>Provider Only</summary>
 ### Add [azurerm] as provider
+
 ```
 cd 01-demo-provider-only>terraform init
 terraform init
