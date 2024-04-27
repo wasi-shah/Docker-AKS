@@ -413,6 +413,7 @@ terraform apply main.destroy.tfplan
 In the above example, we have created a resource group. 
 The state of the group is already saved into a state file.
 Now add [tags] block in main.tf file and execute plan 
+
 ```
 resource "random_pet" "rg_name" {
   prefix = var.resource_group_name_prefix
