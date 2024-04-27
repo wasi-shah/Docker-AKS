@@ -23,7 +23,7 @@ On approval, Terraform performs the proposed operations in the correct order, re
 ## Main commands
 | Commands  | Action |
 | ------------- | ------------- |
-|  init |  Prepare your working directory for other commands |
+|  init |  Prepare your working directory for other commands. Run terraform init to initialize the Terraform deployment. This command downloads the Azure provider required to manage your Azure resources. |
 |  validate | Check whether the configuration is valid  |
 |  plan |  Show changes required by the current configuration |
 |  apply | Create or update infrastructure  |
@@ -373,9 +373,37 @@ provider "azurerm" {
 ### Add [azurerm] as provider
 
 ```HCL
-cd 01-demo-provider-only>terraform init
+cd 01-demo-provider-only
 terraform init
 terraform plan
 terraform apply
+terraform destroy
+
+```
+</details>
+
+<details>
+<summary>Crete resource group with random name</summary>
+
+### Add [azurerm] as provider
+
+https://learn.microsoft.com/en-us/azure/developer/terraform/create-resource-group?tabs=azure-cli
+
+```HCL
+cd 02-demo-resource-group
+terraform init
+terraform plan -out main.tfplan
+terraform apply main.tfplan
+# Verify the results
+resource_group_name=$(terraform output -raw resource_group_name)
+az group show --name $resource_group_name
+
+# Clean up resources
+# When you no longer need the resources created via Terraform, do the following steps:
+# 1 - Run terraform plan and specify the destroy flag.
+terraform plan -destroy -out main.destroy.tfplan
+# 2 - terraform apply main.destroy.tfplan
+terraform apply main.destroy.tfplan
+
 ```
 </details>
