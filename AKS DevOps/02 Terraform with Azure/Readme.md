@@ -62,6 +62,12 @@ Terraform generates a plan and prompts you for your approval before modifying yo
 > [!note]
 > Terraform keeps track of your real infrastructure in a state file
 
+## Terraform local state vs real state
+terraform refresh: Updates local state file against real resources in cloud
+Desired State: Local Terraform Manifest (main.tf)
+Current State: Real Resources present in your cloud
+Command Order of Execution: refresh, plan, make a decision, apply
+
 
 ## Terraform Registry
 browsable and searchable interface for finding providers, and makes it possible for Terraform CLI to automatically install any of the providers it hosts
@@ -394,9 +400,7 @@ cd 02-demo-resource-group
 terraform init
 terraform plan -out main.tfplan
 terraform apply main.tfplan
-# Verify the results
-resource_group_name=$(terraform output -raw resource_group_name)
-az group show --name $resource_group_name
+
 
 # Clean up resources
 # When you no longer need the resources created via Terraform, do the following steps:
@@ -447,6 +451,63 @@ terraform apply main.tfplan
 # Verify the results
 resource_group_name=$(terraform output -raw resource_group_name)
 az group show --name $resource_group_name
+
+# Clean up resources
+# When you no longer need the resources created via Terraform, do the following steps:
+# 1 - Run terraform plan and specify the destroy flag.
+terraform plan -destroy -out main.destroy.tfplan
+# 2 - terraform apply main.destroy.tfplan
+terraform apply main.destroy.tfplan
+
+```
+</details>
+
+<details>
+<summary>Sync Current State and Desired</summary>
+- Desired State: Local Terraform Manifest (main.tf)
+- Current State: Real Resources present in your cloud
+
+Sometimes you made changed directly to your portal, these changed are not available in your main.tf file
+Following example shows how to compare the current state with desire state and update either desire state with current or current state with desire
+
+#### Add new tag in resource group using portal.
+1. Login to portal
+2. Find Resource group
+3. click Tags
+4. Enter new tag for example portal-tag: this is my value
+
+#### Decide which state to keep
+
+Option 1: Overwrite Current state with Desire state main.tf file
+You will loose your tag created via portal
+```
+terraform refresh
+# Terraform will take a backup into terraform.tfstate.backup file and create new terraform.tfstate
+terraform plan
+terraform apply
+```
+
+Option 2: Sync main.tf file with current state
+Manually add tag to your main.tf file
+
+
+```HCL
+cd 02-demo-resource-group-edit
+terraform init
+
+terraform refresh
+# Terraform will take a backup into terraform.tfstate.backup file and create new terraform.tfstate
+
+# Run plan to check the difference 
+terraform plan
+# Find new tag in the output window for example  [ - "portal-tag"  = "this is my value" -> null]
+# Tip: check for - sign.
+# Edit main.tf and copy the new changes
+
+# Run plan again
+terraform plan -out main.tfplan
+
+terraform apply main.tfplan
 
 # Clean up resources
 # When you no longer need the resources created via Terraform, do the following steps:
