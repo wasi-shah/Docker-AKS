@@ -438,8 +438,6 @@ resource "azurerm_resource_group" "rg" {
 >    "demotag"     = "refreshtest"
 >  }
 
-> [!Important]
-> At this point running either terraform plan or terraform apply should allow Terraform to run using the Service Principal to authenticate.
 
 ```HCL
 cd 02-demo-resource-group-edit
