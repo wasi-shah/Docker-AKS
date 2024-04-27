@@ -338,7 +338,7 @@ provider "azurerm" {
 
 ### Using variable to pass client_secret
 It's also possible to configure these variables either in-line or from using variables in Terraform (as the client_secret is in this example), like so:
-```
+```JSON
 variable "client_secret" {
 }
 
