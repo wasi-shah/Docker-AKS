@@ -289,8 +289,12 @@ terraform {
 provider "azurerm" {
   features {}
 
+  # It's also possible to configure Terraform to use a specific Subscription
   subscription_id   = "<azure_subscription_id>"
+
+  # If you're looking to use Terraform across Tenants - it's possible to do this by configuring the Tenant ID field in the Provider block
   tenant_id         = "<azure_subscription_tenant_id>"
+
   client_id         = "<service_principal_appid>"
   client_secret     = "<service_principal_password>"
 }
