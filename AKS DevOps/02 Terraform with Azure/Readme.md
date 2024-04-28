@@ -68,10 +68,7 @@ The files are not required to have the exact same names listed above. However, t
 ### Terraform variable flow and file names
 | Priority | ext | Purpose |
 | ---------| ------------- | ------------- |
-|  1 | command line -var and -var-file  |  values set by command 
-for example 
-<li> [terraform plan -var "resource_group_location=eastus"] 
-<li> [terraform plan -var-file="prod.tfvars"] |
+|  1 | command line -var and -var-file  |  values set by command for example <li> [terraform plan -var "resource_group_location=eastus"] <li> [terraform plan -var-file="prod.tfvars"] |
 |  2 | *.auto.tfvars  | Terraform loads the values from the *.auto.tfvars file by automatically.
 |  3 | terraform.tfvars  | Terraform loads the values from the terraform.tfvars file by default. 
 |  4 | Environment set variables  | values set by TF_VAR_keywordname for example [TF_VAR_resource_group_location="uksouth" terraform plan]
