@@ -108,15 +108,15 @@ variable "location" {
 }
 ```
 
-#### Variable Assignment  
+#### Variable value Assignment  
 
-##### Variable Assignment through the Command Line
+##### Variable Value Assignment through the Command Line
 To specify individual variables on the command line, use the -var option when running the terraform plan and terraform apply commands:
 ```
 terraform plan -var "location=ukwest"
 ```
 
-##### Variable Assignment through .tfvar file 
+##### Variable Value Assignment through .tfvar file 
 To set lots of variables, it is more convenient to specify their values in a variable definitions file (with a filename ending in either .tfvars or .tfvars.json) and then specify that file on the command line with -var-file:
 
 testing.tfvars
@@ -135,7 +135,7 @@ terraform apply -var-file='testing.tfvars'
 terraform apply -var-file="testing.tfvars"
 ```
 
-#####  Variable Assignment through Environment variables
+#####  Variable Value Assignment through Environment variables
 As a fallback for the other ways of defining variables, Terraform searches the environment of its own process for environment variables named TF_VAR_ followed by the name of a declared variable.
 ```
 # Linux
@@ -147,6 +147,16 @@ set TF_VAR_location=ukwest
 terraform plan
 ```
 
+#### Reading Variable Value 
+If we want to use a variable in terraform then we can use it using var.variableName and ${var.variableName} inside string
+```
+variable username {}
+
+output printname {
+    value = "Hello, ${var.username}"
+}
+
+```
 
 
 
