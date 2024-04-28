@@ -55,14 +55,28 @@ All other commands:
 ### IaC Project files
 To begin writing a Terraform configuration while adhering to the best practices, we create the files below in the project’s root directory.
 
+The files are not required to have the exact same names listed above. However, these are general conventions used in Terraform projects.
 
 | ext | Purpose |
 | ------------- | ------------- |
-|  provider.tf | Add Azure as provider in this file for example ```required_providers```  |
-|  x | x  |
-|  x | x  |
-|  x | x  |
-|  x | x  |
+|  provider.tf | Add Azure as provider in this file for example required_providers{} and provider{}  |
+|  main.th | containing the resource blocks which define the resources to be created in the target cloud platform.  |
+|  output.tf | containing the output that needs to be generated on successful completion of “apply” operation.  |
+|  variables.tf | [Variable Declaration] - containing the variable declarations used in the resource blocks and these might or might not have a default value. |
+|  *.tfvars | [Variables Assignment] - containing the environment-specific default values of variables.  |
+
+### Terraform variable flow and file names
+| Priority | ext | Purpose |
+| ---------| ------------- | ------------- |
+|  1 | command line -var and -var-file  |  values set by command for example [terraform plan -var "resource_group_location=eastus"] OR [terraform plan -var-file="prod.tfvars"]
+|  2 | *.auto.tfvars  | Terraform loads the values from the *.auto.tfvars file by automatically.
+|  3 | terraform.tfvars  | Terraform loads the values from the terraform.tfvars file by default. 
+|  4 | Environment set variables  | values set by TF_VAR_keywordname for example [TF_VAR_resource_group_location="uksouth" terraform plan]
+|  x | x  | x 
+|  x | x  | x 
+
+
+
 
 ### Terraform Managed Files
 | ext | Purpose |
@@ -72,6 +86,7 @@ To begin writing a Terraform configuration while adhering to the best practices,
 |  x | x  |
 |  x | x  |
 |  x | x  |
+
 
 ## Terraform resource graph
 Terraform builds a resource graph to determine resource dependencies and creates or modifies non-dependent resources in parallel.
