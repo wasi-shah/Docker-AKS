@@ -108,8 +108,9 @@ variable "location" {
 }
 ```
 
+#### Variable Assignment  
 
-#### Variable Assignment through the Command Line
+##### Variable Assignment through the Command Line
 To specify individual variables on the command line, use the -var option when running the terraform plan and terraform apply commands:
 ```
 terraform plan -var "location=ukwest"
