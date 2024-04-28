@@ -87,7 +87,7 @@ The files are not required to have the exact same names listed above. However, t
 ### Terraform variable declaration and assignment
 
 #### Declaration
->[!note] You can also assign default value during declaration
+> [!note] You can also assign default value during declaration
 variables.tf
 ```
 variable "location" {
