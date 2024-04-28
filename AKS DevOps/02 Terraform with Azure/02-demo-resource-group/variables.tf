@@ -1,4 +1,4 @@
-variable "resource_group_location" {
+variable "location" {
   type        = string
   default     = "uksouth"
   description = "Location of the resource group."

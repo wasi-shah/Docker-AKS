@@ -3,7 +3,7 @@ resource "random_pet" "rg_name" {
 }
 
 resource "azurerm_resource_group" "rg" {
-  location = var.resource_group_location
+  location = var.location
   name     = random_pet.rg_name.id
 # Add Tags
   tags = {
