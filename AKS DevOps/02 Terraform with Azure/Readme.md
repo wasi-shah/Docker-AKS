@@ -20,7 +20,7 @@ Terraform creates an execution plan describing the infrastructure it will create
 On approval, Terraform performs the proposed operations in the correct order, respecting any resource dependencies. For example, if you update the properties of a VPC and change the number of virtual machines in that VPC, Terraform will recreate the VPC before scaling the virtual machines.
 
 ## Terraform basic / essential commands
-## Main commands
+### Main commands
 | Commands  | Action |
 | ------------- | ------------- |
 |  init |  Prepare your working directory for other commands. Run terraform init to initialize the Terraform deployment. This command downloads the Azure provider required to manage your Azure resources. |
@@ -50,6 +50,28 @@ All other commands:
 |   untaint       | Remove the 'tainted' state from a resource instance
 |   version       | Show the current Terraform version
 |   workspace     | Workspace management
+
+## Terraform Files
+### IaC Project files
+To begin writing a Terraform configuration while adhering to the best practices, we create the files below in the project’s root directory.
+
+
+| ext | Purpose |
+| ------------- | ------------- |
+|  provider.tf | Add Azure as provider in this file for example ```required_providers```  |
+|  x | x  |
+|  x | x  |
+|  x | x  |
+|  x | x  |
+
+### Terraform Managed Files
+| ext | Purpose |
+| ------------- | ------------- |
+|  x | x  |
+|  x | x  |
+|  x | x  |
+|  x | x  |
+|  x | x  |
 
 ## Terraform resource graph
 Terraform builds a resource graph to determine resource dependencies and creates or modifies non-dependent resources in parallel.
