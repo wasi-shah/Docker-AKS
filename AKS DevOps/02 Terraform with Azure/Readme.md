@@ -65,17 +65,6 @@ The files are not required to have the exact same names listed above. However, t
 |  variables.tf | [Variable Declaration] - containing the variable declarations used in the resource blocks and these might or might not have a default value. |
 |  *.tfvars | [Variables Assignment] - containing the environment-specific default values of variables.  |
 
-### Terraform variable flow and file names
-| Priority | ext | Purpose |
-| ---------| ------------- | ------------- |
-|  1 | command line <li>-var <li>-var-file  |  values set by command for example <li> [terraform plan -var "location=uksouth"] <li> [terraform plan -var-file="prod.tfvars"] |
-|  2 | *.auto.tfvars  | Terraform loads the values from the *.auto.tfvars file by automatically.
-|  3 | terraform.tfvars  | Terraform loads the values from the terraform.tfvars file by default. 
-|  4 | Environment set variables  | values set by TF_VAR_location for example <li>Linux > [TF_VAR_resource_group_location="uksouth" terraform plan] <li>Windows > <li>  set TF_VAR_location=ukwest<li>  [terraform plan]
-
-
-
-
 
 ### Terraform Managed Files
 | ext | Created/edited stage | Purpose | 
@@ -85,6 +74,30 @@ The files are not required to have the exact same names listed above. However, t
 |  .terraform.tfstate.lock.info | plan, apply, destroy  | Temporary file which is automatically deleted once the operation is completed, the file is removed.  |
 |  .terraform.tfstate.backup | refresh  | Keeps last local state as backup  |
 |  .plan | terraform plan -out filename.plan  | Produce plan file to be used for <li>terraform apply "main.tfplan" <li>terraform plan -destroy -out main.tfplan |
+
+
+## Terraform variable flow and file names
+| Priority | ext | Purpose |
+| ---------| ------------- | ------------- |
+|  1 | command line <li>-var <li>-var-file  |  values set by command for example <li> [terraform plan -var "location=uksouth"] <li> [terraform plan -var-file="prod.tfvars"] |
+|  2 | *.auto.tfvars  | Terraform loads the values from the *.auto.tfvars file by automatically.
+|  3 | terraform.tfvars  | Terraform loads the values from the terraform.tfvars file by default. 
+|  4 | Environment set variables  | values set by TF_VAR_location for example <li>Linux > [TF_VAR_resource_group_location="uksouth" terraform plan] <li>Windows > <li>  set TF_VAR_location=ukwest<li>  [terraform plan]
+
+### Terraform variable declaration and assignment
+
+#### Declaration
+>[!note] You can also assign default value during declaration
+variables.tf
+```
+variable "location" {
+  type        = string
+  default     = "uksouth"
+  description = "Location of the resource group."
+}
+```
+
+
 
 
 
