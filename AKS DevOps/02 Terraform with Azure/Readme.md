@@ -76,7 +76,17 @@ The files are not required to have the exact same names listed above. However, t
 |  .plan | terraform plan -out filename.plan  | Produce plan file to be used for <li>terraform apply "main.tfplan" <li>terraform plan -destroy -out main.tfplan |
 
 
-## Terraform variable flow and file names
+## Terraform variables 
+
+### Assigning Values
+When variables are declared in variables.tf, they can be set in a number of ways:
+
+- In an HCP Terraform workspace.
+- Individually, with the -var command line option.
+- In variable definitions (.tfvars) files, either specified on the command line or automatically loaded.
+- As environment variables.
+
+### Priority and file names
 | Priority | ext | Purpose |
 | ---------| ------------- | ------------- |
 |  1 | command line <li>-var <li>-var-file  |  values set by command for example <li> [terraform plan -var "location=uksouth"] <li> [terraform plan -var-file="prod.tfvars"] |
@@ -98,6 +108,43 @@ variable "location" {
 }
 ```
 
+
+#### Variable Assignment through the Command Line
+To specify individual variables on the command line, use the -var option when running the terraform plan and terraform apply commands:
+```
+terraform plan -var "location=ukwest"
+```
+
+##### Variable Assignment through .tfvar file 
+To set lots of variables, it is more convenient to specify their values in a variable definitions file (with a filename ending in either .tfvars or .tfvars.json) and then specify that file on the command line with -var-file:
+
+testing.tfvars
+```
+location="ukwest"
+```
+
+```
+# Linux, Mac OS, and UNIX:
+terraform apply -var-file="testing.tfvars"
+
+# PowerShell:
+terraform apply -var-file='testing.tfvars'
+
+# Windows cmd.exe:
+terraform apply -var-file="testing.tfvars"
+```
+
+#####  Variable Assignment through Environment variables
+As a fallback for the other ways of defining variables, Terraform searches the environment of its own process for environment variables named TF_VAR_ followed by the name of a declared variable.
+```
+# Linux
+$ export TF_VAR_location=ukwest
+$ terraform plan
+
+# Windows 
+set TF_VAR_location=ukwest
+terraform plan
+```
 
 
 
