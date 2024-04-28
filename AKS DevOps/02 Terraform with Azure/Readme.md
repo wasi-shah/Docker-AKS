@@ -78,13 +78,14 @@ The files are not required to have the exact same names listed above. However, t
 
 
 ### Terraform Managed Files
-| ext | Purpose |
-| ------------- | ------------- |
-|  x | x  |
-|  x | x  |
-|  x | x  |
-|  x | x  |
-|  x | x  |
+| ext | Created/edited stage | Purpose | 
+| ------------- | ------------- |------------- |
+|  .terraform.lock.hcl | init |maintains the hashes of the downloaded binaries for consistency  |
+|  terraform.tfstate | apply or destroy  |This is the Terraform state file, which is critical and automatically managed by Terraform.  |
+|  .terraform.tfstate.lock.info | plan, apply, destroy  | Temporary file which is automatically deleted once the operation is completed, the file is removed.  |
+|  .terraform.tfstate.backup | refresh  | Keeps last local state as backup  |
+|  .plan | terraform plan -out filename.plan  | Produce plan file to be used for <li>terraform apply "main.tfplan" <li>terraform plan -destroy -out main.tfplan |
+
 
 
 ## Terraform resource graph
