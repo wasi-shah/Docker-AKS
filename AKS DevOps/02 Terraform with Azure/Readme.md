@@ -71,7 +71,7 @@ The files are not required to have the exact same names listed above. However, t
 |  1 | command line <li>-var <li>-var-file  |  values set by command for example <li> [terraform plan -var "location=uksouth"] <li> [terraform plan -var-file="prod.tfvars"] |
 |  2 | *.auto.tfvars  | Terraform loads the values from the *.auto.tfvars file by automatically.
 |  3 | terraform.tfvars  | Terraform loads the values from the terraform.tfvars file by default. 
-|  4 | Environment set variables  | values set by TF_VAR_location for example [TF_VAR_resource_group_location="uksouth" terraform plan]
+|  4 | Environment set variables  | values set by TF_VAR_location for example <li>Linux > [TF_VAR_resource_group_location="uksouth" terraform plan] <li>Windows > <li>  set TF_VAR_location=ukwest<li>  [terraform plan]
 
 
 
