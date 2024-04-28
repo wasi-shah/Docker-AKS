@@ -94,9 +94,68 @@ When variables are declared in variables.tf, they can be set in a number of ways
 |  3 | terraform.tfvars  | Terraform loads the values from the terraform.tfvars file by default. 
 |  4 | Environment set variables  | values set by TF_VAR_location for example <li>Linux > [TF_VAR_resource_group_location="uksouth" terraform plan] <li>Windows > <li>  set TF_VAR_location=ukwest<li>  [terraform plan]
 
-### Terraform variable declaration and assignment
+### Terraform variable types, declaration and assignment
+#### Terraform data types
+The Terraform language uses the following types for its values:
+- string: a sequence of Unicode characters representing some text, like "hello".
+```
+# Declare
+variable username {
+  type = string
+  default = "world"
 
-#### Declaration
+}
+
+# Access
+${var.username}
+```
+- number: a numeric value. The number type can represent both whole numbers like 15 and fractional values like 6.283185.
+```
+# Declare
+
+variable age {
+  type = number
+  default = 23
+}
+
+# Access
+${var.age}
+
+```
+- bool: a boolean value, either true or false. bool values can be used in conditional logic.
+- list ( Array or tuple): a sequence of values, like ["us-west-1a", "us-west-1c"]. Identify elements in a list with - consecutive whole numbers, starting with zero.
+```
+# Declare
+
+variable users {
+    type = list
+    default = ["root", "user1", "user2"]
+}
+
+# Access
+${(var.users[1])}
+
+```
+- set: a collection of unique values that do not have any secondary identifiers or ordering.
+- map (or object): a group of values identified by named labels, like {name = "Mabel", age = 52}.
+```
+# Declare
+
+variable "plans" {
+  type = map
+  default = {
+    "5USD"  = "1xCPU-1GB"
+    "10USD" = "1xCPU-2GB"
+    "20USD" = "2xCPU-4GB"
+  }
+}
+
+# Access
+var.plans["5USD"]
+```
+
+
+#### Variable Declaration
 > [!note] 
 > You can also assign default value during declaration
 variables.tf
