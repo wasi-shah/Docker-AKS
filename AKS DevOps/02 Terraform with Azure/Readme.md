@@ -123,6 +123,16 @@ ${var.age}
 
 ```
 - bool: a boolean value, either true or false. bool values can be used in conditional logic.
+```
+# Declaration
+variable "set_password" {
+  default = false
+}
+
+# Access
+var.set_password
+
+```
 - list ( Array or tuple): a sequence of values, like ["us-west-1a", "us-west-1c"]. Identify elements in a list with - consecutive whole numbers, starting with zero.
 ```
 # Declare
@@ -146,12 +156,24 @@ variable "plans" {
   default = {
     "5USD"  = "1xCPU-1GB"
     "10USD" = "1xCPU-2GB"
-    "20USD" = "2xCPU-4GB"
   }
 }
 
+# Assign 
+# Add command line
+terraform plan -var -var plans="{"5USD"=ABC,"10USD"=XYZ}" 
+
+
 # Access
 var.plans["5USD"]
+
+or
+{lookup(var.plans, "5USD")}
+
+or - based on another variable
+${lookup(var.plans, "${var.variable-name-here}")}
+
+
 ```
 
 
@@ -167,7 +189,7 @@ variable "location" {
 }
 ```
 
-#### Variable value Assignment  
+#### Ways to assign a Variable value
 
 ##### Variable Value Assignment through the Command Line
 To specify individual variables on the command line, use the -var option when running the terraform plan and terraform apply commands:
@@ -217,6 +239,38 @@ output printname {
 
 ```
 
+### Defining output variables
+Output variables provide a convenient way to get useful information about your infrastructure. As you might have noticed, much of the server details are calculated at deployment and only become available afterwards. Using output variables you can extract any server-specific values including the calculated details.
+
+Configuring output variables is really quite simple. All you need to do is define a name for the output and what value it should correspond to. These can be included in your Terraform plan or in their own file.
+
+Start by creating an output variables file called output.tf and open it for edit.
+
+```
+output "resource_group_name" {
+  value = azurerm_resource_group.rg.name
+}
+```
+## Terraform Functions
+The Terraform language includes a number of built-in functions that you can call from within expressions to transform and combine values. The general syntax for function calls is a function name followed by comma-separated arguments in parentheses
+
+- Numeric Functions : abs, ceil, floor, log, max, min, parseint, pow, signum
+- String Functions: chomp, format, formalist, join, lower, regex, regexall, rep[lace, split, strrev, title, trim, trimprefix, trimsuffix, trimspace, upper
+- Collection Functions: alltrue, anytrue, chunklist, coalesce, coalescelist, compact, concat, contains, distinct, element, flatten, index, keys, length, list, lookup, map, matchkeys,merge, one, range, reverse, setintersection, setproduct, setsubsctract, setunion, slice, sort, sum, transpose, values, zipmap
+- Encoding Functions: base643ncode, base64decode, base64gzip, csvdecode, jsonencode, jsondecode, urlencode, yamlencode, yamldecode
+- Filesystem functions: absath, dirname, pathexpand, basename, file, fileexists, fileset, filebase64, templatefile
+- Date & Time Functions: formade, timeadd, timestamp
+- Hash and Crypto Functions : base64sha256, base64sha512, bcrypt, filebase64sha512, filemd5, filesha1, filesha256, filesha512, md5, rsadecrypt, sha, sha256, sha512, uuid, uuidv5
+- IP Network Functions: cidrhost, cidrnetmask, cidrsubnets
+- Type Conversion functions: can, defaults, nonsensative, sensitive, tobool, tolist, tomap, tonumber, toset, tostring, try
+
+```
+max(5, 12, 9)
+
+join(", ", ["foo", "bar", "baz"])
+# foo, bar, baz
+
+```
 
 
 ## Terraform resource graph
