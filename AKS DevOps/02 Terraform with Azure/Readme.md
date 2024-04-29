@@ -77,7 +77,7 @@ The files are not required to have the exact same names listed above. However, t
 
 ## Terraform commonly used blocks
 - terraform block
-Terraform block is used for setting the version of the terraform we want. It may also contain required_providers block inside which specifies the versions of the providers we need as well as where Terraform should download these providers from.
+>Terraform block is used for setting the version of the terraform we want. It may also contain required_providers block inside which specifies the versions of the providers we need as well as where Terraform should download these providers from.
 ```HCL
 terraform {
   required_providers {
