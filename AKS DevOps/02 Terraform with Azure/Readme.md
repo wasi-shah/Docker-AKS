@@ -93,14 +93,74 @@ terraform {
 }
 ```
 - provider block
-- resource block
-- variable block
-- locals block
-- data block
-- module block
-- output block
-- provisioner block
+>Provider blocks specifies special type of module that allows Terraform to interact with various cloud-hosting platforms or data centers. Providers must be configured with proper credentials before we can use them.
+```HCL
+# Configure the Microsoft Azure Provider
+provider "azurerm" {
+  skip_provider_registration = true # This is only required when the User, Service Principal, or Identity running Terraform lacks the permissions to register Azure Resource Providers.
+  features {}
+}
 
+```
+- resource block
+> Resource blocks are used to manage resources such as compute instances, virtual networks, databases, buckets, or DNS resources. This block type is the backbone of any terraform configuration because it represents actual resources with majority of other block types playing supporting role.
+```HCL
+# Create a resource group
+resource "azurerm_resource_group" "example" {
+  name     = "example-resources"
+  location = "uksouth"
+}
+```
+- variable block
+> This block is often called an input variable block. Variable block provides parameters for terraform modules and allow users to customize the data provided to other terraform modules without modifying the source.
+
+> Variables are often in their own file called variables.tf. To use a variable it needs to be declared as a block. One block for each variable
+```HCL
+variable "location" {
+  type        = string
+  default     = "uksouth"
+  description = "Location of the resource group."
+}
+```
+- locals block
+> Often called local variables block, this block is used to keep frequently referenced values or expressions to keep the code clean and tidy.
+
+> Locals block can hold many variables inside. Expressions in local values aren not limited to literal constants. They can also reference other values in the module to transform or combine them. These variables can be accessed using local.var_name notation, note that it is called local. when used to access values inside.
+```HCL
+locals {
+  service_name = "forum"
+  owner        = "Community Team"
+  instance_ids = concat(aws_instance.blue.*.id, aws_instance.green.*.id)
+}
+```
+- data block
+> Data block's primary purpose is to load or query data from APIs other than Terraform's. It can be used to provide flexibility to your configuration or to connect different workspaces. One way we would use data block in future articles is to query AWS API to get a list of active Availability Zones to deploy resources in.
+
+> Data is then accessed using dot notation using var identifier. For example: var.variable_1
+```HCL
+# Get Resources from a Resource Group
+data "azurerm_resources" "myallresources" {
+  resource_group_name = "example-resources"
+}
+```
+- module block
+> Modules are containers for multiple resources that are used together. A module consists of .tf and/or .tf.json files stored in a directory. It is the primary way to package and reuse resources in Terraform.
+
+> Every Terraform configuration has at least one model (root module) which contains resources defined in the .tf files. 
+
+> Modules are a great way to compartmentalize reusable collections of resources in multiple configurations.
+
+- output block
+> This is a block which is almost always present in all configurations, along with main.tf and variables.tf block. It allows Terraform to output structured data about your configuration. This output can be used by users to see data like IPs or resources names in one convenient place. Another use case involves using this data in other Terraform workspace or sharing data between modules.
+```HCL
+output "MyResourceGroupValues" {
+  value = "Name: ${azurerm_resource_group.example.name} wiht ID: ${azurerm_resource_group.example.id}"
+}
+```
+- provisioner block
+> Provisioners allows us to specify actions to be performed on local or remote machines to prepare resources for service.
+
+There are two types of Terraform provisioners: local-exec and remote-exec.
 
 
 
