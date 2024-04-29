@@ -596,12 +596,41 @@ provider "azurerm" {
 
 # Demos
 <details>
-<summary>Provider Only</summary>
+<summary>Create resource group without variable</summary>
 
-### Add [azurerm] as provider
+### Add [azurerm] as provider, create resource group
+Source:
+
+```
+# We strongly recommend using the required_providers block to set the
+# Azure Provider source and version being used
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "=3.0.0"
+    }
+  }
+}
+
+# Configure the Microsoft Azure Provider
+provider "azurerm" {
+  skip_provider_registration = true # This is only required when the User, Service Principal, or Identity running Terraform lacks the permissions to register Azure Resource Providers.
+  features {}
+}
+
+# Create a resource group
+resource "azurerm_resource_group" "example" {
+  name     = "example-resources"
+  location = "uksouth"
+}
+
+```
+
+Execution:
 
 ```HCL
-cd 01-demo-provider-only
+cd 01-demo-resource-group-simple
 terraform init
 terraform plan
 terraform apply
@@ -611,7 +640,7 @@ terraform destroy
 </details>
 
 <details>
-<summary>Create an Azure resource group using Terraform</summary>
+<summary>Create an Azure resource group using variables</summary>
 
 ### Create resource group with random name
 
