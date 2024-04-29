@@ -75,6 +75,34 @@ The files are not required to have the exact same names listed above. However, t
 |  .terraform.tfstate.backup | refresh  | Keeps last local state as backup  |
 |  .plan | terraform plan -out filename.plan  | Produce plan file to be used for <li>terraform apply "main.tfplan" <li>terraform plan -destroy -out main.tfplan |
 
+## Terraform commonly used blocks
+- terraform block
+Terraform block is used for setting the version of the terraform we want. It may also contain required_providers block inside which specifies the versions of the providers we need as well as where Terraform should download these providers from.
+```HCL
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~>3.0"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "~>3.0"
+    }
+  }
+}
+```
+- provider block
+- resource block
+- variable block
+- locals block
+- data block
+- module block
+- output block
+- provisioner block
+
+
+
 
 ## Terraform variables 
 
@@ -85,6 +113,7 @@ When variables are declared in variables.tf, they can be set in a number of ways
 - Individually, with the -var command line option.
 - In variable definitions (.tfvars) files, either specified on the command line or automatically loaded.
 - As environment variables.
+- Variable defaults during variable declaration.
 
 ### Priority and file names
 | Priority | ext | Purpose |
@@ -93,6 +122,7 @@ When variables are declared in variables.tf, they can be set in a number of ways
 |  2 | *.auto.tfvars  | Terraform loads the values from the *.auto.tfvars file by automatically.
 |  3 | terraform.tfvars  | Terraform loads the values from the terraform.tfvars file by default. 
 |  4 | Environment set variables  | values set by TF_VAR_location for example <li>Linux > [TF_VAR_resource_group_location="uksouth" terraform plan] <li>Windows > <li>  set TF_VAR_location=ukwest<li>  [terraform plan]
+| 5 | in variables.tf | variable "location" { type        = string default     = "uksouth"  description = Location of the resource group." } |
 
 ### Terraform variable types, declaration and assignment
 #### Terraform data types
@@ -628,6 +658,10 @@ resource "azurerm_resource_group" "example" {
   location = "uksouth"
 }
 
+# Output
+output "MyResourceGroupValues" {
+  value = "Name: ${azurerm_resource_group.example.name} wiht ID: ${azurerm_resource_group.example.id}"
+}
 ```
 
 Execution:

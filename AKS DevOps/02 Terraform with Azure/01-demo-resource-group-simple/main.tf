@@ -27,3 +27,6 @@ resource "azurerm_resource_group" "example" {
   location = "uksouth"
 }
 
+output "MyResourceGroupValues" {
+  value = "Name: ${azurerm_resource_group.example.name} wiht ID: ${azurerm_resource_group.example.id}"
+}
