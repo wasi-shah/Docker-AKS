@@ -601,7 +601,7 @@ provider "azurerm" {
 ### Add [azurerm] as provider, create resource group
 Source:
 
-```
+```HCL
 # We strongly recommend using the required_providers block to set the
 # Azure Provider source and version being used
 terraform {
