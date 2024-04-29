@@ -134,8 +134,7 @@ locals {
 }
 ```
 - data block
-> Data block's primary purpose is to load or query data from APIs other than Terraform's. It can be used to provide flexibility to your configuration or to connect different workspaces. One way we would use data block in future articles is to query AWS API to get a list of active Availability Zones to deploy resources in.
-
+> Data block's primary purpose is to load or query data from APIs other than Terraform's. It can be used to provide flexibility to your configuration or to connect different workspaces. 
 > Data is then accessed using dot notation using var identifier. For example: var.variable_1
 ```HCL
 # Get Resources from a Resource Group
