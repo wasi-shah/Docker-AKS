@@ -642,9 +642,6 @@ terraform destroy
 ```
 </details>
 
-
-## 
-
 <details>
 <summary>Link Azure storage account with Terraform </summary>
 
