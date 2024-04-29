@@ -593,6 +593,9 @@ provider "azurerm" {
 ```
 > [!Important]
 > At this point running either terraform plan or terraform apply should allow Terraform to run using the Service Principal to authenticate.
+# Store Terraform state in Azure Storage
+Terraform state is used to reconcile deployed resources with Terraform configurations. State allows Terraform to know what Azure resources to add, update, or delete. State storage is key for all terraform resources and it should be deleted at any point of time even accidentally.
+
 
 # Demos
 <details>
@@ -638,6 +641,77 @@ terraform destroy
 
 ```
 </details>
+
+
+## 
+
+<details>
+<summary>Link Azure storage account with Terraform </summary>
+
+> [!Note] 
+> By default, Terraform state is stored locally, which isn't ideal for the following reasons:
+> Local state doesn't work well in a team or collaborative environment.
+> Terraform state can include sensitive information.
+> Storing state locally increases the chance of inadvertent deletion.
+
+Create a new storage account 
+- Create Azure Storage Account in new Resource Group
+- Create New Resource Group: terraform-storage-rg
+- Create Storage Account: storageaccountname (Note: Name should be unique across Azure)
+- Create Container Name: containername (for example tfstatefiles )
+- Upload the file terraform.tfstate to storage account container
+
+> [!Note] 
+> You can also link an existing storage account - just upload the file terraform.tfstate to storage account container.
+
+
+Source:
+
+```HCL
+# We strongly recommend using the required_providers block to set the
+# Azure Provider source and version being used
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "=3.0.0"
+    }
+  }
+  backend "azurerm" {
+      resource_group_name  = "tfstate"
+      storage_account_name = "<storage_account_name>"
+      container_name       = "tfstate"
+      key                  = "terraform.tfstate"
+  }
+}
+
+# Configure the Microsoft Azure Provider
+provider "azurerm" {
+  skip_provider_registration = true # This is only required when the User, Service Principal, or Identity running Terraform lacks the permissions to register Azure Resource Providers.
+  features {}
+}
+
+# Create a resource group
+resource "azurerm_resource_group" "example" {
+  name     = "example-resources"
+  location = "uksouth"
+}
+
+```
+
+Execution:
+
+```HCL
+cd 01-demo-resource-group-simple
+terraform init
+terraform plan
+# This will lock the state file temporarily inside Azure
+# LEASE STATUS	Locked
+# LEASE STATE	Leased
+
+```
+</details>
+
 
 <details>
 <summary>Create an Azure resource group using variables</summary>

@@ -7,6 +7,12 @@ terraform {
       version = "=3.0.0"
     }
   }
+    backend "azurerm" {
+      resource_group_name  = "PermanentRG"
+      storage_account_name = "mypermanentstorage"
+      container_name       = "tfstatefiles"
+      key                  = "terraform.tfstate"
+  }
 }
 
 # Configure the Microsoft Azure Provider
@@ -20,3 +26,4 @@ resource "azurerm_resource_group" "example" {
   name     = "example-resources"
   location = "uksouth"
 }
+
