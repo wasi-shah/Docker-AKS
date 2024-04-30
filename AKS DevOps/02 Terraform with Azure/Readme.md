@@ -978,7 +978,7 @@ terraform destroy -target=azurerm_resource_group.rg
 ### Create a module - Storage
 1. Create a new folder inside you root folder 
 2. Create variables.tf and define all module level variables, for example: variable "myvariablename" {}
-3. Create main.tf file and define all resources, for example: resource "azurerm_resource_group" "example" {}
+3. Create main.tf file and define all resources, for example: resource "azurerm_storage_account" "example" {}
 4. Add outputs.tf and publish those variables which maybe needed in other or outer/root module.
 
 ### Using module
