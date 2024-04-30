@@ -1011,6 +1011,5 @@ RgName = "TerraformExample01RG"
 StgActName = "terraformexample01n1dcf5"
 
 Terraform destroy
----
-
+```
 </details>
