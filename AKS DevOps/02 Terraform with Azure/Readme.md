@@ -156,20 +156,6 @@ data "azurerm_resources" "myallresources" {
 > [!Important]
 > Providers should be configured only in root modules and not in reusable modules.
 
-## Steps to create and use a module
-### Create a module
-1. Create a new folder inside you root folder 
-2. Create variables.tf and define all module level variables, for example: variable "myvariablename" {}
-3. Create main.tf file and define all resources, for example: resource "azurerm_resource_group" "example" {}
-4. Add outputs.tf and publish those variables which maybe needed in other or outer/root module.
-5. Repeat the same for all modules
-
-### Using module
-1. Create main.tf in root module 
-  1.1 add terraform {} and provider{} blocks
-  1.2 add module block and define the source 
-2. Create outputs.tf file and publish root or module variables. 
-
 - output block
 > This is a block which is almost always present in all configurations, along with main.tf and variables.tf block. It allows Terraform to output structured data about your configuration. This output can be used by users to see data like IPs or resources names in one convenient place. Another use case involves using this data in other Terraform workspace or sharing data between modules.
 ```HCL
@@ -972,4 +958,59 @@ terraform init
 # use . in between 
 terraform destroy -target=azurerm_resource_group.rg
 ```
+</details>
+
+
+<details>
+<summary>Create and use a module</summary>
+
+> [!Note]
+> Use variables to allow parent/root module to pass values to this reuseable/child module
+> User output variable to allow parent/root module to access this reuseable/child module values
+
+
+### Create a module - ResourceGroup
+1. Create a new folder inside you root folder 
+2. Create variables.tf and define all module level variables, for example: variable "myvariablename" {}
+3. Create main.tf file and define all resources, for example: resource "azurerm_resource_group" "example" {}
+4. Add outputs.tf and publish those variables which maybe needed in other or outer/root module.
+
+### Create a module - Storage
+1. Create a new folder inside you root folder 
+2. Create variables.tf and define all module level variables, for example: variable "myvariablename" {}
+3. Create main.tf file and define all resources, for example: resource "azurerm_resource_group" "example" {}
+4. Add outputs.tf and publish those variables which maybe needed in other or outer/root module.
+
+### Using module
+1. Create main.tf in root module 
+  1.1 add terraform {} and provider{} blocks
+  1.2 add module block and define the source 
+2. Create outputs.tf file and publish root or module variables. 
+> [!Note]
+> Use child module output variable to ro read post deployment values for example module.ResourceGroup._name_out
+
+```
+cd 03-demo-modules-resource-group-and-storage
+terraform init
+terraform plan
+terraform apply
+module.StorageAccount.random_string.random: Creating...
+module.StorageAccount.random_string.random: Creation complete after 0s [id=n1dcf5]
+module.ResourceGroup.azurerm_resource_group.example: Creating...
+module.ResourceGroup.azurerm_resource_group.example: Creation complete after 2s [id=/subscriptions/xxxx/resourceGroups/TerraformExample01RG]
+module.StorageAccount.azurerm_storage_account.example: Creating...
+module.StorageAccount.azurerm_storage_account.example: Still creating... [10s elapsed]
+module.StorageAccount.azurerm_storage_account.example: Still creating... [20s elapsed]
+module.StorageAccount.azurerm_storage_account.example: Creation complete after 29s [id=/subscriptions/xxxx/resourceGroups/TerraformExample01RG/providers/Microsoft.Storage/storageAccounts/terraformexample01n1dcf5]
+
+Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+RgName = "TerraformExample01RG"
+StgActName = "terraformexample01n1dcf5"
+
+Terraform destroy
+---
+
 </details>
