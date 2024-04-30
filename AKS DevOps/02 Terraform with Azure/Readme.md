@@ -964,8 +964,8 @@ terraform destroy -target=azurerm_resource_group.rg
 <details>
 <summary>Create and use a module</summary>
 
-> [!Note]
 > Use variables to allow parent/root module to pass values to this reuseable/child module
+
 > User output variable to allow parent/root module to access this reuseable/child module values
 
 
@@ -986,7 +986,7 @@ terraform destroy -target=azurerm_resource_group.rg
   1.1 add terraform {} and provider{} blocks
   1.2 add module block and define the source 
 2. Create outputs.tf file and publish root or module variables. 
-> [!Note]
+
 > Use child module output variable to ro read post deployment values for example module.ResourceGroup._name_out
 
 ```
