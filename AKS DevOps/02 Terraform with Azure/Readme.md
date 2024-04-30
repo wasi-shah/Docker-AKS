@@ -59,7 +59,7 @@ The files are not required to have the exact same names listed above. However, t
 
 | ext | Purpose |
 | ------------- | ------------- |
-|  provider.tf | Add Azure as provider in this file for example required_providers{} and provider{}  |
+|  provider.tf | Add Azure as provider in this file for example terraform { required_providers{} } and provider{}  |
 |  main.th | containing the resource blocks which define the resources to be created in the target cloud platform.  |
 |  output.tf | containing the output that needs to be generated on successful completion of “apply” operation.  |
 |  variables.tf | [Variable Declaration] - containing the variable declarations used in the resource blocks and these might or might not have a default value. |
