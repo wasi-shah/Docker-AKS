@@ -139,15 +139,36 @@ locals {
 ```HCL
 # Get Resources from a Resource Group
 data "azurerm_resources" "myallresources" {
-  resource_group_name = "example-resources"
+  resource_group_name = "my-existing-resource-group-in-azure"
 }
 ```
 - module block
-> Modules are containers for multiple resources that are used together. A module consists of .tf and/or .tf.json files stored in a directory. It is the primary way to package and reuse resources in Terraform.
-
+> A Terraform module is very simple: any set of Terraform configuration files in a folder is a module.
+> A Terraform module is a set of Terraform configuration files in a single directory. 
+> Even a default root directory with a simple configuration consisting of  one or more .tf files is a module.
+> When you run Terraform commands directly from such a directory, it is considered the root module.
 > Every Terraform configuration has at least one model (root module) which contains resources defined in the .tf files. 
-
 > Modules are a great way to compartmentalize reusable collections of resources in multiple configurations.
+
+> [!important]
+> The DRY (“Don't Repeat Yourself”) principle follows the idea of every logic duplication being eliminated by abstraction. This means that during the development process we should avoid writing repetitive duplicated code as much as possible.
+
+> [!Important]
+> Providers should be configured only in root modules and not in reusable modules.
+
+## Steps to create and use a module
+### Create a module
+1. Create a new folder inside you root folder 
+2. Create variables.tf and define all module level variables, for example: variable "myvariablename" {}
+3. Create main.tf file and define all resources, for example: resource "azurerm_resource_group" "example" {}
+4. Add outputs.tf and publish those variables which maybe needed in other or outer/root module.
+5. Repeat the same for all modules
+
+### Using module
+1. Create main.tf in root module 
+  1.1 add terraform {} and provider{} blocks
+  1.2 add module block and define the source 
+2. Create outputs.tf file and publish root or module variables. 
 
 - output block
 > This is a block which is almost always present in all configurations, along with main.tf and variables.tf block. It allows Terraform to output structured data about your configuration. This output can be used by users to see data like IPs or resources names in one convenient place. Another use case involves using this data in other Terraform workspace or sharing data between modules.
