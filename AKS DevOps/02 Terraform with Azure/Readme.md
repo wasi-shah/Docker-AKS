@@ -964,9 +964,9 @@ terraform destroy -target=azurerm_resource_group.rg
 <details>
 <summary>Create and use a module</summary>
 
-> Use variables to allow parent/root module to pass values to this reuseable/child module
+> variables.tf file inside a module: Use variables to allow parent/root module to pass values to this reuseable/child module
 
-> User output variable to allow parent/root module to access this reuseable/child module values
+> outputs.tf file inside a module: User output variable to allow parent/root module to access this reuseable/child module values
 
 
 ### Create a module - ResourceGroup
