@@ -16,6 +16,33 @@ You define resources, which may be across multiple cloud providers and services.
 ### Plan: creates an execution plan
 Terraform creates an execution plan describing the infrastructure it will create, update, or destroy based on the existing infrastructure and your configuration.
 
+#### Terraform plan file [tfplan]
+A Terraform plan is the file created as a result of terraform plan and is the input to terraform apply.
+
+
+The **-out** flag. This flag allows you to save the output of Terraform plan to a file, which you can then use as an input for Terraform apply. This ensures that Terraform apply will execute exactly the same actions as Terraform plan, without any possibility of drift or interference. 
+
+> [!note]
+> This is especially useful if you have a long-running or complex plan that you want to review carefully before applying, or if you want to automate your Terraform workflow with scripts or **CI/CD tools**. Try this:
+
+```HCL
+terraform init
+
+# Constructive plan
+terraform plan -out main.tfplan -var "location=ukwest"
+
+# Execution of constructive plan
+terraform apply main.tfplan
+
+# Destructive plan
+terraform plan -destroy -out main.destroy.tfplan
+
+# Execution Destructive plan
+terraform apply main.destroy.tfplan
+
+```
+
+
 ### Apply: Builds or change infrastructure 
 On approval, Terraform performs the proposed operations in the correct order, respecting any resource dependencies. For example, if you update the properties of a VPC and change the number of virtual machines in that VPC, Terraform will recreate the VPC before scaling the virtual machines.
 
@@ -257,7 +284,7 @@ variable "plans" {
 
 # Assign 
 # Add command line
-terraform plan -var -var plans="{"5USD"=ABC,"10USD"=XYZ}" 
+terraform plan -var plans="{"5USD"=ABC,"10USD"=XYZ}" 
 
 
 # Access
@@ -697,7 +724,7 @@ Terraform state is used to reconcile deployed resources with Terraform configura
 <details>
 <summary>Create resource group without variable</summary>
 
-### Add [azurerm] as provider, create resource group
+### Create resource group without variable
 Source:
 
 ```HCL
@@ -745,6 +772,7 @@ terraform destroy
 <details>
 <summary>Link Azure storage account with Terraform </summary>
 
+### Link Azure storage account with Terraform 
 > [!Note] 
 > By default, Terraform state is stored locally, which isn't ideal for the following reasons:
 > Local state doesn't work well in a team or collaborative environment.
@@ -811,14 +839,14 @@ terraform plan
 
 
 <details>
-<summary>Create an Azure resource group using variables</summary>
+<summary> Create an Azure resource group using variables </summary>
 
-### Create resource group with random name
+### Create resource group with variables
 
 https://learn.microsoft.com/en-us/azure/developer/terraform/create-resource-group?tabs=azure-cli
 
 ```HCL
-cd 02-demo-resource-group
+cd 02-demo-resource-group-variables
 terraform init
 terraform plan -out main.tfplan
 terraform apply main.tfplan
@@ -835,7 +863,29 @@ terraform apply main.destroy.tfplan
 </details>
 
 <details>
+
+<details>
+<summary> Create an Azure resource group using variables and ser variables using command line</summary>
+
+### Create an Azure resource group using variables and ser variables using command line
+
+
+```HCL
+cd 02-demo-resource-group-variables
+terraform init
+terraform plan -var "location=ukwest" -var "resource_group_name_prefix=anewresourcegroupname"
+terraform apply -var "location=ukwest" -var "resource_group_name_prefix=anewresourcegroupname"
+terraform destroy
+
+```
+</details>
+
+<details>
+
 <summary>Add tags to existing resource group</summary>
+
+### Add tags to existing resource group
+
 In the above example, we have created a resource group. 
 The state of the group is already saved into a state file.
 Now add [tags] block in main.tf file and execute plan 
@@ -866,7 +916,7 @@ Following block is added / uncomment in the code
 ```
 
 ```HCL
-cd 02-demo-resource-group-edit
+cd 02-demo-resource-group-with-variables
 terraform init
 terraform plan -out main.tfplan
 terraform apply main.tfplan
@@ -887,6 +937,7 @@ terraform apply main.destroy.tfplan
 <details>
 <summary>Sync Current State and Desired</summary>
 
+### Sync Current State and Desired
 - Desired State: Local Terraform Manifest (main.tf)
 - Current State: Real Resources present in your cloud
 
@@ -915,7 +966,7 @@ Manually add tag to your main.tf file
 
 
 ```HCL
-cd 02-demo-resource-group-edit
+cd 02-demo-resource-group-with-variables
 terraform init
 
 terraform refresh
@@ -946,12 +997,14 @@ terraform apply main.destroy.tfplan
 <details>
 <summary>Delete a specific resource from state</summary>
 
-### terraform destroy -target=azurerm_resource_group.rg
+### Delete a specific resource from state
+
+> terraform destroy -target=azurerm_resource_group.rg
 
 > The -target option is not for routine use, and is provided only for exceptional situations such as recovering from errors or mistakes, or when Terraform specifically suggests to use it as part of an error message.
 
 ```HCL
-cd 02-demo-resource-group
+cd 02-demo-resource-group-with-variables
 terraform init
 
 # find name from main.tf file > resource "azurerm_resource_group" "rg" 
@@ -990,7 +1043,7 @@ terraform destroy -target=azurerm_resource_group.rg
 > Use child module output variable to ro read post deployment values for example module.ResourceGroup._name_out
 
 ```
-cd 03-demo-modules-resource-group-and-storage
+cd 04-demo-modules-resource-group-and-storage
 terraform init
 terraform plan
 terraform apply
