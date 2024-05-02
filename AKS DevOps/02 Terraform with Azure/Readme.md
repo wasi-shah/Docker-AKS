@@ -862,7 +862,6 @@ terraform apply main.destroy.tfplan
 ```
 </details>
 
-<details>
 
 <details>
 <summary> Create an Azure resource group using variables and ser variables using command line</summary>
