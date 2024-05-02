@@ -34,7 +34,11 @@ Pass in a variable value.
 Pass in variables contained in a file.
 
 6. ##### terraform apply -target=”module.appgw.0"
-Apply changes only to the targeted resource. Read more about Terraform target option.
+Apply changes only to the targeted resource. 
+
+The -target option is a command flag used in Terraform to target a specific resource for action instead of performing the action on all resources. It is used when running the terraform plan, terraform apply or terraform destroy commands.
+
+
 
 7. ##### terraform apply -lock=false
 Do not hold a state lock during the Terraform apply operation. Use with caution if other engineers might run concurrent commands against the same workspace.
