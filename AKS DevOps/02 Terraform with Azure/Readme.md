@@ -1013,3 +1013,60 @@ StgActName = "terraformexample01n1dcf5"
 Terraform destroy
 ```
 </details>
+
+<details>
+<summary>Create a resource group using Terrafrom and DevOps Pipeline Variables</summary>
+
+### Overwriting Terraform variables with Azure DevOps pipeline variables
+
+> using **commandOptions** option, you can use pipeline variables to set terraform varaibles using **-var** flag
+
+> **Step 1: define vailable in terraform in variables.tf**
+
+```HCL
+variable "location" {
+  type        = string
+  default     = "uksouth"
+  description = "Location of the resource group."
+}
+
+variable "resource_group_name_prefix" {
+  type        = string
+  default     = "tf-rg"
+  description = "Prefix of the resource group name that's combined with a random ID so name is unique in your Azure subscription."
+}
+```
+
+> **Step 2: create pipeline variable**
+
+
+```YAML
+variables:
+  - name: location
+    value: 'uksouth'
+  - name: resourcegroupname
+    value: 'myresourcegroup'
+```
+
+> **Step 3: add terraform plan task to pipeline**
+
+>  Note how -var is used to set
+> -var location=$(location) 
+> -var resource_group_name_prefix=$(resourcegroupname)
+
+
+
+```YAML
+- task: TerraformTaskV2@2
+  displayName: 'plan'
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    commandOptions: '-input=false -var location=$(location) -var resource_group_name_prefix=$(resourcegroupname)
+```
+
+
+#### 
+
+</details>
+
