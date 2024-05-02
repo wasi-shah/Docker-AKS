@@ -202,7 +202,7 @@ az ad user delete --id $DEV_AKS_USER_OBJECT_ID
 ```
 
 
-# New config
+# Create a AKS cluster
 
 ```
 myResourceGroup="aksrg"

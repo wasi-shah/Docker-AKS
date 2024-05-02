@@ -81,6 +81,7 @@ A typical pipeline hierarchy
         - Jobs
             - Job 1
                 - Steps
+                    - script: "Do test work"
                     - Task 1
                     - Task 2
 
