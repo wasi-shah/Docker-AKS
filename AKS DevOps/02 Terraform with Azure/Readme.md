@@ -1051,7 +1051,9 @@ variables:
 > **Step 3: add terraform plan task to pipeline**
 
 >  Note how -var is used to set
+
 > -var location=$(location) 
+
 > -var resource_group_name_prefix=$(resourcegroupname)
 
 
