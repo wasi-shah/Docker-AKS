@@ -16,11 +16,52 @@ You define resources, which may be across multiple cloud providers and services.
 ### Plan: creates an execution plan
 Terraform creates an execution plan describing the infrastructure it will create, update, or destroy based on the existing infrastructure and your configuration.
 
+#### Terraform apply quick usage options examples
+
+1. ##### terraform apply
+Creates or updates infrastructure depending on the configuration files. By default, a plan will be generated first and will need to be approved before it is applied.
+
+2. ##### terraform apply -auto-approve
+Apply changes without having to interactively type ‘yes’ to the plan. Useful in automation CI/CD pipelines.
+
+3. ##### terraform apply <planfilename>
+Provide the file generated using the terraform plan -out command. If provided, Terraform will take the actions in the plan without any confirmation prompts.
+
+4. ##### terraform apply -var="my_variable=test"
+Pass in a variable value.
+
+5. ##### terraform apply -var-file="varfile.tfvars"
+Pass in variables contained in a file.
+
+6. ##### terraform apply -target=”module.appgw.0"
+Apply changes only to the targeted resource. Read more about Terraform target option.
+
+7. ##### terraform apply -lock=false
+Do not hold a state lock during the Terraform apply operation. Use with caution if other engineers might run concurrent commands against the same workspace.
+
+8. ##### terraform apply -parallelism=<n>
+Specify the number of operations run in parallel.
+
+9. ##### terraform apply -compact-warnings
+Condenses the warnings into a more concise format, which can be useful for improving the readability of Terraform output.
+
+10. ##### terraform apply -input=false
+Terraform will not prompt you for any input during the apply process, and it will proceed with the plan using the existing values specified in your Terraform configuration files. This can be useful in scenarios where you want to automate the Terraform apply process without any manual intervention, especially in scripted or automated workflows, or when running Terraform in non-interactive environments, such as CI/CD pipelines.
+
+11. ##### terraform apply -json
+ Provides a structured JSON output that includes the results of the operation, making it easier to parse and integrate into automated workflows or other tools.
+
+12. ##### terraform apply -lock-timeout=DURATION
+Set a duration for how long Terraform should wait to acquire a lock on the state file during an apply operation. DURATION should be specified in a format like “30s” (30 seconds), “5m” (5 minutes), “1h” (1 hour).
+
+13. ##### terraform apply -no-color
+ Disable colorized output in the console. By default, Terraform outputs information with color codes for better readability and to distinguish different types of messages (e.g., changes, warnings, and errors) with colors. This is useful when you are working in an environment that does not support or handle color codes properly or when you prefer plain text output for your specific use case.
+
 #### Terraform plan file [tfplan]
 A Terraform plan is the file created as a result of terraform plan and is the input to terraform apply.
 
-
-The **-out** flag. This flag allows you to save the output of Terraform plan to a file, which you can then use as an input for Terraform apply. This ensures that Terraform apply will execute exactly the same actions as Terraform plan, without any possibility of drift or interference. 
+#### -out flag
+This flag allows you to save the output of Terraform plan to a file, which you can then use as an input for Terraform apply. This ensures that Terraform apply will execute exactly the same actions as Terraform plan, without any possibility of drift or interference. 
 
 > [!note]
 > This is especially useful if you have a long-running or complex plan that you want to review carefully before applying, or if you want to automate your Terraform workflow with scripts or **CI/CD tools**. Try this:
@@ -33,6 +74,8 @@ terraform plan -out main.tfplan -var "location=ukwest"
 
 # Execution of constructive plan
 terraform apply main.tfplan
+
+# Note: if you use only [terraform apply] the variable you set during plan will be lost 
 
 # Destructive plan
 terraform plan -destroy -out main.destroy.tfplan
@@ -872,10 +915,29 @@ terraform apply main.destroy.tfplan
 ```HCL
 cd 02-demo-resource-group-variables
 terraform init
+
+# Plan and apply option 1 (without tfplan file)
+
+# Plan
 terraform plan -var "location=ukwest" -var "resource_group_name_prefix=anewresourcegroupname"
+
+# Apply
 terraform apply -var "location=ukwest" -var "resource_group_name_prefix=anewresourcegroupname"
+
+# Destroy
 terraform destroy
 
+# Plan and apply option 2 (with tfplan file)
+
+# Plan
+terraform plan -out my.tfplan -var "location=ukwest" -var "resource_group_name_prefix=anewresourcegroupname"
+
+# apply
+terraform apply my.tfplan 
+
+# Destroy 
+terraform plan -destroy -out my.destroy.tfplan
+terraform apply my.destroy.tfplan
 ```
 </details>
 
