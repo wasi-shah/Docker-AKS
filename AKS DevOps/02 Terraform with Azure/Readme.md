@@ -1108,7 +1108,7 @@ terraform destroy -target=azurerm_resource_group.rg
 > Use child module output variable to ro read post deployment values for example module.ResourceGroup._name_out
 
 ```
-cd 04-demo-modules-resource-group-and-storage
+cd 03-demo-modules-resource-group-and-storage
 terraform init
 terraform plan
 terraform apply
@@ -1135,7 +1135,7 @@ Terraform destroy
 <details>
 <summary>Create a resource group using Terrafrom and DevOps Pipeline Variables</summary>
 
-### Overwriting Terraform variables with Azure DevOps pipeline variables
+### Create a resource group using Terrafrom and DevOps Pipeline Variables
 
 > using **commandOptions** option, you can use pipeline variables to set terraform varaibles using **-var** flag
 
@@ -1155,7 +1155,7 @@ variable "resource_group_name_prefix" {
 }
 ```
 
-> **Step 2: create pipeline variable**
+> **Step 2: create pipeline variable in pipeline yaml file**
 
 
 ```YAML
@@ -1166,7 +1166,7 @@ variables:
     value: 'myresourcegroup'
 ```
 
-> **Step 3: add terraform plan task to pipeline**
+> **Step 3: add terraform plan task in pipeline yaml file**
 
 >  Note how -var is used to set
 
@@ -1184,9 +1184,44 @@ variables:
     command: 'plan'
     commandOptions: '-input=false -var location=$(location) -var resource_group_name_prefix=$(resourcegroupname)
 ```
+TODO
+
+</details>
 
 
-#### 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<details>
+<summary>Create a resource group using Terrafrom / DevOps Pipeline-as-code and pipeline Variables </summary>
+
+### Create a resource group using Terrafrom / DevOps Pipeline-as-code and pipeline Variables 
+
+
+TODO
+create 03 demo using 02
+create a IAC\terrafrom folder and save tf files
+create a IAC\script folder and save any potential powersheel script there (if you have powershell script)
+
+
+
+
+
 
 </details>
 
