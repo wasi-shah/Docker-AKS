@@ -1207,21 +1207,3 @@ TODO
 
 
 
-<details>
-<summary>Create a resource group using Terrafrom / DevOps Pipeline-as-code and pipeline Variables </summary>
-
-### Create a resource group using Terrafrom / DevOps Pipeline-as-code and pipeline Variables 
-
-
-TODO
-create 03 demo using 02
-create a IAC\terrafrom folder and save tf files
-create a IAC\script folder and save any potential powersheel script there (if you have powershell script)
-
-
-
-
-
-
-</details>
-
