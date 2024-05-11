@@ -10,7 +10,7 @@ resource "azurerm_resource_group" "rg" {
   name     = random_pet.rg_name.id
   # Add Tags
   tags = {
-    "environment" = "k8sdev-3"
+    "environment" = "k8sdev-4"
     "demotag"     = "refreshtest"
     "main-tag"    = "main-value"
     # "portal-tag"  = "this is my value"
