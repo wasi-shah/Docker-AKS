@@ -4,7 +4,8 @@
 # https://aka.ms/yaml
 
 variables:
-  global_path: "AKS DevOps/02 Terraform with Azure/04-demo-resource-group-with-variables-using-terraform-and-devops/IAC/terraform/*"    # this is available to all jobs
+  global_path: AKS DevOps/02 Terraform with Azure/04-demo-resource-group-with-variables-using-terraform-and-devops/IAC/terraform/*
+      
 
 
 trigger:
