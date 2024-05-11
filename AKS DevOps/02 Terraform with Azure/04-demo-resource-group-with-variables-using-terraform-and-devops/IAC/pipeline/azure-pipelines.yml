@@ -15,11 +15,20 @@ trigger:
 
 pool: Default
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+stages:
+- stage: My_Init_Stage
+  jobs:
+  - job: My_Init_Job
+    steps:
+    - task: TerraformTaskV4@4
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        backendServiceArm: 'Free-Trial(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
+        backendAzureRmResourceGroupName: 'PermanentRG'
+        backendAzureRmStorageAccountName: 'mypermanentstorage'
+        backendAzureRmContainerName: '04-demo-tfstatefiles'
+        backendAzureRmKey: 'terraform.tfstate'
+
+
