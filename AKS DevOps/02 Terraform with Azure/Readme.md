@@ -874,7 +874,7 @@ resource "azurerm_resource_group" "example" {
 Execution:
 
 ```HCL
-cd 01-demo-resource-group-simple
+cd 01-demo-resource-group-simple-backend-storage-account
 terraform init
 terraform plan
 # This will lock the state file temporarily inside Azure
@@ -1137,6 +1137,108 @@ Terraform destroy
 
 ### Create a resource group using Terrafrom and DevOps Pipeline Variables
 
+#### Create and Test Service Principle for Azure DevOps pipeline
+
+##### Create Service Principle
+```
+# Step 1: Create a SP
+# Login as admin to create SP
+az ad sp create-for-rbac --name DemoPipeline
+#Output
+Look at the JSON output from the previous command. It includes the following properties:
+- appId: The service principal's application ID.
+- password: The service principal's key.
+- tenant: Your Microsoft Entra tenant ID.
+- displayName: The name of the SP for example DemoPipeline in this case
+
+# Step 2: Test the service principal
+# Login as SP
+az login --service-principal \
+  --username APPLICATION_ID \
+  --password PASSWORD \
+  --tenant TENANT_ID \
+  --allow-no-subscriptions
+
+# az logout
+```
+##### Create a role assignment
+
+For your website's deployment pipeline, you decide to create a role assignment with the following details:
+
+- Assignee: The service principal that you created in the previous exercise.
+- Role: The Contributor built-in role.
+- Scope: The resource group that you created in the previous step.
+
+Run the following Azure CLI command in the Visual Studio Code terminal to create the role assignment. Replace the placeholders with the values that you copied earlier.
+```
+# Login as admin to create role assignment
+az role assignment create \
+  --assignee APPLICATION_ID \
+  --role Contributor \
+  --scope resource full path for example  /subscriptions/xxxxxxxx \ 
+  --description "The deployment pipeline for the company's website needs to be able to create resources within the resource group."
+```
+
+##### Test 1: Create Resource group from local using [az group create]
+```
+# Login as SP
+az login --service-principal \
+  --username APPLICATION_ID \
+  --password PASSWORD \
+  --tenant TENANT_ID \
+  --allow-no-subscriptions
+# Test SP by create an empty resource group from command 
+az group create --name testGroup --location uksouth
+
+```
+
+##### Test 2: Create Resource group from local using [terrafrom]
+```
+# Locate to a folder where your simple resorce group creation files are
+cd 01-demo-resource-group-simple
+
+# Set exvironment variables 
+# On mac
+export ARM_SUBSCRIPTION_ID="<azure_subscription_id>"
+export ARM_TENANT_ID="<azure_subscription_tenant_id>"
+export ARM_CLIENT_ID="<service_principal_appid>"
+export ARM_CLIENT_SECRET="<service_principal_password>"
+
+# on windows
+set ARM_SUBSCRIPTION_ID="<azure_subscription_id>"
+set ARM_TENANT_ID="<azure_subscription_tenant_id>"
+set ARM_CLIENT_ID="<service_principal_appid>"
+set ARM_CLIENT_SECRET="<service_principal_password>"
+
+# For example 
+set ARM_TENANT_ID=$(az account show --query tenantId -o tsv)
+ 
+set ARM_SUBSCRIPTION_ID=$(az account list --query "[?name=='Pay-As-You-Go'].id" -o tsv)
+
+set ARM_CLIENT_ID=$(az ad sp show --id "$(az ad sp list --display-name Terraform --query '[0].appId' -o tsv)" --query 'appId' -o tsv)
+
+Or save Sp details inside terraform provider.tf file
+provider "azurerm" {
+  subscription_id = "xxxxxxxxxxxxxx"
+  client_id = "xxxxxxxxxxxxx
+  client_secret = "xxxxxxxxxxx"
+  tenant_id = "xxxxxxxxxxxxxxxxx"
+  features {}
+}
+
+# test
+# Login with terrafrom use [-reconfigure] to refresh any previous state
+terraform init -reconfigure
+terraform plan
+terraform apply
+terraform destroy
+
+```
+
+> Now your SP is ready to work with CICD
+
+#### CICD 
+
 > using **commandOptions** option, you can use pipeline variables to set terraform varaibles using **-var** flag
 
 > **Step 1: define vailable in terraform in variables.tf**
@@ -1185,6 +1287,11 @@ variables:
     commandOptions: '-input=false -var location=$(location) -var resource_group_name_prefix=$(resourcegroupname)
 ```
 TODO
+
+terraform init
+
+#or if you have existing state on locak and with to upload to azre storage
+terraform init -migrate-state
 
 </details>
 
