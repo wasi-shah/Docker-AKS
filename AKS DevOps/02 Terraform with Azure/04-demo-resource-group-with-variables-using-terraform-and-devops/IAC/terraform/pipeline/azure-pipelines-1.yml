@@ -4,10 +4,16 @@
 # https://aka.ms/yaml
 
 trigger:
-- main
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - 04-demo-resource-group-with-variables-using-terraform-and-devops/IAC/terraform
+    exclude:
+    - docs/README.md
 
-pool:
-  vmImage: ubuntu-latest
+pool: Default
 
 steps:
 - script: echo Hello, world!
