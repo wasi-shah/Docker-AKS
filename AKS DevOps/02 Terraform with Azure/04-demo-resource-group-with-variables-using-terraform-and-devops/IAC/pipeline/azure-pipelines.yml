@@ -7,9 +7,7 @@ trigger:
   branches:
     include:
     - main
-  paths:
-    include:
-    - 04-demo-resource-group-with-variables-using-terraform-and-devops/IAC/terraform
+
 
 pool: Default
 
