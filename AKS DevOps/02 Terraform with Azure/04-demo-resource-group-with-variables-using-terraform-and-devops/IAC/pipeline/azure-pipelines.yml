@@ -15,7 +15,7 @@ pool: Default
 
 
 stages:
-- stage: My_InitStage
+- stage: My_Init_Stage
   jobs:
   - job: My_Init_Job
     steps:
