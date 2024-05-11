@@ -13,8 +13,7 @@ trigger:
     exclude:
     - docs/README.md
 
-pool:
-  vmImage: ubuntu-latest
+pool: Default
 
 steps:
 - script: echo Hello, world!
