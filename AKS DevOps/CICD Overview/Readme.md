@@ -142,7 +142,33 @@ stages:
     - script: "Do test work"
     
 ```
+### paths: specific path build
+You can specify trigger, branch, file paths to include or exclude.
 
+Wilds cards are supported for path filters. For instance, you can include all paths that match src/app/**/myapp*. You can use wild card characters (**, *, or ?) when specifying path filters.
+
+
+- Paths are always specified relative to the root of the repository.
+- If you don't set path filters, then the root folder of the repo is implicitly included by default.
+- If you exclude a path, you cannot also include it unless you qualify it to a deeper folder. For example if you exclude /tools then you could include /tools/trigger-runs-on-these
+- The order of path filters doesn't matter.
+Paths in Git are case-sensitive. Be sure to use the same case as the real folders.
+You cannot use variables in paths, as variables are evaluated at runtime (after the trigger has fired).
+
+```
+# specific path build
+trigger:
+  branches:
+    include:
+    - main
+    - releases/*
+  paths:
+    include:
+    - docs
+    exclude:
+    - docs/README.md
+    
+```
 ## Run
 A run represents one execution of a pipeline. It collects the logs associated with running the steps and the results of running tests. During a run, Azure Pipelines will first process the pipeline and then send the run to one or more agents.
 
