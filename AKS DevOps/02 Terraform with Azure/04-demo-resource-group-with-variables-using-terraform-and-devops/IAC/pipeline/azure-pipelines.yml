@@ -3,10 +3,7 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-variables:
-  global_path: AKS DevOps/02 Terraform with Azure/04-demo-resource-group-with-variables-using-terraform-and-devops/IAC/terraform/*
-      
-
+    
 
 trigger:
   branches:
@@ -14,7 +11,7 @@ trigger:
     - main
   paths:
     include:
-    - $(global_variable)
+    - AKS DevOps/02 Terraform with Azure/04-demo-resource-group-with-variables-using-terraform-and-devops/IAC/terraform/*
 
 pool: Default
 
