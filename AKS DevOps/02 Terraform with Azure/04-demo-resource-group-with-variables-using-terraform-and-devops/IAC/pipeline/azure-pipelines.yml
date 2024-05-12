@@ -15,6 +15,10 @@ trigger:
 
 pool: Default
 
+variables:
+  my_tf_root: '$(System.DefaultWorkingDirectory)/AKS DevOps/02 Terraform with Azure/04-demo-resource-group-with-variables-using-terraform-and-devops/IAC/terraform/'
+      
+
 stages:
 - stage: My_Init_Stage
   jobs:
@@ -41,11 +45,12 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'init'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/AKS DevOps/02 Terraform with Azure/04-demo-resource-group-with-variables-using-terraform-and-devops/IAC/terraform/'
+        workingDirectory: $(my_tf_root)
         backendServiceArm: 'Free-Trial(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
         backendAzureRmResourceGroupName: 'PermanentRG'
         backendAzureRmStorageAccountName: 'mypermanentstorage'
         backendAzureRmContainerName: '04-demo-tfstatefiles'
         backendAzureRmKey: 'terraform.tfstate'
+    
 
 
