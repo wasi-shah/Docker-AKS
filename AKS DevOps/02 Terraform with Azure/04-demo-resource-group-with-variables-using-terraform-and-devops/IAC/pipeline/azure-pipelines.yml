@@ -15,7 +15,6 @@ trigger:
 
 pool: Default
 
-
 stages:
 - stage: My_Init_Stage
   jobs:
@@ -30,6 +29,9 @@ stages:
       displayName: Dir
 
     - task: TerraformTaskV4@4
+      env:
+        TF_IN_AUTOMATION: true
+        TF_WORKING_DIR: AKS DevOps/02 Terraform with Azure/04-demo-resource-group-with-variables-using-terraform-and-devops/IAC/terraform/
       inputs:
         provider: 'azurerm'
         command: 'custom'
