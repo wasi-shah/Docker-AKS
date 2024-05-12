@@ -21,6 +21,15 @@ stages:
   jobs:
   - job: My_Init_Job
     steps:
+    - script: |
+        tree $(Agent.BuildDirectory)
+        echo "----------------------"
+        # ls -la $(Build.SourcesDirectory)
+        cd $(Build.SourcesDirectory)
+        dir
+      displayName: Dir
+
+
     - task: TerraformTaskV4@4
       inputs:
         provider: 'azurerm'
