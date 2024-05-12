@@ -38,12 +38,10 @@ stages:
         environmentServiceNameAzureRM: 'Free-Trial(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
 
     - task: TerraformTaskV4@4
-      env:
-        TF_IN_AUTOMATION: true
-        TF_WORKING_DIR: AKS DevOps/02 Terraform with Azure/04-demo-resource-group-with-variables-using-terraform-and-devops/IAC/terraform/
       inputs:
         provider: 'azurerm'
         command: 'init'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/AKS DevOps/02 Terraform with Azure/04-demo-resource-group-with-variables-using-terraform-and-devops/IAC/terraform/'
         backendServiceArm: 'Free-Trial(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
         backendAzureRmResourceGroupName: 'PermanentRG'
         backendAzureRmStorageAccountName: 'mypermanentstorage'
