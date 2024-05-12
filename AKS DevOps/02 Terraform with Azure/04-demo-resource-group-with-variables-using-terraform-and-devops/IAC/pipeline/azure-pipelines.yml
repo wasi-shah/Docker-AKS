@@ -20,9 +20,9 @@ variables:
       
 
 stages:
-- stage: My_Init_Stage
+- stage: Env_Check
   jobs:
-  - job: My_Init_Job
+  - job: My_Dir_Check
     steps:
     - script: |
         tree $(Agent.BuildDirectory)
@@ -32,7 +32,12 @@ stages:
         dir
       displayName: Dir
 
+- stage: Build
+  jobs:
+  - job: My_Init_Job
+    steps:
     - task: TerraformTaskV4@4
+      displayName: workspace_list
       inputs:
         provider: 'azurerm'
         command: 'custom'
@@ -42,6 +47,7 @@ stages:
         environmentServiceNameAzureRM: 'Free-Trial(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
 
     - task: TerraformTaskV4@4
+      displayName: init
       inputs:
         provider: 'azurerm'
         command: 'init'
@@ -51,6 +57,26 @@ stages:
         backendAzureRmStorageAccountName: 'mypermanentstorage'
         backendAzureRmContainerName: '04-demo-tfstatefiles'
         backendAzureRmKey: 'terraform.tfstate'
-    
-
-
+    - task: TerraformTaskV4@4
+      displayName: validate
+      inputs:
+        provider: 'azurerm'
+        command: 'validate'
+        workingDirectory: '$(my_tf_root)'
+    - task: TerraformTaskV4@4
+      displayName: fmt
+      inputs:
+        provider: 'azurerm'
+        command: 'custom'
+        workingDirectory: '$(my_tf_root)'
+        customCommand: 'fmt'
+        outputTo: 'console'
+        environmentServiceNameAzureRM: 'Free-Trial(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
+    - task: TerraformTaskV4@4
+      displayName: plan
+      inputs:
+        provider: 'azurerm'
+        command: 'plan'
+        workingDirectory: '$(my_tf_root)'
+        commandOptions: '-out $(my_tf_root)/my.tfplan'
+        environmentServiceNameAzureRM: 'Free-Trial(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
