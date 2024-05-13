@@ -80,7 +80,12 @@ stages:
         workingDirectory: '$(my_tf_root)'
         commandOptions: '-out $(Build.SourcesDirectory)/tfplanfile'
         environmentServiceNameAzureRM: 'Free-Trial(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
+- stage: Deploy
+  jobs:
+  - job: Deploy
+    steps:
     - task: TerraformTaskV4@4
+      displayName: apply
       inputs:
         provider: 'azurerm'
         command: 'apply'
