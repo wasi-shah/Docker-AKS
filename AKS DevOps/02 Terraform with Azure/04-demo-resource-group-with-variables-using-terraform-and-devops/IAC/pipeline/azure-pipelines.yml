@@ -34,7 +34,7 @@ stages:
 
 - stage: Build
   jobs:
-  - job: My_Init_Job
+  - job: Build
     steps:
     - task: TerraformTaskV4@4
       displayName: workspace_list
