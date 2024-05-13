@@ -32,9 +32,9 @@ stages:
         dir
       displayName: Dir
 
-- stage: Build
+- stage: terraform_plan
   jobs:
-  - job: Build
+  - job: terraform_plan
     steps:
     - task: TerraformTaskV4@4
       displayName: workspace_list
@@ -84,7 +84,7 @@ stages:
     - task: ArchiveFiles@2
       inputs:
         rootFolderOrFile: '$(my_tf_root)'
-        includeRootFolder: true
+        includeRootFolder: false
         archiveType: 'zip'
         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
         replaceExistingArchive: true
@@ -95,10 +95,29 @@ stages:
         ArtifactName: '$(Build.BuildId)-tfplan'
         publishLocation: 'Container'
 
-- stage: Deploy
+- stage: terraform_apply
+  dependsOn: [terraform_plan]
+  condition: succeeded('terraform_plan')
   jobs:
-  - job: Deploy
+  - job: terraform_apply
     steps:
+    - checkout: none
+    
+    - task: DownloadBuildArtifacts@1
+      displayName: 'Download Plan Artifact'
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: '$(Build.BuildId)-tfplan'
+        downloadPath: '$(System.ArtifactsDirectory)'
+    
+    - task: ExtractFiles@1
+      displayName: 'Extract Terraform Plan Artifact'
+      inputs:
+        archiveFilePatterns: '$(System.ArtifactsDirectory)/$(Build.BuildId)-tfplan/$(Build.BuildId).zip'
+        destinationFolder: '$(System.DefaultWorkingDirectory)/'
+        cleanDestinationFolder: false
+        overwriteExistingFiles: false
     - task: TerraformTaskV4@4
       displayName: apply
       inputs:
