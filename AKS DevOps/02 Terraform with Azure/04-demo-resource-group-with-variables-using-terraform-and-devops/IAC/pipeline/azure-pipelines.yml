@@ -85,5 +85,5 @@ stages:
         provider: 'azurerm'
         command: 'apply'
         workingDirectory: '$(my_tf_root)'
-        commandOptions: 'tfplan'
+        commandOptions: '$(Build.SourcesDirectory)/tfplanfile'
         environmentServiceNameAzureRM: 'Free-Trial(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
