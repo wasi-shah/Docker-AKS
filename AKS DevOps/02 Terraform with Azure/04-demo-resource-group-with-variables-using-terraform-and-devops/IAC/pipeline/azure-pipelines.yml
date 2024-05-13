@@ -78,5 +78,5 @@ stages:
         provider: 'azurerm'
         command: 'plan'
         workingDirectory: '$(my_tf_root)'
-        commandOptions: -out $(my_tf_root)/my.tfplan
+        commandOptions: -out '$(my_tf_root)/my.tfplan'
         environmentServiceNameAzureRM: 'Free-Trial(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
