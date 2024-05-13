@@ -123,6 +123,6 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'apply'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/'
-        commandOptions: '"$(my_tf_root)/$(Build.BuildId)/$(Build.BuildId).tfplanfile"'
+        workingDirectory: '$(System.DefaultWorkingDirectory)'
+        commandOptions: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)/$(Build.BuildId).tfplanfile'
         environmentServiceNameAzureRM: 'Free-Trial(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
