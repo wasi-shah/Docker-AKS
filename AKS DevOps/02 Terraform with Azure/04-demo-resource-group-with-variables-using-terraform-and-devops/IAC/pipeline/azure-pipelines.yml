@@ -118,6 +118,19 @@ stages:
         destinationFolder: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)/'
         cleanDestinationFolder: false
         overwriteExistingFiles: false
+    
+    - task: TerraformTaskV4@4
+      displayName: init
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        workingDirectory: $(System.DefaultWorkingDirectory)
+        backendServiceArm: 'Free-Trial(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
+        backendAzureRmResourceGroupName: 'PermanentRG'
+        backendAzureRmStorageAccountName: 'mypermanentstorage'
+        backendAzureRmContainerName: '04-demo-tfstatefiles'
+        backendAzureRmKey: 'terraform.tfstate'
+
     - task: TerraformTaskV4@4
       displayName: apply
       inputs:
@@ -126,3 +139,5 @@ stages:
         workingDirectory: '$(System.DefaultWorkingDirectory)'
         commandOptions: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)/$(Build.BuildId).tfplanfile'
         environmentServiceNameAzureRM: 'Free-Trial(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
+    
+    
