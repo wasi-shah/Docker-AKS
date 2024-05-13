@@ -16,7 +16,7 @@ trigger:
 pool: Default
 
 variables:
-  my_tf_root: '$(System.DefaultWorkingDirectory)/AKS DevOps/02 Terraform with Azure/04-demo-resource-group-with-variables-using-terraform-and-devops/IAC/terraform/'
+  my_tf_root: '$(System.DefaultWorkingDirectory)/AKS DevOps/02 Terraform with Azure/04-demo-resource-group-with-variables-using-terraform-and-devops/IAC/terraform'
       
 
 stages:
