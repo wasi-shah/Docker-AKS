@@ -1237,7 +1237,7 @@ terraform destroy
 
 > Now your SP is ready to work with CICD
 
-#### CICD 
+#### Now - Create a resource group using Terrafrom and DevOps Pipeline Variables 
 
 > using **commandOptions** option, you can use pipeline variables to set terraform varaibles using **-var** flag
 
@@ -1268,31 +1268,154 @@ variables:
     value: 'myresourcegroup'
 ```
 
-> **Step 3: add terraform plan task in pipeline yaml file**
+> **Step 3: add cicd pipeline yaml file**
 
->  Note how -var is used to set
-
-> -var location=$(location) 
-
-> -var resource_group_name_prefix=$(resourcegroupname)
-
-
-
-```YAML
-- task: TerraformTaskV2@2
-  displayName: 'plan'
-  inputs:
-    provider: 'azurerm'
-    command: 'plan'
-    commandOptions: '-input=false -var location=$(location) -var resource_group_name_prefix=$(resourcegroupname)
 ```
-TODO
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
 
-terraform init
+    
 
-#or if you have existing state on locak and with to upload to azre storage
-terraform init -migrate-state
+trigger:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - AKS DevOps/02 Terraform with Azure/04-demo-resource-group-with-variables-using-terraform-and-devops/IAC/terraform/*
 
+pool: Default
+
+variables:
+  my_tf_root: '$(System.DefaultWorkingDirectory)/AKS DevOps/02 Terraform with Azure/04-demo-resource-group-with-variables-using-terraform-and-devops/IAC/terraform'
+      
+
+stages:
+- stage: Env_Check
+  jobs:
+  - job: My_Dir_Check
+    steps:
+    - script: |
+        tree $(Agent.BuildDirectory)
+        echo "----------------------"
+        # ls -la $(Build.SourcesDirectory)
+        cd $(Build.SourcesDirectory)
+        dir
+      displayName: Dir
+
+- stage: terraform_plan
+  jobs:
+  - job: terraform_plan
+    steps:
+    - task: TerraformTaskV4@4
+      displayName: workspace_list
+      inputs:
+        provider: 'azurerm'
+        command: 'custom'
+        customCommand: 'workspace'
+        commandOptions: 'list'
+        outputTo: 'console'
+        environmentServiceNameAzureRM: 'Free-Trial(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
+
+    - task: TerraformTaskV4@4
+      displayName: init
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        workingDirectory: $(my_tf_root)
+        backendServiceArm: 'Free-Trial(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
+        backendAzureRmResourceGroupName: 'PermanentRG'
+        backendAzureRmStorageAccountName: 'mypermanentstorage'
+        backendAzureRmContainerName: '04-demo-tfstatefiles'
+        backendAzureRmKey: 'terraform.tfstate'
+    - task: TerraformTaskV4@4
+      displayName: validate
+      inputs:
+        provider: 'azurerm'
+        command: 'validate'
+        workingDirectory: '$(my_tf_root)'
+    - task: TerraformTaskV4@4
+      displayName: fmt
+      inputs:
+        provider: 'azurerm'
+        command: 'custom'
+        workingDirectory: '$(my_tf_root)'
+        customCommand: 'fmt'
+        outputTo: 'console'
+        environmentServiceNameAzureRM: 'Free-Trial(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
+    - task: TerraformTaskV4@4
+      displayName: plan
+      inputs:
+        provider: 'azurerm'
+        command: 'plan'
+        workingDirectory: '$(my_tf_root)'
+        commandOptions: -out "$(my_tf_root)/$(Build.BuildId).tfplanfile"
+        environmentServiceNameAzureRM: 'Free-Trial(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
+      
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(my_tf_root)'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+        replaceExistingArchive: true
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: '$(Build.BuildId)-tfplan'
+        publishLocation: 'Container'
+
+- stage: terraform_apply
+  dependsOn: [terraform_plan]
+  condition: succeeded('terraform_plan')
+  jobs:
+  - job: terraform_apply
+    steps:
+    - checkout: none
+    
+    - task: DownloadBuildArtifacts@1
+      displayName: 'Download Plan Artifact'
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: '$(Build.BuildId)-tfplan'
+        downloadPath: '$(System.ArtifactsDirectory)'
+    
+    - task: ExtractFiles@1
+      displayName: 'Extract Terraform Plan Artifact'
+      inputs:
+        archiveFilePatterns: '$(System.ArtifactsDirectory)/$(Build.BuildId)-tfplan/$(Build.BuildId).zip'
+        destinationFolder: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)/'
+        cleanDestinationFolder: false
+        overwriteExistingFiles: false
+    
+    - task: TerraformTaskV4@4
+      displayName: init
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        workingDirectory: $(System.DefaultWorkingDirectory)
+        backendServiceArm: 'Free-Trial(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
+        backendAzureRmResourceGroupName: 'PermanentRG'
+        backendAzureRmStorageAccountName: 'mypermanentstorage'
+        backendAzureRmContainerName: '04-demo-tfstatefiles'
+        backendAzureRmKey: 'terraform.tfstate'
+
+    - task: TerraformTaskV4@4
+      displayName: apply
+      inputs:
+        provider: 'azurerm'
+        command: 'apply'
+        workingDirectory: '$(my_tf_root)'
+        commandOptions: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)/$(Build.BuildId).tfplanfile'
+        environmentServiceNameAzureRM: 'Free-Trial(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
+    
+    
+```
+> Run pipeline by editing any tf file located inside the \terraform folder to trigger CICD.
 </details>
 
 
