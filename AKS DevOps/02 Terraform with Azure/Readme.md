@@ -1416,10 +1416,24 @@ stages:
     
 ```
 > Run pipeline by editing any tf file located inside the \terraform folder to trigger CICD.
+
 </details>
 
+<details>
+<summary>Azure CLI in CICD Yaml</summary>
 
+### Create a resource group using Azure CLI in CICD Yaml file
 
+```
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'Free-Trial(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: 'az group create -l uksouth -n mynewrgname'
+```
+
+</details>
 
 
 
