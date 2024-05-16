@@ -1133,9 +1133,9 @@ Terraform destroy
 </details>
 
 <details>
-<summary>Create a resource group using Terrafrom and DevOps Pipeline Variables</summary>
+<summary>Create a resource group using Terrafrom and DevOps Pipeline</summary>
 
-### Create a resource group using Terrafrom and DevOps Pipeline Variables
+### Create a resource group using IAC - Terrafrom and PAC - DevOps Pipeline
 
 #### Create and Test Service Principle for Azure DevOps pipeline
 
@@ -1238,6 +1238,7 @@ terraform destroy
 > Now your SP is ready to work with CICD
 
 #### Now - Create a resource group using Terrafrom and DevOps Pipeline Variables 
+> Source folder: 04-demo-resource-group-with-variables-using-terraform-and-devops\IAC
 
 > using **commandOptions** option, you can use pipeline variables to set terraform varaibles using **-var** flag
 
