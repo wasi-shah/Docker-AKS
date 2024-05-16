@@ -1437,6 +1437,16 @@ stages:
 </details>
 
 
+<details>
+<summary>Create Resource group, App service plan, Web App, Set Repo using a Terraform 
+</summary>
+
+###  It deploys an App Service plan and an App Service app on Linux and a "aspnet_core_webapp_mvc" app directly using terrafrom
+
+> Code directory: 05-demo-resource-group-app-service-plan-web-app-set-repo/infra
+
+
+</details>
 
 
 
