@@ -1135,7 +1135,7 @@ Terraform destroy
 <details>
 <summary>Create a resource group using Terrafrom and DevOps Pipeline</summary>
 
-### Create a resource group using IAC - Terrafrom and PAC - DevOps Pipeline
+### Create a resource group using Infrastructure Aa Code - Terrafrom and Pipeline As Code - DevOps Pipeline
 
 #### Create and Test Service Principle for Azure DevOps pipeline
 
