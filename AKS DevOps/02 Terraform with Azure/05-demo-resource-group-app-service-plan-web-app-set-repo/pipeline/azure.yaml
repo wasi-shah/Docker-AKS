@@ -44,7 +44,7 @@ stages:
         customCommand: 'workspace'
         commandOptions: 'list'
         outputTo: 'console'
-        environmentServiceNameAzureRM: 'Free-Trial(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
+        environmentServiceNameAzureRM: 'Free-Trial(3)(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
 
     - task: TerraformTaskV4@4
       displayName: init
@@ -52,7 +52,7 @@ stages:
         provider: 'azurerm'
         command: 'init'
         workingDirectory: '$(my_tf_root)'
-        backendServiceArm: 'Free-Trial(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
+        backendServiceArm: 'Free-Trial(3)(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
         backendAzureRmResourceGroupName: 'PermanentRG'
         backendAzureRmStorageAccountName: 'mypermanentstorage'
         backendAzureRmContainerName: '05-demo'
@@ -71,15 +71,15 @@ stages:
         workingDirectory: '$(my_tf_root)'
         customCommand: 'fmt'
         outputTo: 'console'
-        environmentServiceNameAzureRM: 'Free-Trial(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
+        environmentServiceNameAzureRM: 'Free-Trial(3)(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
     - task: TerraformTaskV4@4
       displayName: plan
       inputs:
         provider: 'azurerm'
         command: 'plan'
         workingDirectory: '$(my_tf_root)'
-        commandOptions: -out "$(my_tf_root)/$(Build.BuildId).tfplanfile"
-        environmentServiceNameAzureRM: 'Free-Trial(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
+        commandOptions: '-out "$(my_tf_root)/$(Build.BuildId).tfplanfile"'
+        environmentServiceNameAzureRM: 'Free-Trial(3)(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
       
     - task: ArchiveFiles@2
       inputs:
@@ -124,8 +124,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'init'
-        workingDirectory: $(System.DefaultWorkingDirectory)
-        backendServiceArm: 'Free-Trial(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
+        backendServiceArm: 'Free-Trial(3)(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
         backendAzureRmResourceGroupName: 'PermanentRG'
         backendAzureRmStorageAccountName: 'mypermanentstorage'
         backendAzureRmContainerName: '05-demo'
@@ -138,6 +137,6 @@ stages:
         command: 'apply'
         workingDirectory: '$(my_tf_root)'
         commandOptions: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)/$(Build.BuildId).tfplanfile'
-        environmentServiceNameAzureRM: 'Free-Trial(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
+        environmentServiceNameAzureRM: 'Free-Trial(3)(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
     
     
