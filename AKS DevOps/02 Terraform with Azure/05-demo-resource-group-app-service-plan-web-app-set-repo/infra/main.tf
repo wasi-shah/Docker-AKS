@@ -21,7 +21,7 @@ resource "azurerm_service_plan" "appserviceplan" {
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   os_type             = "Linux"
-  sku_name            = "P1v3"
+  sku_name            = "P0v3"
 }
 
 # Create the web app, pass in the App Service Plan ID
