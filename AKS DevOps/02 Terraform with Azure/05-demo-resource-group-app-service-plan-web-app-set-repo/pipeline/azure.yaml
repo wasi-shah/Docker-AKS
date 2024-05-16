@@ -51,7 +51,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'init'
-        workingDirectory: $(my_tf_root)
+        workingDirectory: '$(my_tf_root)'
         backendServiceArm: 'Free-Trial(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
         backendAzureRmResourceGroupName: 'PermanentRG'
         backendAzureRmStorageAccountName: 'mypermanentstorage'
@@ -128,7 +128,7 @@ stages:
         backendServiceArm: 'Free-Trial(e3b7fac9-cc7a-4e30-898f-087b8f741932)'
         backendAzureRmResourceGroupName: 'PermanentRG'
         backendAzureRmStorageAccountName: 'mypermanentstorage'
-        backendAzureRmContainerName: '04-demo-tfstatefiles'
+        backendAzureRmContainerName: '05-demo'
         backendAzureRmKey: 'terraform.tfstate'
 
     - task: TerraformTaskV4@4
