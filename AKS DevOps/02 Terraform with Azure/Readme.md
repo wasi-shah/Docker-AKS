@@ -1443,7 +1443,7 @@ stages:
 
 ###  It deploys an App Service plan and an App Service app on Linux and a "aspnet_core_webapp_mvc" app directly using terrafrom
 
-> Code directory: 05-demo-resource-group-app-service-plan-web-app-set-repo/infra
+> Code directory: 05-demo-resource-group-app-service-plan-web-app-set-repo/
 
 
 </details>
