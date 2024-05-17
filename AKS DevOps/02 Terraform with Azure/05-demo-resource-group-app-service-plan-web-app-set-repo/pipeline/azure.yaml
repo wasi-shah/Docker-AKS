@@ -11,12 +11,12 @@ trigger:
     - main
   paths:
     include:
-    - AKS DevOps/AKS DevOps/02 Terraform with Azure/05-demo-resource-group-app-service-plan-web-app-set-repo/infra/*
+    - AKS DevOps/AKS DevOps/02 Terraform with Azure/05-demo-resource-group-app-service-plan-web-app-set-repo/infra/terraform/*
 
 pool: Default
 
 variables:
-  my_tf_root: '$(System.DefaultWorkingDirectory)/AKS DevOps/02 Terraform with Azure/05-demo-resource-group-app-service-plan-web-app-set-repo/infra'
+  my_tf_root: '$(System.DefaultWorkingDirectory)/AKS DevOps/02 Terraform with Azure/05-demo-resource-group-app-service-plan-web-app-set-repo/infra/terraform'
       
 
 stages:
