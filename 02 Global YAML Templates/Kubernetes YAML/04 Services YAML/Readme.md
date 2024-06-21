@@ -3,7 +3,7 @@ In Kubernetes, a Service is a method for exposing a network application that is 
 > [!CAUTION]
 > The IP addresses of pods are dynamic which means that if you recreate a pod and a new IP will be assigned.
 
-> [!Notes]
+> [!Note]
 > Services are virtual objects that expose the pod/resplicaset or deployment by binding them into a service name.
 > This helps us to call the pod/rs/deployment by internal DNS-like calls, for example, http://my-backend-service
 
