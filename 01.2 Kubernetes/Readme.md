@@ -529,16 +529,16 @@ Implements taints and tolerations. Implements extension points: filter, preScore
 ##### Pod CPU/Memory resource requirements
 A Pod is scheduled to run on a Node only if the Node has enough CPU/Ram resources available to satisfy the Pod CPU and Memory request.
 For example, in pod you define.
-o	CPU
-o	Maximum
-	limits:       cpu: "1"       
-o	Minimum
-	requests:   cpu: "0.5"
-o	Memory
-o	Maximum
-	limits:       memory: "1"       
-o	Minimum
-	requests:   memory: "0.5"+
+-	CPU
+    -	Maximum
+       -	limits:       cpu: "1"       
+    -	Minimum
+       -	requests:   cpu: "0.5"
+-	Memory
+    -	Maximum
+    -	    limits:       memory: "1"       
+    -	Minimum
+        -	requests:   memory: "0.5"+
 
 ##### By Scheduler Name
 When multiple schedulers are available, you specify which scheduler to use
