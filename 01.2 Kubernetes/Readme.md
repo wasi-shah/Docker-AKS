@@ -167,19 +167,19 @@ You can use Secrets for purposes such as the following:
 
 ```
 Imperative way
-•	To  fetch security
-o	Kubectl get secrets
-•	 
-•	To decode
-o	echo -n 'dsfldfkdlsfkdl' | base64 --decode
+To  fetch security
+Kubectl get secrets
+
+To decode
+echo -n 'dsfldfkdlsfkdl' | base64 --decode
  
-•	From command line
+From command line
 Kubectl create secret generic mysecuritykeys 
 --from-literal=App_Color=cGluaw==
 --from-literal=App_DbName=TXlQcm9kRGI=
 --from-literal=App_Color=UGFzc3dvcmQwMDAh
  
-•	From a file
+From a file
 Kubectl create secret generic mysecuritykeys 
 --from-file=myfile.properties
  
@@ -190,7 +190,7 @@ App_Color: UGFzc3dvcmQwMDAh
  
 Declarative way
  
-•	Create a definition file
+Create a definition file
 apiVersion: v1
 kind: Security
 metadata:
@@ -202,6 +202,19 @@ data:
  
 Kubectl create -f mysecuritydefinition.yaml
 
+# Passing Secret as volume
+
+      volumeMounts:
+        # name must match the volume name below
+        - name: secret-volume
+          mountPath: /etc/secret-volume
+  # The secret data is exposed to Containers in the Pod through a Volume.
+  volumes:
+    - name: secret-volume
+      secret:
+        secretName: my-secret
+
+
 ```
 
 #### ConfigMaps
@@ -209,14 +222,215 @@ A ConfigMap is an API object used to store non-confidential data in key-value pa
 A ConfigMap allows you to decouple environment-specific configuration from your container images, so that your applications are easily portable.
 
 
+```
+Imperative way
+
+Fetch configMap
+Kubectl get configmaps
+
+Create configmap from imperative command
+Kubectl create configmap myconfigmap --from-literal=App_Color=pink --from- literal=App_DbName=MyProdDb --from-literal=App_Password=Password000!
+
+Create configmap from a text file
+Kubectl create configmap myconfigmap --from-file=myfile.properties
+The contents of myfile.properties
+App_Color: pink
+App_DbName: MyProdDb
+App_Color: Password000!
 
 
+Declarative way
+Create a definition file
+apiVersion: v1
+kind: ConfigMap
+metadata:
+name: myconfigmap
+data:
+App_Color: pink
+App_DbName: MyProdDb
+App_Password: Password000!
+
+Kubectl create -f myconfigmap.yaml
+
+# Passing configMap as Volume
+    volumeMounts:
+      - name: config-volume
+        mountPath: /etc/config
+  volumes:
+    - name: config-volume
+      configMap:
+        # Provide the name of the ConfigMap containing the files you want
+        # to add to the container
+        name: special-config
+
+
+```
+
+#### Passing Values as Environment 
+```
+# Direct environment assign
+- env:
+- name: App_Color
+  value: pink 
+- name: App_DbName
+  value: MyProdDB
+- name: App_DbPassword
+  value: Password000!
+
+# Pass Config Map through environment
+envFrom:
+-       configMapRef: 
+         name: myconfigmap 
+ 
+
+# Pass Secret through environment
+envFrom:
+-    secretRef: 
+      name: mysecuritykeys 
+
+
+```
+
+#### Passing config map and secrets as Volume
+```
+# Passing Secret as volume
+      volumeMounts:
+        # name must match the volume name below
+        - name: secret-volume
+          mountPath: /etc/secret-volume
+  # The secret data is exposed to Containers in the Pod through a Volume.
+  volumes:
+    - name: secret-volume
+      secret:
+        secretName: my-secret
+
+# Passing configMap as Volume
+    volumeMounts:
+      - name: config-volume
+        mountPath: /etc/config
+  volumes:
+    - name: config-volume
+      configMap:
+        # Provide the name of the ConfigMap containing the files you want
+        # to add to the container
+        name: special-config
+
+
+```
 
 ### Retrieving values from container
+-	You can shell into the container using exec and display file content on same command
+    - kubectl exec webapp cat /log/app.log
+-	You can shell into the container and stay into the container until you exit the container manually.
+    - kubectl exec -it envar-demo -- /bin/bash
+    - Now you are inside the container and can run command for example printenv to disable all environment variables
+    - root@envar-demo:/# printenv
+    - To exit the shell, enter exit.
+
+
+
 ### Pod Health Monitoring
+The kubelet can optionally perform and react to three kinds of probes on running containers:
 #### Startup probes
+-	Ideal for slow starting apps
+-	Executes before Liveness and Readiness Probs
+-	Startup probe execute only once
+
+The kubelet uses startup probes to know when a container application has started. If such a probe is configured, liveness and readiness probes do not start until it succeeds, making sure those probes don't interfere with the application startup.
+
+```
+startupProbe:
+  httpGet:
+    httpHeaders:
+      - name: User-Agent
+        value: MyUserAgent
+
+
+```
+
+
 #### Liveness Probe
+> [!note]
+> Checks if app is still alive – if not kill and start new pod.
+
+A developer can write a small code or page in the app to check if the app is still working and not causing a deadlock. It then then be used a livenessProbe to decide that is it better to restart a pod.
+Indicates whether the container is running. If the liveness probe fails, the kubelet kills the container. For example, liveness probes could catch a deadlock, where an application is running, but unable to make progress. Restarting a container in such a state can help to make the application more available despite bugs.
+
+##### liveness check using Command
+-	Run a command against a container to check if it’s alive.
+-	If not, delete the pod and start new
+```
+livenessProbe:
+      exec:
+        command:
+        - cat
+        - /tmp/healthy
+      initialDelaySeconds: 5
+      periodSeconds: 5
+
+```
+
+##### liveness check using HTTP request
+-	Run a http request to your specially designed page and check if your app is alive.
+-	If not, delete the pod and start a new pod.
+```
+livenessProbe:
+      httpGet:
+        path: /healthz
+        port: 8080
+        httpHeaders:
+        - name: Custom-Header
+          value: Awesome
+      initialDelaySeconds: 3
+      periodSeconds: 3
+
+```
+
+##### liveness check using TCP probe
+-	Open a socket to your container on the specified port.
+-	If not, delete the pod and start a new pod.
+
+```
+livenessProbe:
+      tcpSocket:
+        port: 8080
+     initialDelaySeconds: 15
+      periodSeconds: 10
+
+```
+
 #### Readiness Probes
+
+-	Checks if the pod is less busy for the incoming request.
+-	If not, it passes the traffic to less busy pod.
+-	It does not kill the pod.
+-	It drops the pod from the load balancer backend pool.
+
+It means that your pod is alive but busy serving other customer and unable to server more customer at the moment so direct the traffic to a free less busy pod.
+
+It does not restart the pod but assign the request to another less busy pod.
+Readiness probes to know when a container is ready to start accepting traffic otherwise the kubernetes will redirect the traffic to less busy pod.
+```
+# TCP Check
+readinessProbe:
+    tcpSocket:
+    port: 8080
+    initialDelaySeconds: 15
+    periodSeconds: 10
+
+
+# Command check
+readinessProbe:
+  exec:
+    command:
+    - cat
+    - /tmp/healthy
+  initialDelaySeconds: 5
+  periodSeconds: 5
+
+```
+
+
 ### Pod Scheduling
 
 
