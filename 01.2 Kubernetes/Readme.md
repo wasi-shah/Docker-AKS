@@ -152,7 +152,7 @@ You can pass values to pod as environment or as volume. This configuration is ca
 	-   secretRef
 -	volumeMounts
 -	volumes
-> [!Note ]
+> [!Note]
 > You can pass values to pod as environment or as volume.
 
 #### Secrets:
