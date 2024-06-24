@@ -431,7 +431,7 @@ readinessProbe:
 ```
 
 
-### Pod Scheduling
+### Pod Scheduling - Assigning Pods to Nodes
 Scheduler job is to assign a pod to a best node.
 A scheduler is sitting on master node and watches for newly created Pods that have no Node assigned. For every Pod that the scheduler discovers, the scheduler becomes responsible for finding the best Node for that Pod to run on. Scheduler job is to Schedule, Preemption and Eviction.
 -	Scheduling
@@ -450,7 +450,8 @@ Checks if a Pod spec node name matches the current node. Extension points: filte
 ##### nodeSelector
 You can label your nodes for example ‘forntend’ and then use nodeSelector is pod definition to only assign these pods to a matching label. Kubernetes only schedules the Pod onto nodes that have each of the labels you specify.
 Simple pod with manual schedule with node selector- Remember this can be one to many if you have multiple nodes available with same label.
-Commands
+
+> Commands
 -	Label Node first
     - First label your nodes
     - Kubectl lable nodes node01 size=Large
@@ -461,49 +462,70 @@ Commands
     -  nodeSelector: 
     -   size= Large
 
-##### NodeAffinity
+##### Affinity and anti-affinity
+You can use the In, NotIn, Exists and DoesNotExist values in the operator field for Pod affinity and anti-affinity.
+
+###### NodeAffinity
 NodeAffinity is advance from of nodeSelector in which we can define a query to match the node. 
 There are two types of node affinity:
-•	required DuringSchedulingIgnoredDuringExecution
-o	The scheduler can't schedule the Pod unless the rule is met. This functions like nodeSelector, but with a more expressive syntax.
-•	preferred DuringSchedulingIgnoredDuringExecution:
-o	The scheduler tries to find a node that meets the rule. If a matching node is not available, the scheduler still schedules the Pod.
-Commands
-•	Label node first
-o	Kubectl lable nodes node01 size=Large
-o	Kubectl lable nodes node02 size=Large
-o	Kubectl label nodes node03 size=Medium 
-o	Kubectl label nodes node03 size=Small
-•	Now add node affinity definition in pod definition
-o	affinity:     nodeAffinity:       requiredDuringSchedulingIgnoredDuringExecution:         nodeSelectorTerms:         - matchExpressions:           - key: size             operator: In             values:             - Large             - Medium
+-	required DuringSchedulingIgnoredDuringExecution
+    - The scheduler can't schedule the Pod unless the rule is met. This functions like nodeSelector, but with a more expressive syntax.
+-	preferred DuringSchedulingIgnoredDuringExecution:
+    - The scheduler tries to find a node that meets the rule. If a matching node is not available, the scheduler still schedules the Pod.
+
+> Commands
+-	Label node first
+    -	Kubectl lable nodes node01 size=Large
+    -	Kubectl lable nodes node02 size=Large
+    -	Kubectl label nodes node03 size=Medium 
+    -	Kubectl label nodes node03 size=Small
+-	Now add node affinity definition in pod definition
+```
+    nodeAffinity:       
+    requiredDuringSchedulingIgnoredDuringExecution:
+             nodeSelectorTerms:
+                      - matchExpressions:
+                                 - key: size
+                                   operator: In             
+                                   values:             
+                                   - Large             
+                                   - Medium
+```
+##### anti-affinity
+Inter-pod affinity and anti-affinity rules take the form "this Pod should (or, in the case of anti-affinity, should not) run in an X if that X is already running one or more Pods that meet rule Y", where X is a topology domain like node, rack, cloud provider zone or region, or similar and Y is the rule Kubernetes tries to satisfy.
+
+
+The anti-affinity rule specifies that the scheduler should try to avoid scheduling the Pod on a node if that node belongs to a specific zone where other Pods have been labeled with security=S2. For instance, if we have a cluster with a designated zone, let's call it "Zone R," consisting of nodes labeled with topology.kubernetes.io/zone=R, the scheduler should avoid assigning the Pod to any node within Zone R, as long as there is at least one Pod within Zone R already labeled with security=S2. Conversely, the anti-affinity rule does not impact scheduling into Zone R if there are no Pods with security=S2 labels.
+
 ##### Taint and Toleration
 Implements taints and tolerations. Implements extension points: filter, preScore, score.
-•	Taint
-o	Taints allow a node to repel a set of pods.
-o	Taint Effect
-	Effect tells you what would happen for new and existing pods
-	No Execute
-	No new pod and also evict existing pod if not match the matching toleration.
-	No Schedule
-	Keep existing pod but no new pod if not matching toleration
-	Prefer No Schedule
-	Keep existing pod and try to also place pod with matching toleration.
-o	Commands
-	Kubectl taint nodes node01 name=value:effect
-	Add Taint: Kubectl taint nodes node01 spray=mortein:NoSchedule
-	Get taint info: 
-	kubectl describe node node01 | grep -i taints
-	kubectl describe node node01
-	Remove Taint: Kubectl taint nodes node01 spray=mortein:NoSchedule-
-•	Toleration 
-o	Tolerations are applied to pods. Tolerations allow the scheduler to schedule pods with matching taints. Tolerations allow scheduling but don't guarantee scheduling:
-o	Add Toleration is pod spec
-	  tolerations:
-	  - key: "spray"
-	    operator: "Equal"
-	    value: "mortein"
-	    effect: "NoSchedule"
-
+-	Taint
+    -	Taints allow a node to repel a set of pods.
+    -	Taint Effect
+        -	Effect tells you what would happen for new and existing pods
+            -	No Execute
+                -	No new pod and also evict existing pod if not match the matching toleration.
+            -	No Schedule
+                -	Keep existing pod but no new pod if not matching toleration
+            -	Prefer No Schedule
+                -	Keep existing pod and try to also place pod with matching toleration.
+    -	Commands
+        -	Kubectl taint nodes node01 name=value:effect
+        -	Add Taint: Kubectl taint nodes node01 spray=mortein:NoSchedule
+        -	Get taint info: 
+            -	kubectl describe node node01 | grep -i taints
+            -	kubectl describe node node01
+        -	Remove Taint: Kubectl taint nodes node01 spray=mortein:NoSchedule-
+-	Toleration 
+    -	Tolerations are applied to pods. Tolerations allow the scheduler to schedule pods with matching taints. Tolerations allow scheduling but don't guarantee scheduling:
+    -	Add Toleration is pod spec
+```    
+	  tolerations:
+    	  - key: "spray"
+    	    operator: "Equal"
+    	    value: "mortein"
+    	    effect: "NoSchedule"
+```
 ##### Pod CPU/Memory resource requirements
 A Pod is scheduled to run on a Node only if the Node has enough CPU/Ram resources available to satisfy the Pod CPU and Memory request.
 For example, in pod you define.
