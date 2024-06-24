@@ -175,11 +175,11 @@ The kubectl command-line tool supports several different ways to create and mana
 > A Kubernetes object should be managed using only one technique. Mixing and matching techniques for the same object results in undefined behavior.
 
 
-| Management technique   | Operates on	  | Recommended environment	  | Supported writers	  | Learning curve  |
-| ------------- | ------------- | ------------- | ------------- | ------------- |
-| Imperative commands	   | Live objects	   | Development projects	   | 1+   | Lowest   |
-| Imperative object configuration	   | Individual files	   | Production projects	   | 1   | Moderate   |
-| Declarative object configuration	   | Directories of files	   | Production projects	   | 1+   | Highest   |
+| Management technique   | Example | Operates on	  | Recommended environment	  | Supported writers	  | Learning curve  |
+| ------------- | ------------- | ------------- |------------- | ------------- | ------------- |
+| Imperative commands	   | kubectl create deployment nginx --image nginx	    | Live objects	   | Development projects	   | 1+   | Lowest   |
+| Imperative object configuration	   | kubectl create -f nginx.yaml	    | Individual files	   | Production projects	   | 1   | Moderate   |
+| Declarative object configuration	   | kubectl apply -f configs/	    | Directories of files	   | Production projects	   | 1+   | Highest   |
 
 
 
