@@ -432,6 +432,137 @@ readinessProbe:
 
 
 ### Pod Scheduling
+Scheduler job is to assign a pod to a best node.
+A scheduler is sitting on master node and watches for newly created Pods that have no Node assigned. For every Pod that the scheduler discovers, the scheduler becomes responsible for finding the best Node for that Pod to run on. Scheduler job is to Schedule, Preemption and Eviction.
+-	Scheduling
+    - In Kubernetes, scheduling refers to making sure that Pods are matched to Nodes so that the kubelet can run them. 
+- Preemption 
+    - Preemption is the process of terminating Pods with lower Priority so that Pods with higher Priority can schedule on Nodes. 
+- Eviction 
+    - Eviction is the process of terminating one or more Pods on Nodes.
+
+#### Controlling Pod Scheduling
+There are many ways you can control pod scheduling. The following plugins, enabled by default, implement one or more of these extension points:
+
+##### NodeName
+Checks if a Pod spec node name matches the current node. Extension points: filter.
+
+##### nodeSelector
+You can label your nodes for example ‘forntend’ and then use nodeSelector is pod definition to only assign these pods to a matching label. Kubernetes only schedules the Pod onto nodes that have each of the labels you specify.
+Simple pod with manual schedule with node selector- Remember this can be one to many if you have multiple nodes available with same label.
+Commands
+-	Label Node first
+o	First label your nodes
+o	Kubectl lable nodes node01 size=Large
+o	Kubectl lable nodes node02 size=Large
+o	Kubectl label nodes node03 size=Medium 
+o	Kubectl label nodes node03 size=Small
+-	Now add nodeSelector definition into pod spec
+o	  nodeSelector: 
+o	    size= Large
+
+##### NodeAffinity
+NodeAffinity is advance from of nodeSelector in which we can define a query to match the node. 
+There are two types of node affinity:
+•	required DuringSchedulingIgnoredDuringExecution
+o	The scheduler can't schedule the Pod unless the rule is met. This functions like nodeSelector, but with a more expressive syntax.
+•	preferred DuringSchedulingIgnoredDuringExecution:
+o	The scheduler tries to find a node that meets the rule. If a matching node is not available, the scheduler still schedules the Pod.
+Commands
+•	Label node first
+o	Kubectl lable nodes node01 size=Large
+o	Kubectl lable nodes node02 size=Large
+o	Kubectl label nodes node03 size=Medium 
+o	Kubectl label nodes node03 size=Small
+•	Now add node affinity definition in pod definition
+o	affinity:     nodeAffinity:       requiredDuringSchedulingIgnoredDuringExecution:         nodeSelectorTerms:         - matchExpressions:           - key: size             operator: In             values:             - Large             - Medium
+##### Taint and Toleration
+Implements taints and tolerations. Implements extension points: filter, preScore, score.
+•	Taint
+o	Taints allow a node to repel a set of pods.
+o	Taint Effect
+	Effect tells you what would happen for new and existing pods
+	No Execute
+	No new pod and also evict existing pod if not match the matching toleration.
+	No Schedule
+	Keep existing pod but no new pod if not matching toleration
+	Prefer No Schedule
+	Keep existing pod and try to also place pod with matching toleration.
+o	Commands
+	Kubectl taint nodes node01 name=value:effect
+	Add Taint: Kubectl taint nodes node01 spray=mortein:NoSchedule
+	Get taint info: 
+	kubectl describe node node01 | grep -i taints
+	kubectl describe node node01
+	Remove Taint: Kubectl taint nodes node01 spray=mortein:NoSchedule-
+•	Toleration 
+o	Tolerations are applied to pods. Tolerations allow the scheduler to schedule pods with matching taints. Tolerations allow scheduling but don't guarantee scheduling:
+o	Add Toleration is pod spec
+	  tolerations:
+	  - key: "spray"
+	    operator: "Equal"
+	    value: "mortein"
+	    effect: "NoSchedule"
+
+##### Pod CPU/Memory resource requirements
+A Pod is scheduled to run on a Node only if the Node has enough CPU/Ram resources available to satisfy the Pod CPU and Memory request.
+For example, in pod you define.
+o	CPU
+o	Maximum
+	limits:       cpu: "1"       
+o	Minimum
+	requests:   cpu: "0.5"
+o	Memory
+o	Maximum
+	limits:       memory: "1"       
+o	Minimum
+	requests:   memory: "0.5"+
+
+##### By Scheduler Name
+When multiple schedulers are available, you specify which scheduler to use
+By default kubernetes has one builtin scheduler which is running as pod in kube-system name space. To create a new second scheduler:
+•	You need to create/find a custom scheduler image and run as a pod. 
+•	You then create a pod definition and under spec add [schedulerName:  my-scheduler].
+
+##### ImageLocality
+Favors nodes that already have the container images that the Pod runs. Extension points: score.
+
+##### NodePorts
+Checks if a node has free ports for the requested Pod ports. Extension points: preFilter, filter.
+##### PodTopologySpread
+Implements Pod topology spread. Extension points: preFilter, filter, preScore, score.
+##### NodeUnschedulable
+Filters out nodes that have .spec.unschedulable set to true. Extension points: filter.
+##### NodeResourcesFit
+Checks if the node has all the resources that the Pod is requesting. The score can use one of three rategies: LeastAllocated (default), MostAllocated and RequestedToCapacityRatio. Extension points: preFilter, filter, score.
+##### NodeResourcesBalancedAllocation
+Favors nodes that would obtain a more balanced resource usage if the Pod is scheduled there. Extension points: score.
+##### VolumeBinding
+Checks if the node has or if it can bind the requested volumes. Extension points: preFilter, filter, reserve, preBind, score.
+Note: score extension point is enabled when VolumeCapacityPriority feature is enabled. It prioritizes the smallest PVs that can fit the requested volume size.
+##### VolumeRestrictions
+Checks that volumes mounted in the node satisfy restrictions that are specific to the volume provider. Extension points: filter.
+##### VolumeZone
+Checks that volumes requested satisfy any zone requirements they might have. Extension points: filter.
+##### NodeVolumeLimits
+Checks that CSI volume limits can be satisfied for the node. Extension points: filter.
+##### EBSLimits
+Checks that AWS EBS volume limits can be satisfied for the node. Extension points: filter.
+##### GCEPDLimits
+Checks that GCP-PD volume limits can be satisfied for the node. Extension points: filter.
+##### AzureDiskLimits
+Checks that Azure disk volume limits can be satisfied for the node. Extension points: filter.
+##### InterPodAffinity
+Implements inter-Pod affinity and anti-affinity. Extension oints: preFilter, filter, preScore, score.
+##### PrioritySort
+Provides the default priority based sorting. Extension points: queueSort.
+##### DefaultBinder
+Provides the default binding mechanism. Extension points: bind.
+##### DefaultPreemption
+Provides the default preemption mechanism. Extension points: postFilter.
+You can also enable the following plugins, through the component config APIs, that are not enabled by default:
+##### CinderLimits
+Checks that OpenStack Cinder volume limits can be satisfied for the node. Extension points: filter.
 
 
 ## Kubernetes: Workloads
