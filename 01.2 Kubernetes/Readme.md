@@ -1,7 +1,8 @@
 # Kubernetes
 
 ## Definition
-[!Note] Kubernetes is an open-source container orchestration software.
+> [!Note] 
+> Kubernetes is an open-source container orchestration software.
 
 Kubernetes is an open-source system that automates the management, scaling, and deployment of containerized applications.
 Kubernetes is open-source orchestration software that provides an API to control how and where those containers will run. It allows you to run your Docker containers and workloads and helps you to tackle some of the operating complexities when moving to scale multiple containers, deployed across multiple servers.
@@ -18,12 +19,14 @@ The worker node(s) host the Pods that are the components of the application work
 
 ### The Kubernetes cluster
 A Kubernetes cluster is made up of at least one master node and one or more worker nodes. The master node makes up the control plane of a cluster and is responsible for scheduling tasks and monitoring the state of the cluster. The key advantage of the Kubernetes cluster is that it is not a physical cluster; rather, it is an abstraction. It does not matter whether the nodes in the cluster are virtual machines or bare-metal, on-premises, or on the cloud; Kubernetes can run containerized applications on any group of such machines. 
-[!Note] > Kubernetes v1.29 supports clusters with up to 5,000 nodes.
+> [!Note] 
+> Kubernetes v1.29 supports clusters with up to 5,000 nodes.
 
 #### Master Node
 The master node is responsible for running several Kubernetes processes that are absolutely necessary to run and manage the cluster properly:
 ##### API Server:
-[!Note] API Server allows communication between different Kubernetes clients and the cluster
+> [!Note] 
+> API Server allows communication between different Kubernetes clients and the cluster
 This is essentially the entry-point to the Kubernates cluster, which itself is a container. This is the process that allows communication between different Kubernetes clients and the cluster. The clients include the UI, if we are using the Kubernetes Dashboard, the API if we are running scripts, or the command-line tool. All these clients talk to the API Server to interact with the cluster.
 
 ##### Scheduler:
