@@ -536,9 +536,9 @@ For example, in pod you define.
        -	requests:   cpu: "0.5"
 -	Memory
     -	Maximum
-    -	    limits:       memory: "1"       
-    -	Minimum
-        -	requests:   memory: "0.5"+
+        -	    limits:       memory: "1"       
+    - Minimum
+        -       requests:   memory: "0.5"+
 
 ##### By Scheduler Name
 When multiple schedulers are available, you specify which scheduler to use
