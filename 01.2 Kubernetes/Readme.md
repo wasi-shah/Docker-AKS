@@ -452,14 +452,14 @@ You can label your nodes for example ‘forntend’ and then use nodeSelector is
 Simple pod with manual schedule with node selector- Remember this can be one to many if you have multiple nodes available with same label.
 Commands
 -	Label Node first
-o	First label your nodes
-o	Kubectl lable nodes node01 size=Large
-o	Kubectl lable nodes node02 size=Large
-o	Kubectl label nodes node03 size=Medium 
-o	Kubectl label nodes node03 size=Small
+    - First label your nodes
+    - Kubectl lable nodes node01 size=Large
+    - Kubectl lable nodes node02 size=Large
+    - Kubectl label nodes node03 size=Medium 
+    - Kubectl label nodes node03 size=Small
 -	Now add nodeSelector definition into pod spec
-o	  nodeSelector: 
-o	    size= Large
+    -  nodeSelector: 
+    -   size= Large
 
 ##### NodeAffinity
 NodeAffinity is advance from of nodeSelector in which we can define a query to match the node. 
