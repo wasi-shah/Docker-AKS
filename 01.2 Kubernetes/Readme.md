@@ -27,6 +27,7 @@ The master node is responsible for running several Kubernetes processes that are
 ##### API Server:
 > [!Note] 
 > API Server allows communication between different Kubernetes clients and the cluster
+
 This is essentially the entry-point to the Kubernates cluster, which itself is a container. This is the process that allows communication between different Kubernetes clients and the cluster. The clients include the UI, if we are using the Kubernetes Dashboard, the API if we are running scripts, or the command-line tool. All these clients talk to the API Server to interact with the cluster.
 
 ##### Scheduler:
@@ -34,10 +35,21 @@ It’s job is to make sure that the pod is successfully assigned to a best node.
 It chooses the best node for a pod according to pod definition. For example node name, node selector etc.
 
 ##### Controller Manager:
+Controller does the job according to scheduler. This keeps track of the state of the cluster. It keeps an eye on the cluster and checks whether a node needs to be repaired or restarted.
+
 ##### Etcd:
+This is the key-value storage responsible for holding the state of the cluster at any given time. etcd has the configuration information and status data of each node in the cluster. etcd snapshots allow us to recover the whole cluster state, hence it is used in backing up and restoring a cluster.
 
 #### Worker Node
+The worker nodes are the part of the Kubernetes clusters which execute the containers and applications on them. They have two main components, the Kubelet Service and the Kube-proxy Service.
 ##### Kubelet Service:
+-	It runs on worker nodes of a Kubernetes cluster.
+-	It sits on Worker node as a node captain.
+-	Each worker node has a Kubelet process running on it that allows the cluster to talk to each other and execute some tasks on the worker nodes, such as running application processes. 
+-	It listens for instructions from the Api Server and manages containers running on the node. kubelet is a part of the Kubernetes cluster (server) software.
+-	It sees what pods needs to be realized on a node and realizes them in the form of running docker containers. As such it talks a lot to the docker layer on the node.
+
+
 ##### Kube-proxy Service:
 ##### Container Runtime:
 
