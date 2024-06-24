@@ -165,6 +165,52 @@ You can use Secrets for purposes such as the following:
 -	Provide credentials such as SSH keys or passwords to Pods.
 -	Allow the kubelet to pull container images from private registries.
 
+```
+Imperative way
+•	To  fetch security
+o	Kubectl get secrets
+•	 
+•	To decode
+o	echo -n 'dsfldfkdlsfkdl' | base64 --decode
+ 
+•	From command line
+Kubectl create secret generic mysecuritykeys 
+--from-literal=App_Color=cGluaw==
+--from-literal=App_DbName=TXlQcm9kRGI=
+--from-literal=App_Color=UGFzc3dvcmQwMDAh
+ 
+•	From a file
+Kubectl create secret generic mysecuritykeys 
+--from-file=myfile.properties
+ 
+The contents of myfile.properties
+App_Color: cGluaw==
+App_DbName: TXlQcm9kRGI=
+App_Color: UGFzc3dvcmQwMDAh
+ 
+Declarative way
+ 
+•	Create a definition file
+apiVersion: v1
+kind: Security
+metadata:
+  name: mysecuritykeys 
+data:
+ App_Color: cGluaw==
+ App_DbName: TXlQcm9kRGI=
+ App_Color: UGFzc3dvcmQwMDAh
+ 
+Kubectl create -f mysecuritydefinition.yaml
+
+```
+
+#### ConfigMaps
+A ConfigMap is an API object used to store non-confidential data in key-value pairs. Pods can consume ConfigMaps as environment variables, command-line arguments, or as configuration files in a volume.
+A ConfigMap allows you to decouple environment-specific configuration from your container images, so that your applications are easily portable.
+
+
+
+
 
 ### Retrieving values from container
 ### Pod Health Monitoring
