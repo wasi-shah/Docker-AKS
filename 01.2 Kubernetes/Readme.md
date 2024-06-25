@@ -896,23 +896,23 @@ All existing Pods are killed before new ones are created when .spec.strategy.typ
 	- Edit an existing deployment image
 -	Updates and Rollback
 	- Kubectl create -f deploymentfile.yaml
-	 - Create a deployment from a file
+	  - Create a deployment from a file
 	- Kubectl create/apply -f deploymentfile.yaml
-	 - Apply changes to already deployed objects
+	  - Apply changes to already deployed objects
 	- kubectl set image deployment/nginx-deployment nginx=nginx:1.9.1 --record
-	 - Imperative command which directly modify image in a deployment object
+	  - Imperative command which directly modify image in a deployment object
 	- Kubectl get deployment fontend -o yaml > deployment.yaml
-	 - This will save the deployment definition into a yaml file, you can edit this file and make required changes and then run kubectl create/apply -f deployment.yaml 
+	  - This will save the deployment definition into a yaml file, you can edit this file and make required changes and then run kubectl create/apply -f deployment.yaml 
 	- kubectl rollout status deployment.v1.apps/nginx-deployment
-	 - shows current deployment status
+	  - shows current deployment status
 	- kubectl rollout history deployment.v1.apps/nginx-deployment
-	 - shows rollout history
+	  - shows rollout history
 	- kubectl rollout undo deployment.v1.apps/nginx-deployment
-	 - Now you’ve decided to undo the current rollout and rollback to the previous revision:
+	  - Now you’ve decided to undo the current rollout and rollback to the previous revision:
 	- kubectl rollout undo deployment.v1.apps/nginx-deployment --to-revision=2
-	 - Alternatively, you can rollback to a specific revision by specifying it with --to-revision:
+	  - Alternatively, you can rollback to a specific revision by specifying it with --to-revision:
 	- kubectl scale deployment.v1.apps/nginx-deployment --replicas=10
-	 - You can scale a Deployment by using scale 
+	  - You can scale a Deployment by using scale 
 
 
 ### StatefulSet
