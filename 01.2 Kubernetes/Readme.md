@@ -196,7 +196,7 @@ In Kubernetes, namespaces provide a mechanism for isolating groups of resources 
 
 
 Initial namespaces
-Kubernetes starts with four initial namespaces:
+> Kubernetes starts with four initial namespaces:
 
 ##### default
 Kubernetes includes this namespace so that you can start using your new cluster without first creating a namespace.
