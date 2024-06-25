@@ -1296,7 +1296,45 @@ If you want to control traffic flow at the IP address or port level (OSI layer 3
         - A downwardAPI volume makes downward API data available to applications. Within the volume, you can find the exposed data as read-only files in plain text format.
 
 ### Persistent Volumes
+You have to define the storage first and then use it.
+Sometimes you wish to save the data permanently. The answer is Persistent Volumes.
+-	A PersistentVolume (PV) is a piece of storage in the cluster.
+-	Commands
+  -	kubectl get pv
+  -	kubectl describe pv pv0001
+  -	kubectl get pvc
+
+> Ways a pod can attach to a PV
+
+#### Directly 
+-	Direct assign a volume to a pod without claim
+-	Create a PV
+-	Assign a PV name is pod definition
+
+#### Persistence Volume Claim
+-	A PersistentVolumeClaim (PVC) is a request for storage by a user/pod.
+-	In the claim you define how much space you need.
+-	The claim then binds to available PV. It only binds to a PV which can satisfy the claim needs.
+-	It attaches a pod to a required available persistence storage.
+-	The name of the PV is not known to a pod.
+
 ### Storage Classes
+
+- The storage dynamically provisioned/creates a storage to satisfy a PersistentVolumeClaim (PVC).
+- It creates the PV automatically.
+- Its an on demand PV
+- In StorageClass definition you define the storage provider as ‘provisioner’  for example Google or Azure.
+- Create Persistent Volume on Demand through StorageClass
+  -apiVersion: storage.k8s.io/v1
+  -kind: StorageClass
+  -metadata:
+  -  name: azurefile
+  -provisioner: kubernetes.io/azure-file
+  -parameters:
+  -  skuName: Standard_LRS
+  -  location: eastus
+  -  storageAccount: azure_storage_account_name
+- Now you can create a PVC with our without StorageClass name.
 
 ## Kubernetes: Security
 ### Authentication
