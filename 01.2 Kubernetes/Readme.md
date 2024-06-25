@@ -337,6 +337,11 @@ kubectl apply -R -f configs/
 -	It can have multiple containers, but the containers must be doing a related job because it recycles together.
 -	You can have 110 pods in one node max to 256. It means you can have max 265 IP allocations inside the node because each pods get one IP.
 
+> [!important]
+> **Question:** How many pods can you have on a single node
+> <br> **Answer:** 110 to 265 
+
+
 ### Types on Pods
 #### Application Pods
 This is your main pod where your application runs.
