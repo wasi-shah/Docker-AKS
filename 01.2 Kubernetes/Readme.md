@@ -1536,12 +1536,23 @@ Metrics Server collects resource usage statistics from the kubelet on each node 
 #### kube-state-metrics
 kube-state-metrics is a service that makes cluster state information easily consumable. Whereas Metrics Server exposes metrics on resource usage by pods and nodes, kube-state-metrics listens to the Control Plane API server for data on the overall status of Kubernetes objects (nodes, pods, Deployments, etc.), as well as the resource limits and allocations for those objects. It then generates metrics from that data that are available through the Metrics API.
 
-#### Monitoring Cluster level
+## Viewing monitoring data/metrics
+
+- Heapster - Heapster monitors the kubernetes cluster
+- Grafana/Prometheus - A dashboard to view pod metrics by namespace and pod names. 
+- graphing tool - Datadog
+- kentik - Understand your Kubernetes networks, from container, to data center, to public cloud.
+- NetFlow - Service communication monitoring in Kubernetes
+- a storage backend - PV
+- integrating a monitoring tool with the different components of your infrastructure
+
+
+#### Monitoring Cluster level (using Metrics Server)
 You can monitor nodes on cluster using 
 - Kubectl top Nodes 
 - Kubectl top pods
 
-#### Monitoring Application Level
+#### Monitoring Application Level (using Metrics Server)
 This is to monitor log written by your application
 - Reading pod log
    - Kubectl logs pod-name
@@ -1559,6 +1570,17 @@ This is to monitor log written by your application
 
 ## Kubernetes Cluster Providers
 
+IaaS/Kubernetes Provider	
+Alibaba Cloud 
+Amazon Web Services 
+Google Cloud Platform 
+Huawei Cloud  
+IBM Cloud 
+Microsoft Azure 
+Oracle Cloud Infrastructure 
+VMware vSphere  
+
 ## Kubernetes Tools
 ### Command Tools
-
+> Kubectl
+The Kubernetes command-line tool, kubectl, allows you to run commands against Kubernetes clusters. You can use kubectl to deploy applications, inspect and manage cluster resources, and view logs.
