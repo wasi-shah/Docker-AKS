@@ -922,6 +922,41 @@ DaemonSet defines Pods that provide facilities that are local to nodes. Every ti
 ### Job and CronJob 
 Job and CronJob provide different ways to define tasks that run to completion and then stop. You can use a Job to define a task that runs to completion, just once. You can use a CronJob to run the same Job multiple times according a schedule.
 
+## Kubernetes: Application types
+Kubernetes can have two types of applications. 
+### Stateless
+By default, the pods are stateless so when the pod deletes its data also deletes. You still can link the pods to a volume (which is attached to node) but this can be deleted if node is deleted.
+-	Mostly stateless
+-	Volumes (see section in storage)
+### Stateful Set
+It’s a solution for a stateful application.
+It scaleup gracefully and also scale down gracefully.
+You also need to define a headless service in satefullset.
+It expose all pods in the set with a servicename with -0, -1 and so on at the end.
+The StatefulSet provisions a PersistentVolumeClaim in  a single yaml file.
+To help prevent data loss, PersistentVolumes and PersistentVolumeClaims are not deleted when a StatefulSet is deleted
+The StatefulSet automatically replaces Pods that fail or are evicted from their nodes, and automatically associates new Pods with the storage resources. You define PV and PVC in single files and the kind od definition is StatefulSet.
+If the pods is deleted, it does not recreate  storage, it just create new pods and automatically associate it to the storage resources.
+A stateful application requires that its state be saved or persistent. 
+Stateful applications use persistent storage, such as persistent volumes, to save data for use by the server or by other users.
+Statefulset is different from Deployment because in statefulset the pod are create in sequence. First pod name becomes name-0 and so on so you can refer each pod by name.
+	
+#### Kubernetes solution:  Option 1 > StatfulSet:  
+For stateful applications using ReadWriteOnce volumes, use StatefulSets. StatefulSets are designed to deploy stateful applications and clustered applications that save data to persistent storage, such as Compute Engine persistent disks. StatefulSets are suitable for deploying Kafka, MySQL, Redis, ZooKeeper, and other applications needing unique, persistent identities and stable hostnames.
+	
+#### Kubernetes solution:  Option 2 > KubeDirector:  
+KubeDirector is an open source project designed to make it easy to run complex stateful scale-out application clusters on Kubernetes. KubeDirector is built using the custom resource definition (CRD) framework and leverages the native Kubernetes API extensions and design philosophy. 
+KubeDirector provides the following capabilities:
+-	The ability to run non-cloud native stateful applications on Kubernetes without modifying the code. In other words, it’s not necessary to decompose these existing applications to fit a microservices design pattern.
+-	Native support for preserving application-specific configuration and state.
+-	An application-agnostic deployment pattern, minimizing the time to onboard new stateful applications to Kubernetes
+### 3rd Party Solution:
+You can also use 3rd party to host your database, this allows you to take the database management complexity out of Kubernetes and only use Kubernetes to manage your application management like auto scale and controlled deployment.
+There are many option you can use like, this is useful because these 3rd party is responsible to take backup of your services.
+-	A web hosting company to host your database
+-	Azure database etc
+
+
 ## Kubernetes: Scaling
 > Scaling
 Kubernetes autoscaling is a feature that allows a cluster to automatically increase or decrease the number of nodes, or adjust pod resources, in response to demand. When demand increases, the cluster can add nodes or provide more resources to  pods, and when demand decreases, Kubernetes can remove nodes or assign less resources to a pod. This can help optimize resource usage and costs, and also improve performance.
@@ -1239,11 +1274,29 @@ The EndpointSlice API is the mechanism that Kubernetes uses to let your Service 
 If you want to control traffic flow at the IP address or port level (OSI layer 3 or 4), NetworkPolicies allow you to specify rules for traffic flow within your cluster, and also between Pods and the outside world. Your cluster must use a network plugin that supports NetworkPolicy enforcement.
 
 
-
-
-
-
 ## Kubernetes: Storage
+
+### Volumes
+- Problems 
+   - Container state is not saved so all of the files that were created or modified during the lifetime of the container are lost. During a crash, kubelet restarts the container with a clean state.
+   - Another problem occurs when multiple containers are running in a Pod and need to share files. It can be challenging to setup and access a shared filesystem across all of the containers.
+- So we need a temporary solution which lets the pods share data among it’s container and if restarts, atleast get the previous state saves to reload.
+- The solution is volumes
+- The volume type defines where data is stored and when it’s data will be deleted
+- Volume Types
+   - 1. emptyDir
+	- emptyDir is a pod level storage
+	- All containers in the Pod can read and write the same files in the emptyDir volume
+	- When a Pod is removed from a node for any reason, the data in the emptyDir is deleted permanently.
+   - 2. hostPath
+	- hostPath is node level storage (not for production)
+	- A hostPath volume mounts a file or directory from the host node's filesystem into your Pod.
+	- If node is deleted the hostpath data is deleted.
+   - 3. downwardAPI
+	- A downwardAPI volume makes downward API data available to applications. Within the volume, you can find the exposed data as read-only files in plain text format.
+
+### Persistent Volumes
+### Storage Classes
 
 ## Kubernetes: Security
 ### Authentication
