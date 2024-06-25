@@ -954,10 +954,26 @@ In Kubernetes, you do not create ReplicaSets directly. ReplicaSets are set up as
 
 
 ### Horizontal Pod Autoscaler (HPA)
+HPA dynamically add pods depending on the load on your application. It’s kind of a dynamic replicaset based on CPU usage. 
+Automatically adds or removes pod replicas dynamically depending on HPA definition. Horizontal Pod Autoscaler (HPA) automatically adds or removes pod replicas. This makes it possible to automatically manage workload scaling when the level of application usage changes.
+Commands
+-	creates a pod and define that the cpu requirements
+  -	kubectl run php-apache --image=k8s.gcr.io/hpa-example --requests=cpu=200m --limits=cpu=500m --expose --port=80
+-	create a HPA and define the if the pod exceeds 50% CPU then create a new pod upto 3 max.
+  -	kubectl autoscale deployment php-apache --cpu-percent=50 --min=1 --max=3
+-	Get HPA status
+  -	Kubectl get hpa
+
 
 ### Cluster Autoscaler
+Automatically adds or removes nodes in a cluster based on all pods’ requested resources & HPA. Cluster Autoscaler works with Horizonal Pod Scaler to automatically adds or removes nodes in a cluster based on demand. It seeks unschedulable pods and tries to consolidate pods that are currently deployed on only a few nodes. It loops through these two tasks constantly.
 
 ### Vertical Pod Autoscaler (VPA)
+You install a vertical pod scaler which automatically change your pod CPU/Memory limited based on it’s usage both up and down.
+Vertical Pod Autoscaler (VPA) frees users from the necessity of setting up-to-date resource limits and requests for the containers in their pods. When configured, it will set the requests automatically based on usage and thus allow proper scheduling onto nodes so that appropriate resource amount is available for each pod. It will also maintain ratios between limits and requests that were specified in initial containers configuration.
+It can both down-scale pods that are over-requesting resources, and also up-scale pods that are under-requesting resources based on their usage over time.
+Automatically adds or adjusts CPU and memory reservations for your pods. The Vertical Pod Autoscaler automatically adds or adjusts CPU and memory reservations for your pods. It uses live usage data to set limits on container resources.
+
 
 ## Kubernetes: Services, Load Balancing, and Networking
 
