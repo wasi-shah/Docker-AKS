@@ -198,7 +198,8 @@ In Kubernetes, namespaces provide a mechanism for isolating groups of resources 
 Initial namespaces
 Kubernetes starts with four initial namespaces:
 
-> default
+**default**
+
 Kubernetes includes this namespace so that you can start using your new cluster without first creating a namespace.
 > kube-node-lease
 This namespace holds Lease objects associated with each node. Node leases allow the kubelet to send heartbeats so that the control plane can detect node failure.
@@ -1543,6 +1544,7 @@ kube-state-metrics is a service that makes cluster state information easily cons
 - graphing tool - Datadog
 - kentik - Understand your Kubernetes networks, from container, to data center, to public cloud.
 - NetFlow - Service communication monitoring in Kubernetes
+- Cilium - Visualize Network Traffic
 - a storage backend - PV
 - integrating a monitoring tool with the different components of your infrastructure
 
@@ -1582,5 +1584,4 @@ IaaS/Kubernetes Provider
 
 ## Kubernetes Tools
 ### Command Tools
-- Kubectl
-The Kubernetes command-line tool, kubectl, allows you to run commands against Kubernetes clusters. You can use kubectl to deploy applications, inspect and manage cluster resources, and view logs.
+- Kubectl : The Kubernetes command-line tool, kubectl, allows you to run commands against Kubernetes clusters. You can use kubectl to deploy applications, inspect and manage cluster resources, and view logs.
