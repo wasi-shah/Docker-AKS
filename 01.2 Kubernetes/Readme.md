@@ -1506,6 +1506,56 @@ A resource quota, defined by a ResourceQuota object, provides constraints that l
 
 
 ## Monitoring in Kubernetes
+ In traditional, host-centric infrastructure, we were used to monitoring only two layers: applications and the hosts running them. Now with containers in the middle and Kubernetes itself needing to be monitored, there are four different components to monitor and collect metrics from.
+
+> [!note] 
+>There are four different components to monitor and collect metrics from
+
+- applications
+- the hosts
+- containers 
+- Kubernetes
+
+### Metrics to monitor
+
+Whether you use Heapster data or a monitoring tool integrating with Kubernetes and its different APIs, there are several key types of metrics that need to be closely tracked:
+
+- Running pods and their deployments
+- Usual resource metrics such as CPU, memory usage, and disk I/O
+- Container-native metrics
+- Application metrics for which a service discovery feature in your monitoring tool is essential 
+All these metrics should be aggregated using Kubernetes labels and correlated with events from Kubernetes and container technologies.
+
+
+
+### Where Kubernetes metrics come from
+The Kubernetes ecosystem includes two complementary add-ons for aggregating and reporting valuable monitoring data from your cluster: Metrics Server and kube-state-metrics.
+#### Metrics Server
+Metrics Server collects resource usage statistics from the kubelet on each node and provides aggregated metrics through the Metrics API. Metrics Server stores only near-real-time metrics in memory, so it is primarily valuable for spot checks of CPU or memory usage, or for periodic querying by a full-featured monitoring service that retains data over longer timespans.
+
+#### kube-state-metrics
+kube-state-metrics is a service that makes cluster state information easily consumable. Whereas Metrics Server exposes metrics on resource usage by pods and nodes, kube-state-metrics listens to the Control Plane API server for data on the overall status of Kubernetes objects (nodes, pods, Deployments, etc.), as well as the resource limits and allocations for those objects. It then generates metrics from that data that are available through the Metrics API.
+
+#### Monitoring Cluster level
+You can monitor nodes on cluster using 
+- Kubectl top Nodes 
+- Kubectl top pods
+
+#### Monitoring Application Level
+This is to monitor log written by your application
+- Reading pod log
+   - Kubectl logs pod-name
+- Reading pod outer log
+   - kubectl logs ${POD_NAME} ${CONTAINER_NAME}
+- Reading log written by an app inside its container storage
+   - The application stores logs at location /log/app.log. View the logs.
+   - You can shell into the container using exec
+   - kubectl exec webapp -- cat /log/app.log
+- Listing folders inside the container
+   - kubectl exec webapp -- ls
+- Reading Events
+   - Kubectl get events
+
 
 ## Kubernetes Cluster Providers
 
