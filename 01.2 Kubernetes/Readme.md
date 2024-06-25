@@ -1378,23 +1378,35 @@ kubectl describe pod kube-apiserver-master -n kube-system | grep authorization-m
         serviceAccountName: dashboard-sa
 ```
 
-What are service accounts?
-A service account is a type of non-human account that, in Kubernetes, provides a distinct identity in a Kubernetes cluster. Application Pods, system components, and entities inside and outside the cluster can use a specific ServiceAccount's credentials to identify as that ServiceAccount. This identity is useful in various situations, including authenticating to the API server or implementing identity-based security policies.
-Commands
-•	Kubectl get serviceaccount 
-•	Kubectl get sa
-•	Kubectl create serviceaccount dashboard-sa
-•	Configure Service Accounts for Pods
-o	apiVersion: v1
-o	kind: Pod
-o	metadata:
-o	  name: my-pod
-o	spec:
-o	  serviceAccountName: dashboard-sa
-
 #### Authorization 
+The Kubernetes API server may authorize a request using one of several authorization modes:
+
+- Node - A special-purpose authorization mode that grants permissions to kubelets based on the pods they are scheduled to run. To learn more about using the Node authorization mode, see Node Authorization.
+- ABAC - Attribute-based access control (ABAC) defines an access control paradigm whereby access rights are granted to users through the use of policies which combine attributes together. The policies can use any type of attributes (user attributes, resource attributes, object, environment attributes, etc). To learn more about using the ABAC mode, see ABAC Mode.
+- RBAC - Role-based access control (RBAC) is a method of regulating access to computer or network resources based on the roles of individual users within an enterprise. In this context, access is the ability of an individual user to perform a specific task, such as view, create, or modify a file. To learn more about using the RBAC mode, see RBAC Mode. To enable RBAC, start the apiserver with --authorization-mode=RBAC.
+By default all roles are denied by kubernetes so you never define a deny role, you allow create and assign a allow role.
+  - Role
+    - A Role can only be used to grant access to resources within a single namespace.
+    - A Role always sets permissions within a particular namespace; when you create a Role, you have to specify the namespace it belongs in.
+    - RoleBinding
+    - Because a role is namespace bound so RoleBinding grants permissions within a specific namespace.
+  - ClusterRole
+    - A ClusterRole can be used to grant the same permissions as a Role, but because they are cluster-scoped, they can also be used to grant access to:
+      - cluster-scoped resources (like nodes)
+      - non-resource endpoints (like “/healthz”)
+      - namespaced resources (like pods) across all namespaces (needed to run kubectl get pods --all-namespaces, for example)
+    - ClusterRoleBinding
+      - Because a cluster role is cluster wide so ClusterRoleBinding grants that access cluster-wide.
+
+- Webhook - A WebHook is an HTTP callback: an HTTP POST that occurs when something happens; a simple event-notification via HTTP POST. A web application implementing WebHooks will POST a message to a URL when certain things happen. To learn more about using the Webhook mode, see Webhook Mode.
 
 
+- AlwaysAllow
+This mode allows all requests, which brings security risks. Use this authorization mode only if you do not require authorization for your API requests (for example, for testing).
+- AlwaysDeny
+This mode blocks all requests. Use this authorization mode only for testing.
+- Node
+A special-purpose authorization mode that grants permissions to kubelets based on the pods they are scheduled to run. To learn more about the Node authorization mode, see Node Authorization.
 
 ### Secrets 
 The Secret API provides basic protection for configuration values that require confidentiality.
