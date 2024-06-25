@@ -1571,16 +1571,16 @@ This is to monitor log written by your application
 ## Kubernetes Cluster Providers
 
 IaaS/Kubernetes Provider	
-Alibaba Cloud 
-Amazon Web Services 
-Google Cloud Platform 
-Huawei Cloud  
-IBM Cloud 
-Microsoft Azure 
-Oracle Cloud Infrastructure 
-VMware vSphere  
+- Alibaba Cloud 
+- Amazon Web Services 
+- Google Cloud Platform 
+- Huawei Cloud  
+- IBM Cloud 
+- Microsoft Azure 
+- Oracle Cloud Infrastructure 
+- VMware vSphere  
 
 ## Kubernetes Tools
 ### Command Tools
-> Kubectl
+- Kubectl
 The Kubernetes command-line tool, kubectl, allows you to run commands against Kubernetes clusters. You can use kubectl to deploy applications, inspect and manage cluster resources, and view logs.
