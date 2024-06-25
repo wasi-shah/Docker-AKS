@@ -977,6 +977,271 @@ Automatically adds or adjusts CPU and memory reservations for your pods. The Ver
 
 ## Kubernetes: Services, Load Balancing, and Networking
 
+### The Kubernetes network model
+Every Pod in a cluster gets its own unique cluster-wide IP address. This means you do not need to explicitly create links between Pods and you almost never need to deal with mapping container ports to host ports.
+-	Kubernetes do not let docker run the networking hence the container never gets an IP in Kubernetes
+-	The first thing Kubernetes does is it kills the docker networking.
+This creates a clean, backwards-compatible model where Pods can be treated much like VMs or physical hosts from the perspectives of port allocation, naming, service discovery, load balancing, application configuration, and migration.
+
+### Rules
+Kubernetes imposes the following fundamental requirements on any networking implementation
+-	pods can communicate with all other pods on same node and any other node without NAT (Network address translation). It means all pods should be able to talk to other pods inside a cluster.
+-	agents on a node (e.g. system daemons, kubelet) can communicate with all pods on that node and all pods should be able to talk to all nodes.
+
+### The Law
+-	Kubernetes wants all pods/Nodes IPs to be unique.
+-	But Kubernetes does not provide a way to do it.
+-	You need to make sure you control IP uniqueness.
+-	For this you can use 3rd party tool called CNI (Container Network Interface) API tools.
+
+
+#### CNI (Container Network Interface) API tools
+-	Container Network Interface (CNI) is a framework for dynamically configuring networking resources.
+-	Examples are 
+  - WeaveNet, Cisco, Flannel, VMware, NSX, Cilium
+  - Flannel, by default, flannel uses CIDR 10.244.0.0/16 to allocate smaller subnets with 10.244.X.0/24 mask to each node, and Pods will use IP addresses from one of these subnets allocated to a given node.
+
+
+### DNS for Services and Pods
+Kubernetes wants you to choose your DNS service like coreDNS.
+DNS is nothing but to resolve and name url (FQDN) to an ip endpoint resource.
+When you create a Service, it creates a corresponding DNS entry. This entry is of the form <service-name>.<namespace-name>.svc.cluster.local, which means that if a container only uses <service-name>, it will resolve to the service which is local to a namespace. This is useful for using the same configuration across multiple namespaces such as Development, Staging and Production. If you want to reach across namespaces, you need to use the fully qualified domain name (FQDN).
+-	As we know the pods are expose by a service
+  -	A service is in a name space
+    -	The name space is in cluster 
+ 
+So to achieve to access a service means you access to pods. The DNS will look like this
+ 
+> Service-name.namespace-name.svc.cluster-name.local
+ 
+This will translate into a service endpoint.
+  
+You can also reach the pod with its IP with dashes in the middle for example your pod ip is 10.244.2.10
+ 
+> 10-244-2-10.namespace-name.pod.cluster-name.local
+
+
+
+#### coreDNS
+Core-DNS is the internal DNS service used by the cluster's resources. It's the component which registers pod/service DNS names. This is considered a critical component of Kubernetes.
+
+-	coreDNS runs as a pod is master and act Kubernetes DNS service. 
+-	When you create a new pod or service, it records its endpoint IP and access url so it can resolve it.
+-	It has a local storage where it keeps the ip-table 
+-	When you type any url which is in fact a FQDN for example  https://Service-name.namespace-name.svc.cluster-name.local it resolves it to it's IP and let you reach to a resource.
+-	Commands
+  -	How to find the FQDN of a service
+  -	Run
+  -	$ host web-service
+  -	Here you have a service name web-service
+  -	 > web-service-default.svc.cluster.local has address 10.97.206.196
+
+
+
+#### External DNS
+External-DNS is an add-on component which allows the deployment of DNS records in external DNS services such as Azure DNS zone based on the host field within ingress resources deployed to the cluster.
+
+#### Cert Manager
+It runs as a pod as an external service to install and renew SSL
+
+### Service
+
+Service is a method for exposing a network application that is running as one or more Pods in your cluster.
+Service is bound to whole cluster and not a single node. Services are not created on single node or assigned to a single node. Services are cluster wide object.
+Services are virtual object which created cluster wide scope and get an IP address. 
+You can’t attach a service to a node, services are attached to a cluster.
+The Service API lets you expose an application running in Pods to be reachable from outside your cluster.
+Ingress provides extra functionality specifically for exposing HTTP applications, websites and APIs.
+Gateway API is an add-on that provides an expressive, extensible, and role-oriented family of API kinds for modelling service networking.
+
+
+> Service type
+For some parts of your application (for example, frontends) you may want to expose a Service onto an external IP address, one that's accessible from outside of your cluster.
+Kubernetes Service types allow you to specify what kind of Service you want.
+The available type values and their behaviors are:
+
+
+#### ClusterIP (default service) (Internet to k8s cluster)
+It crease a Cluster virtual IP so multiple clusters can talk to each other. Exposes the Service on a cluster-internal IP. Choosing this value makes the Service only reachable from within the cluster. This is the default that is used if you don't explicitly specify a type for a Service. You can expose the Service to the public internet using an Ingress or a Gateway.
+This default Service type assigns an IP address from a pool of IP addresses that your cluster has reserved for that purpose. Several of the other types for Service build on the ClusterIP type as a foundation. If you define a Service that has the .spec.clusterIP set to "None" then Kubernetes does not assign an IP address.
+Commands
+-	kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yam
+  -	Create a Service named redis-service of type ClusterIP to expose pod redis on port 6379
+  -	This will automatically use the pod's labels as selectors
+-	kubectl create service clusterip redis --tcp=6379:6379 --dry-run -o yaml
+  -	This will not use the 
+
+
+#### NodePort (To Internet through a Worker Node)
+Used to map a node port to an pod port using [selector]. Selector is used to filter the pods with some sort of criteria like app name.
+Exposes the Service on each Node's IP at a static port (the NodePort). To make the node port available, Kubernetes sets up a cluster IP address, the same as if you had requested a Service of 
+> type: ClusterIP
+If you set the type field to NodePort, the Kubernetes control plane allocates a port from a range specified by --service-node-port-range flag (default: 30000-32767). Each node proxies that port (the same port number on every Node) into your Service. Your Service reports the allocated port in its .spec.ports[*].nodePort field.
+Using a NodePort gives you the freedom to set up your own load balancing solution, to configure environments that are not fully supported by Kubernetes, or even to expose one or more nodes' IP addresses directly.
+Commands:
+-	kubectl expose pod nginx --port=80 --name nginx-service --dry-run -o yaml
+  -	This will automatically use the pod's labels as selectors, but you cannot specify the node port.
+-	kubectl create service nodeport nginx --tcp=80:80 --node-port=30080 --dry-run -o yaml
+  -	This will not use the pods labels as selectors
+
+#### LoadBalancer (To Internet)
+Exposes the Service (nodePort) externally using an external load balancer. Kubernetes does not directly offer a load balancing component; you must provide one, or you can integrate your Kubernetes cluster with a cloud provider.
+> type: LoadBalancer
+On cloud providers which support external load balancers, setting the type field to LoadBalancer provisions a load balancer for your Service. The actual creation of the load balancer happens asynchronously, and information about the provisioned balancer is published in the Service's .status.loadBalancer field.
+Traffic from the external load balancer is directed at the backend Pods. The cloud provider decides how it is load balanced.
+To implement a Service of type: LoadBalancer, Kubernetes typically starts off by making the changes that are equivalent to you requesting a Service of type: NodePort. The cloud-controller-manager component then configures the external load balancer to forward traffic to that assigned node port.
+Command
+kubectl create service loadbalancer lb  --tcp=5123:8080 --dry-run=client -o yaml
+
+
+#### ExternalName (From Internet)
+
+It is used to connect the pods to an external MySQL database sitting on Azure through a CNAME.
+Maps the Service to the contents of the externalName field (for example, to the hostname api.foo.bar.example). The mapping configures your cluster's DNS server to return a CNAME record with that external hostname value. No proxying of any kind is set up.
+> type: ExternalName
+Services of type ExternalName map a Service to a DNS name, not to a typical selector such as my-service or cassandra. You specify these Services with the spec.externalName parameter.
+This Service definition, for example, maps the my-service Service in the prod namespace to my.database.example.com:
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+  namespace: prod
+spec:
+  type: ExternalName
+  externalName: my.database.example.com
+```
+
+
+### Ingress (To Internet)
+Ingress exposes HTTP and HTTPS routes from outside the cluster to services within the cluster. 
+Traffic routing is controlled by rules defined on the Ingress resource.
+Make your HTTP (or HTTPS) network service available using a protocol-aware configuration mechanism, that understands web concepts like URIs, hostnames, paths, and more. The Ingress concept lets you map traffic to different backends based on rules you define via the Kubernetes API.
+Ingress provides extra functionality specifically for exposing HTTP applications, websites and APIs.
+Ingress Service
+ 
+It's like a level 7 load balance same as application gateway which can pass the control to another service based on the url for example.
+ 
+You can say it’s a smart load balancer
+  
+#### Simple fanout
+A fan-out configuration routes traffic from a single IP address to more than one Service, based on the HTTP URI being requested. An Ingress allows you to keep the number of load balancers down to a minimum. For example, a setup like:
+> Abc.com/foo	service1:80
+> Abc.com/bar	service2:80
+
+```
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: simple-fanout-example
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: abc.com
+    http:
+      paths:
+      - path: /foo
+        backend:
+          serviceName: service1
+          servicePort: 80
+      - path: /bar
+        backend:
+          serviceName: service2
+          servicePort: 80
+
+```
+
+#### Sub domain level ingress 
+Name-based virtual hosts support routing HTTP traffic to multiple host names at the same IP address.
+> foo.abc.com	service1:80
+> bar.abc.com	service2:80
+```
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: name-virtual-host-ingress
+spec:
+  rules:
+  - host: foo.abc.com
+    http:
+      paths:
+      - backend:
+          serviceName: service1
+          servicePort: 80
+  - host: bar.abc.com
+    http:
+      paths:
+      - backend:
+          serviceName: service2
+          servicePort: 80
+
+```
+> Sub domains with default www
+> foo.abc.com	service1:80
+> bar.abc.com	service2:80
+> www.abc.com
+> Service3:80
+> Xyz.abcd.com	Service3:80
+```
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: name-virtual-host-ingress
+spec:
+  rules:
+  - host: foo.abc.com
+    http:
+      paths:
+      - backend:
+          serviceName: service1
+          servicePort: 80
+  - host: bar.abc.com
+    http:
+      paths:
+      - backend:
+          serviceName: service2
+          servicePort: 80
+  - http: # for all other sub domain including www
+      paths:
+      - backend:
+          serviceName: service3
+          servicePort: 80
+
+```
+ 
+-	To deploy this file run
+-	Kubectl create -f filename.yaml
+-	Or
+-	kubectl create ingress <ingress-name> --rule="host/path=service:port"
+-	To fetch
+-	Kubectl get Ingress
+
+
+#### Ingress Controllers
+In order for an Ingress to work in your cluster, there must be an ingress controller running. You need to select at least one ingress controller and make sure it is set up in your cluster. This page lists common ingress controllers that you can deploy.
+-	AKS Application Gateway Ingress Controller is an ingress controller that configures the Azure Application Gateway.
+-	The Application Gateway Ingress Controller (AGIC) is a Kubernetes application, which makes it possible for Azure Kubernetes Service (AKS) customers to leverage Azure's native Application Gateway L7 load-balancer to expose cloud software to the Internet. AGIC monitors the Kubernetes cluster it's hosted on and continuously updates an Application Gateway, so that selected services are exposed to the Internet.
+-	AKS Application Gateway Ingress Controller helps eliminate the need to have another load balancer/public IP address in front of the AKS cluster and avoids multiple hops in your datapath before requests reach the AKS cluster. Application Gateway talks to pods using their private IP address directly and doesn't require NodePort or KubeProxy services. This capability also brings better performance to your deployments.
+
+
+### Headless Services
+Used in Stateful set.
+Sometimes you don't need load-balancing and a single Service IP. In this case, you can create what are termed headless Services, by explicitly specifying "None" for the cluster IP address (.spec.clusterIP).
+You can use a headless Service to interface with other service discovery mechanisms, without being tied to Kubernetes' implementation.
+For headless Services, a cluster IP is not allocated, kube-proxy does not handle these Services, and there is no load balancing or proxying done by the platform for them.
+
+### Gateway API
+Gateway API is a family of API kinds that provide dynamic infrastructure provisioning and advanced traffic routing. Gateway API is an add-on containing API kinds that provide dynamic infrastructure provisioning and advanced traffic routing.
+### EndpointSlices
+The EndpointSlice API is the mechanism that Kubernetes uses to let your Service scale to handle large numbers of backends, and allows the cluster to update its list of healthy backends efficiently.
+### Network Policies
+If you want to control traffic flow at the IP address or port level (OSI layer 3 or 4), NetworkPolicies allow you to specify rules for traffic flow within your cluster, and also between Pods and the outside world. Your cluster must use a network plugin that supports NetworkPolicy enforcement.
+
+
+
+
+
 
 ## Kubernetes: Storage
 
