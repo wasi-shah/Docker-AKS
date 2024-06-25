@@ -1368,7 +1368,8 @@ kubectl describe pod kube-apiserver-master -n kube-system | grep authorization-m
     -	Kubectl get sa
     -	Kubectl create serviceaccount dashboard-sa
     -	Configure Service Accounts for Pods
-    ```
+
+```
       apiVersion: v1
       kind: Pod
       metadata:
