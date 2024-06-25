@@ -1285,15 +1285,15 @@ If you want to control traffic flow at the IP address or port level (OSI layer 3
 - The volume type defines where data is stored and when it’s data will be deleted
 - Volume Types
    - 1. emptyDir
-	- emptyDir is a pod level storage
-	- All containers in the Pod can read and write the same files in the emptyDir volume
-	- When a Pod is removed from a node for any reason, the data in the emptyDir is deleted permanently.
+        - emptyDir is a pod level storage
+        - All containers in the Pod can read and write the same files in the emptyDir volume
+        - When a Pod is removed from a node for any reason, the data in the emptyDir is deleted permanently.
    - 2. hostPath
-	- hostPath is node level storage (not for production)
-	- A hostPath volume mounts a file or directory from the host node's filesystem into your Pod.
-	- If node is deleted the hostpath data is deleted.
+        - hostPath is node level storage (not for production)
+        - A hostPath volume mounts a file or directory from the host node's filesystem into your Pod.
+        - If node is deleted the hostpath data is deleted.
    - 3. downwardAPI
-	- A downwardAPI volume makes downward API data available to applications. Within the volume, you can find the exposed data as read-only files in plain text format.
+        - A downwardAPI volume makes downward API data available to applications. Within the volume, you can find the exposed data as read-only files in plain text format.
 
 ### Persistent Volumes
 ### Storage Classes
