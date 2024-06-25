@@ -335,7 +335,7 @@ kubectl apply -R -f configs/
 -	Pod is the smallest element in the Kubernetes.
 -	The contains containers. Pods has an internal IP address assigned by the Kubernetes and it acts like a mini machine.
 -	It can have multiple containers, but the containers must be doing a related job because it recycles together.
--	You can have 110 pods ins one node max to 256. It means you can have max 265 IP allocations inside the node because each pods get one IP.
+-	You can have 110 pods in one node max to 256. It means you can have max 265 IP allocations inside the node because each pods get one IP.
 
 ### Types on Pods
 #### Application Pods
@@ -383,6 +383,9 @@ This is your container which is your main app. If starts after InitContainer fin
 -	Each init container must complete successfully before the next one starts.
 -	If you specify multiple init containers for a Pod, kubelet runs each init container sequentially.
 -	Ensures that the main container starts with the necessary prerequisites.
+> [!important]
+> Question : Can you have multiple init container in  a single pod.
+> Answer: Yes : If you specify multiple init containers for a Pod, kubelet runs each init container sequentially.
 
 ##### Multi-Container Pod design pattern
 ###### Adapter containers 
