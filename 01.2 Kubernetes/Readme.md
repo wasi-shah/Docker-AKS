@@ -855,7 +855,7 @@ Checks that OpenStack Cinder volume limits can be satisfied for the node. Extens
 ## Kubernetes: Workloads
 A workload is an application running on Kubernetes. Whether your workload is a single component or several that work together, on Kubernetes you run it inside a set of pods. In Kubernetes, a Pod represents a set of running containers on your cluster.
 
-### Deployment and ReplicaSet
+### Deployment
 Deployment and ReplicaSet (replacing the legacy resource ReplicationController). Deployment is a good fit for managing a stateless application workload on your cluster, where any Pod in the Deployment is interchangeable and can be replaced if needed.
 
 A Deployment provides declarative updates for Pods and ReplicaSets.
@@ -922,12 +922,45 @@ DaemonSet defines Pods that provide facilities that are local to nodes. Every ti
 ### Job and CronJob 
 Job and CronJob provide different ways to define tasks that run to completion and then stop. You can use a Job to define a task that runs to completion, just once. You can use a CronJob to run the same Job multiple times according a schedule.
 
+## Kubernetes: Scaling
+> Scaling
+Kubernetes autoscaling is a feature that allows a cluster to automatically increase or decrease the number of nodes, or adjust pod resources, in response to demand. When demand increases, the cluster can add nodes or provide more resources to  pods, and when demand decreases, Kubernetes can remove nodes or assign less resources to a pod. This can help optimize resource usage and costs, and also improve performance.
+Types of scaling in Kubernetes.
+
+### ReplicaSets
+It makes sure that the desired number of pods always running.
+Used to create a specified quantity of identical pods. It hardcode the number of pods must be running. A ReplicaSet (RS) is a Kubernetes object that ensures there is always a stable set of running pods for a specific workload. The ReplicaSet configuration defines a number of identical pods required, and if a pod is evicted or fails, creates more pods to compensate for the loss.
+In Kubernetes, you do not create ReplicaSets directly. ReplicaSets are set up as part of the Deployment construct.
+
+> Commands
+-	kubectl create deployment my-dep --image=nginx --replicas=3
+-	This will create a deployment but if you just need to create a replicaset then same the command output in file and replace Kind: Deployment to Kind Replicaset and delete strategy tag.
+ 	   -kubectl create deployment mydep --image=nginx --replicas=1 --dry-run=client -o yaml > rs.yaml
+ 	   -Edit rs.yaml
+ 	   -Replace Deployment to Replicaset
+ 	   -Remove Strategy 
+ 	   -Kubectl apply -f rs.yaml
+-	Kubectl get replicasets OR 
+-	Kubectl get rs
+ 	   -List all replicasets available in the cluster
+-	Kubectl describe rs my-replica-set-1
+ 	   -Describe the replica set object, here you can see the image use to create the containers and events
+-	Kubectl get rs my-replica-set-1 -o yaml > myreplica.yaml
+ 	   -Creates a yaml file from existing replica, handy if you wish to change anything is replica like image and re-deploy
+-	Kubectl scale rs my-replicaset-1 --replicas=5
+ 	   -Update or downgrand number of replicas in a replicaset
+-	kubectl delete rs replicaset-1
+ 	   -Deletes the replica set
 
 
+### Horizontal Pod Autoscaler (HPA)
+
+### Cluster Autoscaler
+
+### Vertical Pod Autoscaler (VPA)
 
 ## Kubernetes: Services, Load Balancing, and Networking
 
-## Kubernetes: Scaling
 
 ## Kubernetes: Storage
 
