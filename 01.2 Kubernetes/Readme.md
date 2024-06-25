@@ -935,22 +935,22 @@ In Kubernetes, you do not create ReplicaSets directly. ReplicaSets are set up as
 > Commands
 -	kubectl create deployment my-dep --image=nginx --replicas=3
 -	This will create a deployment but if you just need to create a replicaset then same the command output in file and replace Kind: Deployment to Kind Replicaset and delete strategy tag.
- 	   -kubectl create deployment mydep --image=nginx --replicas=1 --dry-run=client -o yaml > rs.yaml
- 	   -Edit rs.yaml
- 	   -Replace Deployment to Replicaset
- 	   -Remove Strategy 
- 	   -Kubectl apply -f rs.yaml
+  - kubectl create deployment mydep --image=nginx --replicas=1 --dry-run=client -o yaml > rs.yaml
+  - Edit rs.yaml
+  - Replace Deployment to Replicaset
+  - Remove Strategy 
+  - Kubectl apply -f rs.yaml
 -	Kubectl get replicasets OR 
 -	Kubectl get rs
- 	   -List all replicasets available in the cluster
+	- List all replicasets available in the cluster
 -	Kubectl describe rs my-replica-set-1
- 	   -Describe the replica set object, here you can see the image use to create the containers and events
+  - Describe the replica set object, here you can see the image use to create the containers and events
 -	Kubectl get rs my-replica-set-1 -o yaml > myreplica.yaml
- 	   -Creates a yaml file from existing replica, handy if you wish to change anything is replica like image and re-deploy
+  - Creates a yaml file from existing replica, handy if you wish to change anything is replica like image and re-deploy
 -	Kubectl scale rs my-replicaset-1 --replicas=5
- 	   -Update or downgrand number of replicas in a replicaset
+  - Update or downgrand number of replicas in a replicaset
 -	kubectl delete rs replicaset-1
- 	   -Deletes the replica set
+  - Deletes the replica set
 
 
 ### Horizontal Pod Autoscaler (HPA)
