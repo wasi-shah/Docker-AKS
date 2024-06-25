@@ -1353,21 +1353,21 @@ Kubernetes do not provide user creation; it wants to create a user through follo
 To inspect which authorization mode is configured in your cluster, run the following command
 kubectl describe pod kube-apiserver-master -n kube-system | grep authorization-mode
 -	Files - Username and password
-  -	Create a user csv file and configure it with the api server
+    -	Create a user csv file and configure it with the api server
 -	Files - Username and tokens like bearer tokens also known as service account.
-  -	Create a user csv file and register it with api server
+    -	Create a user csv file and register it with api server
 -	Certificates
-  -	Create a Certificate Signing Request object in kubernetes with user provided certificate and approve it
-  -	Kubectl create -f robert-certificate-signing-request.yaml
-  -	kubectl certificate approve robert 
+    -	Create a Certificate Signing Request object in kubernetes with user provided certificate and approve it
+    -	Kubectl create -f robert-certificate-signing-request.yaml
+    -	kubectl certificate approve robert 
 -	3rd Party access management like Microsoft Entra ID using API webhooks
 -	Service Account (for CICD like azure devops pipeline, Jenkins) 
-  - A service account is a type of non-human account that, in Kubernetes, provides a distinct identity in a Kubernetes cluster. Application Pods, system components, and entities inside and outside the cluster can use a specific ServiceAccount's credentials to identify as that ServiceAccount. This identity is useful in various situations, including authenticating to the API server or implementing identity-based security policies.
-  - Commands
-    - Kubectl get serviceaccount 
-    -	Kubectl get sa
-    -	Kubectl create serviceaccount dashboard-sa
-    -	Configure Service Accounts for Pods
+    - A service account is a type of non-human account that, in Kubernetes, provides a distinct identity in a Kubernetes cluster. Application Pods, system components, and entities inside and outside the cluster can use a specific ServiceAccount's credentials to identify as that ServiceAccount. This identity is useful in various situations, including authenticating to the API server or implementing identity-based security policies.
+    - Commands
+      - Kubectl get serviceaccount 
+      -	Kubectl get sa
+      -	Kubectl create serviceaccount dashboard-sa
+      -	Configure Service Accounts for Pods
 
 ```
       apiVersion: v1
