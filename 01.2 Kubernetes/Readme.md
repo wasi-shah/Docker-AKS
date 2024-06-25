@@ -167,6 +167,109 @@ No server side field validation is performed
 
 When kubectl cannot connect to an API server that supports field validation it will fall back to using client-side validation. Kubernetes 1.27 and later versions always offer field validation; older Kubernetes releases might not. If your cluster is older than v1.27, check the documentation for your version of Kubernetes.
 
+#### Labels and Selectors
+##### Labels
+Labels are key/value pairs that are attached to objects such as Pods. Labels are intended to be used to specify identifying attributes of objects that are meaningful and relevant to users, but do not directly imply semantics to the core system. Labels can be used to organize and to select subsets of objects. Labels can be attached to objects at creation time and subsequently added and modified at any time. Each object can have a set of key/value labels defined. Each Key must be unique for a given object.
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: label-demo
+  labels:
+    environment: production
+    app: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
+```
+Labels allow for efficient queries and watches and are ideal for use in UIs and CLIs. Non-identifying information should be recorded using annotations.
+
+##### Selectors
+Unlike names and UIDs, labels do not provide uniqueness. In general, we expect many objects to carry the same label(s).
+Via a label selector, the client/user can identify a set of objects. The label selector is the core grouping primitive in Kubernetes.
+
+#### Namespaces
+In Kubernetes, namespaces provide a mechanism for isolating groups of resources within a single cluster. Names of resources need to be unique within a namespace, but not across namespaces. Namespace-based scoping is applicable only for namespaced objects (e.g. Deployments, Services, etc.) and not for cluster-wide objects (e.g. StorageClass, Nodes, PersistentVolumes, etc.).
+
+
+Initial namespaces
+Kubernetes starts with four initial namespaces:
+
+> default
+Kubernetes includes this namespace so that you can start using your new cluster without first creating a namespace.
+> kube-node-lease
+This namespace holds Lease objects associated with each node. Node leases allow the kubelet to send heartbeats so that the control plane can detect node failure.
+> kube-public
+This namespace is readable by all clients (including those not authenticated). This namespace is mostly reserved for cluster usage, in case that some resources should be visible and readable publicly throughout the whole cluster. The public aspect of this namespace is only a convention, not a requirement.
+> kube-system
+The namespace for objects created by the Kubernetes system.
+
+```
+kubectl get namespaces
+kubectl get namespaces --show-labels
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: production
+  labels:
+    name: production
+
+kubectl create -f https://k8s.io/examples/admin/namespace-prod.yaml
+
+or
+
+kubectl create ns production
+
+```
+
+#### Annotations
+
+You can use Kubernetes annotations to attach arbitrary non-identifying metadata to objects. Clients such as tools and libraries can retrieve this metadata.
+
+Attaching metadata to objects 
+You can use either labels or annotations to attach metadata to Kubernetes objects. Labels can be used to select objects and to find collections of objects that satisfy certain conditions. In contrast, annotations are not used to identify and select objects. The metadata in an annotation can be small or large, structured or unstructured, and can include characters not permitted by labels. It is possible to use labels as well as annotations in the metadata of the same object.
+
+Annotations, like labels, are key/value maps:
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: annotations-demo
+  annotations:
+    imageregistry: "https://hub.docker.com/"
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
+
+```
+
+#### Field Selectors
+Field selectors let you select Kubernetes objects based on the value of one or more resource fields. Here are some examples of field selector queries:
+```
+metadata.name=my-service
+metadata.namespace!=default
+status.phase=Pending
+```
+This kubectl command selects all Pods for which the value of the status.phase field is Running:
+```
+kubectl get pods --field-selector status.phase=Running
+```
+> [!Note]
+> Field selectors are essentially resource filters. By default, no selectors/filters are applied, meaning that all resources of the specified type are selected. This makes the kubectl queries kubectl get pods and kubectl get pods --field-selector "" equivalent.
+
+
+#### Owners and Dependents  
+In Kubernetes, some objects are owners of other objects. For example, a ReplicaSet is the owner of a set of Pods. These owned objects are dependents of their owner.
+
+
+
 ### Kubernetes Object Management
 The kubectl command-line tool supports several different ways to create and manage Kubernetes objects.
 
@@ -750,6 +853,78 @@ Checks that OpenStack Cinder volume limits can be satisfied for the node. Extens
 
 
 ## Kubernetes: Workloads
+A workload is an application running on Kubernetes. Whether your workload is a single component or several that work together, on Kubernetes you run it inside a set of pods. In Kubernetes, a Pod represents a set of running containers on your cluster.
+
+### Deployment and ReplicaSet
+Deployment and ReplicaSet (replacing the legacy resource ReplicationController). Deployment is a good fit for managing a stateless application workload on your cluster, where any Pod in the Deployment is interchangeable and can be replaced if needed.
+
+A Deployment provides declarative updates for Pods and ReplicaSets.
+You describe a desired state in a Deployment, and the Deployment Controller changes the actual state to the desired state at a controlled rate. You can define Deployments to create new ReplicaSets, or to remove existing Deployments and adopt all their resources with new Deployments. 
+#### Rollout
+When you are deploying you are actually doing a rollout. A Deployment's revision is created when a Deployment's rollout is triggered.
+
+Everytime you create an update, it creates a rollout and gives it a rollout number.
+
+##### Update/Deploy
+A Deployment's rollout is triggered if and only if the Deployment's Pod template (that is, .spec.template) is changed, for example if the labels or container images of the template are updated. Other updates, such as scaling the Deployment, do not trigger a rollout.
+
+##### Rolling Back a Deployment 
+Sometimes, you may want to rollback a Deployment; for example, when the Deployment is not stable, such as crash looping. By default, all of the Deployment's rollout history is kept in the system so that you can rollback anytime you want (you can change that by modifying revision history limit).
+
+
+#### Deployment Strategy
+.spec.strategy specifies the strategy used to replace old Pods by new ones. .spec.strategy.type can be "Recreate" or "RollingUpdate". 
+"RollingUpdate" is the default value.
+
+##### RollingUpdate
+Pods are killed one-by-one when .spec.strategy.type== RollingUpdate.
+##### Recreate
+All existing Pods are killed before new ones are created when .spec.strategy.type==Recreate.
+
+##### Commands
+-	Kubectl get deployments OR kubectl get deploy
+	- List the existing deployment of cluster and on default name space
+-	Kubectl describe deployment mydeployment
+	- Describe the deployment 
+-	kubectl run --generator=deployment/v1beta1 nginx --image=nginx --dry-run --replicas=4 -o yaml > newfile.yaml
+	- Creates a new deployment yaml file with the name nginx and with nginx image with 4 replicas
+-	Kubectl get deployment mydeployment -o yaml > filename.yaml
+	- Creates a deployment file with existing deployment object.
+-	kubectl run --generator=deployment/v1beta1 webapp --image=kodekloud/webapp-color --replicas=3
+	- Creates a deployment without creating a yaml file
+-	kubectl set image deployment/frontend simple-webapp=kodekloud/webapp-2
+	- Edit an existing deployment image
+-	Updates and Rollback
+	- Kubectl create -f deploymentfile.yaml
+	 - Create a deployment from a file
+	- Kubectl create/apply -f deploymentfile.yaml
+	 - Apply changes to already deployed objects
+	- kubectl set image deployment/nginx-deployment nginx=nginx:1.9.1 --record
+	 - Imperative command which directly modify image in a deployment object
+	- Kubectl get deployment fontend -o yaml > deployment.yaml
+	 - This will save the deployment definition into a yaml file, you can edit this file and make required changes and then run kubectl create/apply -f deployment.yaml 
+	- kubectl rollout status deployment.v1.apps/nginx-deployment
+	 - shows current deployment status
+	- kubectl rollout history deployment.v1.apps/nginx-deployment
+	 - shows rollout history
+	- kubectl rollout undo deployment.v1.apps/nginx-deployment
+	 - Now you’ve decided to undo the current rollout and rollback to the previous revision:
+	- kubectl rollout undo deployment.v1.apps/nginx-deployment --to-revision=2
+	 - Alternatively, you can rollback to a specific revision by specifying it with --to-revision:
+	- kubectl scale deployment.v1.apps/nginx-deployment --replicas=10
+	 - You can scale a Deployment by using scale 
+
+
+### StatefulSet
+StatefulSet lets you run one or more related Pods that do track state somehow. For example, if your workload records data persistently, you can run a StatefulSet that matches each Pod with a PersistentVolume. Your code, running in the Pods for that StatefulSet, can replicate data to other Pods in the same StatefulSet to improve overall resilience.
+### DaemonSet
+DaemonSet defines Pods that provide facilities that are local to nodes. Every time you add a node to your cluster that matches the specification in a DaemonSet, the control plane schedules a Pod for that DaemonSet onto the new node. Each pod in a DaemonSet performs a job similar to a system daemon on a classic Unix / POSIX server. A DaemonSet might be fundamental to the operation of your cluster, such as a plugin to run cluster networking, it might help you to manage the node, or it could provide optional behavior that enhances the container platform you are running.
+### Job and CronJob 
+Job and CronJob provide different ways to define tasks that run to completion and then stop. You can use a Job to define a task that runs to completion, just once. You can use a CronJob to run the same Job multiple times according a schedule.
+
+
+
+
 ## Kubernetes: Services, Load Balancing, and Networking
 
 ## Kubernetes: Scaling
