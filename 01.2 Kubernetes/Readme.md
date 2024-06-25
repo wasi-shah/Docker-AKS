@@ -1325,15 +1325,17 @@ Sometimes you wish to save the data permanently. The answer is Persistent Volume
 - Its an on demand PV
 - In StorageClass definition you define the storage provider as ‘provisioner’  for example Google or Azure.
 - Create Persistent Volume on Demand through StorageClass
-  -apiVersion: storage.k8s.io/v1
-  -kind: StorageClass
-  -metadata:
-  -  name: azurefile
-  -provisioner: kubernetes.io/azure-file
-  -parameters:
-  -  skuName: Standard_LRS
-  -  location: eastus
-  -  storageAccount: azure_storage_account_name
+```
+  apiVersion: storage.k8s.io/v1
+  kind: StorageClass
+  metadata:
+    name: azurefile
+  provisioner: kubernetes.io/azure-file
+  parameters:
+    skuName: Standard_LRS
+    location: eastus
+    storageAccount: azure_storage_account_name
+  ```
 - Now you can create a PVC with our without StorageClass name.
 
 ## Kubernetes: Security
