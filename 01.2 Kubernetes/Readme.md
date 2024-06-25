@@ -1336,11 +1336,161 @@ Sometimes you wish to save the data permanently. The answer is Persistent Volume
     location: eastus
     storageAccount: azure_storage_account_name
   ```
-- Now you can create a PVC with our without StorageClass name.
+- Now you can create a PVC with our StorageClass name.
 
 ## Kubernetes: Security
-### Authentication
-### Authorization 
+This section of the Kubernetes documentation aims to help you learn to run workloads more securely, and about the essential aspects of keeping a Kubernetes cluster secure.
+
+Kubernetes includes several APIs and security controls, as well as ways to define policies that can form part of how you manage information security.
+
+### Control plane protection 
+A key security mechanism for any Kubernetes cluster is to control access to the Kubernetes API.
+Users access the Kubernetes API using kubectl, client libraries, or by making REST requests. Both human users and Kubernetes service accounts can be authorized for API access. When a request reaches the API, it goes through several stages like Authentication and Authorization
+
+#### Authentication
+
+Kubernetes do not provide user creation; it wants to create a user through following options. Kubernetes can create service account so you can use CICD tools to deploy apps. 
+To inspect which authorization mode is configured in your cluster, run the following command
+kubectl describe pod kube-apiserver-master -n kube-system | grep authorization-mode
+-	Files - Username and password
+  -	Create a user csv file and configure it with the api server
+-	Files - Username and tokens like bearer tokens also known as service account.
+  -	Create a user csv file and register it with api server
+-	Certificates
+  -	Create a Certificate Signing Request object in kubernetes with user provided certificate and approve it
+  -	Kubectl create -f robert-certificate-signing-request.yaml
+  -	kubectl certificate approve robert 
+-	3rd Party access management like Microsoft Entra ID using API webhooks
+-	Service Account (for CICD like azure devops pipeline, Jenkins) 
+  - A service account is a type of non-human account that, in Kubernetes, provides a distinct identity in a Kubernetes cluster. Application Pods, system components, and entities inside and outside the cluster can use a specific ServiceAccount's credentials to identify as that ServiceAccount. This identity is useful in various situations, including authenticating to the API server or implementing identity-based security policies.
+  - Commands
+    - Kubectl get serviceaccount 
+    -	Kubectl get sa
+    -	Kubectl create serviceaccount dashboard-sa
+    -	Configure Service Accounts for Pods
+    ```
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        name: my-pod
+      spec:
+        serviceAccountName: dashboard-sa
+```
+
+What are service accounts?
+A service account is a type of non-human account that, in Kubernetes, provides a distinct identity in a Kubernetes cluster. Application Pods, system components, and entities inside and outside the cluster can use a specific ServiceAccount's credentials to identify as that ServiceAccount. This identity is useful in various situations, including authenticating to the API server or implementing identity-based security policies.
+Commands
+•	Kubectl get serviceaccount 
+•	Kubectl get sa
+•	Kubectl create serviceaccount dashboard-sa
+•	Configure Service Accounts for Pods
+o	apiVersion: v1
+o	kind: Pod
+o	metadata:
+o	  name: my-pod
+o	spec:
+o	  serviceAccountName: dashboard-sa
+
+#### Authorization 
+
+
+
+### Secrets 
+The Secret API provides basic protection for configuration values that require confidentiality.
+
+### Policies
+
+#### NetworkPolicies
+> Can be used to restrict ingress and egress traffic for a workload.
+If you want to control traffic flow at the IP address or port level for TCP, UDP, and SCTP protocols, then you might consider using Kubernetes NetworkPolicies for particular applications in your cluster
+An example NetworkPolicy might look like this:
+```
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: test-network-policy
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      role: db
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - ipBlock:
+        cidr: 172.17.0.0/16
+        except:
+        - 172.17.1.0/24
+    - namespaceSelector:
+        matchLabels:
+          project: myproject
+    - podSelector:
+        matchLabels:
+          role: frontend
+    ports:
+    - protocol: TCP
+      port: 6379
+  egress:
+  - to:
+    - ipBlock:
+        cidr: 10.0.0.0/24
+    ports:
+    - protocol: TCP
+      port: 5978
+
+
+```
+#### LimitRanges 
+> Limit resource consumption for a namespace.
+
+By default, containers run with unbounded compute resources on a Kubernetes cluster. Using Kubernetes resource quotas, administrators (also termed cluster operators) can restrict consumption and creation of cluster resources (such as CPU time, memory, and persistent storage) within a specified namespace. Within a namespace, a Pod can consume as much CPU and memory as is allowed by the ResourceQuotas that apply to that namespace. As a cluster operator, or as a namespace-level administrator, you might also be concerned about making sure that a single object cannot monopolize all available resources within a namespace.
+
+A LimitRange is a policy to constrain the resource allocations (limits and requests) that you can specify for each applicable object kind (such as Pod or PersistentVolumeClaim) in a namespace.
+
+A LimitRange provides constraints that can:
+
+- Enforce minimum and maximum compute resources usage per Pod or Container in a namespace.
+- Enforce minimum and maximum storage request per PersistentVolumeClaim in a namespace.
+- Enforce a ratio between request and limit for a resource in a namespace.
+- Set default request/limit for compute resources in a namespace and automatically inject them to Containers at runtime.
+- A LimitRange is enforced in a particular namespace when there is a LimitRange object in that namespace.
+
+For example, you define a LimitRange with this manifest:
+
+```
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: cpu-resource-constraint
+spec:
+  limits:
+  - default: # this section defines default limits
+      cpu: 500m
+    defaultRequest: # this section defines default requests
+      cpu: 500m
+    max: # max and min define the limit range
+      cpu: "1"
+    min:
+      cpu: 100m
+    type: Container
+
+```
+#### ResourceQuotas
+> ResourceQuotas limit resource consumption for a namespace.
+When several users or teams share a cluster with a fixed number of nodes, there is a concern that one team could use more than its fair share of resources.
+
+Resource quotas are a tool for administrators to address this concern.
+
+A resource quota, defined by a ResourceQuota object, provides constraints that limit aggregate resource consumption per namespace. It can limit the quantity of objects that can be created in a namespace by type, as well as the total amount of compute resources that may be consumed by resources in that namespace.
+
+
+
+
+
+
+
 
 ## Monitoring in Kubernetes
 
