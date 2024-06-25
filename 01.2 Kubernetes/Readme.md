@@ -384,8 +384,8 @@ This is your container which is your main app. If starts after InitContainer fin
 -	If you specify multiple init containers for a Pod, kubelet runs each init container sequentially.
 -	Ensures that the main container starts with the necessary prerequisites.
 > [!important]
-> Question : Can you have multiple init container in  a single pod.
-> <br>Answer: Yes : If you specify multiple init containers for a Pod, kubelet runs each init container sequentially.
+> **Question:** Can you have multiple init container in  a single pod.
+> <br> **Answer:** Yes, if you specify multiple init containers for a Pod, kubelet runs each init container sequentially.
 
 ##### Multi-Container Pod design pattern
 ###### Adapter containers 
