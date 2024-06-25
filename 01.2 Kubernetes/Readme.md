@@ -935,11 +935,11 @@ In Kubernetes, you do not create ReplicaSets directly. ReplicaSets are set up as
 > Commands
 -	kubectl create deployment my-dep --image=nginx --replicas=3
 -	This will create a deployment but if you just need to create a replicaset then same the command output in file and replace Kind: Deployment to Kind Replicaset and delete strategy tag.
-  - kubectl create deployment mydep --image=nginx --replicas=1 --dry-run=client -o yaml > rs.yaml
-  - Edit rs.yaml
-  - Replace Deployment to Replicaset
-  - Remove Strategy 
-  - Kubectl apply -f rs.yaml
+    - kubectl create deployment mydep --image=nginx --replicas=1 --dry-run=client -o yaml > rs.yaml
+    - Edit rs.yaml
+    - Replace Deployment to Replicaset
+    - Remove Strategy 
+    - Kubectl apply -f rs.yaml
 -	Kubectl get replicasets OR 
 -	Kubectl get rs
 	- List all replicasets available in the cluster
