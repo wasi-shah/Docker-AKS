@@ -305,6 +305,12 @@ In Kubernetes, some objects are owners of other objects. For example, a ReplicaS
 
 
 ### Kubernetes Object Management
+> [!important]
+> **Question: What ae the three objec Management technique available in Kubernetes?** 
+> <br> **1. Imperative commands - for example kubectl create deployment nginx --image nginx.** 
+> <br> **2. Imperative object configuration - for example  kubectl create -f nginx.yaml**
+> <br> **3. Declarative object configuration - for example kubectl apply -f configs/**
+
 The kubectl command-line tool supports several different ways to create and manage Kubernetes objects.
 
 #### Kubernetes object Management techniques
