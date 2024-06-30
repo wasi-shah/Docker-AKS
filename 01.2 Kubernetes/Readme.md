@@ -37,8 +37,10 @@ The worker node(s) host the Pods that are the components of the application work
 
 ### The Kubernetes cluster
 A Kubernetes cluster is made up of at least one master node and one or more worker nodes. The master node makes up the control plane of a cluster and is responsible for scheduling tasks and monitoring the state of the cluster. The key advantage of the Kubernetes cluster is that it is not a physical cluster; rather, it is an abstraction. It does not matter whether the nodes in the cluster are virtual machines or bare-metal, on-premises, or on the cloud; Kubernetes can run containerized applications on any group of such machines. 
-> [!Note] 
-> Kubernetes v1.29 supports clusters with up to 5,000 nodes.
+
+> [!important]
+> **Question: How many nodes can a cluster have?** 
+> <br> **Kubernetes v1.29 supports clusters with up to 5,000 nodes.** 
 
 #### Master Node
 The master node is responsible for running several Kubernetes processes that are absolutely necessary to run and manage the cluster properly:
