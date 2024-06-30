@@ -13,6 +13,10 @@ The fully managed Azure Kubernetes Service (AKS) ia a PAAS and makes deploying a
 > **Question: What Kubernetes does?** 
 > <br> **Answer: Kubernetes manage, scale, and deploy  containerised applications:** 
 
+> [!important]
+> **Question: What is a Kubernetes cluster?** 
+> <br> **Answer: A Kubernetes cluster consists of a set of worker machines, called nodes, that run containerized applications. Every cluster has at least one worker node.** 
+
 ## Kubernetes Components
 When you deploy Kubernetes, you get a cluster.
 
