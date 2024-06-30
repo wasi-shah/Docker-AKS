@@ -953,7 +953,7 @@ Checks that OpenStack Cinder volume limits can be satisfied for the node. Extens
 > **Question: What is a WordLoad and it's four types?** 
 > <br> **A Workload is the actual execution of application. It can be following four types** 
 > <br> **1. Deployment - For running a stateless application workload on your cluster, where any Pod in the Deployment is interchangeable and can be replaced if needed.**
-> <br> **2. StatefulSet - For running one or more related Pods that do track state. It matches each Pod with a PersistentVolume.  **
+> <br> **2. StatefulSet - For running one or more related Pods that do track state. It matches each Pod with a PersistentVolume.**
 > <br> **3. DaemonSet - For running Pods on all nodes. Addons runs as a demonset.**
 > <br> **4. Job & CronJob - Job define a task that runs to completion, just once. CronJob rubs a Job multiple times according a schedule.**
 
@@ -964,8 +964,8 @@ Checks that OpenStack Cinder volume limits can be satisfied for the node. Extens
 
 > [!important]
 > **Question: What are the two types of applications?** 
-> <br> **1. Stateless - By default, the pods are stateless so when the pod deletes its data also deletes. ** 
-> <br> **2. Statefull - The StatefulSet provisions a PersistentVolumeClaim in a single yaml file. To help prevent data loss, PersistentVolumes and PersistentVolumeClaims are not deleted when a StatefulSet is deleted**
+> <br> **1. Stateless - By default, the pods are stateless so when the pod deletes its data also deletes.** 
+> <br> **2. StatefullSet - The StatefulSet provisions a PersistentVolumeClaim in a single yaml file. To help prevent data loss, PersistentVolumes and PersistentVolumeClaims are not deleted when a StatefulSet is deleted**
 
 
 A workload is an application running on Kubernetes. Whether your workload is a single component or several that work together, on Kubernetes you run it inside a set of pods. In Kubernetes, a Pod represents a set of running containers on your cluster.
@@ -1073,6 +1073,14 @@ There are many option you can use like, this is useful because these 3rd party i
 
 
 ## Kubernetes: Scaling
+
+> [!important]
+> **Question: What are the four types of scaling available in Kubernetes?** 
+> <br> **1. - ReplicaSets: An object which create/delete pods to match the desired number of pods.** 
+> <br> **2. - Horizontal Pod Autoscaler (HPA): An object which create/delete pods to match the performance for example, if the pod exceeds 50% CPU then create a new pod. Automatically adds or removes nodes in a cluster based on all pods’ requested resources & HPA. Cluster Autoscaler works with Horizonal Pod Scaler to automatically adds or removes nodes in a cluster based on demand.**
+> <br> **3. - Cluster Autoscaler: **
+> <br> **4. - Vertical Pod Autoscaler (VPA): automatically change your pod CPU/Memory limited based on it’s usage both up and down.**
+
 > Scaling
 Kubernetes autoscaling is a feature that allows a cluster to automatically increase or decrease the number of nodes, or adjust pod resources, in response to demand. When demand increases, the cluster can add nodes or provide more resources to  pods, and when demand decreases, Kubernetes can remove nodes or assign less resources to a pod. This can help optimize resource usage and costs, and also improve performance.
 Types of scaling in Kubernetes.
