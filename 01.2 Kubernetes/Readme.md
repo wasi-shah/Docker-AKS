@@ -26,7 +26,7 @@ The fully managed Azure Kubernetes Service (AKS) ia a PAAS and makes deploying a
 > [!important]
 > **Question: What is a worker node and it's components?** 
 > <br> **Answer: The worker nodes are the part of the Kubernetes clusters which execute the containers and applications on them.** 
-> <br>** Workernode components are Kubelet Service, Kube-proxy Service & Container Runtime.** 
+> <br>**Workernode components are Kubelet Service, Kube-proxy Service & Container Runtime.** 
 
 ## Kubernetes Components
 When you deploy Kubernetes, you get a cluster.
