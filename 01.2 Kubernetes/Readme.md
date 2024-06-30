@@ -9,6 +9,9 @@ Kubernetes is open-source orchestration software that provides an API to control
 Kubernetes lets you orchestrate a cluster of virtual machines and schedule containers to run on those virtual machines based on their available compute resources and the resource requirements of each container. Containers are grouped into pods, the basic operational unit for Kubernetes. These containers and pods can be scaled to your desired state and you’re able to manage their lifecycle to keep your apps up and running. 
 The fully managed Azure Kubernetes Service (AKS) ia a PAAS and makes deploying and managing containerised applications easy. It offers serverless Kubernetes, an integrated continuous integration and continuous delivery (CI/CD) experience, and enterprise-grade security and governance.
 
+> [!important]
+> **What Kubernetes does:** 
+> <br> **Kubernetes manage, scale, and deploy  containerised applications:** 
 
 ## Kubernetes Components
 When you deploy Kubernetes, you get a cluster.
