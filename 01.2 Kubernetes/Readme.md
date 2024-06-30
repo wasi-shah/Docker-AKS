@@ -1704,6 +1704,12 @@ A resource quota, defined by a ResourceQuota object, provides constraints that l
 > **Question: What is the default monitoring addon already included in Kubernetes?** 
 > <br> **Metrics Server is the complementary  addon already included in Kubernetes.** 
 
+> [!important]
+> **Question: What is ‘Heapster’ in Kubernetes??** 
+> <br> **A Heapster is a performance monitoring and metrics collection system for data collected by the Kublet.** 
+
+
+
 ### Metrics to monitor
 
 Whether you use Heapster data or a monitoring tool integrating with Kubernetes and its different APIs, there are several key types of metrics that need to be closely tracked:
@@ -1772,3 +1778,58 @@ IaaS/Kubernetes Provider
 ## Kubernetes Tools
 ### Command Tools
 - Kubectl : The Kubernetes command-line tool, kubectl, allows you to run commands against Kubernetes clusters. You can use kubectl to deploy applications, inspect and manage cluster resources, and view logs.
+
+## Other interview Questions
+
+> [!important]
+> **Question: What are federated clusters??** 
+> <br> **The aggregation of multiple clusters that treat them as a single logical cluster refers to cluster federation. In this, multiple clusters may be managed as a single cluster..** 
+
+
+> [!important]
+> **Question: Give examples of recommended security measures for Kubernetes?** 
+> <br> **Examples of standard Kubernetes security measures include defining resource quotas, support for auditing, restriction of etcd access, regular security updates to the environment, network segmentation, definition of strict resource policies, continuous scanning for security vulnerabilities, and using images from authorized repositories.** 
+
+
+> [!important]
+> **Question: How to monitor the Kubernetes cluster?** 
+> <br> **Monitoring a Kubernetes cluster involves setting up various tools and practices to collect and analyze data on the cluster’s health, performance, and resource usage.** 
+
+
+> [!important]
+> **Question: How to get the central logs from POD?** 
+> <br> **To collect central logs from Pods running in a Kubernetes cluster, you can use a centralized logging solution. One popular approach is to use the ELK Stack, which consists of three main components: Elasticsearch, Logstash (or Fluentd), and Kibana.** 
+
+
+> [!important]
+> **Question: What is a Network Policy in Kubernetes?** 
+> <br> **Kubernetes Network Policies are an application-centric build that let you specify how pod is allowed to communicate with various network.** 
+
+
+> [!important]
+> **Question: What is a Helm chart, and how is it used?** 
+> <br> **Helm utilizes a packaging format called charts, which are collection of files which describe the cohesive set of Kubernetes resources. Whether you are deploying a simple component, like a memcached pod, or a complex web app stack which involves HTTP servers, databases, caches, and more, all the files you need are contained in a single chart. Helm chart packages provide all the resources you need to deploy an application to a Kubernetes cluster, which involves YAML configuration files for secrets, services, deployments, and config maps that provide the app’s desired state.**
+
+
+> [!important]
+> **Question: Explain the concept of Pod Disruption Budgets.** 
+> <br> **It is intended for application owners who want to build highly available applications and also serves as a guide for cluster administrators who are building automated cluster actions such as autoscaling and upgrades. Pod disruption budgets, or PDBs for short, are policies that specify the desired state of the cluster and the orchestrators’ attempt to maintain it. For PDBs, this consists of defining a maximum quantity of failed pods or the lowest number of pod replicas that must stay in the cluster at any given time.** 
+
+
+> [!important]
+> **Question: What are the different ways to provide external network connectivity to K8??** 
+> <br> **1. Nodeport (it will expose one port on each node to communicate with it)** 
+> <br> **2. Load balancers (L4 layer of TCP/IP protocol)** 
+> <br> **3. Ingress (L7 layer of TCP/IP Protocol)** 
+
+> [!important]
+> **Question: How is Kubernetes different from Docker Swarm?** 
+> <br> **Docker Swarm can’t do auto-scaling.** 
+> <br> **Docker Swarm doesn’t have a GUI.** 
+> <br> **Docker Swarm does automatic load balancing of traffic between containers in a cluster.** 
+
+> [!important]
+> **Question: How do you perform maintenance on the K8 node?** 
+> <br> **kubectl cordon.** 
+> <br> **kubectl drain -ignore-demon set.** 
+
