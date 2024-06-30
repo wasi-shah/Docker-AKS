@@ -1139,7 +1139,7 @@ Automatically adds or adjusts CPU and memory reservations for your pods. The Ver
 
 > [!important]
 > **Question: What is the Kubernetes networking unique IP law and how CNI addon helps?** 
-> <br> **Kubernetes wants all pods/Nodes IPs to be unique. For this you can use 3rd party tool called CNI (Container Network Interface) API tools like:** 
+> <br> **Kubernetes wants all pods/Nodes IPs to be unique. For this you can use 3rd party tool called CNI (Container Network Interface) API like:** 
 > <br> **WeaveNet, Cisco, Flannel, VMware, NSX, Cilium to make sure IP uniqueness.**
 
 Every Pod in a cluster gets its own unique cluster-wide IP address. This means you do not need to explicitly create links between Pods and you almost never need to deal with mapping container ports to host ports.
@@ -1167,6 +1167,13 @@ Kubernetes imposes the following fundamental requirements on any networking impl
 
 
 ### DNS for Services and Pods
+> [!important]
+> **Question: What is a DNS service and why we need it DNS addons? Name three important DNS Addons** 
+> <br> **DNS service assing a name to an IP so we can call objects by using a name (instead of IP).** 
+> <br> **1. coreDNS - When you create a new pod or service, it records its endpoint IP and access url so it can resolve it. For example now you can use 'web-service-default.svc.cluster.local' instead of '10.97.206.196'**
+> <br> **2. External DNS - It's an addon to map a domain name to ingress service**
+> <br> **3. Cert Manager - It's an addon to install and renew SSL**
+
 Kubernetes wants you to choose your DNS service like coreDNS.
 DNS is nothing but to resolve and name url (FQDN) to an ip endpoint resource.
 When you create a Service, it creates a corresponding DNS entry. This entry is of the form <service-name>.<namespace-name>.svc.cluster.local, which means that if a container only uses <service-name>, it will resolve to the service which is local to a namespace. This is useful for using the same configuration across multiple namespaces such as Development, Staging and Production. If you want to reach across namespaces, you need to use the fully qualified domain name (FQDN).
