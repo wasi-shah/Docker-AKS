@@ -375,7 +375,7 @@ kubectl apply -R -f configs/
 > [!important]
 > **Question: What is a pod?** 
 > <br> **A pod is the smallest object and works like a VM and always has an internal IP address assigned.** 
-> <br> **Pod runs container inside.**
+> <br> **Pod runs container inside. Pod represents a set of running containers on your cluster.**
 
 
 > [!important]
@@ -418,7 +418,7 @@ kubectl apply -R -f configs/
 > [!important]
 > **Question: Can you control pod scheduling and how?** 
 > <br> **There are many ways you can control pod scheduling. For example through NodeName, NodeSelector, Labels, Affinity and anti-affinity, Taint and Toleration, and forcing Pod CPU/Memory resource requirements.** 
-> <br> **.**
+
 
 -	Pod is the smallest element in the Kubernetes.
 -	The contains containers. Pods has an internal IP address assigned by the Kubernetes and it acts like a mini machine.
@@ -948,6 +948,26 @@ Checks that OpenStack Cinder volume limits can be satisfied for the node. Extens
 
 
 ## Kubernetes: Workloads
+
+> [!important]
+> **Question: What is a WordLoad and it's four types?** 
+> <br> **A Workload is the actual execution of application. It can be following four types** 
+> <br> **1. Deployment - For running a stateless application workload on your cluster, where any Pod in the Deployment is interchangeable and can be replaced if needed.**
+> <br> **2. StatefulSet - For running one or more related Pods that do track state. It matches each Pod with a PersistentVolume.  **
+> <br> **3. DaemonSet - For running Pods on all nodes. Addons runs as a demonset.**
+> <br> **4. Job & CronJob - Job define a task that runs to completion, just once. CronJob rubs a Job multiple times according a schedule.**
+
+> [!important]
+> **Question: What are the two deployment Strategies available?** 
+> <br> **1. RollingUpdate - Pods are killed and create one-by-one** 
+> <br> **2. Recreate - All existing Pods are killed then create**
+
+> [!important]
+> **Question: What are the two types of applications?** 
+> <br> **1. Stateless - By default, the pods are stateless so when the pod deletes its data also deletes. ** 
+> <br> **2. Statefull - The StatefulSet provisions a PersistentVolumeClaim in a single yaml file. To help prevent data loss, PersistentVolumes and PersistentVolumeClaims are not deleted when a StatefulSet is deleted**
+
+
 A workload is an application running on Kubernetes. Whether your workload is a single component or several that work together, on Kubernetes you run it inside a set of pods. In Kubernetes, a Pod represents a set of running containers on your cluster.
 
 ### Deployment
