@@ -1474,7 +1474,7 @@ Sometimes you wish to save the data permanently. The answer is Persistent Volume
   -	kubectl describe pv pv0001
   -	kubectl get pvc
 
-> Ways a pod can attach to a PV
+### Ways a pod can attach to a PV
 
 #### Directly 
 -	Direct assign a volume to a pod without claim
