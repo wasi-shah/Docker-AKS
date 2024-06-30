@@ -85,6 +85,7 @@ Addons use Kubernetes resources (DaemonSet, Deployment, etc) to implement cluste
 > **Question: How can you extend the functionality of Kubernetes?** 
 > <br> **Answer: You can add add-ons to extend functionality** 
 > <br> **for example DNS, Web UI (Dashboard), Container Resource Monitoring, Cluster-level Logging and Network Plugins.**
+> <br> **Addons runs as a demonset.**
 
 Selected addons are described below; for an extended list of available addons, please see Addons.
 
@@ -215,6 +216,12 @@ Unlike names and UIDs, labels do not provide uniqueness. In general, we expect m
 Via a label selector, the client/user can identify a set of objects. The label selector is the core grouping primitive in Kubernetes.
 
 #### Namespaces
+
+> [!important]
+> **Question: What is a Namespaces and four initial namespaces?** 
+> <br> **Answer: Namespaces provide a mechanism for isolating groups of resources within a single cluster.** 
+> <br> **Initial namespaces are default, kube-node-lease, kube-public & kube-system.**
+
 In Kubernetes, namespaces provide a mechanism for isolating groups of resources within a single cluster. Names of resources need to be unique within a namespace, but not across namespaces. Namespace-based scoping is applicable only for namespaced objects (e.g. Deployments, Services, etc.) and not for cluster-wide objects (e.g. StorageClass, Nodes, PersistentVolumes, etc.).
 
 
