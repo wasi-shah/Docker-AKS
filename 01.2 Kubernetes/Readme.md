@@ -1445,6 +1445,12 @@ If you want to control traffic flow at the IP address or port level (OSI layer 3
 > <br> **1. Directly - Create a PV and assign a PV name is pod definition** 
 > <br> **2. Persistence Volume Claim - You create 1.PV and the 2.Claim you define how much space you need. The claim then attached to the pod.**
 > <br> **3. Storage Classes - It creates the PV automatically to satisfy a PersistentVolumeClaim (PVC) for example create a sstorage calss using azure-file**
+> [!important]
+> **Question: Name few types of volumes?** 
+> <br> **1. emptyDir - it's a temprary storage. All containers in the Pod can read and write the same files in the emptyDir volume. When a Pod is removed from a node for any reason, the data in the emptyDir is deleted permanently.
+** 
+> <br> **2. hostPath - hostPath is node level storage (not for production). If node is deleted the hostpath data is deleted.**
+> <br> **2. downwardAPI - A downwardAPI volume makes downward API data available to applications. Within the volume, you can find the exposed data as read-only files in plain text format.**
 
 ### Volumes
 - Problems 
@@ -1581,9 +1587,7 @@ A special-purpose authorization mode that grants permissions to kubelets based o
 ### Secrets 
 The Secret API provides basic protection for configuration values that require confidentiality.
 
-### Policies
-
-#### NetworkPolicies
+### NetworkPolicies
 > Can be used to restrict ingress and egress traffic for a workload.
 If you want to control traffic flow at the IP address or port level for TCP, UDP, and SCTP protocols, then you might consider using Kubernetes NetworkPolicies for particular applications in your cluster
 An example NetworkPolicy might look like this:
@@ -1625,7 +1629,7 @@ spec:
 
 
 ```
-#### LimitRanges 
+### LimitRanges 
 > Limit resource consumption for a namespace.
 
 By default, containers run with unbounded compute resources on a Kubernetes cluster. Using Kubernetes resource quotas, administrators (also termed cluster operators) can restrict consumption and creation of cluster resources (such as CPU time, memory, and persistent storage) within a specified namespace. Within a namespace, a Pod can consume as much CPU and memory as is allowed by the ResourceQuotas that apply to that namespace. As a cluster operator, or as a namespace-level administrator, you might also be concerned about making sure that a single object cannot monopolize all available resources within a namespace.
@@ -1660,7 +1664,7 @@ spec:
     type: Container
 
 ```
-#### ResourceQuotas
+### ResourceQuotas
 > ResourceQuotas limit resource consumption for a namespace.
 When several users or teams share a cluster with a fixed number of nodes, there is a concern that one team could use more than its fair share of resources.
 
@@ -1675,7 +1679,17 @@ A resource quota, defined by a ResourceQuota object, provides constraints that l
 
 
 
+
+
 ## Monitoring in Kubernetes
+> [!important]
+> **Question: What are the four items you an monitor in Kubernetes?** 
+> <br> **1. applications** 
+> <br> **2. hosts**
+> <br> **3. containers**
+> <br> **4. Kubernetes**
+
+
  In traditional, host-centric infrastructure, we were used to monitoring only two layers: applications and the hosts running them. Now with containers in the middle and Kubernetes itself needing to be monitored, there are four different components to monitor and collect metrics from.
 
 > [!note] 
@@ -1685,6 +1699,10 @@ A resource quota, defined by a ResourceQuota object, provides constraints that l
 - the hosts
 - containers 
 - Kubernetes
+
+> [!important]
+> **Question: What is the default monitoring addon already included in Kubernetes?** 
+> <br> **Metrics Server is the complementary  addon already included in Kubernetes.** 
 
 ### Metrics to monitor
 
@@ -1708,14 +1726,14 @@ kube-state-metrics is a service that makes cluster state information easily cons
 
 ## Viewing monitoring data/metrics
 
-- Heapster - Heapster monitors the kubernetes cluster
-- Grafana/Prometheus - A dashboard to view pod metrics by namespace and pod names. 
-- graphing tool - Datadog
-- kentik - Understand your Kubernetes networks, from container, to data center, to public cloud.
-- NetFlow - Service communication monitoring in Kubernetes
-- Cilium - Visualize Network Traffic
-- a storage backend - PV
-- integrating a monitoring tool with the different components of your infrastructure
+- Tool : Heapster - Heapster monitors the kubernetes cluster
+- Tool : Grafana/Prometheus - A dashboard to view pod metrics by namespace and pod names. 
+- Tool : Datadog - graphing tool - 
+- Tool : Kentik - Understand your Kubernetes networks, from container, to data center, to public cloud.
+- Tool : NetFlow - Service communication monitoring in Kubernetes
+- Tool : Cilium - Visualize Network Traffic
+- Your own solution: Attach a storage backend using PV to save application log
+- Your own solution: Integrate your own a monitoring tool with the different components of your infrastructure
 
 
 #### Monitoring Cluster level (using Metrics Server)
@@ -1723,7 +1741,7 @@ You can monitor nodes on cluster using
 - Kubectl top Nodes 
 - Kubectl top pods
 
-#### Monitoring Application Level (using Metrics Server)
+#### Monitoring Application Level
 This is to monitor log written by your application
 - Reading pod log
    - Kubectl logs pod-name
