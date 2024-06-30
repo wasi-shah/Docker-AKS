@@ -368,14 +368,24 @@ kubectl apply -R -f configs/
 
 
 ## Pods
+
+
+> [!important]
+> **Question: What is a pod?** 
+> <br> **A pod is the smallest object and works like a VM and always has an internal IP address assigned.** 
+> <br> **Pod runs container inside.**
+
+
+> [!important]
+> **Question: How many pods can you have on a single node**
+> <br>**110 to 265**
+
 -	Pod is the smallest element in the Kubernetes.
 -	The contains containers. Pods has an internal IP address assigned by the Kubernetes and it acts like a mini machine.
 -	It can have multiple containers, but the containers must be doing a related job because it recycles together.
 -	You can have 110 pods in one node max to 256. It means you can have max 265 IP allocations inside the node because each pods get one IP.
 
-> [!important]
-> **Question:** How many pods can you have on a single node**
-> <br> **110 to 265**
+
 
 
 ### Types on Pods
