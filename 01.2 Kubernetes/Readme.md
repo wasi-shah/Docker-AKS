@@ -81,6 +81,11 @@ Worker nodes are generally more powerful than master nodes because they have to 
 ### Kubernetes Addons
 Addons use Kubernetes resources (DaemonSet, Deployment, etc) to implement cluster features. Because these are providing cluster-level features, namespaced resources for addons belong within the kube-system namespace.
 
+> [!important]
+> **Question: How can you extend the functionality of Kubernetes?** 
+> <br> **Answer: You can add add-ons to extend functionality** 
+> <br> **for example DNS, Web UI (Dashboard), Container Resource Monitoring, Cluster-level Logging and Network Plugins.**
+
 Selected addons are described below; for an extended list of available addons, please see Addons.
 
 #### DNS
