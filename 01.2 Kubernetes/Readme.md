@@ -1294,6 +1294,13 @@ spec:
 
 
 ### Ingress (To Internet)
+
+> [!important]
+> **Question: What is a Ingress service and it's two types?** 
+> <br> **It's like a level 7 load balance same as application gateway which can pass the control to another service based on the url.** 
+> <br> **Simple fanout - example [ Abc.com/foo to service1:80] & [Abc.com/bar service2:80].**
+> <br> **Sub domain level ingress - example [ foo.abc.com service1:80 ] & [ bar.abc.com service2:80 ].**
+
 Ingress exposes HTTP and HTTPS routes from outside the cluster to services within the cluster. 
 Traffic routing is controlled by rules defined on the Ingress resource.
 Make your HTTP (or HTTPS) network service available using a protocol-aware configuration mechanism, that understands web concepts like URIs, hostnames, paths, and more. The Ingress concept lets you map traffic to different backends based on rules you define via the Kubernetes API.
@@ -1306,7 +1313,9 @@ You can say it’s a smart load balancer
   
 #### Simple fanout
 A fan-out configuration routes traffic from a single IP address to more than one Service, based on the HTTP URI being requested. An Ingress allows you to keep the number of load balancers down to a minimum. For example, a setup like:
+
 > Abc.com/foo	service1:80
+
 > Abc.com/bar	service2:80
 
 ```
