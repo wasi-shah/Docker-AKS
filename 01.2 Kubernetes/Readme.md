@@ -10,8 +10,8 @@ Kubernetes lets you orchestrate a cluster of virtual machines and schedule conta
 The fully managed Azure Kubernetes Service (AKS) ia a PAAS and makes deploying and managing containerised applications easy. It offers serverless Kubernetes, an integrated continuous integration and continuous delivery (CI/CD) experience, and enterprise-grade security and governance.
 
 > [!important]
-> **What Kubernetes does:** 
-> <br> **Kubernetes manage, scale, and deploy  containerised applications:** 
+> **Question: What Kubernetes does?** 
+> <br> **Answer: Kubernetes manage, scale, and deploy  containerised applications:** 
 
 ## Kubernetes Components
 When you deploy Kubernetes, you get a cluster.
