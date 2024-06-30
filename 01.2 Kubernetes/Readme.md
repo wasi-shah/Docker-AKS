@@ -1077,8 +1077,8 @@ There are many option you can use like, this is useful because these 3rd party i
 > [!important]
 > **Question: What are the four types of scaling available in Kubernetes?** 
 > <br> **1. - ReplicaSets: An object which create/delete pods to match the desired number of pods.** 
-> <br> **2. - Horizontal Pod Autoscaler (HPA): An object which create/delete pods to match the performance for example, if the pod exceeds 50% CPU then create a new pod. Automatically adds or removes nodes in a cluster based on all pods’ requested resources & HPA. Cluster Autoscaler works with Horizonal Pod Scaler to automatically adds or removes nodes in a cluster based on demand.**
-> <br> **3. - Cluster Autoscaler: **
+> <br> **2. - Horizontal Pod Autoscaler (HPA): An object which create/delete pods to match the performance for example, if the pod exceeds 50% CPU then create a new pod.**
+> <br> **3. - Cluster Autoscaler: Automatically adds or removes nodes in a cluster based on all pods’ requested resources & HPA. Cluster Autoscaler works with Horizonal Pod Scaler to automatically adds or removes nodes in a cluster based on demand.**
 > <br> **4. - Vertical Pod Autoscaler (VPA): automatically change your pod CPU/Memory limited based on it’s usage both up and down.**
 
 > Scaling
