@@ -1136,6 +1136,12 @@ Automatically adds or adjusts CPU and memory reservations for your pods. The Ver
 ## Kubernetes: Services, Load Balancing, and Networking
 
 ### The Kubernetes network model
+
+> [!important]
+> **Question: What is the Kubernetes networking unique IP law and how CNI addon helps?** 
+> <br> **Kubernetes wants all pods/Nodes IPs to be unique. For this you can use 3rd party tool called CNI (Container Network Interface) API tools like:** 
+> <br> **WeaveNet, Cisco, Flannel, VMware, NSX, Cilium to make sure IP uniqueness.**
+
 Every Pod in a cluster gets its own unique cluster-wide IP address. This means you do not need to explicitly create links between Pods and you almost never need to deal with mapping container ports to host ports.
 -	Kubernetes do not let docker run the networking hence the container never gets an IP in Kubernetes
 -	The first thing Kubernetes does is it kills the docker networking.
