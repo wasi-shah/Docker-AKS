@@ -1216,6 +1216,15 @@ External-DNS is an add-on component which allows the deployment of DNS records i
 It runs as a pod as an external service to install and renew SSL
 
 ### Service
+> [!important]
+> **Question: What is a service and it's four types?** 
+> <br> **Service is a method for exposing a network application that is running as one or more Pods in your cluster.** 
+> <br> **1. ClusterIP (default service) - Expose a workload locally as a service.**
+> <br> **2. NodePort (To Internet through a Worker Node) - Expose a workload to a cluster port.**
+> <br> **3. LoadBalancer (To Internet) - Exposes the Service/Workload externally using an external load balancer.**
+> <br> **4. ExternalName (From Internet) - It is used to connect the pods to an external MySQL database sitting on Azure through a CNAME.**
+
+
 
 Service is a method for exposing a network application that is running as one or more Pods in your cluster.
 Service is bound to whole cluster and not a single node. Services are not created on single node or assigned to a single node. Services are cluster wide object.
