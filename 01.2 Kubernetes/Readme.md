@@ -382,6 +382,29 @@ kubectl apply -R -f configs/
 > **Question: How many pods can you have on a single node**
 > <br>**110 to 265**
 
+
+> [!important]
+> **Question: What are the three types of Pods?** 
+> <br> **Application pods.** 
+> <br> **Static Pods.**
+> <br> **Demonsets.**
+
+
+> [!important]
+> **Question: What are the two types of containers pod can have?** 
+> <br> **Application Container.** 
+> <br> **InitContainer.**
+
+> [!important]
+> **Question: Can you have multiple initContainer in  a single pod.**
+> <br> **Yes, if you specify multiple init containers for a Pod, kubelet runs each init container sequentially.**
+
+> [!important]
+> **Question: What are the two ways you can pass values to a Pod/Container?** 
+> <br> **Environment.** 
+> <br> **Volume.**
+
+
 -	Pod is the smallest element in the Kubernetes.
 -	The contains containers. Pods has an internal IP address assigned by the Kubernetes and it acts like a mini machine.
 -	It can have multiple containers, but the containers must be doing a related job because it recycles together.
@@ -436,9 +459,6 @@ This is your container which is your main app. If starts after InitContainer fin
 -	Each init container must complete successfully before the next one starts.
 -	If you specify multiple init containers for a Pod, kubelet runs each init container sequentially.
 -	Ensures that the main container starts with the necessary prerequisites.
-> [!important]
-> **Question: Can you have multiple init container in  a single pod.**
-> <br> **Yes, if you specify multiple init containers for a Pod, kubelet runs each init container sequentially.**
 
 ##### Multi-Container Pod design pattern
 ###### Adapter containers 
