@@ -415,6 +415,11 @@ kubectl apply -R -f configs/
 > <br> **2. Liveness Probe - Checks if app is still alive – if not kill and start new pod.**
 > <br> **3. Readiness Probes - Checks if the pod is less busy for the incoming request. If not, it passes the traffic to less busy pod. It does not kill the pod.**
 
+> [!important]
+> **Question: Can you control pod scheduling and how?** 
+> <br> **There are many ways you can control pod scheduling. For example through NodeName, NodeSelector, Labels, Affinity and anti-affinity, Taint and Toleration, and forcing Pod CPU/Memory resource requirements.** 
+> <br> **.**
+
 -	Pod is the smallest element in the Kubernetes.
 -	The contains containers. Pods has an internal IP address assigned by the Kubernetes and it acts like a mini machine.
 -	It can have multiple containers, but the containers must be doing a related job because it recycles together.
