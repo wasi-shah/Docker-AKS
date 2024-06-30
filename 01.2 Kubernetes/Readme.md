@@ -385,15 +385,15 @@ kubectl apply -R -f configs/
 
 > [!important]
 > **Question: What are the three types of Pods?** 
-> <br> **Application pods.** 
-> <br> **Static Pods.**
-> <br> **Demonsets.**
+> <br> **1. Application pods.** 
+> <br> **2. Static Pods.**
+> <br> **3. Demonsets.**
 
 
 > [!important]
 > **Question: What are the two types of containers pod can have?** 
-> <br> **Application Container.** 
-> <br> **InitContainer.**
+> <br> **1. Application Container.** 
+> <br> **2. InitContainer.**
 
 > [!important]
 > **Question: Can you have multiple initContainer in  a single pod.**
@@ -401,8 +401,8 @@ kubectl apply -R -f configs/
 
 > [!important]
 > **Question: What are the two ways you can pass values to a Pod/Container?** 
-> <br> **Environment.** 
-> <br> **Volume.**
+> <br> **1. Environment.** 
+> <br> **2. Volume.**
 
 
 -	Pod is the smallest element in the Kubernetes.
