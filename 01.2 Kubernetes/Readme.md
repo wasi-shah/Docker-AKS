@@ -1298,8 +1298,8 @@ spec:
 > [!important]
 > **Question: What is a Ingress service and it's two types?** 
 > <br> **It's like a level 7 load balance same as application gateway which can pass the control to another service based on the url.** 
-> <br> **Simple fanout - example [ Abc.com/foo to service1:80] & [Abc.com/bar service2:80].**
-> <br> **Sub domain level ingress - example [ foo.abc.com service1:80 ] & [ bar.abc.com service2:80 ].**
+> <br> **1. Simple fanout - example [ Abc.com/foo to service1:80] & [Abc.com/bar service2:80].**
+> <br> **2. Sub domain level ingress - example [ foo.abc.com service1:80 ] & [ bar.abc.com service2:80 ].**
 
 Ingress exposes HTTP and HTTPS routes from outside the cluster to services within the cluster. 
 Traffic routing is controlled by rules defined on the Ingress resource.
