@@ -11,21 +11,21 @@ The fully managed Azure Kubernetes Service (AKS) ia a PAAS and makes deploying a
 
 > [!important]
 > **Question: What Kubernetes does?** 
-> <br> **Answer: Kubernetes manage, scale, and deploy  containerised applications:** 
+> <br> **Kubernetes manage, scale, and deploy  containerised applications:** 
 
 > [!important]
 > **Question: What is a Kubernetes cluster?** 
-> <br> **Answer: A Kubernetes cluster consists of a set of worker machines, called nodes, that run containerized applications. Every cluster has at least one master and worker node.** 
+> <br> **A Kubernetes cluster consists of a set of worker machines, called nodes, that run containerized applications. Every cluster has at least one master and worker node.** 
 
 > [!important]
 > **Question: What is a master node and it's components?** 
-> <br> **Answer: The master node is responsible for running several Kubernetes processes that are absolutely necessary to run and manage the cluster.** 
+> <br> **The master node is responsible for running several Kubernetes processes that are absolutely necessary to run and manage the cluster.** 
 > <br> **Master node components are API Server, Scheduler, Controller Manager & ETCD.** 
 
 
 > [!important]
 > **Question: What is a worker node and it's components?** 
-> <br> **Answer: The worker nodes are the part of the Kubernetes clusters which execute the containers and applications on them.** 
+> <br> **The worker nodes are the part of the Kubernetes clusters which execute the containers and applications on them.** 
 > <br>**Workernode components are Kubelet Service, Kube-proxy Service & Container Runtime.** 
 
 ## Kubernetes Components
@@ -83,7 +83,7 @@ Addons use Kubernetes resources (DaemonSet, Deployment, etc) to implement cluste
 
 > [!important]
 > **Question: How can you extend the functionality of Kubernetes?** 
-> <br> **Answer: You can add add-ons to extend functionality** 
+> <br> **You can add add-ons to extend functionality** 
 > <br> **for example DNS, Web UI (Dashboard), Container Resource Monitoring, Cluster-level Logging and Network Plugins.**
 > <br> **Addons runs as a demonset.**
 
@@ -219,7 +219,7 @@ Via a label selector, the client/user can identify a set of objects. The label s
 
 > [!important]
 > **Question: What is a Namespaces and four initial namespaces?** 
-> <br> **Answer: Namespaces provide a mechanism for isolating groups of resources within a single cluster.** 
+> <br> **Namespaces provide a mechanism for isolating groups of resources within a single cluster.** 
 > <br> **Initial namespaces are default, kube-node-lease, kube-public & kube-system.**
 
 In Kubernetes, namespaces provide a mechanism for isolating groups of resources within a single cluster. Names of resources need to be unique within a namespace, but not across namespaces. Namespace-based scoping is applicable only for namespaced objects (e.g. Deployments, Services, etc.) and not for cluster-wide objects (e.g. StorageClass, Nodes, PersistentVolumes, etc.).
@@ -368,8 +368,8 @@ kubectl apply -R -f configs/
 -	You can have 110 pods in one node max to 256. It means you can have max 265 IP allocations inside the node because each pods get one IP.
 
 > [!important]
-> **Question:** How many pods can you have on a single node
-> <br> **Answer:** 110 to 265 
+> **Question:** How many pods can you have on a single node**
+> <br> **110 to 265**
 
 
 ### Types on Pods
@@ -419,8 +419,8 @@ This is your container which is your main app. If starts after InitContainer fin
 -	If you specify multiple init containers for a Pod, kubelet runs each init container sequentially.
 -	Ensures that the main container starts with the necessary prerequisites.
 > [!important]
-> **Question:** Can you have multiple init container in  a single pod.
-> <br> **Answer:** Yes, if you specify multiple init containers for a Pod, kubelet runs each init container sequentially.
+> **Question: Can you have multiple init container in  a single pod.**
+> <br> **Yes, if you specify multiple init containers for a Pod, kubelet runs each init container sequentially.**
 
 ##### Multi-Container Pod design pattern
 ###### Adapter containers 
