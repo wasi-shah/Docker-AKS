@@ -1298,8 +1298,13 @@ spec:
 > [!important]
 > **Question: What is a Ingress service and it's two types?** 
 > <br> **It's like a level 7 load balance same as application gateway which can pass the control to another service based on the url.** 
-> <br> **1. Simple fanout - example [ Abc.com/foo to service1:80] & [Abc.com/bar service2:80].**
+> <br> **1. Simple fanout - example [ Abc.com/foo to service1:80 ] & [ Abc.com/bar service2:80 ].**
 > <br> **2. Sub domain level ingress - example [ foo.abc.com service1:80 ] & [ bar.abc.com service2:80 ].**
+
+> [!important]
+> **Question: Why you need an Ingress Control Addon and naem one Ingress controler?** 
+> <br> **In order for an Ingress to work in your cluster, there must be an ingress controller running. You need to select at least one ingress controller and make sure it is set up in your cluster.** 
+> <br> **AGID - AKS Application Gateway Ingress Controller is an ingress controller that configures the Azure Application Gateway..**
 
 Ingress exposes HTTP and HTTPS routes from outside the cluster to services within the cluster. 
 Traffic routing is controlled by rules defined on the Ingress resource.
@@ -1429,6 +1434,17 @@ If you want to control traffic flow at the IP address or port level (OSI layer 3
 
 
 ## Kubernetes: Storage
+> [!important]
+> **Question: Why we need storage in Kubernetes and What are the three storage options available?** 
+> <br> **We need storage becuase the container state is not saved so all of the files that were created or modified during the lifetime of the container are lost. During a crash, kubelet restarts the container with a clean state..**
+> <br> **1. Volumes - A semi=erment storage and it's type defines where data is stored and when it’s data will be deleted** 
+> <br> **2. Persistance Volumes -  A perment storage in the cluster to save the data permanently.**
+
+> [!important]
+> **Question: What are the three ways to attach volumes to pod?** 
+> <br> **1. Directly - Create a PV and assign a PV name is pod definition** 
+> <br> **2. Persistence Volume Claim - You create 1.PV and the 2.Claim you define how much space you need. The claim then attached to the pod.**
+> <br> **3. Storage Classes - It creates the PV automatically to satisfy a PersistentVolumeClaim (PVC) for example create a sstorage calss using azure-file**
 
 ### Volumes
 - Problems 
@@ -1472,7 +1488,7 @@ Sometimes you wish to save the data permanently. The answer is Persistent Volume
 -	It attaches a pod to a required available persistence storage.
 -	The name of the PV is not known to a pod.
 
-### Storage Classes
+#### Storage Classes
 
 - The storage dynamically provisioned/creates a storage to satisfy a PersistentVolumeClaim (PVC).
 - It creates the PV automatically.
