@@ -404,6 +404,16 @@ kubectl apply -R -f configs/
 > <br> **1. Environment.** 
 > <br> **2. Volume.**
 
+> [!important]
+> **Question: How can you retrieve values back from pod?** 
+> <br> **You can shell into the container using exec and display file content or print environment variables.** 
+
+> [!important]
+> **Question: How you monitor pod health and what are the three probes available?** 
+> <br> **Kubernetes track, check and react to three probes.** 
+> <br> **1. Startup probes - to know when a container application has started.**
+> <br> **2. Liveness Probe - Checks if app is still alive – if not kill and start new pod.**
+> <br> **3. Readiness Probes - Checks if the pod is less busy for the incoming request. If not, it passes the traffic to less busy pod. It does not kill the pod.**
 
 -	Pod is the smallest element in the Kubernetes.
 -	The contains containers. Pods has an internal IP address assigned by the Kubernetes and it acts like a mini machine.
