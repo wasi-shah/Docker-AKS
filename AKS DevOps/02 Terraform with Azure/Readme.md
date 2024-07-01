@@ -15,6 +15,7 @@ Infrastructure as Code (IaC) tools allow you to manage infrastructure with confi
 > <br> **4. apply: Create or update infrastructure**
 > <br> **5. destroy: Destroy previously-created infrastructure**
 
+
 > [!important]
 > **Question: What are the five most common terraform files?** 
 > <br> **1. provider.tf:	Add Azure as provider in this file for example terraform { required_providers{} } and provider{}** 
