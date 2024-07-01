@@ -21,8 +21,8 @@ Infrastructure as Code (IaC) tools allow you to manage infrastructure with confi
 > <br> **1. provider.tf:	Add Azure as provider in this file for example terraform { required_providers{} } and provider{}** 
 > <br> **2. main.tf:	containing the resource blocks which define the resources to be created in the target cloud platform.**
 > <br> **3. output.tf:	containing the output that needs to be generated on successful completion of “apply” operation.**
-> <br> **4. variables.tf:	[Variable Declaration] - containing the variable declarations used in the resource blocks and these might or might not have a default value.
-> <br> 5. *.tfvars: [Variables Assignment] - containing the environment-specific default values of variables.**
+> <br> **4. variables.tf:	[Variable Declaration] - containing the variable declarations used in the resource blocks and these might or might not have a default value.**
+> <br> **5. ***.tfvars: [Variables Assignment] - containing the environment-specific default values of variables.**
 
 HashiCorp Terraform is an infrastructure as code tool that lets you define both cloud and on-prem resources in human-readable configuration files that you can version, reuse, and share. You can then use a consistent workflow to provision and manage all of your infrastructure throughout its lifecycle. Terraform can manage low-level components like compute, storage, and networking resources, as well as high-level components like DNS entries and SaaS features.
 
