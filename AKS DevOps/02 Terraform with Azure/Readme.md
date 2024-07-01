@@ -2,6 +2,20 @@
 Infrastructure as Code (IaC) tools allow you to manage infrastructure with configuration files rather than through a graphical user interface. IaC allows you to build, change, and manage your infrastructure in a safe, consistent, and repeatable way by defining resource configurations that you can version, reuse, and share.
 
 # Terraform
+> [!important]
+> **Question: What is a Terraform?** 
+> <br> **HashiCorp Terraform is an infrastructure as code tool that lets you define both cloud and on-prem resources in human-readable configuration files that you can version, reuse, and share..** 
+
+
+> [!important]
+> **Question: What are the five most common commands on Terraform?** 
+> <br> **1. init - Prepare your working directory for other commands. Run terraform init to initialize the Terraform deployment. This command downloads the Azure provider required to manage your Azure resources.** 
+> <br> **2. validate - Check whether the configuration is valid**
+> <br> **3. plan - Show changes required by the current configuration**
+> <br> **4. apply - Create or update infrastructure**
+> <br> **5. destroy - Destroy previously-created infrastructure**
+
+
 HashiCorp Terraform is an infrastructure as code tool that lets you define both cloud and on-prem resources in human-readable configuration files that you can version, reuse, and share. You can then use a consistent workflow to provision and manage all of your infrastructure throughout its lifecycle. Terraform can manage low-level components like compute, storage, and networking resources, as well as high-level components like DNS entries and SaaS features.
 
 ## Terraform workflow
