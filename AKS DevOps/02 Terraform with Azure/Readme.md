@@ -24,6 +24,23 @@ Infrastructure as Code (IaC) tools allow you to manage infrastructure with confi
 > <br> **4. variables.tf:	[Variable Declaration] - containing the variable declarations used in the resource blocks and these might or might not have a default value.**
 > <br> 5. ***.tfvars: [Variables Assignment] - containing the environment-specific default values of variables.**
 
+
+> [!important]
+> **Question: What is a modules in Terraform
+> <br> **Any set of Terraform configuration files in a folder is a module. A Terraform module is a set of Terraform configuration files in a single sub-directory. Modules are a great way to compartmentalize reusable collections of resources in multiple configurations.**
+
+
+> [!important]
+> **Question: What is the variable assign priority in Terraform?** 
+> <br> **1. -var - values set by command - [terraform plan -var "location=uksouth"]** 
+> <br> **2. -var-file - values set by command - [terraform plan -var-file="prod.tfvars"]**
+> <br> **3. x.auto.tfvars - 	Terraform loads the values from the x.auto.tfvars file by automatically.**
+> <br> **4. terraform.tfvars - 	Terraform loads the values from the terraform.tfvars file by default.**
+> <br> **5. Environment set variables - values set by TF_VAR_location for example [set TF_VAR_location=ukwest]**
+> <br> **6. in variables.tf assigned during variable declaration - variable "location" { type = string default = "uksouth" description = Location of the resource group." }**
+
+
+
 HashiCorp Terraform is an infrastructure as code tool that lets you define both cloud and on-prem resources in human-readable configuration files that you can version, reuse, and share. You can then use a consistent workflow to provision and manage all of your infrastructure throughout its lifecycle. Terraform can manage low-level components like compute, storage, and networking resources, as well as high-level components like DNS entries and SaaS features.
 
 ## Terraform workflow
