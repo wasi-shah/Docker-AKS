@@ -9,7 +9,7 @@ Infrastructure as Code (IaC) tools allow you to manage infrastructure with confi
 
 > [!important]
 > **Question: What are the five most common commands on Terraform?** 
-> <br> **1. init: Prepare your working directory for other commands. Run terraform init to initialize the Terraform deployment. This command downloads the Azure provider required to manage your Azure resources.** 
+> <br> **1. init:** Prepare your working directory for other commands. Run terraform init to initialize the Terraform deployment. This command downloads the Azure provider required to manage your Azure resources. 
 > <br> **2. validate: Check whether the configuration is valid**
 > <br> **3. plan: Show changes required by the current configuration**
 > <br> **4. apply: Create or update infrastructure**
