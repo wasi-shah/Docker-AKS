@@ -10,19 +10,19 @@ Infrastructure as Code (IaC) tools allow you to manage infrastructure with confi
 > [!important]
 > **Question: What are the five most common commands on Terraform?** 
 > <br> **1. init:** Prepare your working directory for other commands. Run terraform init to initialize the Terraform deployment. This command downloads the Azure provider required to manage your Azure resources. 
-> <br> **2. validate: Check whether the configuration is valid**
-> <br> **3. plan: Show changes required by the current configuration**
-> <br> **4. apply: Create or update infrastructure**
-> <br> **5. destroy: Destroy previously-created infrastructure**
+> <br> **2. validate:** Check whether the configuration is valid
+> <br> **3. plan:** Show changes required by the current configuration
+> <br> **4. apply:** Create or update infrastructure
+> <br> **5. destroy:** Destroy previously-created infrastructure
 
 
 > [!important]
 > **Question: What are the five most common terraform files?** 
-> <br> **1. provider.tf:	Add Azure as provider in this file for example terraform { required_providers{} } and provider{}** 
-> <br> **2. main.tf:	containing the resource blocks which define the resources to be created in the target cloud platform.**
-> <br> **3. output.tf:	containing the output that needs to be generated on successful completion of “apply” operation.**
-> <br> **4. variables.tf:	[Variable Declaration] - containing the variable declarations used in the resource blocks and these might or might not have a default value.**
-> <br> 5. ***.tfvars: [Variables Assignment] - containing the environment-specific default values of variables.**
+> <br> **1. provider.tf:**	Add Azure as provider in this file for example terraform { required_providers{} } and provider{} 
+> <br> **2. main.tf:**	containing the resource blocks which define the resources to be created in the target cloud platform.
+> <br> **3. output.tf:**	containing the output that needs to be generated on successful completion of “apply” operation.
+> <br> **4. variables.tf:**	[Variable Declaration] - containing the variable declarations used in the resource blocks and these might or might not have a default value.
+> <br> 5. ***.tfvars:** [Variables Assignment] - containing the environment-specific default values of variables.
 
 
 > [!important]
@@ -32,12 +32,12 @@ Infrastructure as Code (IaC) tools allow you to manage infrastructure with confi
 
 > [!important]
 > **Question: What is the variable assign priority in Terraform?** 
-> <br> **1. -var - values set by command - [terraform plan -var "location=uksouth"]** 
-> <br> **2. -var-file - values set by command - [terraform plan -var-file="prod.tfvars"]**
-> <br> **3. x.auto.tfvars - 	Terraform loads the values from the x.auto.tfvars file by automatically.**
-> <br> **4. terraform.tfvars - 	Terraform loads the values from the terraform.tfvars file by default.**
-> <br> **5. Environment set variables - values set by TF_VAR_location for example [set TF_VAR_location=ukwest]**
-> <br> **6. in variables.tf assigned during variable declaration - variable "location" { type = string default = "uksouth" description = Location of the resource group." }**
+> <br> **1. -var** values set by command - [terraform plan -var "location=uksouth"]
+> <br> **2. -var-file** values set by command - [terraform plan -var-file="prod.tfvars"]
+> <br> **3. x.auto.tfvars** Terraform loads the values from the x.auto.tfvars file by automatically.
+> <br> **4. terraform.tfvars** Terraform loads the values from the terraform.tfvars file by default.
+> <br> **5. Environment set variables** values set by TF_VAR_location for example [set TF_VAR_location=ukwest]
+> <br> **6. in variables.tf assigned during variable declaration** variable "location" { type = string default = "uksouth" description = Location of the resource group." }
 
 
 
