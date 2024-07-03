@@ -6,6 +6,15 @@ Infrastructure as Code (IaC) tools allow you to manage infrastructure with confi
 > **Question: What is a Terraform?** 
 > <br> **HashiCorp Terraform is an infrastructure as code tool that lets you define both cloud and on-prem resources in human-readable configuration files that you can version, reuse, and share..** 
 
+> [!important]
+> **Question: What is a Terraform Registry?** 
+> <br> **Terraform Registry makes it possible for Terraform CLI to automatically install any of the providers it hosts.** 
+> <br> **The Terraform Registry is integrated directly into Terraform so you can directly specify providers and modules.**
+
+> [!important]
+> **Question: What is a terraform provider?** 
+> <br> **Providers are how Terraform integrates with any upstream API. For example Azure, AWS and GCP.** 
+> <br> **Providers allow Terraform to interact with cloud providers, SaaS providers, and other APIs. Each provider adds a set of resource types and/or data sources that Terraform can manage..**
 
 > [!important]
 > **Question: What are the five most common commands on Terraform?** 
@@ -38,6 +47,7 @@ Infrastructure as Code (IaC) tools allow you to manage infrastructure with confi
 > <br> **4. terraform.tfvars** Terraform loads the values from the terraform.tfvars file by default.
 > <br> **5. Environment set variables** values set by TF_VAR_location for example [set TF_VAR_location=ukwest]
 > <br> **6. in variables.tf assigned during variable declaration** variable "location" { type = string default = "uksouth" description = Location of the resource group." }
+
 
 
 
