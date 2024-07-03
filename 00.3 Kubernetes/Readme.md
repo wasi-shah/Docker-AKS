@@ -1734,6 +1734,13 @@ kube-state-metrics is a service that makes cluster state information easily cons
 
 - Tool : Heapster - Heapster monitors the kubernetes cluster
 - Tool : Grafana/Prometheus - A dashboard to view pod metrics by namespace and pod names. 
+- Tool : Istio - Istio is an open-source service mesh implementation that manages communication and data sharing between microservices
+  - 1. Traffic Control
+The main feature of Istio is its role in traffic management. It controls the flow of traffic between services by implementing routing rules through its Envoy proxies.
+  - 2. Observability
+The platform controls and observes all incoming and outgoing traffic within the network layer. Therefore, it collects large amounts of data that provide useful insight for future development.
+  - 3. Security
+While developers secure the application from potential threats and hacks, Istio authorizes, authenticates, and encrypts all internal communication. Pods and services talk to each other and transfer data under Istio’s policies.
 - Tool : Datadog - graphing tool - 
 - Tool : Kentik - Understand your Kubernetes networks, from container, to data center, to public cloud.
 - Tool : NetFlow - Service communication monitoring in Kubernetes
