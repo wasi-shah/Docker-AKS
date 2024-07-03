@@ -24,7 +24,7 @@
 > <br> **1. Infrastructure as a service (IaaS)** - the service provider owns and operates the infrastructure/hardware, but customers will need to purchase and manage software, such as operating systems, middleware, data, and applications and also responsible for softwares for example VMs
 > <br> **2. Platform as a service (PaaS)** - the service provider owns and mange OS and hardware but the customer is responsible for application and its configuration for example Web Apps
 > <br> **3. Software as a service (SaaS)** - the provider owns the hardware, Os and the software but customer is only responsible for installing, configuring and using the software - for example MS Office and Dropbox.
-> <br> **4. Serverless/Function as a Service** - provider is responsible for everything but customer is responsible for application and business logic.
+> <br> **4. Serverless/Function as a Service** - provider is responsible for everything but customer is responsible for application and business logic for example Azure Functions, Azure Logic Apps, Azure Event Grid.
 
 The main three types of cloud computing are public cloud, private cloud, and hybrid cloud. Within these deployment models, there are four main services: infrastructure as a service (IaaS), platform as a service (PaaS), software as a service (SaaS), and serverless computing.
 
