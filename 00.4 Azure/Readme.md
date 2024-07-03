@@ -12,7 +12,22 @@
 
 
 # Azure Compute
+> [!important]
+> **Question: What are three main compute type/model?** 
+> <br> **1. Public** - owned and run by third-party cloud service providers like Google Cloud, Azure and AWS
+> <br> **2. Private** - you own all of the hardware or, at least, have complete control over it.
+> <br> **3. Hybrid** - Environments that mix at least one private computing environment (traditional IT infrastructure or private cloud, including edge) with one or more public clouds are called hybrid clouds.
+
+> [!important]
+> **Question: What are four major compute services type/model?** 
+> <br>
+> <br> **1. Infrastructure as a service (IaaS)** - the service provider owns and operates the infrastructure/hardware, but customers will need to purchase and manage software, such as operating systems, middleware, data, and applications and also responsible for softwares for example VMs
+> <br> **2. Platform as a service (PaaS)** - the service provider owns and mange OS and hardware but the customer is responsible for application and its configuration for example Web Apps
+> <br> **3. Software as a service (SaaS)** - the provider owns the hardware, Os and the software but customer is only responsible for installing, configuring and using the software - for example MS Office and Dropbox.
+> <br> **4. Serverless/Function as a Service** - provider is responsible for everything but customer is responsible for application and business logic.
+
 The main three types of cloud computing are public cloud, private cloud, and hybrid cloud. Within these deployment models, there are four main services: infrastructure as a service (IaaS), platform as a service (PaaS), software as a service (SaaS), and serverless computing.
+
 ## Cloud Computing Types/Models
 
 ### Public
