@@ -186,10 +186,10 @@ In FaaS, all you need to do is create your application or weave together busines
 
 > [!important]
 > **Question: What are the two ways to import/export Azure Data?** 
-> <br> 1. Online
->         - First nested list item
-> <br> 2. Offline - 
->       - First nested list item
+>  - Offline
+>    - Data Box (100 TB), Data Box Disk (8 TB SSD x 5 =40 TB), and Data Box Heavy (1 PB) are offline data transfer devices which are shipped between your datacentre and Azure. Data Boxes use standard NAS protocols (SMB/CIFs and NFS), use AES encryption to protect your data, and perform a post-upload sanitization process to ensure that all data is wiped clean from the device.
+>  - Online
+>    - Data Box Gateway (1 TB) is an online data transfer product - a virtual appliance for moving data in and out of Azure.
 
 
 ## Azure data services
