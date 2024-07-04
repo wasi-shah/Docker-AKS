@@ -201,47 +201,37 @@ Geo-zone-redundant storage (GZRS) copies your data synchronously across three Az
 #### Read-access geo-redundant storage (RA-GRS) & Read-access geo-zone-redundant storage (RA-GZRS)
 With an account configured for GRS or GZRS only, data in the secondary region is not directly accessible to users or applications, unless a failover occurs. Read-access geo-redundant storage (RA-GRS) or read-access geo-zone-redundant storage (RA-GZRS) configurations permit read access to the secondary region.
 
-Supported Azure Storage services
-The following table shows which redundancy options are supported by each Azure Storage service.
-Expand table
-Service	LRS	ZRS	GRS	RA-GRS	GZRS	RA-GZRS
-Blob storage
-(including Data Lake Storage)	✅	✅	✅	✅	✅	✅
-Queue storage	✅	✅	✅	✅	✅	✅
-Table storage	✅	✅	✅	✅	✅	✅
-Azure Files	✅ 1,2	✅ 1,2	✅ 1		✅ 1	
-Azure managed disks	✅	✅ 3				
-Azure Elastic SAN	✅	✅				
-1 Standard file shares are supported on LRS and ZRS. Standard file shares are supported on GRS and GZRS as long as they're less than or equal to 5 TiB in size.
-2 Premium file shares are supported on LRS and ZRS.
-3 ZRS managed disks have certain limitations. See the Limitations section of the redundancy options for managed disks article for details.
-Azure Storage Performance Tiers
-•	Standard: This is HHD drive
-•	Premium: SSD: This is fast drive but only page blob. Premium do not support block blob, append blog, file share, tables and queues.
-Azure Storage Access Tier (Only available with standard storage)
-•	Hot tier - An online tier optimized for storing data that is accessed or modified frequently. The hot tier has the highest storage costs, but the lowest access costs.
-•	Cool tier - An online tier optimized for storing data that is infrequently accessed or modified. Data in the cool tier should be stored for a minimum of 30 days. The cool tier has lower storage costs and higher access costs compared to the hot tier.
-•	Cold tier - An online tier optimized for storing data that is rarely accessed or modified, but still requires fast retrieval. Data in the cold tier should be stored for a minimum of 90 days. The cold tier has lower storage costs and higher access costs compared to the cool tier.
-•	Archive tier - An offline tier optimized for storing data that is rarely accessed, and that has flexible latency requirements, on the order of hours. Data in the archive tier should be stored for a minimum of 180 days.
-Azure Storage Encryption 
+## Azure Storage Performance Tiers
+- Standard: This is HHD drive
+- Premium: SSD: This is fast drive but only page blob. Premium do not support block blob, append blog, file share, tables and queues.
+
+## Azure Storage Access Tier (Only available with standard storage)
+-	Hot tier - An online tier optimized for storing data that is accessed or modified frequently. The hot tier has the highest storage costs, but the lowest access costs.
+-	Cool tier - An online tier optimized for storing data that is infrequently accessed or modified. Data in the cool tier should be stored for a minimum of 30 days. The cool tier has lower storage costs and higher access costs compared to the hot tier.
+-	Cold tier - An online tier optimized for storing data that is rarely accessed or modified, but still requires fast retrieval. Data in the cold tier should be stored for a minimum of 90 days. The cold tier has lower storage costs and higher access costs compared to the cool tier.
+-	Archive tier - An offline tier optimized for storing data that is rarely accessed, and that has flexible latency requirements, on the order of hours. Data in the archive tier should be stored for a minimum of 180 days.
+
+## Azure Storage Encryption 
 Azure Storage encryption is enabled for all storage accounts, including both Resource Manager and classic storage accounts. Azure Storage encryption cannot be disabled. Because your data is secured by default, you don't need to modify your code or applications to take advantage of Azure Storage encryption.
 Types of Azure Storage Encryption
-1.	Microsoft-Managed-Keys (MMK)
+### 1.	Microsoft-Managed-Keys (MMK)
 Data in a new storage account is encrypted with Microsoft-managed keys by default.
-2.	Custom-Managed-Keys (CMK)
+### 2.	Custom-Managed-Keys (CMK)
 You can manage encryption with your own keys. If you choose to manage encryption with your own keys, you have two options. You can use either type of key management, or both
-Azure Storage Identity and access management
-Access Keys
+
+## Azure Storage Identity and access management
+### Access Keys
 When you create a storage account, Azure generates two 512-bit storage account access keys for that account. These keys can be used to authorize access to data in your storage account via Shared Key authorization, or via SAS tokens that are signed with the shared key.
-Shared Access Keys
+### Shared Access Keys
 A shared access signature (SAS) provides secure delegated access to resources in your storage account. With a SAS, you have granular control over how a client can access your data. For example:
-•	What resources the client may access.
-•	What permissions they have to those resources.
-•	How long the SAS is valid.
-Microsoft Entra ID Integration
+-	What resources the client may access.
+-	What permissions they have to those resources.
+-	How long the SAS is valid.
+### Microsoft Entra ID Integration
 Microsoft Entra integration for authorizing requests to blob, queue, and table resources. Microsoft recommends using Microsoft Entra credentials to authorize requests to data when possible for optimal security and ease of use. For more information about Microsoft Entra integration, see the articles for either blob, queue, or table resources.
 You can use Azure role-based access control (Azure RBAC) to manage a security principal's permissions to blob, queue, and table resources in a storage account. You can also use Azure attribute-based access control (ABAC) to add conditions to Azure role assignments for blob resources.
-Azure Data Import/Export
+
+## Azure Data Import/Export
 Moving stored or in-flight data into the cloud is a challenge. Data Box devices provide solutions for both scenarios. Data Box devices easily move data to Azure when busy networks aren’t an option. Move large amounts of data to Azure when you're limited by time, network availability, or costs, using common copy tools such as Robocopy.
-•	Data Box (100 TB), Data Box Disk (8 TB SSD x 5 =40 TB), and Data Box Heavy (1 PB) are offline data transfer devices which are shipped between your datacentre and Azure. Data Boxes use standard NAS protocols (SMB/CIFs and NFS), use AES encryption to protect your data, and perform a post-upload sanitization process to ensure that all data is wiped clean from the device.
-•	Data Box Gateway (1 TB) is an online data transfer product - a virtual appliance for moving data in and out of Azure.
+-	Data Box (100 TB), Data Box Disk (8 TB SSD x 5 =40 TB), and Data Box Heavy (1 PB) are offline data transfer devices which are shipped between your datacentre and Azure. Data Boxes use standard NAS protocols (SMB/CIFs and NFS), use AES encryption to protect your data, and perform a post-upload sanitization process to ensure that all data is wiped clean from the device.
+-	Data Box Gateway (1 TB) is an online data transfer product - a virtual appliance for moving data in and out of Azure.
