@@ -6,27 +6,27 @@
 
 
 > [!important]
-> **Question: What are Azure main services and resources categories?** 
-> <br> Azure organised it's services and resources in categories, for example. 
-> <br> Compute, Containers, Databases, Developer tools, DevOps, Hybrid + multicloud, Identity, Integration, Internet of Things, Management and governance, Media, Migration, Mixed reality, Mobile, Networking, Security, Storage, Virtual desktop infrastructure and Web.
+> **Question: What are Azure's main services and resources categories?** 
+> <br> Azure organised its services and resources in categories, for example. 
+> <br> Compute, Containers, Databases, Developer tools, DevOps, Hybrid + multi-cloud, Identity, Integration, Internet of Things, Management and governance, Media, Migration, Mixed Reality, Mobile, Networking, Security, Storage, Virtual desktop infrastructure and Web.
 
 
 # Azure Compute
 > [!important]
-> **Question: What are three main compute type/model?** 
+> **Question: What are the three main compute types/model?** 
 > <br> **1. Public** - owned and run by third-party cloud service providers like Google Cloud, Azure and AWS
 > <br> **2. Private** - you own all of the hardware or, at least, have complete control over it.
 > <br> **3. Hybrid** - Environments that mix at least one private computing environment (traditional IT infrastructure or private cloud, including edge) with one or more public clouds are called hybrid clouds.
 
 > [!important]
-> **Question: What are four major compute services type/model?** 
+> **Question: What are four major compute services types/model?** 
 > <br>
-> <br> **1. Infrastructure as a service (IaaS)** - the service provider owns and operates the infrastructure/hardware, but customers will need to purchase and manage software, such as operating systems, middleware, data, and applications and also responsible for softwares for example VMs
-> <br> **2. Platform as a service (PaaS)** - the service provider owns and mange OS and hardware but the customer is responsible for application and its configuration for example Web Apps
-> <br> **3. Software as a service (SaaS)** - the provider owns the hardware, Os and the software but customer is only responsible for installing, configuring and using the software - for example MS Office and Dropbox.
-> <br> **4. Serverless/Function as a Service** - provider is responsible for everything but customer is responsible for application and business logic for example Azure Functions, Azure Logic Apps, Azure Event Grid.
+> <br> **1. Infrastructure as a service (IaaS)** - the service provider owns and operates the infrastructure/hardware, but customers will need to purchase and manage software, such as operating systems, middleware, data, and applications and also responsible for software for example VMs
+> <br> **2. Platform as a service (PaaS)** - the service provider owns and manage OS and hardware but the customer is responsible for the application and its configuration for example Web Apps
+> <br> **3. Software as a service (SaaS)** - the provider owns the hardware, OS and software but the customer is only responsible for installing, configuring and using the software - for example MS Office and Dropbox.
+> <br> **4. Serverless/Function as a Service** - The provider is responsible for everything but the customer is responsible for application and business logic for example Azure Functions, Azure Logic Apps, and Azure Event Grid.
 
-The main three types of cloud computing are public cloud, private cloud, and hybrid cloud. Within these deployment models, there are four main services: infrastructure as a service (IaaS), platform as a service (PaaS), software as a service (SaaS), and serverless computing.
+The main three types of cloud computing are public, private, and hybrid. Within these deployment models, there are four main services: infrastructure as a service (IaaS), platform as a service (PaaS), software as a service (SaaS), and serverless computing.
 
 ## Cloud Computing Types/Models
 
@@ -35,7 +35,7 @@ Public clouds deliver resources, such as compute, storage, network, develop-and-
 In the public cloud model, you don’t own any hardware; your cloud vendor is responsible for purchasing and maintaining all hardware. The public cloud consists of all of the services and compute resources that you do not own yourself but that you use from your cloud provider. The provider is responsible for keeping everything running and adhering to Service-Level Agreements (SLAs). You pay for what you use, not for what you own.
 
 ### Private
-With a private cloud, you own all of the hardware or, at least, have complete control over it. The hardware that runs your services and houses your data is somewhere in your on-premises datacentre. Of course, this complete control comes at a price: you must purchase and maintain everything. You pay for what you own, not for what you use. But, how do you set up a private cloud platform in a traditional on-premises datacentre. Fortunately, Azure provides a unique solution designed specifically to work in this environment: Azure Stack. In a nutshell, Azure Stack is your own private instance of Azure in a box that you can run in your on-premises datacentre.
+With a private cloud, you own all the hardware or, at least, have complete control over it. The hardware that runs your services and houses your data is somewhere in your on-premises data centre. Of course, this complete control comes at a price: you must purchase and maintain everything. You pay for what you own, not for what you use. But, how do you set up a private cloud platform in a traditional on-premises datacentre. Fortunately, Azure provides a unique solution designed specifically to work in this environment: Azure Stack. In a nutshell, Azure Stack is your own private instance of Azure in a box that you can run in your on-premises datacentre.
 Private clouds are built, run, and used by a single organization, typically located on-premises. They provide greater control, customization, and data security but come with similar costs and resource limitations associated with traditional IT environments.
 ### Hybrid
 Environments that mix at least one private computing environment (traditional IT infrastructure or private cloud, including edge) with one or more public clouds are called hybrid clouds. They allow you to leverage the resources and services from different computing environments and choose which is the most optimal for the workloads.
@@ -44,7 +44,7 @@ The hybrid cloud model is, as its name implies, a mixture between the public and
 
 ### Infrastructure as a service (IaaS)
 IaaS delivers on-demand infrastructure resources, such as compute, storage, networking, and virtualization. With IaaS, the service provider owns and operates the infrastructure, but customers will need to purchase and manage software, such as operating systems, middleware, data, and applications.
-With infrastructure as a service (IaaS), you are responsible for softwares. Azure takes care of all the hardware, such as the solid-state drives (SSDs), network cabling, routers, power supplies, backup generators, cooling systems, and so on. 
+With infrastructure as a service (IaaS), you are responsible for software. Azure takes care of all the hardware, such as solid-state drives (SSDs), network cabling, routers, power supplies, backup generators, cooling systems, and so on. 
 Azure provides native support for IaC via the Azure Resource Manager model. Teams can define declarative ARM or Bicep templates that specify the infrastructure required to deploy solutions.
 Services that fall into this category include 
 •	Azure Virtual Machines
@@ -63,7 +63,7 @@ Services that fall into the PaaS category include
 •	Azure Container Apps
 
 ### Software as a service (SaaS)
-With software as a service (SaaS [pronounced “sass”]), you need only concern yourself with installing and configuring the software—nothing else. For example Dropbox, MS Office, even a calculator is a SaaS example. Indeed, SaaS is the highest abstraction level of the cloud computing types. Services in the SaaS category include Azure Cognitive Services and Azure IoT Suite. Office 365 is another example of an Azure SaaS application suite, offering reliable business applications such as Microsoft Word, Excel, PowerPoint, and more. And all of this is available without you having to install or maintain anything. With SaaS, the software is ready to use. All you need to do is configure it to your preferences and then you are ready to go. You don’t write the software, and you don’t need to think about deployment, scaling, operating systems, and hardware.
+With software as a service (SaaS [pronounced “sass”]), you need only concern yourself with installing and configuring the software—nothing else. For example Dropbox, MS Office, and even a calculator is a SaaS example. Indeed, SaaS is the highest abstraction level of the cloud computing types. Services in the SaaS category include Azure Cognitive Services and Azure IoT Suite. Office 365 is another example of an Azure SaaS application suite, offering reliable business applications such as Microsoft Word, Excel, PowerPoint, and more. And all of this is available without you having to install or maintain anything. With SaaS, the software is ready to use. All you need to do is configure it to your preferences and then you are ready to go. You don’t write the software, and you don’t need to think about deployment, scaling, operating systems, and hardware.
 SaaS provides a full application stack as a service that customers can access and use. SaaS solutions often come as ready-to-use applications, which are managed and maintained by the cloud service provider.
 
 ### Serverless/Function as a Service.
@@ -83,7 +83,7 @@ In FaaS, all you need to do is create your application or weave together busines
 > <br>The Azure Storage platform is Microsoft's cloud storage solution for modern data storage scenarios. Azure Storage offers highly available, massively scalable, durable, and secure storage for a variety of data objects in the cloud. Azure Storage data objects are accessible from anywhere in the world over HTTP or HTTPS via a REST API.
 
 > [!important]
-> **Question: What are the key benefits of Azure storage account?** 
+> **Question: What are the key benefits of an Azure storage account?** 
 > <br>Storage in Azure is highly available, secure, durable, scalable, and redundant.
 
 > [!important]
@@ -93,7 +93,7 @@ In FaaS, all you need to do is create your application or weave together busines
 
 > [!important]
 > **Question: What is an Availability zone?** 
-> <br> With in a region, you have availability zones. Azure availability zones are physically and logically separated datacenters with their own independent power source, network, and cooling. Formula availability zone = data centre 1 + data centre 2 + data centre n
+> <br> Within a region, you have availability zones. Azure availability zones are physically and logically separated datacenters with their own independent power source, network, and cooling. Formula availability zone = data centre 1 + data centre 2 + data centre n
 
 
 > [!important]
@@ -121,7 +121,7 @@ In FaaS, all you need to do is create your application or weave together busines
 
 
 > [!important]
-> **Question: What is Azure storage redundancy and it’s types?** 
+> **Question: What is Azure storage redundancy and its types?** 
 > <br> To ensure that your data is durable, Azure Storage stores multiple copies of your data. When you set up your storage account, you select a redundancy option.
 > <br> **L means primary region/one data center. LRS means 3 copies. G means secondary region**
 >  - Locally redundant storage 
@@ -130,7 +130,7 @@ In FaaS, all you need to do is create your application or weave together busines
 >  - Redundancy in a secondary region
 >    - Geo-redundant storage (GRS)-  formula [LRS] + [Second Region LRS] + copies your data asynchronously to a single physical location in the secondary region three times.
 >    - Geo-zone-redundant storage (GZRS)  - formula [LRS] + [3 Zone copies] + [3 Secondary region Zone copies]
->    - Read Access Geo-zone-redundant storage (RA-GZRS) same as GZRS but you can read from secondary region
+>    - Read Access Geo-zone-redundant storage (RA-GZRS) same as GZRS but you can read from the secondary region
 
 > [!important]
 > **Question: What are two blobs and their sizes?** 
@@ -195,6 +195,8 @@ In FaaS, all you need to do is create your application or weave together busines
 
 
 ## Azure data services
+![image](https://github.com/wasi-shah/Docker-AKS/assets/51749920/c81c4d0a-29ad-4005-a03b-34fb09342552)
+
 ### Azure Blobs
 A massively scalable object store for text and binary data. Also includes support for big data analytics through Data Lake Storage Gen2.
 You can use Azure Blob Storage to store large unstructured data—literally, blobs of data. This can be video, image, audio, or text, or even virtual hard drive (VHD) files for VMs. There are two types of Blobs: Page and Block Blobs. 
@@ -206,7 +208,7 @@ Max size 190 TB
 Block blobs are optimized for efficiently uploading large amounts of data. These are perfect for storing large video files that don’t change often.
 ### Azure Files
 File Storage (Max size 100TB).
-You can use Azure File Storage as a drive from which to share files. Its uses the Server Message Block (SMB) protocol, which means that you can use it with Windows and Linux, and you can access it from the cloud or from on-premises systems. Like the other Azure Storage types, File Storage is scalable and inexpensive. Managed file shares for cloud or on-premises deployments.
+You can use Azure File Storage as a drive from which to share files. It uses the Server Message Block (SMB) protocol, which means that you can use it with Windows and Linux, and you can access it from the cloud or from on-premises systems. Like the other Azure Storage types, File Storage is scalable and inexpensive. Managed file shares for cloud or on-premises deployments.
 ### Azure Queues
 •	Maximum queue size 500 TB
 •	Maximum message size 64 KB
@@ -214,26 +216,26 @@ Azure Queue Storage is an unusual type of storage in that it is used to store sm
 Azure Queue Storage is a service for storing large numbers of messages. You access messages from anywhere in the world via authenticated calls using HTTP or HTTPS. A queue message can be up to 64 KB in size. A queue may contain millions of messages, up to the total capacity limit of a storage account. Queues are commonly used to create a backlog of work to process asynchronously.
 A messaging store for reliable messaging between application components.
 ### Azure Tables
-•	Table has 5TB storage limit
-•	1 MB data per entry (per row)
+•	Table has a 5TB storage limit
+•	1 MB of data per entry (per row)
 A NoSQL store for schemaless storage of structured data.
 Azure Table storage is a service that stores non-relational structured data (also known as structured NoSQL data) in the cloud, providing a key/attribute store with a schemaless design. Because Table storage is schemaless, it's easy to adapt your data as the needs of your application evolve. Access to Table storage data is fast and cost-effective for many types of applications, and is typically lower in cost than traditional SQL for similar volumes of data.
-Azure Tables is a Flexible NoSQL database type storage, its ideal for semi structured dataset where values are added in a Key-value pairs. Table is an ideal solution for structures, semi structured and non-structured data. You can use Tables to save your data to the tables and use OData-based queries to save and retrieve data. 
+Azure Tables is a Flexible NoSQL database type storage, its ideal for semi-structured dataset where values are added in Key-value pairs. Table is an ideal solution for structures, semi-structured and non-structured data. You can use Tables to save your data to the tables and use OData-based queries to save and retrieve data. 
 Table storage is excellent for flexible datasets – web app user data, address books, device information and other metadata – and lets you build cloud applications without locking down the data model to particular schemas. Because different rows in the same table can have a different structure – for example, order information in one row, and customer information in another.
 ### Azure managed Disks
 Applies to: ✔️ Linux VMs ✔️ Windows VMs ✔️ Flexible scale sets ✔️ Uniform scale sets
-Azure managed disks are block-level storage volumes that are managed by Azure and used with Azure Virtual Machines. Managed disks are like a physical disk in an on-premises server but, virtualized. With managed disks, all you have to do is specify the disk size, the disk type, and provision the disk. Once you provision the disk, Azure handles the rest.
+Azure managed disks are block-level storage volumes that are managed by Azure and used with Azure Virtual Machines. Managed disks are like a physical disk in an on-premises server but, virtualized. With managed disks, all you have to do is specify the disk size, and the disk type, and provision the disk. Once you provision the disk, Azure handles the rest.
 The available types of disks are ultra disks, premium solid-state drives (SSD), standard SSDs, and standard hard disk drives (HDD). For information about each individual disk type, see Select a disk type for IaaS VMs.
 #### Disk roles
 There are three main disk roles in Azure: the data disk, the OS disk, and the temporary disk. These roles map to disks that are attached to your virtual machine.
 ##### Data disk
-A data disk is a managed disk that's attached to a virtual machine to store application data, or other data you need to keep. Data disks are registered as SCSI drives and are labeled with a letter that you choose. The size of the virtual machine determines how many data disks you can attach to it and the type of storage you can use to host the disks.
+A data disk is a managed disk that's attached to a virtual machine to store application data or other data you need to keep. Data disks are registered as SCSI drives and are labeled with a letter that you choose. The size of the virtual machine determines how many data disks you can attach to it and the type of storage you can use to host the disks.
 ##### OS disk
 Every virtual machine has one attached operating system disk. That OS disk has a pre-installed OS, which was selected when the VM was created. This disk contains the boot volume.
 This disk has a maximum capacity of 4,095 GiB. However, many operating systems are partitioned with master boot record (MBR) by default. MBR limits the usable size to 2 TiB. If you need more than 2 TiB, create and attach data disks and use them for data storage. If you need to store data on the OS disk and require the additional space, convert it to GUID Partition Table (GPT). To learn about the differences between MBR and GPT on Windows deployments, see Windows and GPT FAQ.
 ##### Temporary disk
-Most VMs contain a temporary disk, which is not a managed disk. The temporary disk provides short-term storage for applications and processes, and is intended to only store data such as page files, swap files, or SQL Server tempdb. Data on the temporary disk may be lost during a maintenance event, when you redeploy a VM, or when you stop the VM. During a successful standard reboot of the VM, data on the temporary disk will persist. For more information about VMs without temporary disks, see Azure VM sizes with no local temporary disk.
-On Azure Linux VMs, the temporary disk is typically /dev/sdb and on Windows VMs the temporary disk is D: by default. The temporary disk is not encrypted unless (for server side encryption) you enable encryption at host or (for Azure Disk Encryption) with the VolumeType parameter set to All on Windows or EncryptFormatAll on Linux.
+Most VMs contain a temporary disk, which is not a managed disk. The temporary disk provides short-term storage for applications and processes and is intended to only store data such as page files, swap files, or SQL Server tempdb. Data on the temporary disk may be lost during a maintenance event when you redeploy a VM, or when you stop the VM. During a successful standard reboot of the VM, data on the temporary disk will persist. For more information about VMs without temporary disks, see Azure VM sizes with no local temporary disk.
+On Azure Linux VMs, the temporary disk is typically /dev/sdb and on Windows VMs the temporary disk is D: by default. The temporary disk is not encrypted unless (for server-side encryption) you enable encryption at the host or (for Azure Disk Encryption) with the VolumeType parameter set to All on Windows or EncryptFormatAll on Linux.
 ### Azure Container Storage
 A volume management, deployment, and orchestration service built natively for containers.
 Azure Container Storage is a cloud-based volume management, deployment, and orchestration service built natively for containers. It integrates with Kubernetes, allowing you to dynamically and automatically provision persistent volumes to store data for stateful applications running on Kubernetes clusters.
@@ -242,10 +244,16 @@ Azure Storage always stores multiple copies of your data so that it's protected 
 ### Redundancy in the primary region
 Data in an Azure Storage account is always replicated three times in the primary region. Azure Storage offers two options for how your data is replicated in the primary region:
 #### Locally redundant storage (LRS)
-Locally redundant storage (LRS) copies your data synchronously three times within a single physical location in the primary region. LRS is the least expensive replication option, but isn't recommended for applications requiring high availability or durability.
+![image](https://github.com/wasi-shah/Docker-AKS/assets/51749920/e57ce798-6b23-4c03-a769-340ece43f09e)
+
+Locally redundant storage (LRS) copies your data synchronously three times within a single physical location in the primary region. LRS is the least expensive replication option but isn't recommended for applications requiring high availability or durability.
 #### Zone-redundant storage (ZRS)
+![image](https://github.com/wasi-shah/Docker-AKS/assets/51749920/222c9761-47f5-457f-821e-4a0e35b75312)
+
 Azure availability zones in the primary region. For applications requiring high availability, Microsoft recommends using ZRS in the primary region, and also replicating to a secondary region.
 ### Redundancy in a secondary region
+![image](https://github.com/wasi-shah/Docker-AKS/assets/51749920/e2df94e9-5933-49b4-8289-c4e8b415186e)
+
 For applications requiring high durability, you can choose to additionally copy the data in your storage account to a secondary region that is hundreds of miles away from the primary region. If your storage account is copied to a secondary region, then your data is durable even in the case of a complete regional outage or a disaster in which the primary region isn't recoverable.
 When you create a storage account, you select the primary region for the account. The paired secondary region is determined based on the primary region, and can't be changed. For more information about regions supported by Azure, see Azure regions.
 Geo-redundant storage (GRS) copies your data synchronously three times within a single physical location in the primary region using LRS. It then copies your data asynchronously to a single physical location in a secondary region that is hundreds of miles away from the primary region. GRS offers durability for storage resources of at least 99.99999999999999% (16 9's) over a given year.
@@ -259,9 +267,11 @@ With an account configured for GRS or GZRS only, data in the secondary region is
 
 ## Azure Storage Performance Tiers
 - Standard: This is HHD drive
-- Premium: SSD: This is fast drive but only page blob. Premium do not support block blob, append blog, file share, tables and queues.
+- Premium: SSD: This is a fast drive but only a page blob. Premium does not support block blob, append blog, file share, tables and queues.
 
 ## Azure Storage Access Tier (Only available with standard storage)
+![image](https://github.com/wasi-shah/Docker-AKS/assets/51749920/b5b1a453-720f-4f99-910e-960c66c44087)
+
 -	Hot tier - An online tier optimized for storing data that is accessed or modified frequently. The hot tier has the highest storage costs, but the lowest access costs.
 -	Cool tier - An online tier optimized for storing data that is infrequently accessed or modified. Data in the cool tier should be stored for a minimum of 30 days. The cool tier has lower storage costs and higher access costs compared to the hot tier.
 -	Cold tier - An online tier optimized for storing data that is rarely accessed or modified, but still requires fast retrieval. Data in the cold tier should be stored for a minimum of 90 days. The cold tier has lower storage costs and higher access costs compared to the cool tier.
@@ -273,18 +283,18 @@ Types of Azure Storage Encryption
 ### 1.	Microsoft-Managed-Keys (MMK)
 Data in a new storage account is encrypted with Microsoft-managed keys by default.
 ### 2.	Custom-Managed-Keys (CMK)
-You can manage encryption with your own keys. If you choose to manage encryption with your own keys, you have two options. You can use either type of key management, or both
+You can manage encryption with your own keys. If you choose to manage encryption with your own keys, you have two options. You can use either type of key management or both
 
 ## Azure Storage Identity and access management
 ### Access Keys
 When you create a storage account, Azure generates two 512-bit storage account access keys for that account. These keys can be used to authorize access to data in your storage account via Shared Key authorization, or via SAS tokens that are signed with the shared key.
 ### Shared Access Keys
-A shared access signature (SAS) provides secure delegated access to resources in your storage account. With a SAS, you have granular control over how a client can access your data. For example:
+A shared access signature (SAS) provides secure delegated access to resources in your storage account. With SAS, you have granular control over how a client can access your data. For example:
 -	What resources the client may access.
--	What permissions they have to those resources.
+-	What permissions do they have to those resources?
 -	How long the SAS is valid.
 ### Microsoft Entra ID Integration
-Microsoft Entra integration for authorizing requests to blob, queue, and table resources. Microsoft recommends using Microsoft Entra credentials to authorize requests to data when possible for optimal security and ease of use. For more information about Microsoft Entra integration, see the articles for either blob, queue, or table resources.
+Microsoft Entra integration for authorizing requests to blob, queue, and table resources. Microsoft recommends using Microsoft Entra credentials to authorize requests for data when possible for optimal security and ease of use. For more information about Microsoft Entra integration, see the articles for either blob, queue, or table resources.
 You can use Azure role-based access control (Azure RBAC) to manage a security principal's permissions to blob, queue, and table resources in a storage account. You can also use Azure attribute-based access control (ABAC) to add conditions to Azure role assignments for blob resources.
 
 ## Azure Data Import/Export
