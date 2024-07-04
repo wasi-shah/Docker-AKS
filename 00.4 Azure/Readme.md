@@ -130,7 +130,7 @@ In FaaS, all you need to do is create your application or weave together busines
 > <br> **L means primary region/one data center. LRS means 3 copies. G means secondary region**
 > 1. First list item
 >   - First nested list item
->     - Second nested list item
+>   - Second nested list item
 > <br> - Locally redundant storage 
 > <br>      - Locally redundant storage (LRS) – formula [Local/primary 3 copies]. Replicates your storage account three times within a single data center in the primary region. SLA 99.999999999% (11 nines). 
 > <br>      - Zone-redundant storage – formula [LRS] + [1 Zone copy]. Replicates your storage account synchronously across three Azure availability zones in the primary region. SLA 99.9999999999% (12 9's).
