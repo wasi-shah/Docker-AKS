@@ -141,6 +141,58 @@ In FaaS, all you need to do is create your application or weave together busines
 > <br> **1.Page Blobs:** Max size 8 TB Page blob are optimized for random read and write operations. 
 > <br> **2.Block Blobs:** Max size 190 TB Block blobs are optimized for efficiently uploading large amounts of data. These are perfect for storing large video files that don’t change often.  
 
+> [!important]
+> **Question: What is Azure file max size?** 
+> <br>File Storage (Max size 100TB)
+
+> [!important]
+> **Question: what is Azure Queue and message size?** 
+> <br>Maximum queue size 500 TB & Maximum message size 64 KB 
+
+
+
+> [!important]
+> **Question: what is Azure Table and row size?** 
+> <br>Table has 5TB storage limit & 1 MB data per entry (per row)
+
+
+
+> [!important]
+> **Question: What are the three Managed Disk roles/types available?** 
+> <br> 1. Data disk 
+> <br> 2. OS disk
+> <br> Temporary disk
+
+
+
+> [!important]
+> **Question: What are the two basic Storage performance tiers?** 
+> <br> 1. **Standard:** This is HHD drive
+> <br> 2. **Premium: SSD:** This is fast drive but only page blob. Premium do not support block blob, append blog, file share, tables and queues.
+
+
+> [!important]
+> **Question: What are four storage access tiers?** 
+> <br> **1. Hot tier:** An online tier optimized for storing data that is accessed or modified frequently. The hot tier has the highest storage costs, but the lowest access costs.
+> <br> **2. Cool tier:**  An online tier optimized for storing data that is infrequently accessed or modified. Data in the cool tier should be stored for a minimum of 30 days. The cool tier has lower storage costs and higher access costs compared to the hot tier. 
+> <br> **3. Cold tier:**  An online tier optimized for storing data that is rarely accessed or modified, but still requires fast retrieval. Data in the cold tier should be stored for a minimum of 90 days. The cold tier has lower storage costs and higher access costs compared to the cool tier. 
+> <br> **4. Archive tier:**  An offline tier optimized for storing data that is rarely accessed, and that has flexible latency requirements, on the order of hours. Data in the archive tier should be stored for a minimum of 180 days.
+
+> [!important]
+> **Question: What are the two Storage Encryption?** 
+> <br> 1. **Microsoft-Managed-Keys (MMK):** Data in a new storage account is encrypted with Microsoft-managed keys by default.
+> <br> 2. **Custom-Managed-Keys (CMK):** You can manage encryption with your own keys. If you choose to manage encryption with your own keys, you have two options. You can use either type of key management, or both
+
+> [!important]
+> **Question: What are the three Storage Identity and access management?** 
+> <br> 1. **Access Keys:** When you create a storage account, Azure generates two 512-bit storage account access keys for that account. These keys can be used to authorize access to data in your storage account via Shared Key authorization, or via SAS tokens that are signed with the shared key.
+> <br> 2. **Shared Access Keys:** A shared access signature (SAS) provides secure delegated access to resources in your storage account. With a SAS, you have granular control over how a client can access your data.
+> <br> 2. **Microsoft Entra ID Integration:** Microsoft Entra integration for authorizing requests to blob, queue, and table resources. Microsoft recommends using Microsoft Entra credentials to authorize requests to data when possible for optimal security and ease of use. For more information about Microsoft Entra integration, see the articles for either blob, queue, or table resources. You can use Azure role-based access control (Azure RBAC) to manage a security principal's permissions to blob, queue, and table resources in a storage account. You can also use Azure attribute-based access control (ABAC) to add conditions to Azure role assignments for blob resources.
+
+
+
+
+
 ## Azure data services
 ### Azure Blobs
 A massively scalable object store for text and binary data. Also includes support for big data analytics through Data Lake Storage Gen2.
