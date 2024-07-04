@@ -128,11 +128,9 @@ In FaaS, all you need to do is create your application or weave together busines
 > **Question: What is Azure storage redundancy and it’s types?** 
 > <br> To ensure that your data is durable, Azure Storage stores multiple copies of your data. When you set up your storage account, you select a redundancy option.
 > <br> L means primary region/one data center. LRS means 3 copies. G means secondary region
-> <br> **1. Locally redundant storage 
-> <br> **1.1 Locally redundant storage (LRS) – formula [Local/primary 3 copies] 
-> <br> **1.1.1 Replicates your storage account three times within a single data center in the primary region. SLA 99.999999999% (11 nines). 
-> <br> **1.2 Zone-redundant storage – formula [LRS] + [1 Zone copy]
-> <br> **1.2.1 	replicates your storage account synchronously across three Azure availability zones in the primary region. SLA 99.9999999999% (12 9's).
+> <br> - Locally redundant storage 
+> <br>   - Locally redundant storage (LRS) – formula [Local/primary 3 copies]. Replicates your storage account three times within a single data center in the primary region. SLA 99.999999999% (11 nines). 
+> <br>   - Zone-redundant storage – formula [LRS] + [1 Zone copy]. Replicates your storage account synchronously across three Azure availability zones in the primary region. SLA 99.9999999999% (12 9's).
 > <br> **2. Redundancy in a secondary region
 > <br> **2.1 Geo-redundant storage (GRS)-  formula [LRS] + [Second Region LRS] + copies your data asynchronously to a single physical location in the secondary region three times. 
 > <br> **2.2 Geo-zone-redundant storage (GZRS)  - formula [LRS] + [3 Zone copies] + [3 Secondary region Zone copies]
