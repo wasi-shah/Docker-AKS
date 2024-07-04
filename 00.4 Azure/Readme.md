@@ -76,50 +76,69 @@ Services in the FaaS category are
 In FaaS, all you need to do is create your application or weave together business logic and run it. Scaling happens automatically. One of the more noteworthy benefits of FaaS is that you pay for the resources you use only when the logic runs instead of paying for a service that is always on, waiting for somebody to use it. But FaaS does more than just host your application; it connects your logic to triggers and sources. Outside sources such as Azure Storage Queues or WebHooks can initiate Azure Functions or Logic Apps and provide them with data to process. You do not need to write the activating logic or set up the plumbing to connect to external data stores or services, meaning you can focus on your logic and customer-facing features.
 
 ## Azure Storage
-What is Azure storage?
-The Azure Storage platform is Microsoft's cloud storage solution for modern data storage scenarios. Azure Storage offers highly available, massively scalable, durable, and secure storage for a variety of data objects in the cloud. Azure Storage data objects are accessible from anywhere in the world over HTTP or HTTPS via a REST API.
-Q: What are the key benefits of Azure storage account.
-Storage in Azure is highly available, secure, durable, scalable, and redundant.
-Q: What is a region
-An Azure region is a geographical area in which one or more physical Azure data centers reside. Formula region = availability zone 1 + availability zone 2 + availability zone n
-Q: What is an Availability zone?
-With in a region, you have availability zones. Azure availability zones are physically and logically separated datacenters with their own independent power source, network, and cooling. Formula availability zone = data centre 1 + data centre 2 + data centre n
-Q: What is an azure data centre?
-An Azure data center is a unique physical building that contains thousands of physical servers with it's own power, cooling and networking infrastructure
+> [!important]
+> **Question: What is Azure storage?** 
+> <br>The Azure Storage platform is Microsoft's cloud storage solution for modern data storage scenarios. Azure Storage offers highly available, massively scalable, durable, and secure storage for a variety of data objects in the cloud. Azure Storage data objects are accessible from anywhere in the world over HTTP or HTTPS via a REST API.
 
-Q: What are Azure data services
-The Azure Storage platform includes the following data services:
-•	Azure Blobs: A massively scalable object store for text and binary data. Also includes support for big data analytics through Data Lake Storage Gen2.
-•	Azure Files: Managed file shares for cloud or on-premises deployments.
-•	Azure Elastic SAN: A fully integrated solution that simplifies deploying, scaling, managing, and configuring a SAN in Azure.
-•	Azure Queues: A messaging store for reliable messaging between application components.
-•	Azure Tables: A NoSQL store for schemaless storage of structured data.
-•	Azure managed Disks: Block-level storage volumes for Azure VMs.
-•	Azure Container Storage (preview): A volume management, deployment, and orchestration service built natively for containers.
 
-Q: What are Azure storage types
-•	Standard general-purpose v2 – [ available with Blob Storage (including Data Lake Storage1), Queue Storage, Table Storage, and Azure Files]
-•	Premium block blobs – [ available with Blob Storage (including Data Lake Storage1)]
-•	Premium file shares – [Available with Azure Files]
-•	Premium page blobs – [Available with Page blobs only]
 
-Q: What is Azure storage redundancy and it’s types?
-To ensure that your data is durable, Azure Storage stores multiple copies of your data. When you set up your storage account, you select a redundancy option.
-TIP: 
-L means primary region/one data center
-LRS means 3 copies
-G means secondary region
 
-•	Locally redundant storage 
-o	Locally redundant storage (LRS) – formula [Local/primary 3 copies] 
-o	replicates your storage account three times within a single data center in the primary region. SLA 99.999999999% (11 nines). 
-o	Zone-redundant storage – formula [LRS] + [1 Zone copy]
-o	replicates your storage account synchronously across three Azure availability zones in the primary region. SLA 99.9999999999% (12 9's).
-•	Redundancy in a secondary region
-o	Geo-redundant storage (GRS)-  formula [LRS] + [Second Region LRS]
+
+
+> [!important]
+> **Question: What are the key benefits of Azure storage account?** 
+> <br>Storage in Azure is highly available, secure, durable, scalable, and redundant.
+
+
+> [!important]
+> **Question: What is a region?** 
+> <br> An Azure region is a geographical area in which one or more physical Azure data centers reside. Formula region = availability zone 1 + availability zone 2 + availability zone n
+
+
+> [!important]
+> **Question: What is an Availability zone?** 
+> <br> With in a region, you have availability zones. Azure availability zones are physically and logically separated datacenters with their own independent power source, network, and cooling. Formula availability zone = data centre 1 + data centre 2 + data centre n
+
+
+> [!important]
+> **Question: What is an azure data centre?** 
+> <br>An Azure data center is a unique physical building that contains thousands of physical servers with it's own power, cooling and networking infrastructure
+
+> [!important]
+> **Question: What are Azure data services** 
+> <br>The Azure Storage platform includes the following data services:
+> <br> **1. Azure Blobs:** A massively scalable object store for text and binary data. Also includes support for big data analytics through Data Lake Storage Gen2.
+> <br> **2. Azure Files:** Managed file shares for cloud or on-premises deployments.
+> <br> **3. Azure Elastic SAN:** A fully integrated solution that simplifies deploying, scaling, managing, and configuring a SAN in Azure.
+> <br> **4. Azure Queues:** A messaging store for reliable messaging between application components.
+> <br> **5. Azure Tables:** A NoSQL store for schemaless storage of structured data.
+> <br> **6. Azure managed Disks:** Block-level storage volumes for Azure VMs.
+> <br> **7. Azure Container Storage (preview):** A volume management, deployment, and orchestration service built natively for containers.
+
+
+> [!important]
+> **Question: What are Azure storage types** 
+> <br> **1. Standard general-purpose v2:**  [ available with Blob Storage (including Data Lake Storage1), Queue Storage, Table Storage, and Azure Files]
+> <br> **2. Premium block blobs:**  [ available with Blob Storage (including Data Lake Storage1)]
+> <br> **3. Premium file shares:**  [Available with Azure Files]
+> <br> **4. Premium page blobs:**  [Available with Page blobs only]
+
+
+> [!important]
+> **Question: What is Azure storage redundancy and it’s types?** 
+> <br> To ensure that your data is durable, Azure Storage stores multiple copies of your data. When you set up your storage account, you select a redundancy option.
+> <br> **TIP: L means primary region/one data center. LRS means 3 copies. G means secondary region
+
+> <br> **1. Locally redundant storage 
+> <br> **1.1 Locally redundant storage (LRS) – formula [Local/primary 3 copies] 
+> <br> **1.1.1 Replicates your storage account three times within a single data center in the primary region. SLA 99.999999999% (11 nines). 
+> <br> **1.2 Zone-redundant storage – formula [LRS] + [1 Zone copy]
+> <br> **1.2.1 	replicates your storage account synchronously across three Azure availability zones in the primary region. SLA 99.9999999999% (12 9's).
+> <br> **2. Redundancy in a secondary region
+> <br> **2.1 Geo-redundant storage (GRS)-  formula [LRS] + [Second Region LRS]
 LRS + copies your data asynchronously to a single physical location in the secondary region three times. 
-o	Geo-zone-redundant storage (GZRS)  - formula [LRS] + [3 Zone copies] + [3 Secondary region Zone copies]
-o	Read Access Geo-zone-redundant storage (RA-GZRS) same as GZRS but you can read from secondary region]
+> <br> **2.2 Geo-zone-redundant storage (GZRS)  - formula [LRS] + [3 Zone copies] + [3 Secondary region Zone copies]
+> <br> **2.3 	Read Access Geo-zone-redundant storage (RA-GZRS) same as GZRS but you can read from secondary region]
 
 
 
