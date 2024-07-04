@@ -136,7 +136,10 @@ In FaaS, all you need to do is create your application or weave together busines
 >    - Geo-zone-redundant storage (GZRS)  - formula [LRS] + [3 Zone copies] + [3 Secondary region Zone copies]
 >    - Read Access Geo-zone-redundant storage (RA-GZRS) same as GZRS but you can read from secondary region
 
-
+> [!important]
+> **Question: What are two blobs and their sizes?** 
+> <br> **1.Page Blobs:** Max size 8 TB Page blob are optimized for random read and write operations. 
+> <br> **2.Block Blobs:** Max size 190 TB Block blobs are optimized for efficiently uploading large amounts of data. These are perfect for storing large video files that don’t change often.  
 
 ## Azure data services
 ### Azure Blobs
