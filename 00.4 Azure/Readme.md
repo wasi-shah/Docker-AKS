@@ -76,9 +76,10 @@ Services in the FaaS category are
 In FaaS, all you need to do is create your application or weave together business logic and run it. Scaling happens automatically. One of the more noteworthy benefits of FaaS is that you pay for the resources you use only when the logic runs instead of paying for a service that is always on, waiting for somebody to use it. But FaaS does more than just host your application; it connects your logic to triggers and sources. Outside sources such as Azure Storage Queues or WebHooks can initiate Azure Functions or Logic Apps and provide them with data to process. You do not need to write the activating logic or set up the plumbing to connect to external data stores or services, meaning you can focus on your logic and customer-facing features.
 
 ___
+# Azure Storage
 ___
 
-# Azure Storage
+
 ![image](https://github.com/wasi-shah/Docker-AKS/assets/51749920/5cbaa486-7224-44af-935b-df5265edf292)
 
 > [!important]
