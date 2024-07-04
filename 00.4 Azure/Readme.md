@@ -134,8 +134,7 @@ In FaaS, all you need to do is create your application or weave together busines
 > <br> **1.2 Zone-redundant storage – formula [LRS] + [1 Zone copy]
 > <br> **1.2.1 	replicates your storage account synchronously across three Azure availability zones in the primary region. SLA 99.9999999999% (12 9's).
 > <br> **2. Redundancy in a secondary region
-> <br> **2.1 Geo-redundant storage (GRS)-  formula [LRS] + [Second Region LRS]
-LRS + copies your data asynchronously to a single physical location in the secondary region three times. 
+> <br> **2.1 Geo-redundant storage (GRS)-  formula [LRS] + [Second Region LRS] + copies your data asynchronously to a single physical location in the secondary region three times. 
 > <br> **2.2 Geo-zone-redundant storage (GZRS)  - formula [LRS] + [3 Zone copies] + [3 Secondary region Zone copies]
 > <br> **2.3 	Read Access Geo-zone-redundant storage (RA-GZRS) same as GZRS but you can read from secondary region]
 
