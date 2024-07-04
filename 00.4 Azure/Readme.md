@@ -187,7 +187,7 @@ In FaaS, all you need to do is create your application or weave together busines
 > [!important]
 > **Question: What are the two ways to import/export Azure Data?** 
 > <br> 1. Online
->       - First nested list item
+>         - First nested list item
 > <br> 2. Offline - 
 >       - First nested list item
 
