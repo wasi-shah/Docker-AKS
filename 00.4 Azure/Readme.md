@@ -127,7 +127,7 @@ In FaaS, all you need to do is create your application or weave together busines
 > [!important]
 > **Question: What is Azure storage redundancy and it’s types?** 
 > <br> To ensure that your data is durable, Azure Storage stores multiple copies of your data. When you set up your storage account, you select a redundancy option.
-> <br> **TIP: L means primary region/one data center. LRS means 3 copies. G means secondary region
+> <br> L means primary region/one data center. LRS means 3 copies. G means secondary region
 
 > <br> **1. Locally redundant storage 
 > <br> **1.1 Locally redundant storage (LRS) – formula [Local/primary 3 copies] 
