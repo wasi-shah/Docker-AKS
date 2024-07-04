@@ -75,20 +75,14 @@ Services in the FaaS category are
 • Azure Event Grid.
 In FaaS, all you need to do is create your application or weave together business logic and run it. Scaling happens automatically. One of the more noteworthy benefits of FaaS is that you pay for the resources you use only when the logic runs instead of paying for a service that is always on, waiting for somebody to use it. But FaaS does more than just host your application; it connects your logic to triggers and sources. Outside sources such as Azure Storage Queues or WebHooks can initiate Azure Functions or Logic Apps and provide them with data to process. You do not need to write the activating logic or set up the plumbing to connect to external data stores or services, meaning you can focus on your logic and customer-facing features.
 
-## Azure Storage
+# Azure Storage
 > [!important]
 > **Question: What is Azure storage?** 
 > <br>The Azure Storage platform is Microsoft's cloud storage solution for modern data storage scenarios. Azure Storage offers highly available, massively scalable, durable, and secure storage for a variety of data objects in the cloud. Azure Storage data objects are accessible from anywhere in the world over HTTP or HTTPS via a REST API.
 
-
-
-
-
-
 > [!important]
 > **Question: What are the key benefits of Azure storage account?** 
 > <br>Storage in Azure is highly available, secure, durable, scalable, and redundant.
-
 
 > [!important]
 > **Question: What is a region?** 
@@ -190,7 +184,12 @@ In FaaS, all you need to do is create your application or weave together busines
 > <br> 2. **Microsoft Entra ID Integration:** Microsoft Entra integration for authorizing requests to blob, queue, and table resources. Microsoft recommends using Microsoft Entra credentials to authorize requests to data when possible for optimal security and ease of use. For more information about Microsoft Entra integration, see the articles for either blob, queue, or table resources. You can use Azure role-based access control (Azure RBAC) to manage a security principal's permissions to blob, queue, and table resources in a storage account. You can also use Azure attribute-based access control (ABAC) to add conditions to Azure role assignments for blob resources.
 
 
-
+> [!important]
+> **Question: What are the two ways to import/export Azure Data?** 
+> <br> 1. Online
+>       - First nested list item
+> <br> 2. Offline - 
+>       - First nested list item
 
 
 ## Azure data services
