@@ -599,13 +599,30 @@ The NSG diagnostics is an Azure Network Watcher tool that helps you understand w
 Topology provides a visualization of the entire network for understanding network configuration. It provides an interactive interface to view resources and their relationships in Azure across multiple subscriptions, resource groups and locations. You can also drill down to a resource view for resources to view their component level visualization.
 
 
-
-
 # Azure Governance
 
 ![AzureAccountStructurev2](https://github.com/wasi-shah/Docker-AKS/assets/51749920/43ede4f8-be41-40f6-b10f-37081a7aa135)
 
+> [!important]
+> **Question: Define azure governance structure?** 
+> <br> Tenant > Management Group > Subscription > Resource Group > Resources
+> - Azure account types
+>   - User, Application (called managed identity)    
+> - Account access types
+>   - Owner, Contributor, Reader or Custom
 
+
+
+> [!important]
+> **Question: What is a Azure account?** 
+> <br> Azure account is used as a authentication mechanism. Every Azure account is part of one Azure tenant.
+
+
+> [!important]
+> **Question: How can you apply restrictions on Azure resources?** 
+> <br> There are two ways to control azure
+> - **RBAC** - manage who has access to Azure resources, what they can do with those resources, and what areas they have access to.
+> - **Policies** - Azure Policy helps to enforce organizational standards for example you can enforce resource creation in certain regions only.
 
 ## Tenant
 - Azure tenant is a organisation or a company.
