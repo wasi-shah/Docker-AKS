@@ -315,9 +315,47 @@ Moving stored or in-flight data into the cloud is a challenge. Data Box devices 
 # Azure Networking
 Azure networking provides the following services
 - **Connectivity services**: Connect Azure resources and on-premises resources using any or a combination of these networking services in Azure - Virtual Network (VNet), Virtual WAN, ExpressRoute, VPN Gateway, NAT Gateway, Azure DNS, Peering service, Azure Virtual Network Manager, Route Server, and Azure Bastion.
-- Application protection services: Protect your applications using any or a combination of these networking services in Azure - Load Balancer, Private Link, DDoS protection, Firewall, Network Security Groups, Web Application Firewall, and Virtual Network Endpoints.
+- **Application protection services**: Protect your applications using any or a combination of these networking services in Azure - Load Balancer, Private Link, DDoS protection, Firewall, Network Security Groups, Web Application Firewall, and Virtual Network Endpoints.
 - **Application delivery services**: Deliver applications in the Azure network using any or a combination of these networking services in Azure - Azure Front Door Service, Traffic Manager, Application Gateway, Internet Analyzer, and Load Balancer.
 - **Network monitoring**: Monitor your network resources using any or a combination of these networking services in Azure - Network Watcher, ExpressRoute Monitor, Azure Monitor, or VNet Terminal Access Point (TAP).
+
+> [!important]
+> **Question: What is Azure DNS service?** 
+> <br> Azure DNS service allow you to manage domain DNS records. Azure DNS is your domain control panel.
+
+
+> [!important]
+> **Question: What is Azure CDN?** 
+> <br> Content Delivery Network helps reduce latency and improve performance by offloading static and media files to Azure global CDN network.
+
+
+> [!important]
+> **Question: What is Load balancing?** 
+> <br> The term load balancing refers to the distribution of workloads across multiple computing resources.
+
+> [!important]
+> **Question: What is four Load balancing option available?** 
+> <br> Azure Traffic Manager, Azure Load Balancer, Azure Application Gateway and Azure Front Door.
+
+
+> [!important]
+> **Question: What is four Azure Traffic Manager?** 
+> <br> Azure Traffic Manager operates at the DNS layer and distributes traffic based on DNS/user IP using DNS-based traffic routing methods [Layer 7/TCP/UDP].
+
+
+> [!important]
+> **Question: What is Azure Load Balancer?** 
+> <br> Distributer traffic to a less busy VM. [Layer 4/TCP/UDP] 
+
+> [!important]
+> **Question: What is Azure Application Gateway?** 
+> <br> Azure Application Gateway is a web traffic load balancer that route traffic based on the incoming URL. [Layer 7/TCP/HTTP/HTTPS] 
+
+
+> [!important]
+> **Question: What is Front Door?** 
+> <br> Front Door is an Advance CDN with DDoS protection already built-in and can serve dynamic contents.
+
 ## Azure DNS
 Host your Domain Name System (DNS) domain in Azure. Azure DNS is a hosting service for DNS domains that provides name resolution by using Microsoft Azure infrastructure. By hosting your domains in Azure, you can manage your DNS records by using the same credentials, APIs, tools, and billing as your other Azure services.
 You can't use Azure DNS to buy a domain name. For an annual fee, you can buy a domain name by using App Service domains or a third-party domain name registrar. Your domains then can be hosted in Azure DNS for record management. For more information, see Delegate a domain to Azure DNS.
@@ -332,18 +370,10 @@ This involves you to use custom domain by using Microsoft DNS Zone service.
 Azure Content Delivery Network offers a global solution for rapidly delivering content. Save bandwidth and improve responsiveness when encoding or distributing gaming software, firmware updates, and IoT endpoints. Reduce load times for websites, mobile apps, and streaming media to increase user satisfaction globally.
 Users expect a fast, reliable, and personalized web experience wherever they are. Content Delivery Network helps reduce latency and improve performance for high-bandwidth content by distributing user requests and serving content directly from edge servers. This brings the content closer to users and sends less traffic to the origin point, delivering superior online experiences.
 
-## Azure Front Door
-Azure Front Door is a modern cloud content delivery network (CDN) service that delivers high performance, scalability, and secure user experiences for your content and applications.
-Deliver real-time performance of global web applications using the Microsoft global edge network. Accelerate content and transform multiple microservice applications into a single more secure app delivery architecture.
-Supports:
-- HTTP, HTTPS, HTTP/2 
-- Layer 7
-- Global apps
-- Web application firewall
-- SSL/TLS offloading
-
 
 ## Azure load balancing services
+The term load balancing refers to the distribution of workloads across multiple computing resources.
+
 ### Azure Traffic Manager
 Azure Traffic Manager operates at the DNS layer to quickly and efficiently direct incoming DNS requests based on the routing method of your choice. An example would be sending requests to the closest endpoints, improving the responsiveness of your applications.
 Distribute traffic optimally to services across global Azure regions—with DNS-based traffic routing methods. Prioritize user access, help ensure adherence to data sovereignty, and adjust traffic for app upgrades and maintenance.
@@ -373,6 +403,16 @@ Supports:
 - Web application firewall
 - SSL/TLS offloading
 
+### Azure Front Door
+Azure Front Door is a modern cloud content delivery network (CDN) service that delivers high performance, scalability, and secure user experiences for your content and applications.
+Deliver real-time performance of global web applications using the Microsoft global edge network. Accelerate content and transform multiple microservice applications into a single more secure app delivery architecture.
+Supports:
+- HTTP, HTTPS, HTTP/2 
+- Layer 7
+- Global apps
+- Web application firewall
+- SSL/TLS offloading
+- 
 ## Azure Virtual Network
 Azure Virtual Network is a service that provides the fundamental building block for your private network in Azure. An instance of the service (a virtual network) enables many types of Azure resources to securely communicate with each other, the internet, and on-premises networks. These Azure resources include virtual machines (VMs).
 A virtual network is similar to a traditional network that you'd operate in your own datacenter. But it brings extra benefits of the Azure infrastructure, such as scale, availability, and isolation.
