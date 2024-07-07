@@ -443,9 +443,7 @@ You can filter network traffic between subnets by using either or both of the fo
 Network security groups and application security groups can contain multiple inbound and outbound security rules. These rules enable you to filter traffic to and from resources by source and destination IP address, port, and protocol.
 NSG defines which traffic is allowed and which traffic is blocked. It’s a security guard in the middle which checks the incoming request (what is source IP, what is destination IP, what is the destination port) and decides if that request is allowed or denied. 
 - NSG can be attached to 
-  - 
   - A Network interface
-    - 
     - If you attach a NSG to network interface then it is a security guard between Subnet and Network interface
   - A Subnet
     - If you attach a NSG to a subnet then it is a security guard between Vnet and subnet (technically a guard between other subnets in the vnet)
