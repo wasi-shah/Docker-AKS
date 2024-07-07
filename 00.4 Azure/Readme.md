@@ -810,9 +810,9 @@ If I manage a big infrastructure, then.
 
 > [!important]
 > **Question: What are Service Account Types?** 
-> <br> 1. User-based service accounts It’s a basic general purpose user account. 
-> <br> 2. Managed identities Managed identities are secure Microsoft Entra identities created to provide identities for Azure resources.
-> <br> 3. Service principals Service accounts are a special type of account that is intended to represent a non-human entity such as an application
+> <br> 1. **User-based service accounts** It’s a basic general purpose user account. 
+> <br> 2. **Managed identities** Managed identities are secure Microsoft Entra identities created to provide identities for Azure resources.
+> <br> 3. **Service principals** Service accounts are a special type of account that is intended to represent a non-human entity such as an application
 
 
 Azure Entra ID is Microsoft’s cloud-based identity and access management service, which helps your employees sign in and access resources in:
