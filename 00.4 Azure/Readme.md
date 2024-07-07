@@ -814,7 +814,6 @@ Microsoft Entra ID and Azure AD B2C are separate product offerings.
 - Microsoft Entra tenant
   - A Microsoft Entra tenant represents an organization.
 - Azure AD B2C tenant
-  - 
   - An Azure AD B2C tenant represents a collection of identities to be used with relying party applications.
   - By default, each B2C tenant can accommodate a total of 1.25 million objects (user accounts and applications), but you can increase this limit to 5.25 million objects when you add and verify a custom domain.
 
