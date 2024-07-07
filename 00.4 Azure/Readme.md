@@ -439,15 +439,21 @@ Supports:
 
 > [!important]
 > **Question: How can you connect yur own-prem resources to Azure?** 
-> <br> 
-
-
-> [!important]
-> **Question: What is ?** 
 > <br> You can connect your on-premises computers and networks to a virtual network by using any of the following options:
-- Point-to-site virtual private network (VPN)
-- Site-to-site VPN
-- Azure ExpressRoute
+> - Point-to-site virtual private network (VPN)
+>   - your office computer to azure vnet using public internet.
+>   - lets you create a secure connection to your azure virtual network from an office/on-prem client computer.
+>   - Install software on PC
+>   - Data travel over public internet
+> - Site-to-site VPN
+>   - your office network to azure vnet using public internet.
+>   - A Site-to-Site VPN gateway connection is used to connect your on-premises network to an Azure virtual network
+>   - Install physical VPN gateway on prem
+>   - Data travel over public internet
+> - Azure ExpressRoute
+>   - your office network to azure vnet using **private** internet.
+>   - ExpressRoute lets you extend your on-premises networks into the Microsoft cloud over a private connection
+>   - Data travel over **private** internet
 
 
 
