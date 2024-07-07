@@ -617,6 +617,7 @@ Topology provides a visualization of the entire network for understanding networ
 > - Account access types
 >   - Owner, Contributor, Reader or Custom
 
+> [!important]
 > **Question: What is a Role?** 
 > <br> A role definition is a collection of permissions. You can use a pre-defined role or create a custom role.
 
@@ -790,6 +791,30 @@ If I manage a big infrastructure, then.
 
 
 # Manage Entra ID (Azure Active Directory)
+
+> [!important]
+> **Question: What is a Manage Entra ID types and their sub-types?** 
+> <br> Microsoft’s cloud-based identity and access management service provides user management system.
+> <br> It gives your apps (services principle/managed identities), people (your domain name users), partners (guest users), and customers (your app users) a single identity to access the applications they want and collaborate from any platform and device.
+
+> [!important]
+> **Question: What are Microsoft Entra tenant Types?** 
+> <br> 1. Microsoft Entra tenant - A Microsoft Entra tenant represents an organization
+> <br>  1.1 User-based service accounts It’s a basic general purpose user account. 
+> <br>  1.2 Managed identities Managed identities are secure Microsoft Entra identities created to provide identities for Azure resources.
+> <br>  1.3 Service principals Service accounts are a special type of account that is intended to represent a non-human entity such as an application
+> <br> 2. Azure AD B2C tenant - An Azure AD B2C tenant represents a collection of identities to be used with relying party applications.
+> - Work account. Employees which want to access azure portal. A work account can access resources in a tenant, and with an administrator role, can manage tenants.
+> - Guest account An external consultant that can only manage Azure active directory users. A guest account can only be a Microsoft account or an Azure Active Directory user that can be used to access applications or manage tenants.
+> - Consumer account (your own asp.net app) Your app customers. Then can't access Azure portal and they can't access Azure resources
+
+> [!important]
+> **Question: What are Service Account Types?** 
+> <br> 1. User-based service accounts It’s a basic general purpose user account. 
+> <br> 2. Managed identities Managed identities are secure Microsoft Entra identities created to provide identities for Azure resources.
+> <br> 3. Service principals Service accounts are a special type of account that is intended to represent a non-human entity such as an application
+
+
 Azure Entra ID is Microsoft’s cloud-based identity and access management service, which helps your employees sign in and access resources in:
 - External resources, such as Microsoft Office 365, the Azure portal, and thousands of other SaaS applications.
 - Internal resources, such as apps on your corporate network and intranet (B2B), along with any cloud apps developed by your own organization (B2C).
