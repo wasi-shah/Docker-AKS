@@ -698,16 +698,16 @@ Whenever a change is made to RBAC definition and role assignment, the details ar
 Use the Activity Log, to determine the what, who, and when for any write operations  taken on the resources in your subscription.
 The following  RBAC related operations are written in Activity Log, 
 1. For built-in roles
-a. When you create/update/delete a new role assignment for built-in roles
-1. For Custom Roles
-a. When you create/update/delete a custom role.
-b. When you create/update/delete a new role assignment for custom roles
+   - When you create/update/delete a new role assignment for built-in roles
+2. For Custom Roles
+   - When you create/update/delete a custom role.
+   - When you create/update/delete a new role assignment for custom roles
 How to filter Activity Log to view RBAC events.
 1. Apply [Administrator] Filter on events.
 2. Apply following filters on Operation 
-a. Create role assignment
-b. Delete role assignment
-c. Create or update custom role definition 
+   - Create role assignment
+   - Delete role assignment
+   - Create or update custom role definition 
                          d. Delete custom role definition
 ### RBAC Tips
 Tips and tricks to avoid RBAC issues
