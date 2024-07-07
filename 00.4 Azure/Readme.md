@@ -449,7 +449,8 @@ Supports:
 
 
 ## Azure Virtual Network
-![alt text](<Azure Virtual Network.png>)
+![Azure Virtual Network](https://github.com/wasi-shah/Docker-AKS/assets/51749920/da47b0d7-bc68-42ab-93c6-6911022af7b2)
+
 Azure Virtual Network is a service that provides the fundamental building block for your private network in Azure. An instance of the service (a virtual network) enables many types of Azure resources to securely communicate with each other, the internet, and on-premises networks. These Azure resources include virtual machines (VMs).
 A virtual network is similar to a traditional network that you'd operate in your own datacenter. But it brings extra benefits of the Azure infrastructure, such as scale, availability, and isolation.
 
