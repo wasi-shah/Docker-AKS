@@ -697,28 +697,28 @@ Activity Log provides data about the external operations that are performed on a
 Whenever a change is made to RBAC definition and role assignment, the details are recorded in Azure Activity Log.  The Azure Activity Log provides insight into subscription-level management events that have occurred in Azure.
 Use the Activity Log, to determine the what, who, and when for any write operations  taken on the resources in your subscription.
 The following  RBAC related operations are written in Activity Log, 
-	1. For built-in roles
-		a. When you create/update/delete a new role assignment for built-in roles
-	2. For Custom Roles
-		a. When you create/update/delete a custom role.
-		b. When you create/update/delete a new role assignment for custom roles
+1. For built-in roles
+a. When you create/update/delete a new role assignment for built-in roles
+1. For Custom Roles
+a. When you create/update/delete a custom role.
+b. When you create/update/delete a new role assignment for custom roles
 How to filter Activity Log to view RBAC events.
-	1. Apply [Administrator] Filter on events.
-	2. Apply following filters on Operation 
-		a. Create role assignment
-		b. Delete role assignment
-		c. Create or update custom role definition 
-                               d. Delete custom role definition
+1. Apply [Administrator] Filter on events.
+2. Apply following filters on Operation 
+a. Create role assignment
+b. Delete role assignment
+c. Create or update custom role definition 
+                         d. Delete custom role definition
 ### RBAC Tips
 Tips and tricks to avoid RBAC issues
-•	Organise your resources in correct resource group.
-•	Avoid assigning RBAC on subscription level.
-•	These days organizations are moving sensitive data into a separate subscription or management group which is good.
-•	Avoid RBAC on a single resource level
-•	Use builtin role where possible
-•	Assign role on group level (not user level )
-•	Avoid assigning permission to someone Microsoft account. Always create an Azure AZ user account and assign permission to that account so if he leaves you can control his account.
-•	Use RBAC with service to support CICD
+- Organise your resources in correct resource group.
+- Avoid assigning RBAC on subscription level.
+- These days organizations are moving sensitive data into a separate subscription or management group which is good.
+- Avoid RBAC on a single resource level
+- Use builtin role where possible
+- Assign role on group level (not user level )
+- Avoid assigning permission to someone Microsoft account. Always create an Azure AZ user account and assign permission to that account so if he leaves you can control his account.
+- Use RBAC with service to support CICD
 
 ## Azure Blueprints
 ![image](https://github.com/wasi-shah/Docker-AKS/assets/51749920/9d51b918-6078-445b-93bb-90a2b4160ec7)
