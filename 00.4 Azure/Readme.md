@@ -205,23 +205,28 @@ In FaaS, all you need to do is create your application or weave together busines
 A massively scalable object store for text and binary data. Also includes support for big data analytics through Data Lake Storage Gen2.
 You can use Azure Blob Storage to store large unstructured data—literally, blobs of data. This can be video, image, audio, or text, or even virtual hard drive (VHD) files for VMs. There are two types of Blobs: Page and Block Blobs. 
 #### Page Blobs 
-Max size 8 TB
+- Max size 8 TB
+  
 Page blob are optimized for random read and write operations. These are perfect for storing a VHD. 
 #### Block Blobs
-Max size 190 TB
+- Max size 190 TB
+
 Block blobs are optimized for efficiently uploading large amounts of data. These are perfect for storing large video files that don’t change often.
 ### Azure Files
-File Storage (Max size 100TB).
+- File Storage (Max size 100TB).
+
 You can use Azure File Storage as a drive from which to share files. It uses the Server Message Block (SMB) protocol, which means that you can use it with Windows and Linux, and you can access it from the cloud or from on-premises systems. Like the other Azure Storage types, File Storage is scalable and inexpensive. Managed file shares for cloud or on-premises deployments.
 ### Azure Queues
 - Maximum queue size 500 TB
 - Maximum message size 64 KB
+
 Azure Queue Storage is an unusual type of storage in that it is used to store small messages of data, but its main purpose is to serve as a queue. You put messages on the queue and other processes pick it up. This pattern decouples the message sender from the message processor and results in performance and reliability benefits. Azure Queue Storage is based on the Microsoft Message Queueing that you can find in previous versions of Windows.
 Azure Queue Storage is a service for storing large numbers of messages. You access messages from anywhere in the world via authenticated calls using HTTP or HTTPS. A queue message can be up to 64 KB in size. A queue may contain millions of messages, up to the total capacity limit of a storage account. Queues are commonly used to create a backlog of work to process asynchronously.
 A messaging store for reliable messaging between application components.
 ### Azure Tables
 - Table has a 5TB storage limit
 - 1 MB of data per entry (per row)
+
 A NoSQL store for schemaless storage of structured data.
 Azure Table storage is a service that stores non-relational structured data (also known as structured NoSQL data) in the cloud, providing a key/attribute store with a schemaless design. Because Table storage is schemaless, it's easy to adapt your data as the needs of your application evolve. Access to Table storage data is fast and cost-effective for many types of applications, and is typically lower in cost than traditional SQL for similar volumes of data.
 Azure Tables is a Flexible NoSQL database type storage, its ideal for semi-structured dataset where values are added in Key-value pairs. Table is an ideal solution for structures, semi-structured and non-structured data. You can use Tables to save your data to the tables and use OData-based queries to save and retrieve data. 
