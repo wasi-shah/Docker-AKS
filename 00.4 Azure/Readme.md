@@ -611,10 +611,10 @@ Topology provides a visualization of the entire network for understanding networ
 
 ## Account
 - The Azure account is a global unique entity that gets you access to Azure services and your Azure subscriptions.
-- Azure account of two types
+- Azure account types
   - User
   - Application (called managed identity)
-- Account access type could be
+- Account access types
   - Owner
   - Contributor
   - Reader
@@ -651,13 +651,6 @@ All items azure offers including Azure compute, storage, networking etc.
 A resource group is a container that holds related resources for an Azure solution. The resource group can include all the resources for the solution, or only those resources that you want to manage as a group. You decide how you want to allocate resources to resource groups based on what makes the most sense for your organization. Generally, add resources that share the same lifecycle to the same resource group so you can easily deploy, update, and delete them as a group.
 
 The resource group stores metadata about the resources. Therefore, when you specify a location for the resource group, you are specifying where that metadata is stored. For compliance reasons, you may need to ensure that your data is stored in a particular region.
-
-
-## Azure Blueprints
-Accelerate migration by easily deploying a fully governed landing zone, without the need for external cloud architects or engagements. Reuse cloud-based blueprints for future environments or use built-in blueprints to set up ISO-compliant foundational architectures.
-In modern azure architecture there is concept of blue print. Blue Prints deploy and updates the cloud environment is a repeatable manner using composable artifacts.
-Blueprint consists of following artifacts [ RBAC + Policies + IAC]
-
 
 
 ## Role Base Access controls (RBAC)
@@ -722,3 +715,8 @@ Tips and tricks to avoid RBAC issues
 •	Assign role on group level (not user level )
 •	Avoid assigning permission to someone Microsoft account. Always create an Azure AZ user account and assign permission to that account so if he leaves you can control his account.
 •	Use RBAC with service to support CICD
+
+## Azure Blueprints
+Accelerate migration by easily deploying a fully governed landing zone, without the need for external cloud architects or engagements. Reuse cloud-based blueprints for future environments or use built-in blueprints to set up ISO-compliant foundational architectures.
+In modern azure architecture there is concept of blue print. Blue Prints deploy and updates the cloud environment is a repeatable manner using composable artifacts.
+Blueprint consists of following artifacts [ RBAC + Policies + IAC]
