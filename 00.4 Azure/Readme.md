@@ -120,9 +120,10 @@ In FaaS, all you need to do is create your application or weave together busines
 > [!important]
 > **Question: What are Azure storage types** 
 > <br> **1. Standard general-purpose v2:**  [ available with Blob Storage (including Data Lake Storage1), Queue Storage, Table Storage, and Azure Files]
-> <br> **2. Premium block blobs:**  [ available with Blob Storage (including Data Lake Storage1)]
-> <br> **3. Premium file shares:**  [Available with Azure Files]
-> <br> **4. Premium page blobs:**  [Available with Page blobs only]
+> <br> **2. Premium
+> <br>      - Premium block blobs:**  [ available with Blob Storage (including Data Lake Storage1)]
+> > <br>    - Premium file shares:**  [Available with Azure Files]
+> <br>      - Premium page blobs:**  [Available with Page blobs only]
 
 
 > [!important]
