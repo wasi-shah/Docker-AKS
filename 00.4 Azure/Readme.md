@@ -455,6 +455,10 @@ Supports:
 >   - ExpressRoute lets you extend your on-premises networks into the Microsoft cloud over a private connection
 >   - Data travel over **private** internet
 
+> [!important]
+> **Question: What is Network security groups?** 
+> <br> NSG defines which traffic is allowed and which traffic is blocked. It’s a security guard. NSG can be attached to A Network interface and A Subnet and can define Inbound and Outbound traffic rules.
+
 
 
 ## Azure Virtual Network
@@ -564,3 +568,30 @@ Integrating Azure services with an Azure virtual network enables private access 
 - Deploy dedicated instances of the service into a virtual network. The services can then be privately accessed within the virtual network and from on-premises networks.
 - Use Azure Private Link to privately access a specific instance of the service from your virtual network and from on-premises networks.
 - Access the service over public endpoints by extending a virtual network to the service, through service endpoints. Service endpoints allow service resources to be secured to the virtual network.
+
+
+## Monitoring/Troubleshooting Azure Virtual Networks
+
+### Network Watcher
+- Network Watcher is a regional service that enables you to monitor and diagnose conditions at a network scenario level.
+- Network Watcher is designed to monitor and repair the network health of IaaS (Infrastructure-as-a-Service) products which includes Virtual Machines, Virtual Networks, Application Gateways, Load balancers, etc. 
+- Note: It is not intended for and will not work for PaaS monitoring or Web analytics.
+- It can do
+#### NSG diagnostics
+The NSG diagnostics is an Azure Network Watcher tool that helps you understand which network traffic is allowed or denied in your Azure virtual network along with detailed information for debugging. NSG diagnostics can help you verify that your network security group rules are set up properly.
+#### IP flow verify
+- Network Watcher IP flow verify checks if a packet is allowed or denied to or from a virtual machine based on 5-tuple information. The security group decision and the name of the rule that denied the packet is returned.
+- You can test something like if a one vm ip can reach another vm ip on port 80 for example.
+#### Next hop
+- Next Hop provides the next hop from the target virtual machine to the destination IP address.
+- It validates outbound connectivity from Azure Virtual machine to an external host.
+
+#### Network packet capture
+- Network Watcher packet capture allows you to create capture sessions to track traffic to and from a virtual machine. 
+
+#### Connection Monitor
+- It enables you to configure and track connection reachability, latency, and network topology changes. If there is an issue, it tells you why it occurred and how to fix it.
+- You can inspect all network traffic from one VM to another VM.
+
+### Topology Tool/Viewer
+Topology provides a visualization of the entire network for understanding network configuration. It provides an interactive interface to view resources and their relationships in Azure across multiple subscriptions, resource groups and locations. You can also drill down to a resource view for resources to view their component level visualization.
