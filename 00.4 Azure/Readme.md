@@ -420,7 +420,34 @@ Supports:
 - Global apps
 - Web application firewall
 - SSL/TLS offloading
-- 
+
+
+> [!important]
+> **Question: What is Azure Virtual Network?** 
+> <br> Azure Virtual Network is your private network in Azure. You can deploy VMs and other types of Azure resources in a virtual network. Examples of resources include App Service Environments, Azure Kubernetes Service (AKS), and Azure Virtual Machine Scale Sets. 
+
+
+> [!important]
+> **Question: What is ?** 
+> <br> 
+
+
+> [!important]
+> **Question: What is ?** 
+> <br> 
+
+
+> [!important]
+> **Question: What is ?** 
+> <br> 
+
+
+> [!important]
+> **Question: What is ?** 
+> <br> 
+
+
+
 ## Azure Virtual Network
 Azure Virtual Network is a service that provides the fundamental building block for your private network in Azure. An instance of the service (a virtual network) enables many types of Azure resources to securely communicate with each other, the internet, and on-premises networks. These Azure resources include virtual machines (VMs).
 A virtual network is similar to a traditional network that you'd operate in your own datacenter. But it brings extra benefits of the Azure infrastructure, such as scale, availability, and isolation.
@@ -460,9 +487,7 @@ You can connect virtual networks to each other by using virtual peering. The res
 > [!Tip]
 > Global Vnet peering is when you peer two Vnet in different regions.
 
-### Virtual Network Gateway
-Azure VPN Gateway is a service that uses a specific type of virtual network gateway to send encrypted traffic between an Azure virtual network and on-premises locations over the public Internet. You can also use VPN Gateway to send encrypted traffic between Azure virtual networks over the Microsoft network. Multiple connections can be created to the same VPN gateway. When you create multiple connections, all VPN tunnels share the available gateway bandwidth.
-You can also use virtual network gateway to communicate VNets in different regions. This is called VNet to VNet connection.
+
 
 ### Communication with on-premises resources.
 You can connect your on-premises computers and networks to a virtual network by using any of the following options:
@@ -491,6 +516,10 @@ Established between your on-premises VPN device and an Azure VPN gateway that's 
 - Costly as you pay for speed and data.
 Established between your network and Azure, through an ExpressRoute partner. This connection is private.
 Experience a fast, reliable, and private connection to Azure. Use Azure ExpressRoute to create private connections between Azure datacenters and infrastructure on premises or in a colocation environment. ExpressRoute connections don't route through the public internet, and they offer more reliability, faster speed, and lower latency than typical internet connections. In some cases, using ExpressRoute connections to transfer data between on-premises systems and Azure gives you significant cost benefits.
+
+### Virtual Network Gateway
+Azure VPN Gateway is a service that uses a specific type of virtual network gateway to send encrypted traffic between an Azure virtual network and on-premises locations over the public Internet. You can also use VPN Gateway to send encrypted traffic between Azure virtual networks over the Microsoft network. Multiple connections can be created to the same VPN gateway. When you create multiple connections, all VPN tunnels share the available gateway bandwidth.
+You can also use virtual network gateway to communicate VNets in different regions. This is called VNet to VNet connection.
 
 ### Security & Filtering of network traffic.
 You can filter network traffic between subnets by using either or both of the following options:
