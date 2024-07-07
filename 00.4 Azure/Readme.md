@@ -799,11 +799,11 @@ If I manage a big infrastructure, then.
 
 > [!important]
 > **Question: What are Microsoft Entra tenant Types?** 
-> <br> 1. Microsoft Entra tenant - A Microsoft Entra tenant represents an organization
-> <br>  1.1 User-based service accounts It’s a basic general purpose user account. 
-> <br>  1.2 Managed identities Managed identities are secure Microsoft Entra identities created to provide identities for Azure resources.
-> <br>  1.3 Service principals Service accounts are a special type of account that is intended to represent a non-human entity such as an application
-> <br> 2. Azure AD B2C tenant - An Azure AD B2C tenant represents a collection of identities to be used with relying party applications.
+> 1. Microsoft Entra tenant - A Microsoft Entra tenant represents an organization
+> - User-based service accounts It’s a basic general purpose user account. 
+> - Managed identities Managed identities are secure Microsoft Entra identities created to provide identities for Azure resources.
+> - Service principals Service accounts are a special type of account that is intended to represent a non-human entity such as an application
+> 2. Azure AD B2C tenant - An Azure AD B2C tenant represents a collection of identities to be used with relying party applications.
 > - Work account. Employees which want to access azure portal. A work account can access resources in a tenant, and with an administrator role, can manage tenants.
 > - Guest account An external consultant that can only manage Azure active directory users. A guest account can only be a Microsoft account or an Azure Active Directory user that can be used to access applications or manage tenants.
 > - Consumer account (your own asp.net app) Your app customers. Then can't access Azure portal and they can't access Azure resources
