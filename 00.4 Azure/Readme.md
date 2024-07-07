@@ -597,3 +597,128 @@ The NSG diagnostics is an Azure Network Watcher tool that helps you understand w
 
 ### Topology Tool/Viewer
 Topology provides a visualization of the entire network for understanding network configuration. It provides an interactive interface to view resources and their relationships in Azure across multiple subscriptions, resource groups and locations. You can also drill down to a resource view for resources to view their component level visualization.
+
+
+
+
+# Azure Governance
+
+## Tenant
+- Azure tenant is a organisation or a company.
+- Azure gives you a default subdomain for tenant.
+- You can add your custom domain instead.
+-  Gives you dedicated instance of Azure Intra ID (AAD). 
+
+## Account
+- The Azure account is a global unique entity that gets you access to Azure services and your Azure subscriptions.
+- Azure account of two types
+  - User
+  - Application (called managed identity)
+- Account access type could be
+  - Owner
+  - Contributor
+  - Reader
+  - Custom 
+- Used as a authentication mechanism.
+- Every Azure account is part of one Azure tenant.
+
+## Management Group
+Management groups provide a governance scope above subscriptions. You organize subscriptions into management groups; the governance conditions you apply cascade by inheritance to all associated subscriptions.
+Management groups give you enterprise-grade management at scale, no matter what type of subscriptions you might have. However, all subscriptions within a single management group must trust the same Azure Active Directory (Azure AD) tenant.
+
+
+## Subscription
+- Azure subscription is your billing identity. 
+- The container where your created resources are created.
+- Resources from one subscription are isolated from resources in other subscriptions.
+- Once tenant can have multiple subscriptions. BUT one subscription can only part of once tenant.
+- Organizations might have several Azure credit subscriptions. Each subscription an organization sets up is associated with an Microsoft Entra ID.
+- You can move subscription from one Entra directory to other Entra directory.
+- An organization can have zero or multiple subscriptions.
+  - A subscription can have multiple licenses.
+  - Licenses can be assigned to individual user accounts.
+  - User accounts are stored in a Microsoft Entra tenant.
+- Common types of Azure subscriptions
+  - Free
+  - PAYG
+  - Enterprise
+
+
+## Resources
+All items azure offers including Azure compute, storage, networking etc.
+
+## Resource Group
+A resource group is a container that holds related resources for an Azure solution. The resource group can include all the resources for the solution, or only those resources that you want to manage as a group. You decide how you want to allocate resources to resource groups based on what makes the most sense for your organization. Generally, add resources that share the same lifecycle to the same resource group so you can easily deploy, update, and delete them as a group.
+
+The resource group stores metadata about the resources. Therefore, when you specify a location for the resource group, you are specifying where that metadata is stored. For compliance reasons, you may need to ensure that your data is stored in a particular region.
+
+
+## Azure Blueprints
+Accelerate migration by easily deploying a fully governed landing zone, without the need for external cloud architects or engagements. Reuse cloud-based blueprints for future environments or use built-in blueprints to set up ISO-compliant foundational architectures.
+In modern azure architecture there is concept of blue print. Blue Prints deploy and updates the cloud environment is a repeatable manner using composable artifacts.
+Blueprint consists of following artifacts [ RBAC + Policies + IAC]
+
+
+
+## Role Base Access controls (RBAC)
+Azure role-based access control (Azure RBAC) helps you manage who has access to Azure resources, what they can do with those resources, and what areas they have access to.
+### Role
+A role definition is a collection of permissions. It's typically just called a role. A role definition lists the actions that can be performed, such as read, write, and delete. Roles can be high-level, like owner, or specific, like virtual machine reader.
+**Built-in roles for Azure Resources**
+Role-based access control (RBAC) has several built-in roles for Azure resources that you can assign to users, groups, service principals, and managed identities. Role assignments are the way you control access to Azure resources. If the built-in roles don't meet the specific needs of your organization, you can create your own custom roles for Azure resources.
+ There are three basic roles
+ Owner: Can do all action
+Contributor: Can't edit existing resources but can create new
+Reader: Can only read resources. He can't read secrets and Cost.
+
+### Scope
+Scope is the set of resources that the access applies to. When you assign a role, you can further limit the actions allowed by defining a scope. This is helpful if you want to make someone a Website Contributor, but only for one resource group.
+Scope Levels
+In Azure, you can specify a scope at four levels: management group, subscription, resource group, or resource. Scopes are structured in a parent-child relationship. You can assign roles at any of these levels of scope.
+
+### Role assignments
+A role assignment is the process of attaching a role definition to a user, group, service principal, or managed identity at a particular scope for the purpose of granting access. Access is granted by creating a role assignment, and access is revoked by removing a role assignment. 
+
+**Role Assignment to Security principal**
+A security principal is an object that represents a user, group, service principal, or managed identity that is requesting access to Azure resources. You can assign a role to any of these security principals.
+Tip: Service principal - It mostly used to perform management tasks. An Azure service principal is a security identity used by user-created apps, services, and automation tools like CICD to access specific Azure resources. Think of it as a 'user identity' (login and password or certificate) with a specific role, and tightly controlled permissions to access your resources. It only needs to be able to do specific things, unlike a general user identity. It improves security if you only grant it the minimum permissions level needed to perform its management tasks.
+
+**Role Assignment to Group**
+Role assignments are transitive for groups which means that if a user is a member of a group and that group is a member of another group that has a role assignment, the user will have the permissions in the role assignment.
+
+**Multiple role assignments**
+So what happens if you have multiple overlapping role assignments? Azure RBAC is an additive model, so your effective permissions are the sum of your role assignments. Consider the following example where a user is granted the Contributor role at the subscription scope and the Reader role on a resource group. The sum of the Contributor permissions and the Reader permissions is effectively the Contributor role for the subscription. Therefore, in this case, the Reader role assignment has no impact.
+Multiple Role inheritance and priority.
+If you have more than one role assign to a scope then it follows this sequence.
+1.	Management Group
+2.	Subscription
+3.	Resource Group
+4.	Individual Resource
+
+### RBAC Monitoring (Azure Activity Log)
+Activity Log provides data about the external operations that are performed on a resource by management activity. This log can be used to audit RBAC. Activity log records a lot of other management activities, so you need to filter it to get the RBAC activities only.
+Whenever a change is made to RBAC definition and role assignment, the details are recorded in Azure Activity Log.  The Azure Activity Log provides insight into subscription-level management events that have occurred in Azure.
+Use the Activity Log, to determine the what, who, and when for any write operations  taken on the resources in your subscription.
+The following  RBAC related operations are written in Activity Log, 
+	1. For built-in roles
+		a. When you create/update/delete a new role assignment for built-in roles
+	2. For Custom Roles
+		a. When you create/update/delete a custom role.
+		b. When you create/update/delete a new role assignment for custom roles
+How to filter Activity Log to view RBAC events.
+	1. Apply [Administrator] Filter on events.
+	2. Apply following filters on Operation 
+		a. Create role assignment
+		b. Delete role assignment
+		c. Create or update custom role definition 
+                               d. Delete custom role definition
+### RBAC Tips
+Tips and tricks to avoid RBAC issues
+•	Organise your resources in correct resource group.
+•	Avoid assigning RBAC on subscription level.
+•	These days organizations are moving sensitive data into a separate subscription or management group which is good.
+•	Avoid RBAC on a single resource level
+•	Use builtin role where possible
+•	Assign role on group level (not user level )
+•	Avoid assigning permission to someone Microsoft account. Always create an Azure AZ user account and assign permission to that account so if he leaves you can control his account.
+•	Use RBAC with service to support CICD
