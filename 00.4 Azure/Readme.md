@@ -428,13 +428,13 @@ Supports:
 
 
 > [!important]
-> **Question: What is ?** 
-> <br> 
+> **Question: What is Subnets?** 
+> <br> Subnets enable you to segment the virtual network into one or more subnetworks and allocate a portion of the virtual network's address space to each subnet.
 
 
 > [!important]
-> **Question: What is ?** 
-> <br> 
+> **Question: What is Virtual network peering?** 
+> <br> By default resources in different VNets can’t talk to each other. You can connect virtual networks to each other by using virtual peering.
 
 
 > [!important]
@@ -449,6 +449,7 @@ Supports:
 
 
 ## Azure Virtual Network
+![alt text](<Azure Virtual Network.png>)
 Azure Virtual Network is a service that provides the fundamental building block for your private network in Azure. An instance of the service (a virtual network) enables many types of Azure resources to securely communicate with each other, the internet, and on-premises networks. These Azure resources include virtual machines (VMs).
 A virtual network is similar to a traditional network that you'd operate in your own datacenter. But it brings extra benefits of the Azure infrastructure, such as scale, availability, and isolation.
 
