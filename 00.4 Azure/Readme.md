@@ -334,12 +334,12 @@ Azure networking provides the following services
 > <br> The term load balancing refers to the distribution of workloads across multiple computing resources.
 
 > [!important]
-> **Question: What is four Load balancing option available?** 
+> **Question: What are four Load balancing options available?** 
 > <br> Azure Traffic Manager, Azure Load Balancer, Azure Application Gateway and Azure Front Door.
 
 
 > [!important]
-> **Question: What is four Azure Traffic Manager?** 
+> **Question: What is Azure Traffic Manager?** 
 > <br> Azure Traffic Manager operates at the DNS layer and distributes traffic based on DNS/user IP using DNS-based traffic routing methods [Layer 7/TCP/UDP].
 
 
@@ -364,7 +364,7 @@ If you domain name servers are pointing to Azure, then this will become your tra
 If you are using MS name servers then your web app not automatically configured. You still need to add "A" records to connect your web app to DNS Zone 
 It is like connecting a DNS Zone to a web app.
 Azure DNS (Domain manager service) for DNS domains that provides name resolution by using Microsoft Azure infrastructure.
-This involves you to use custom domain by using Microsoft DNS Zone service.
+This involves you using a custom domain by using Microsoft DNS Zone service.
 
 ## Azure Content Delivery Network
 Azure Content Delivery Network offers a global solution for rapidly delivering content. Save bandwidth and improve responsiveness when encoding or distributing gaming software, firmware updates, and IoT endpoints. Reduce load times for websites, mobile apps, and streaming media to increase user satisfaction globally.
@@ -375,6 +375,8 @@ Users expect a fast, reliable, and personalized web experience wherever they are
 The term load balancing refers to the distribution of workloads across multiple computing resources.
 
 ### Azure Traffic Manager
+![tm](https://github.com/wasi-shah/Docker-AKS/assets/51749920/f3d43777-a6a3-4d05-acc7-f8dfbfb4685b)
+
 Azure Traffic Manager operates at the DNS layer to quickly and efficiently direct incoming DNS requests based on the routing method of your choice. An example would be sending requests to the closest endpoints, improving the responsiveness of your applications.
 Distribute traffic optimally to services across global Azure regions—with DNS-based traffic routing methods. Prioritize user access, help ensure adherence to data sovereignty, and adjust traffic for app upgrades and maintenance.
 Supports:
@@ -383,7 +385,9 @@ Supports:
 - Global apps
 
 ### Azure Load Balancer
-This is a traditional load balance that can work for all ports and application, if you just want to load balance a website then you may need an application gateway which is specially designed for HTTP and HHTPS means for port 80 and port 443.With Azure Load Balancer you can scale your applications and create high availability for your services. Load Balancer supports inbound and outbound scenarios, provides low latency and high throughput, and scales up to millions of flows for all TCP and UDP applications.
+![lb](https://github.com/wasi-shah/Docker-AKS/assets/51749920/fb2121ca-f112-4039-a3a2-0547437cba6c)
+
+This is a traditional load balance that can work for all ports and applications, if you just want to load balance a website then you may need an application gateway which is specially designed for HTTP and HHTPS means for port 80 and port 443. With Azure Load Balancer you can scale your applications and create high availability for your services. Load Balancer supports inbound and outbound scenarios, provides low latency and high throughput, and scales up to millions of flows for all TCP and UDP applications.
 Load Balancer types
 Public: A public load balancer maps the public IP address and port number of incoming traffic to the private IP address and port number of the VM
 Internal: An internal load balancer directs traffic only to resources that are inside a virtual network or that use a VPN to access Azure infrastructure.
@@ -394,7 +398,9 @@ Supports:
 - Global and regional apps
 
 ### Azure Application Gateway
-Azure Application Gateway is a web traffic load balancer that enables you to manage traffic to your web applications. With Application gateway for even define a server for a URL path, amazing. For example, you can route traffic based on the incoming URL. So if /images is in the incoming URL, you can route traffic to a specific set of servers (known as a pool) configured for images. If /video is in the URL, that traffic is routed to another pool optimized for videos. Application gateway also inspect data and protects you from SQL injection for example.
+![Azure Application Gateway](https://github.com/wasi-shah/Docker-AKS/assets/51749920/54520757-45c8-4d6b-9c36-5da42849eebb)
+
+Azure Application Gateway is a web traffic load balancer that enables you to manage traffic to your web applications. With an Application gateway for even defining a server for a URL path, it is amazing. For example, you can route traffic based on the incoming URL. So if /images are in the incoming URL, you can route traffic to a specific set of servers (known as a pool) configured for images. If /video is in the URL, that traffic is routed to another pool optimized for videos. Application gateway also inspects data and protects you from SQL injection for example.
 Transform web front ends into scalable and highly available apps using layer 7 load balancing capabilities. Distribute regional applications more securely.
 Supports:
 - HTTP, HTTPS, HTTP/2
@@ -404,6 +410,8 @@ Supports:
 - SSL/TLS offloading
 
 ### Azure Front Door
+![Front Door](https://github.com/wasi-shah/Docker-AKS/assets/51749920/57beb603-1c61-4f52-8ae3-1134f98571eb)
+
 Azure Front Door is a modern cloud content delivery network (CDN) service that delivers high performance, scalability, and secure user experiences for your content and applications.
 Deliver real-time performance of global web applications using the Microsoft global edge network. Accelerate content and transform multiple microservice applications into a single more secure app delivery architecture.
 Supports:
