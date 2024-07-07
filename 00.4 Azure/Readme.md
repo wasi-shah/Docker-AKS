@@ -819,23 +819,30 @@ Microsoft Entra ID and Azure AD B2C are separate product offerings.
 
 ## Entra ID Service Account Types: 
 There are three types of service accounts native to Microsoft Entra ID: 
+
 **Managed identities**
 Managed identities are secure Microsoft Entra identities created to provide identities for Azure resources.
+
 **Service principals**
 Service accounts are a special type of account that is intended to represent a non-human entity such as an application, API, or other service.
 If you can't use a managed identity to represent your application, use a service principal. Service principals can be used with both single tenant and multi-tenant applications.
 A service principal is the local representation of an application object in a single Microsoft Entra tenant. It functions as the identity of the application instance, defines who can access the application, and what resources the application can access. A service principal is created in (local to) each tenant where the application is used and references the globally unique application object. The tenant secures the service principal's sign-in and access to resources.
 There are two mechanisms for authentication using service principals—client certificates and client secrets. Certificates are more secure: use client certificates if possible. Unlike client secrets, client certificates cannot accidentally be embedded in code.	 
+
 **User-based service accounts**
 It’s a user account.
+
 ## Azure Entra ID B2C
 In Azure Active Directory B2C (Azure AD B2C), you can use different types of accounts. Azure Active Directory, Azure Active Directory B2B, and Azure Active Directory B2C share in the types of user accounts that can be used.
 Users create is Azure AD are different from  Users created in Azure B2C User
 The following types of accounts are available:
+
 **Work account.**
 Employees which want to access azure portal. A work account can access resources in a tenant, and with an administrator role, can manage tenants.
+
 **Guest account**
 An external consultant that can only manage Azure active directory users. A guest account can only be a Microsoft account or an Azure Active Directory user that can be used to access applications or manage tenants.
+
 **Consumer account (your own asp.net app)**
 Your app customers. Then can't access Azure portal and they can't access Azure resources. A consumer account is created by going through a sign-up user flow in an Azure AD B2C application or by using Azure AD Graph API, and is used by users of the applications that are registered with Azure AD B2C.
 Azure AD B2C is primarily for businesses and developers that create customer-facing apps. With Azure AD B2C, developers can use Azure AD as the full-featured identity system for their application, while letting customers sign in with an identity they already have established (like Facebook or Gmail).
