@@ -47,20 +47,20 @@ IaaS delivers on-demand infrastructure resources, such as compute, storage, netw
 With infrastructure as a service (IaaS), you are responsible for software. Azure takes care of all the hardware, such as solid-state drives (SSDs), network cabling, routers, power supplies, backup generators, cooling systems, and so on. 
 Azure provides native support for IaC via the Azure Resource Manager model. Teams can define declarative ARM or Bicep templates that specify the infrastructure required to deploy solutions.
 Services that fall into this category include 
-•	Azure Virtual Machines
-•	Azure Virtual Networks
-•	Azure Container Instance.
+- Azure Virtual Machines
+- Azure Virtual Networks
+- Azure Container Instance.
 
 ### Platform as a service (PaaS)
 Using the platform as a service (PaaS) model, you are responsible for your application and its configuration; Azure provides the OS and hardware. As Figure 1-1 demonstrates, PaaS is an abstraction level higher than IaaS. You have far fewer responsibilities but less direct control over your hardware resources than with IaaS. 
 PaaS delivers and manages hardware and software resources for developing, testing, delivering, and managing cloud applications. Providers typically offer middleware, development tools, and cloud databases within their PaaS offerings.
 Services that fall into the PaaS category include 
-•	Azure App Service
-•	Azure SQL Databases
-•	Azure Redis Cache
-•	Azure Batch.
-•	AKS
-•	Azure Container Apps
+- Azure App Service
+- Azure SQL Databases
+- Azure Redis Cache
+- Azure Batch.
+- AKS
+- Azure Container Apps
 
 ### Software as a service (SaaS)
 With software as a service (SaaS [pronounced “sass”]), you need only concern yourself with installing and configuring the software—nothing else. For example Dropbox, MS Office, and even a calculator is a SaaS example. Indeed, SaaS is the highest abstraction level of the cloud computing types. Services in the SaaS category include Azure Cognitive Services and Azure IoT Suite. Office 365 is another example of an Azure SaaS application suite, offering reliable business applications such as Microsoft Word, Excel, PowerPoint, and more. And all of this is available without you having to install or maintain anything. With SaaS, the software is ready to use. All you need to do is configure it to your preferences and then you are ready to go. You don’t write the software, and you don’t need to think about deployment, scaling, operating systems, and hardware.
@@ -214,14 +214,14 @@ Block blobs are optimized for efficiently uploading large amounts of data. These
 File Storage (Max size 100TB).
 You can use Azure File Storage as a drive from which to share files. It uses the Server Message Block (SMB) protocol, which means that you can use it with Windows and Linux, and you can access it from the cloud or from on-premises systems. Like the other Azure Storage types, File Storage is scalable and inexpensive. Managed file shares for cloud or on-premises deployments.
 ### Azure Queues
-•	Maximum queue size 500 TB
-•	Maximum message size 64 KB
+- Maximum queue size 500 TB
+- Maximum message size 64 KB
 Azure Queue Storage is an unusual type of storage in that it is used to store small messages of data, but its main purpose is to serve as a queue. You put messages on the queue and other processes pick it up. This pattern decouples the message sender from the message processor and results in performance and reliability benefits. Azure Queue Storage is based on the Microsoft Message Queueing that you can find in previous versions of Windows.
 Azure Queue Storage is a service for storing large numbers of messages. You access messages from anywhere in the world via authenticated calls using HTTP or HTTPS. A queue message can be up to 64 KB in size. A queue may contain millions of messages, up to the total capacity limit of a storage account. Queues are commonly used to create a backlog of work to process asynchronously.
 A messaging store for reliable messaging between application components.
 ### Azure Tables
-•	Table has a 5TB storage limit
-•	1 MB of data per entry (per row)
+- Table has a 5TB storage limit
+- 1 MB of data per entry (per row)
 A NoSQL store for schemaless storage of structured data.
 Azure Table storage is a service that stores non-relational structured data (also known as structured NoSQL data) in the cloud, providing a key/attribute store with a schemaless design. Because Table storage is schemaless, it's easy to adapt your data as the needs of your application evolve. Access to Table storage data is fast and cost-effective for many types of applications, and is typically lower in cost than traditional SQL for similar volumes of data.
 Azure Tables is a Flexible NoSQL database type storage, its ideal for semi-structured dataset where values are added in Key-value pairs. Table is an ideal solution for structures, semi-structured and non-structured data. You can use Tables to save your data to the tables and use OData-based queries to save and retrieve data. 
@@ -305,3 +305,166 @@ You can use Azure role-based access control (Azure RBAC) to manage a security pr
 Moving stored or in-flight data into the cloud is a challenge. Data Box devices provide solutions for both scenarios. Data Box devices easily move data to Azure when busy networks aren’t an option. Move large amounts of data to Azure when you're limited by time, network availability, or costs, using common copy tools such as Robocopy.
 -	Data Box (100 TB), Data Box Disk (8 TB SSD x 5 =40 TB), and Data Box Heavy (1 PB) are offline data transfer devices which are shipped between your datacentre and Azure. Data Boxes use standard NAS protocols (SMB/CIFs and NFS), use AES encryption to protect your data, and perform a post-upload sanitization process to ensure that all data is wiped clean from the device.
 -	Data Box Gateway (1 TB) is an online data transfer product - a virtual appliance for moving data in and out of Azure.
+
+
+# Azure Networking
+## Azure DNS
+Host your Domain Name System (DNS) domain in Azure. Azure DNS is a hosting service for DNS domains that provides name resolution by using Microsoft Azure infrastructure. By hosting your domains in Azure, you can manage your DNS records by using the same credentials, APIs, tools, and billing as your other Azure services.
+You can't use Azure DNS to buy a domain name. For an annual fee, you can buy a domain name by using App Service domains or a third-party domain name registrar. Your domains then can be hosted in Azure DNS for record management. For more information, see Delegate a domain to Azure DNS.
+Azure DNS - It is a domain control panel. 
+If you domain name servers are pointing to Azure, then this will become your traditional domain control panel.
+If you are using MS name servers then your web app not automatically configured. You still need to add "A" records to connect your web app to DNS Zone 
+It is like connecting a DNS Zone to a web app.
+Azure DNS (Domain manager service) for DNS domains that provides name resolution by using Microsoft Azure infrastructure.
+This involves you to use custom domain by using Microsoft DNS Zone service.
+
+## Azure Content Delivery Network
+Azure Content Delivery Network offers a global solution for rapidly delivering content. Save bandwidth and improve responsiveness when encoding or distributing gaming software, firmware updates, and IoT endpoints. Reduce load times for websites, mobile apps, and streaming media to increase user satisfaction globally.
+Users expect a fast, reliable, and personalized web experience wherever they are. Content Delivery Network helps reduce latency and improve performance for high-bandwidth content by distributing user requests and serving content directly from edge servers. This brings the content closer to users and sends less traffic to the origin point, delivering superior online experiences.
+
+## Azure Front Door
+Azure Front Door is a modern cloud content delivery network (CDN) service that delivers high performance, scalability, and secure user experiences for your content and applications.
+Deliver real-time performance of global web applications using the Microsoft global edge network. Accelerate content and transform multiple microservice applications into a single more secure app delivery architecture.
+Supports:
+- HTTP, HTTPS, HTTP/2 
+- Layer 7
+- Global apps
+- Web application firewall
+- SSL/TLS offloading
+
+
+## Azure load balancing services
+### Azure Traffic Manager
+Azure Traffic Manager operates at the DNS layer to quickly and efficiently direct incoming DNS requests based on the routing method of your choice. An example would be sending requests to the closest endpoints, improving the responsiveness of your applications.
+Distribute traffic optimally to services across global Azure regions—with DNS-based traffic routing methods. Prioritize user access, help ensure adherence to data sovereignty, and adjust traffic for app upgrades and maintenance.
+Supports:
+- HTTP, HTTPS, HTTP/2, TCP, UDP
+- Layer 7
+- Global apps
+
+### Azure Load Balancer
+This is a traditional load balance that can work for all ports and application, if you just want to load balance a website then you may need an application gateway which is specially designed for HTTP and HHTPS means for port 80 and port 443.With Azure Load Balancer you can scale your applications and create high availability for your services. Load Balancer supports inbound and outbound scenarios, provides low latency and high throughput, and scales up to millions of flows for all TCP and UDP applications.
+Load Balancer types
+Public: A public load balancer maps the public IP address and port number of incoming traffic to the private IP address and port number of the VM
+Internal: An internal load balancer directs traffic only to resources that are inside a virtual network or that use a VPN to access Azure infrastructure.
+Build high availability and network performance into your applications with low-latency layer 4 load balancing capabilities. Balance traffic between virtual machines (VMs) inside your virtual networks and across multitiered hybrid apps.
+Supports:
+- TCP, UDP
+- Layer 4
+- Global and regional apps
+
+### Azure Application Gateway
+Azure Application Gateway is a web traffic load balancer that enables you to manage traffic to your web applications. With Application gateway for even define a server for a URL path, amazing. For example, you can route traffic based on the incoming URL. So if /images is in the incoming URL, you can route traffic to a specific set of servers (known as a pool) configured for images. If /video is in the URL, that traffic is routed to another pool optimized for videos. Application gateway also inspect data and protects you from SQL injection for example.
+Transform web front ends into scalable and highly available apps using layer 7 load balancing capabilities. Distribute regional applications more securely.
+Supports:
+- HTTP, HTTPS, HTTP/2
+- Layer 7
+- Regional apps
+- Web application firewall
+- SSL/TLS offloading
+
+## Azure Virtual Network
+Azure Virtual Network is a service that provides the fundamental building block for your private network in Azure. An instance of the service (a virtual network) enables many types of Azure resources to securely communicate with each other, the internet, and on-premises networks. These Azure resources include virtual machines (VMs).
+A virtual network is similar to a traditional network that you'd operate in your own datacenter. But it brings extra benefits of the Azure infrastructure, such as scale, availability, and isolation.
+
+### Communication of Azure resources with the internet.
+All resources in a virtual network can communicate outbound with the internet, by default. You can also use a public IP address, NAT gateway, or public load balancer to manage your outbound connections. You can communicate inbound with a resource by assigning a public IP address or a public load balancer.
+
+
+
+### Communication between Azure resources.
+Azure resources communicate securely with each other in one of the following ways:
+- Virtual network 
+- Virtual network service endpoint
+- Virtual network peering
+
+#### Virtual network 
+You can deploy VMs and other types of Azure resources in a virtual network. Examples of resources include App Service Environments, Azure Kubernetes Service (AKS), and Azure Virtual Machine Scale Sets. To view a complete list of Azure resources that you can deploy in a virtual network, see Deploy dedicated Azure services into virtual networks.
+
+**Address space**: When creating a virtual network, you must specify a custom private IP address space using public and private (RFC 1918) addresses. Azure assigns resources in a virtual network a private IP address from the address space that you assign. For example, if you deploy a VM in a virtual network with address space, 10.0.0.0/16, the VM is assigned a private IP like 10.0.0.4.
+
+**Subnets**: Subnets enable you to segment the virtual network into one or more subnetworks and allocate a portion of the virtual network's address space to each subnet. You can then deploy Azure resources in a specific subnet. Just like in a traditional network, subnets allow you to segment your virtual network address space into segments that are appropriate for the organization's internal network. Segmentation improves address allocation efficiency. You can secure resources within subnets using Network Security Groups. For more information, see Network security groups.
+
+**Regions**: A virtual network is scoped to a single region/location; however, multiple virtual networks from different regions can be connected together using Virtual Network Peering.
+
+**Subscription**: A virtual network is scoped to a subscription. You can implement multiple virtual networks within each Azure subscription and Azure region.
+
+
+
+#### Virtual network service endpoint
+You can extend your virtual network's private address space and the identity of your virtual network to Azure service resources over a direct connection. Examples of resources include Azure Storage accounts and Azure SQL Database. Service endpoints allow you to secure your critical Azure service resources to only a virtual network. To learn more, see Virtual network service endpoints.
+
+
+
+#### Virtual network peering
+By default resources in different VNets can’t talk to each other. 
+You can connect virtual networks to each other by using virtual peering. The resources in either virtual network can then communicate with each other. The virtual networks that you connect can be in the same, or different, Azure regions. To learn more, see Virtual network peering.
+> [!Tip]
+> Global Vnet peering is when you peer two Vnet in different regions.
+
+### Virtual Network Gateway
+Azure VPN Gateway is a service that uses a specific type of virtual network gateway to send encrypted traffic between an Azure virtual network and on-premises locations over the public Internet. You can also use VPN Gateway to send encrypted traffic between Azure virtual networks over the Microsoft network. Multiple connections can be created to the same VPN gateway. When you create multiple connections, all VPN tunnels share the available gateway bandwidth.
+You can also use virtual network gateway to communicate VNets in different regions. This is called VNet to VNet connection.
+
+### Communication with on-premises resources.
+You can connect your on-premises computers and networks to a virtual network by using any of the following options:
+- Point-to-site virtual private network (VPN)
+- Site-to-site VPN
+- Azure ExpressRoute
+ 
+#### Point-to-site virtual private network (VPN)
+- Install software on PC
+- Data travel over public internet
+- If you make a change to the topology of your network and have Windows VPN clients, the VPN client package for Windows clients must be downloaded and installed again in order for the changes to be applied to the client.
+					
+Established between a virtual network and a single computer in your local/office network. Each computer that wants to establish connectivity with a virtual network must configure its connection. This connection type is useful if you're just getting started with Azure, or for developers, because it requires few or no changes to an existing network. The communication between your computer and a virtual network is sent through an encrypted tunnel over the internet. To learn more, see About point-to-site VPN.
+
+#### Site-to-site VPN
+- Install physical VPN gateway on prem
+- Data travel over public internet
+Established between your on-premises VPN device and an Azure VPN gateway that's deployed in a virtual network. This connection type enables any on-premises resource that you authorize to access a virtual network. The communication between your on-premises VPN device and an Azure VPN gateway is sent through an encrypted tunnel over the internet. To learn more, see Site-to-site VPN.
+
+#### Azure ExpressRoute
+- It’s a faster private connection to Azure
+- You don’t use public internet
+- Fast and expensive
+- You need to talk to your broadband provider to set a connection
+- Microsoft has a list of vendor which can provide you high speed private internet connection.
+- Costly as you pay for speed and data.
+Established between your network and Azure, through an ExpressRoute partner. This connection is private.
+Experience a fast, reliable, and private connection to Azure. Use Azure ExpressRoute to create private connections between Azure datacenters and infrastructure on premises or in a colocation environment. ExpressRoute connections don't route through the public internet, and they offer more reliability, faster speed, and lower latency than typical internet connections. In some cases, using ExpressRoute connections to transfer data between on-premises systems and Azure gives you significant cost benefits.
+
+### Security & Filtering of network traffic.
+You can filter network traffic between subnets by using either or both of the following options:
+- Network security groups [NSG]
+- Network virtual appliances
+  
+#### Network security groups
+Network security groups and application security groups can contain multiple inbound and outbound security rules. These rules enable you to filter traffic to and from resources by source and destination IP address, port, and protocol.
+NSG defines which traffic is allowed and which traffic is blocked. It’s a security guard in the middle which checks the incoming request (what is source IP, what is destination IP, what is the destination port) and decides if that request is allowed or denied. 
+- NSG can be attached to 
+  - 
+  - A Network interface
+    - 
+    - If you attach a NSG to network interface then it is a security guard between Subnet and Network interface
+  - A Subnet
+    - If you attach a NSG to a subnet then it is a security guard between Vnet and subnet (technically a guard between other subnets in the vnet)
+- NSG rules
+  - Inbound rules 
+    - Rules that applies when a request comes
+  - Outbound rules
+    - Rules that applies when the response sent or the requested resource further requests another resource
+
+#### Network virtual appliances
+A network virtual appliance is a VM that performs a network function, such as a firewall or WAN optimization. To view a list of available network virtual appliances that you can deploy in a virtual network, go to Azure Marketplace.
+
+### Routing of network traffic.
+Azure routes traffic between subnets, connected virtual networks, on-premises networks, and the internet, by default. You can implement either or both of the following options to override the default routes that Azure creates:
+- Route tables: You can create custom route tables that control where traffic is routed to for each subnet.
+- Border gateway protocol (BGP) routes: If you connect your virtual network to your on-premises network by using an Azure VPN gateway or an ExpressRoute connection, you can propagate your on-premises BGP routes to your virtual networks.
+
+### Integration with Azure services.
+Integrating Azure services with an Azure virtual network enables private access to the service from virtual machines or compute resources in the virtual network. You can use the following options for this integration:
+- Deploy dedicated instances of the service into a virtual network. The services can then be privately accessed within the virtual network and from on-premises networks.
+- Use Azure Private Link to privately access a specific instance of the service from your virtual network and from on-premises networks.
+- Access the service over public endpoints by extending a virtual network to the service, through service endpoints. Service endpoints allow service resources to be secured to the virtual network.
