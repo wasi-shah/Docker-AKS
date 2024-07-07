@@ -606,16 +606,19 @@ Topology provides a visualization of the entire network for understanding networ
 > [!important]
 > **Question: Define azure governance structure?** 
 > <br> Tenant > Management Group > Subscription > Resource Group > Resources
-> - Azure account types
->   - User, Application (called managed identity)    
-> - Account access types
->   - Owner, Contributor, Reader or Custom
 
 
 
 > [!important]
 > **Question: What is a Azure account?** 
 > <br> Azure account is used as a authentication mechanism. Every Azure account is part of one Azure tenant.
+> - Azure account types
+>   - User, Application (called managed identity)    
+> - Account access types
+>   - Owner, Contributor, Reader or Custom
+
+> **Question: What is a Role?** 
+> <br> A role definition is a collection of permissions. You can use a pre-defined role or create a custom role.
 
 
 > [!important]
@@ -624,13 +627,9 @@ Topology provides a visualization of the entire network for understanding networ
 > - **RBAC** - manage who has access to Azure resources, what they can do with those resources, and what areas they have access to.
 > - **Policies** - Azure Policy helps to enforce organizational standards for example you can enforce resource creation in certain regions only.
 
-## Tenant
-- Azure tenant is a organisation or a company.
-- Azure gives you a default subdomain for tenant.
-- You can add your custom domain instead.
--  Gives you dedicated instance of Azure Intra ID (AAD). 
 
-## Account
+
+## Azure Account
 - The Azure account is a global unique entity that gets you access to Azure services and your Azure subscriptions.
 - Azure account types
   - User
@@ -642,6 +641,14 @@ Topology provides a visualization of the entire network for understanding networ
   - Custom 
 - Used as a authentication mechanism.
 - Every Azure account is part of one Azure tenant.
+- 
+## Tenant
+- Azure tenant is a organisation or a company.
+- Azure gives you a default subdomain for tenant.
+- You can add your custom domain instead.
+-  Gives you dedicated instance of Azure Intra ID (AAD). 
+
+
 
 ## Management Group
 Management groups provide a governance scope above subscriptions. You organize subscriptions into management groups; the governance conditions you apply cascade by inheritance to all associated subscriptions.
@@ -779,3 +786,65 @@ If I manage a big infrastructure, then.
 - I will use the RBAC to force the access control and access level.
 - I will use Azure cost management to keep control of cost and put cost related constraint.
 - I will use Azure Blue Print to deploy and control my infrastructure.
+
+
+
+# Manage Entra ID (Azure Active Directory)
+Azure Entra ID is Microsoft’s cloud-based identity and access management service, which helps your employees sign in and access resources in:
+- External resources, such as Microsoft Office 365, the Azure portal, and thousands of other SaaS applications.
+- Internal resources, such as apps on your corporate network and intranet (B2B), along with any cloud apps developed by your own organization (B2C).
+- The Azure Active Directory (Azure AD) enterprise identity service provides SSO and multi-factor authentication to help protect your users from 99.9 per cent of cybersecurity attacks.
+- It’s a user management system
+- Azure Active Directory is a cloud identity and access management solution that combines easy single sign-on to any cloud and on-premises application with advanced protection. 
+- It gives your people (your domain name users), partners (guest users), and customers (your app users) a single identity to access the applications they want and  collaborate from any platform and device. 
+- And because it’s based on scalable management capabilities and risk-based access rules, Azure Active  Directory protects your identities and streamlines IT processes.
+- Integrate your on-premises Active Directory and other directories with Azure AD through Azure AD Connect and use one identity to access any app. 
+- Add your own SaaS or custom apps (B2C)
+- Users can securely manage their own services, like application requests, changing passwords and join or create groups. 
+- Add policies/rules based on user information.
+- Self Service really helps.  Keep IT overhead low with self-service capabilities, including password resets, group and application management. 
+- Conditional access policies based on location, application sensitivity, device state, and user or sign-in risk
+- Built in multifactor authentication gives you an additional layer of authentication protection.
+- Identity protection insights for user, sign-in and configuration risk 
+- Privileged identity management helps you discover, restrict, and monitor administrators 
+- Provide just-in-time administration for eligible users.
+
+## Microsoft Entra tenant Types
+Microsoft Entra ID and Azure AD B2C are separate product offerings.
+- Microsoft Entra tenant
+  - A Microsoft Entra tenant represents an organization.
+- Azure AD B2C tenant
+  - 
+  - An Azure AD B2C tenant represents a collection of identities to be used with relying party applications.
+  - By default, each B2C tenant can accommodate a total of 1.25 million objects (user accounts and applications), but you can increase this limit to 5.25 million objects when you add and verify a custom domain.
+
+## Entra ID Service Account Types: 
+There are three types of service accounts native to Microsoft Entra ID: 
+**Managed identities**
+Managed identities are secure Microsoft Entra identities created to provide identities for Azure resources.
+**Service principals**
+Service accounts are a special type of account that is intended to represent a non-human entity such as an application, API, or other service.
+If you can't use a managed identity to represent your application, use a service principal. Service principals can be used with both single tenant and multi-tenant applications.
+A service principal is the local representation of an application object in a single Microsoft Entra tenant. It functions as the identity of the application instance, defines who can access the application, and what resources the application can access. A service principal is created in (local to) each tenant where the application is used and references the globally unique application object. The tenant secures the service principal's sign-in and access to resources.
+There are two mechanisms for authentication using service principals—client certificates and client secrets. Certificates are more secure: use client certificates if possible. Unlike client secrets, client certificates cannot accidentally be embedded in code.	 
+**User-based service accounts**
+It’s a user account.
+## Azure Entra ID B2C
+In Azure Active Directory B2C (Azure AD B2C), you can use different types of accounts. Azure Active Directory, Azure Active Directory B2B, and Azure Active Directory B2C share in the types of user accounts that can be used.
+Users create is Azure AD are different from  Users created in Azure B2C User
+The following types of accounts are available:
+**Work account.**
+Employees which want to access azure portal. A work account can access resources in a tenant, and with an administrator role, can manage tenants.
+**Guest account**
+An external consultant that can only manage Azure active directory users. A guest account can only be a Microsoft account or an Azure Active Directory user that can be used to access applications or manage tenants.
+**Consumer account (your own asp.net app)**
+Your app customers. Then can't access Azure portal and they can't access Azure resources. A consumer account is created by going through a sign-up user flow in an Azure AD B2C application or by using Azure AD Graph API, and is used by users of the applications that are registered with Azure AD B2C.
+Azure AD B2C is primarily for businesses and developers that create customer-facing apps. With Azure AD B2C, developers can use Azure AD as the full-featured identity system for their application, while letting customers sign in with an identity they already have established (like Facebook or Gmail).
+- Ideal for B2C web app
+- Create user in your web app
+- Customers of your mobile and web apps, whether individuals, institutional or organizational customers into your Azure AD.
+- User can use their own personal email or facebook to register / login
+- Internal AD user can login too.
+- Single sign on (SSO) to your own ASP.Net web apps within the Azure AD B2C tenants is supported.
+- You can create login pages, they can change their password. You can restrict them, enable multi factor authentication.
+
