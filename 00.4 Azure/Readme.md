@@ -603,6 +603,10 @@ Topology provides a visualization of the entire network for understanding networ
 
 # Azure Governance
 
+![AzureAccountStructurev2](https://github.com/wasi-shah/Docker-AKS/assets/51749920/43ede4f8-be41-40f6-b10f-37081a7aa135)
+
+
+
 ## Tenant
 - Azure tenant is a organisation or a company.
 - Azure gives you a default subdomain for tenant.
@@ -717,6 +721,8 @@ Tips and tricks to avoid RBAC issues
 •	Use RBAC with service to support CICD
 
 ## Azure Blueprints
+![image](https://github.com/wasi-shah/Docker-AKS/assets/51749920/9d51b918-6078-445b-93bb-90a2b4160ec7)
+
 Accelerate migration by easily deploying a fully governed landing zone, without the need for external cloud architects or engagements. Reuse cloud-based blueprints for future environments or use built-in blueprints to set up ISO-compliant foundational architectures.
 In modern azure architecture there is concept of blue print. Blue Prints deploy and updates the cloud environment is a repeatable manner using composable artifacts.
 Blueprint consists of following artifacts [ RBAC + Policies + IAC]
