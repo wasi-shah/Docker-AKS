@@ -720,9 +720,45 @@ Tips and tricks to avoid RBAC issues
 - Avoid assigning permission to someone Microsoft account. Always create an Azure AZ user account and assign permission to that account so if he leaves you can control his account.
 - Use RBAC with service to support CICD
 
+
+## Policies
+Azure Policy helps to enforce organizational standards and to assess compliance at-scale. Through its compliance dashboard, it provides an aggregated view to evaluate the overall state of the environment, with the ability to drill down to the per-resource, per-policy granularity. It also helps to bring your resources to compliance through bulk remediation for existing resources and automatic remediation for new resources.
+
+### Policy Definition
+The journey of creating and implementing a policy in Azure Policy begins with creating a policy definition. Every policy definition has conditions under which it's enforced. And, it has a defined effect that takes place if the conditions are met.
+In Azure Policy, we offer several built-in policies that are available by default. For example:
+- Allowed Storage Account SKUs (Deny): Determines if a storage account being deployed is within a set of SKU sizes. Its effect is to deny all storage accounts that don't adhere to the set of defined SKU sizes.
+- Allowed Resource Type (Deny): Defines the resource types that you can deploy. Its effect is to deny all resources that aren't part of this defined list.
+- Allowed Locations (Deny): Restricts the available locations for new resources. Its effect is used to enforce your geo-compliance requirements.
+- Allowed Virtual Machine SKUs (Deny): Specifies a set of virtual machine SKUs that you can deploy.
+- Add a tag to resources (Modify): Applies a required tag and its default value if it's not specified by the deploy request.
+- Not allowed resource types (Deny): Prevents a list of resource types from being deployed.
+
+### Policy Assignments
+An assignment is a policy definition or initiative that has been assigned to a specific scope. This scope could range from a management group to an individual resource. The term scope refers to all the resources, resource groups, subscriptions, or management groups that the definition is assigned to. Assignments are inherited by all child resources. This design means that a definition applied to a resource group is also applied to resources in that resource group. However, you can exclude a subscope from the assignment.
+For example, at the subscription scope, you can assign a definition that prevents the creation of networking resources. You could exclude a resource group in that subscription that is intended for networking infrastructure. You then grant access to this networking resource group to users that you trust with creating networking resources.
+
+
+
+
+
+## Microsoft Entra ID Protection
+Microsoft Entra ID Protection helps organizations detect, investigate, and remediate identity-based risks. These identity-based risks can be further fed into tools like Conditional Access to make access decisions or fed back to a security information and event management (SIEM) tool for further investigation and correlation.
+
+
+
+
 ## Azure Blueprints
 ![image](https://github.com/wasi-shah/Docker-AKS/assets/51749920/9d51b918-6078-445b-93bb-90a2b4160ec7)
 
 Accelerate migration by easily deploying a fully governed landing zone, without the need for external cloud architects or engagements. Reuse cloud-based blueprints for future environments or use built-in blueprints to set up ISO-compliant foundational architectures.
 In modern azure architecture there is concept of blue print. Blue Prints deploy and updates the cloud environment is a repeatable manner using composable artifacts.
 Blueprint consists of following artifacts [ RBAC + Policies + IAC]
+
+## Azure Governance best practice
+If I manage a big infrastructure, then. 
+- I will also use Azure Management group to make sure the subscriptions are in a dedicated group. 
+- I will use policies to force the resource creating
+- I will use the RBAC to force the access control and access level.
+- I will use Azure cost management to keep control of cost and put cost related constraint.
+- I will use Azure Blue Print to deploy and control my infrastructure.
