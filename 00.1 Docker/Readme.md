@@ -1,4 +1,6 @@
 # Docker
+![da](https://github.com/wasi-shah/Docker-AKS/assets/51749920/66a7221f-466e-4b72-b869-9b9bd0c6bbdd)
+
 Docker is a tool for running containerized apps. A containerized app includes the app and the filesystem that makes up the environment in which it runs. For example, a containerized app could consist of a database and other associated software and configuration information needed to run the app.
 
 Docker is an open-source technology—and a container file format—for automating the deployment of applications as portable, self-sufficient containers that can run in the cloud or on-premises. Docker, Inc., although it shares a similar name, is one of the companies that cultivates the open-source Docker technology to run on Linux and Windows in collaboration with cloud providers like Microsoft.
