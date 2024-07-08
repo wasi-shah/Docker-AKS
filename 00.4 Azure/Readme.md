@@ -1413,3 +1413,25 @@ Azure Container Instances enables deployment of container instances into an Azur
 
 # Azure Compute > Containers > PaaS > Azure Container App
 ![image](https://github.com/wasi-shah/Docker-AKS/assets/51749920/9dec63c5-5ba7-45cb-8509-36f18977a1a2)
+
+> [!important]
+> **Question: What is a Azure Container App?** 
+> <br> Azure Container Apps is a serverless platform that allows you to maintain less infrastructure and save costs while running containerized applications. Instead of worrying about server configuration, container orchestration, and deployment details. 
+
+Build and deploy fully managed, cloud- native apps and microservices using serverless containers. Azure Container Apps is a serverless platform that handles scaling, security, and infrastructure management for you - all while reducing costs. Once freed from server-related concerns, you're able to spend your time focusing on your application code.
+Container Apps make it easy to manage:
+1.	Automatic scaling: As requests for your applications fluctuate, Container Apps keeps your systems running even during seasons of high demand. Container Apps meets the demand for your app at any level by automatically creating new copies (called replicas) of your container. As demand falls, the runtime removes unneeded replicas on your behalf.
+2.	Security: Application security is enforced throughout many layers. From authentication and authorization to network-level security, Container Apps allows you to be explicit about the users and requests allowed into your system.
+3.	Monitoring: Easily monitor your container app's health using observability tools in Container Apps.
+4.	Deployment flexibility: You can deploy from GitHub, Azure DevOps, or from your local machine.
+5.	Changes: As your containers evolve, Container Apps catalogues changes as revisions to your containers. If you're experiencing a problem with a container, you can easily roll back to an older version.
+Azure Container Apps is a serverless platform that allows you to maintain less infrastructure and save costs while running containerized applications. Instead of worrying about server configuration, container orchestration, and deployment details, Container Apps provides all the up-to-date server resources required to keep your applications stable and secure.
+Common uses of Azure Container Apps include:
+- Deploying API endpoints
+- Hosting background processing jobs
+- Handling event-driven processing
+- Running microservices
+Additionally, applications built on Azure Container Apps can dynamically scale based on the following characteristics:
+- HTTP traffic
+- Event-driven processing
+- CPU or memory load
