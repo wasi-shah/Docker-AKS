@@ -885,13 +885,30 @@ Azure AD B2C is primarily for businesses and developers that create customer-fac
 ![non-rdb](https://github.com/wasi-shah/Docker-AKS/assets/51749920/46e6809e-76f3-43d1-9d38-112a5bcdc27c)
 
 
-
+> [!important]
+> **Question: What are two Databases options Available on Azure?** 
+> <br> 1. Azure Database
+> <br> 2. Open source Database
 
 
 > [!important]
 > **Question: What are two Azure Databases?** 
 > <br> 1. Azure Cosmos DB
 > <br> 2. Azure SQL Database 
+
+
+> [!important]
+> **Question: What are two Azure SQL Database deployment options?** 
+> <br> 1. SQL Server on Azure VM
+> <br> 2. Azure SQL Database
+> <br>    - **Single database**: As a single database with its own set of resources managed via a logical SQL server. A single database is like a contained database in SQL Server.
+> <br>    - **Elastic pool**: An elastic pool, which is a collection of databases with a shared set of resources managed via a logical server. Single databases can be moved into and out of an elastic pool. Elastic pools provide a cost-effective solution for managing the performance of multiple databases that have variable usage patterns.
+> <br> 3. Azure SQL Managed Instance
+
+> [!important]
+> **Question: What are two Azure SQL Database pricing model?** 
+> <br> 1. vCore-based purchasing model
+> <br> 2. DTU-based purchasing model
 
 
 > [!important]
@@ -913,3 +930,52 @@ Azure AD B2C is primarily for businesses and developers that create customer-fac
 > <br> 2. **Azure File Storage**: It allows us to create file shares in the cloud, and access them from anywhere with an internet connection.
 > <br> 3. **Azure Blob Storage**: This service lets you store massive amounts of unstructured data, or blobs, in the cloud.
 > <br> 4. **Azure Table Storage**: In this service, the data for an item is stored as a set of fields, and the item is identified by a unique key. It implements the key-value data store model.
+
+
+Azure offers a choice of relational and non-relational databases for all your application needs.
+
+## Azure Database 
+
+### Azure Cosmos DB
+Azure Cosmos DB is a fully managed NoSQL and relational database for modern app development including AI, digital commerce, Internet of Things, booking management, and other types of solutions. Azure Cosmos DB offers single-digit millisecond response times, automatic and instant scalability, along with guaranteed speed at any scale.
+
+### Azure SQL Database
+Azure SQL Database is always running on the latest stable version of the SQL Server database engine and patched OS with 99.99% availability. PaaS capabilities built into Azure SQL Database enable you to focus on the domain-specific database administration and optimization activities that are critical for your business. With Azure SQL Database, you can create a highly available and high-performance data storage layer for the applications and solutions in Azure. SQL Database can be the right choice for a variety of modern cloud applications because it enables you to process both relational data and nonrelational structures, such as graphs, JSON, spatial, and XML.
+Azure SQL Database is based on the latest stable version of the Microsoft SQL Server database engine. You can use advanced query processing features, such as high-performance in-memory technologies and intelligent query processing. In fact, the newest capabilities of SQL Server are released first to Azure SQL Database, and then to SQL Server itself. You get the newest SQL Server capabilities with no overhead for patching or upgrading, tested across millions of databases.
+
+#### Azure SQL Database Pricing Models
+SQL Database enables you to easily define and scale performance within two different purchasing models: a vCore-based purchasing model and a DTU-based purchasing model. SQL Database is a fully managed service that has built-in high availability, backups, and other common maintenance operations. Microsoft handles all patching and updating of the SQL and operating system code. You don't have to manage the underlying infrastructure.
+
+**vCore-based purchasing model**
+The vCore-based purchasing model lets you choose the number of vCores, the amount of memory, and the amount and speed of storage. The vCore-based purchasing model also allows you to use Azure Hybrid Benefit for SQL Server to gain cost savings by leveraging your existing SQL Server licenses.
+Service tiers
+The vCore-based purchasing model offers three service tiers:
+The General Purpose service tier is designed for common workloads. It offers budget-oriented balanced compute and storage options.
+The Business Critical service tier is designed for OLTP applications with high transaction rates and low latency I/O requirements. It offers the highest resilience to failures by using several isolated replicas.
+The Hyperscale service tier is designed for most business workloads. Hyperscale provides great flexibility and high performance with independently scalable compute and storage resources. It offers higher resilience to failures by allowing configuration of more than one isolated database replica.
+
+**DTU-based purchasing model**
+The DTU-based purchasing model offers a blend of compute, memory, and I/O resources in three service tiers, to support light to heavy database workloads. Compute sizes within each tier provide a different mix of these resources, to which you can add additional storage resources.
+Service tiers
+The DTU-based purchasing model offers two service tiers:
+The Standard service tier is designed for common workloads. It offers budget-oriented balanced compute and storage options.
+The Premium service tier is designed for OLTP applications with high transaction rates and low latency I/O requirements. It offers the highest resilience to failures by using several isolated replicas.
+
+#### Deployment models
+Azure SQL Database provides the following deployment options for a database:
+Single database represents a fully managed, isolated database. You might use this option if you have modern cloud applications and microservices that need a single reliable data source. A single database is similar to a contained database in the SQL Server database engine.
+Elastic pool is a collection of single databases with a shared set of resources, such as CPU or memory. Single databases can be moved into and out of an elastic pool.
+
+## Open-Source Database
+
+**Azure Database for PostgreSQL**
+Azure Database for PostgreSQL - Flexible Server is a relational database service based on the open-source Postgres database engine. It's a fully managed database-as-a-service that can handle mission-critical workloads with predictable performance, security, high availability, and dynamic scalability.
+
+**Azure Database for MySQL**
+Azure Database for MySQL - Flexible Server is a relational database service powered by the MySQL community edition. You can use Azure Database for MySQL - Flexible Server to host a MySQL database in Azure. It's a fully managed database as a service offering that can handle mission-critical workloads with predictable performance and dynamic scalability.
+
+**Azure Database for MariaDB**
+Azure Database for MariaDB is a relational database service based on the open-source MariaDB Server engine. It's a fully managed database as a service offering that can handle mission-critical workloads with predictable performance and dynamic scalability. Develop applications with Azure Database for MariaDB leveraging the open-source tools and platform of your choice.
+
+**Azure Cache for Redis**
+Azure Cache for Redis provides an in-memory data store based on the Redis software. Redis improves the performance and scalability of an application that uses backend data stores heavily. It's able to process large volumes of application requests by keeping frequently accessed data in the server memory, which can be written to and read from quickly. Redis brings a critical low-latency and high-throughput data storage solution to modern applications.
