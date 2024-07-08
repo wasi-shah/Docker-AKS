@@ -880,6 +880,14 @@ Azure AD B2C is primarily for businesses and developers that create customer-fac
 - You can create login pages, they can change their password. You can restrict them, enable multi factor authentication.
 
 # Databases on Azure
+![rdb](https://github.com/wasi-shah/Docker-AKS/assets/51749920/d5a42d09-0926-4190-be06-ed522de682dd)
+
+![non-rdb](https://github.com/wasi-shah/Docker-AKS/assets/51749920/46e6809e-76f3-43d1-9d38-112a5bcdc27c)
+
+
+
+
+
 > [!important]
 > **Question: What are two Azure Databases?** 
 > <br> 1. Azure Cosmos DB
@@ -893,7 +901,7 @@ Azure AD B2C is primarily for businesses and developers that create customer-fac
 > <br> 3. Azure Database for MariaDB 
 
 > [!important]
-> **Question: What relational databases supported on Azure?** 
+> **Question: What relational databases are supported on Azure?** 
 > <br> 1. Azure SQL Database
 > <br> 2. Azure Database for MySQL 
 > <br> 3. Azure Database for MariaDB
@@ -901,7 +909,7 @@ Azure AD B2C is primarily for businesses and developers that create customer-fac
 
 > [!important]
 > **Question: What *non-relational* databases supported on Azure?** 
-> <br> 1. **Azure CosmosDB**: It is a globally distributes, multi-model database service which manages data as a partitioned set of documents. It is a serverless service and scalable.
-> <br> 2. **Azure File Storage**: It allows us to create files shares in the cloud, and access them from anywhere with an internet connection.
-> <br> 3. **Azure Blob Storage**: This service enables you to store massive amounts of unstructured data, or blobs, in the cloud.
+> <br> 1. **Azure CosmosDB**: It is a globally distributed, multi-model database service which manages data as a partitioned set of documents. It is a serverless service and scalable.
+> <br> 2. **Azure File Storage**: It allows us to create file shares in the cloud, and access them from anywhere with an internet connection.
+> <br> 3. **Azure Blob Storage**: This service lets you store massive amounts of unstructured data, or blobs, in the cloud.
 > <br> 4. **Azure Table Storage**: In this service, the data for an item is stored as a set of fields, and the item is identified by a unique key. It implements the key-value data store model.
