@@ -48,7 +48,7 @@ IaaS delivers on-demand infrastructure resources, such as compute, storage, netw
 With infrastructure as a service (IaaS), you are responsible for software. Azure takes care of all the hardware, such as solid-state drives (SSDs), network cabling, routers, power supplies, backup generators, cooling systems, and so on. 
 Azure provides native support for IaC via the Azure Resource Manager model. Teams can define declarative ARM or Bicep templates that specify the infrastructure required to deploy solutions.
 Services that fall into this category include 
-- Azure Virtual Machines
+- Azure Virtual Machines 
 - Azure Virtual Networks
 - Azure Container Instance.
 
@@ -75,6 +75,29 @@ Services in the FaaS category are
 • Azure Logic Apps
 • Azure Event Grid.
 In FaaS, all you need to do is create your application or weave together business logic and run it. Scaling happens automatically. One of the more noteworthy benefits of FaaS is that you pay for the resources you use only when the logic runs instead of paying for a service that is always on, waiting for somebody to use it. But FaaS does more than just host your application; it connects your logic to triggers and sources. Outside sources such as Azure Storage Queues or WebHooks can initiate Azure Functions or Logic Apps and provide them with data to process. You do not need to write the activating logic or set up the plumbing to connect to external data stores or services, meaning you can focus on your logic and customer-facing features.
+
+
+## Azure Compute Products 
+
+**Virtual Machines (IaaS)**
+Provision Linux and Windows virtual machines in seconds with the configurations of your choice. (see chapter for more details)
+
+**Azure Kubernetes Service (AKS) (PaaS)**
+Deploy and scale containers on managed Kubernetes.
+
+**Azure Service Fabric (PaaS)**
+Develop microservices and orchestrate containers on Windows and Linux
+
+**Azure Container Instances (IaaS)**
+Containerize apps and easily run containers with a single command.
+
+**App Service (PaaS)**
+Quickly create cloud apps for web and mobile with fully managed platform. You can host your applications in Azure App Service. Azure App Service is a collection of hosting and orchestrating services that share features and capabilities. For instance, all App Services have the capability to secure an application using Azure Active Directory and can use custom domains.
+Azure App Service is an HTTP-based service for hosting web applications, REST APIs, and mobile back ends. You can develop in your favourite language, be it .NET, .NET Core, Java, Node.js, PHP, and Python. Applications run and scale with ease on both Windows and Linux-based environments.
+
+**Azure Functions (FaaS)**
+Accelerate app development using 
+
 
 ---
 # Azure Storage
