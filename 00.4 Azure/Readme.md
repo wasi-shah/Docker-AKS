@@ -879,3 +879,29 @@ Azure AD B2C is primarily for businesses and developers that create customer-fac
 - Single sign on (SSO) to your own ASP.Net web apps within the Azure AD B2C tenants is supported.
 - You can create login pages, they can change their password. You can restrict them, enable multi factor authentication.
 
+# Databases on Azure
+> [!important]
+> **Question: What are two Azure Databases?** 
+> <br> 1. Azure Cosmos DB
+> <br> 2. Azure SQL Database 
+
+
+> [!important]
+> **Question: What are other 3rd party/open source Databases on Azure?** 
+> <br> 1. Azure Database for PostgreSQL 
+> <br> 2. Azure Database for MySQL 
+> <br> 3. Azure Database for MariaDB 
+
+> [!important]
+> **Question: What relational databases supported on Azure?** 
+> <br> 1. Azure SQL Database
+> <br> 2. Azure Database for MySQL 
+> <br> 3. Azure Database for MariaDB
+> <br> 4. Azure Database for PostgreSQL
+
+> [!important]
+> **Question: What *non-relational* databases supported on Azure?** 
+> <br> 1. **Azure CosmosDB**: It is a globally distributes, multi-model database service which manages data as a partitioned set of documents. It is a serverless service and scalable.
+> <br> 2. **Azure File Storage**: It allows us to create files shares in the cloud, and access them from anywhere with an internet connection.
+> <br> 3. **Azure Blob Storage**: This service enables you to store massive amounts of unstructured data, or blobs, in the cloud.
+> <br> 4. **Azure Table Storage**: In this service, the data for an item is stored as a set of fields, and the item is identified by a unique key. It implements the key-value data store model.
