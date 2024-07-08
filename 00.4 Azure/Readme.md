@@ -1435,3 +1435,78 @@ Additionally, applications built on Azure Container Apps can dynamically scale b
 - HTTP traffic
 - Event-driven processing
 - CPU or memory load
+
+# Azure Messaging Services
+Messaging services on Azure provide the interconnectivity between components and applications that are written in different languages and hosted in the same cloud, multiple clouds, or on-premises. Use message queues or topics to send messages without concerns of consumer availability and to help balance varying workload throughput.
+
+## Azure Event Grid
+Simplify your event-based apps with Event Grid, a single service for managing routing of all events from any source to any destination. Designed for high availability, consistent performance, and dynamic scale, Event Grid lets you focus on your app logic rather than infrastructure.
+Event Grid connects data sources and event handlers. For example, use Event Grid to instantly trigger a serverless function to run image analysis each time a new photo is added to a blob storage container.
+Azure Event Grid is a highly scalable, fully managed Pub Sub message distribution service that offers flexible message consumption patterns using the MQTT and HTTP protocols. With Azure Event Grid, you can build data pipelines with device data, integrate applications, and build event-driven serverless architectures. Event Grid enables clients to publish and subscribe to messages over the MQTT v3.1.1 and v5.0 protocols to support Internet of Things (IoT) solutions. Through HTTP, Event Grid enables you to build event-driven solutions where a publisher service announces its system state changes (events) to subscriber applications. Event Grid can be configured to send events to subscribers (push delivery) or subscribers can connect to Event Grid to read events (pull delivery). Event Grid supports CloudEvents 1.0 specification to provide interoperability across systems.
+Azure Event Grid is used at different stages of data pipelines to achieve a diverse set of integration goals.
+MQTT messaging. IoT devices and applications can communicate with each other over MQTT. Event Grid can also be used to route MQTT messages to Azure services or custom endpoints for further data analysis, visualization, or storage. This integration with Azure services enables you to build data pipelines that start with data ingestion from your IoT devices.
+Data distribution using push and pull delivery modes. At any point in a data pipeline, HTTP applications can consume messages using push or pull APIs. The source of the data may include MQTT clients’ data, but also includes the following data sources that send their events over HTTP:
+- Azure services
+- Your custom applications
+- External partner (SaaS) systems
+When using push delivery, Event Grid can send data to destinations that include your own application webhooks and Azure services.
+
+## Azure Event Hubs
+Azure Event Hubs is a cloud native data streaming service that can stream millions of events per second, with low latency, from any source to any destination. Event Hubs is compatible with Apache Kafka, and it enables you to run existing Kafka workloads without any code changes.
+Using Event Hubs to ingest and store streaming data, businesses can harness the power of streaming data to gain valuable insights, drive real-time analytics, and respond to events as they happen, enhancing overall efficiency and customer experience.
+
+
+## Azure Service Bus
+Reliable cloud messaging as a service (MaaS) and simple hybrid integration. Azure Service Bus supports reliable message queuing and durable publish/subscribe messaging. The messaging entities that form the core of the messaging capabilities in Service Bus are queues, topics and subscriptions.
+
+### Service Bus Message Types
+
+**Azure Messaging Queue (NOT A AZURE STORAGE QUEUE)**
+
+Queues offer First In, First Out (FIFO) message delivery to one or more competing consumers. That is, receivers typically receive and process messages in the order in which they were added to the queue. And, only one message consumer receives and processes each message.		
+A key benefit of using queues is to achieve temporal decoupling of application components. In other words, the producers (senders) and consumers (receivers) don't have to send and receive messages at the same time, because messages are stored durably in the queue. Furthermore, the producer doesn't have to wait for a reply from the consumer to continue to process and send messages.	
+ 
+**Topics and subscriptions**
+
+Topics and subscriptions provide a one-to-many form of communication in a publish and subscribe pattern. It's useful for scaling to large numbers of recipients. Each published message is made available to each subscription registered with the topic. Publisher sends a message to a topic and one or more subscribers receive a copy of the message.
+ 
+ ### Service Bus Receive Modes
+
+You can specify two different modes in which consumers can receive messages from Service Bus.
+
+**Receive and delete.**
+
+In this mode, when Service Bus receives the request from the consumer, it marks the message as being consumed and returns it to the consumer application. This mode is the simplest model. It works best for scenarios in which the application can tolerate not processing a message if a failure occurs. To understand this scenario, consider a scenario in which the consumer issues the receive request and then crashes before processing it. As Service Bus marks the message as consumed, the application begins consuming messages upon restart. It will miss the message that it consumed before the crash. This process is often called at-most once processing.
+
+
+**Peek lock.**
+
+In this mode, the receive operation becomes two-stage, which makes it possible to support applications that can't tolerate missing messages.
+Finds the next message to be consumed, locks it to prevent other consumers from receiving it, and then, return the message to the application.
+After the application finishes processing the message, it requests the Service Bus service to complete the second stage of the receive process. Then, the service marks the message as consumed. 
+If the application is unable to process the message for some reason, it can request the Service Bus service to abandon the message. Service Bus unlocks the message and makes it available to be received again, either by the same consumer or by another competing consumer. Secondly, there's a timeout associated with the lock. If the application fails to process the message before the lock timeout expires, Service Bus unlocks the message and makes it available to be received again.
+If the application crashes after it processes the message, but before it requests the Service Bus service to complete the message, Service Bus redelivers the message to the application when it restarts. This process is often called at-least once processing. That is, each message is processed at least once. However, in certain situations the same message might be redelivered. If your scenario can't tolerate duplicate processing, add extra logic in your application to detect duplicates. For more information, see Duplicate detection, which is known as exactly once processing.
+
+## Azure Relay
+The Azure Relay service enables you to securely expose services that run in your corporate network to the public cloud. You can do so without opening a port on your firewall, or making intrusive changes to your corporate network infrastructure.
+The relay service supports the following scenarios between on-premises services and applications running in the cloud or in another on-premises environment.
+- Traditional one-way, request/response, and peer-to-peer communication
+- Event distribution at internet-scope to enable publish/subscribe scenarios
+- Bi-directional and unbuffered socket communication across network boundaries
+Azure Relay differs from network-level integration technologies such as VPN. An Azure relay can be scoped to a single application endpoint on a single machine. The VPN technology is far more intrusive, as it relies on altering the network environment.
+
+## Queue storage (Storage Account)
+An Azure Storage Account Queue can also be used as Messaging Service. (see storage queue session)
+
+## Notification Hubs
+Azure Notification Hubs provide an easy-to-use and scaled-out push engine that enables you to send push notifications to any platform (iOS, Android, Windows, etc.) from any back-end (cloud or on-premises). Notification Hubs works great for both enterprise and consumer scenarios. Here are a few example scenarios:
+- Send breaking news notifications to millions with low latency.
+- Send location-based coupons to interested user segments.
+- Send event-related notifications to users or groups for media/sports/finance/gaming applications.
+- Push promotional contents to applications to engage and market to customers.
+- Notify users of enterprise events such as new messages and work items.
+- Send codes for multi-factor authentication.
+Notification Hubs eliminates all complexities associated with sending push notifications on your own from your app backend. Its multi-platform, scaled-out push notification infrastructure reduces push-related coding and simplifies your backend. With Notification Hubs, devices are merely responsible for registering their PNS handles with a hub, while the backend sends messages to users or interest groups
+
+## Azure IoT Hub
+Enable bi-directional communication between IoT devices and Azure. Enable highly secure and reliable communication between your Internet of Things (IoT) application and the devices it manages. Azure IoT Hub provides a cloud-hosted solution back end to connect virtually any device. Extend your solution from the cloud to the edge with per-device authentication, built-in device management, and scaled provisioning.
