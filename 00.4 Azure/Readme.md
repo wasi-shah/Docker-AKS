@@ -1169,10 +1169,10 @@ Software containers work the same way, but in the digital world. Just like how a
 
 **Benefits of using containers**
 Containers package your applications in an easy-to-transport unit. Here are a few benefits of using containers:
-- Consistency: Goods in a shipping container remain safe and unchanged during transport. Similarly, a software container guarantees consistent application behavior among different environments.
-- Flexibility: Despite the diverse contents of a shipping container, transportation methods remain standardized. Software containers encapsulate different apps and technologies, but are maintained in a standardized fashion.
-- Efficiency: Just as shipping containers optimize transport by allowing efficient stacking on ships and trucks, software containers optimize the use of computing resources. This optimization allows multiple containers to operate simultaneously on a single server.
-- Simplicity: Moving shipping containers requires specific, yet standardized tools. Similarly, Azure Container Apps simplifies how you use containers, which allows you focus on app development without worrying about the details of container management.
+- **Consistency**: Goods in a shipping container remain safe and unchanged during transport. Similarly, a software container guarantees consistent application behavior among different environments.
+- **Flexibility**: Despite the diverse contents of a shipping container, transportation methods remain standardized. Software containers encapsulate different apps and technologies, but are maintained in a standardized fashion.
+- **Efficiency**: Just as shipping containers optimize transport by allowing efficient stacking on ships and trucks, software containers optimize the use of computing resources. This optimization allows multiple containers to operate simultaneously on a single server.
+- **Simplicity**: Moving shipping containers requires specific, yet standardized tools. Similarly, Azure Container Apps simplifies how you use containers, which allows you focus on app development without worrying about the details of container management.
 
 **Images**
 A container image is a static file with executable code that can create a container on a computing system. A container image is immutable meaning it cannot be changed, and can be deployed consistently in any environment. It is a core component of a containerized architecture.
@@ -1227,3 +1227,128 @@ Azure Bastion is a service that you can deploy to let you connect to a virtual m
 
 **SSH**
 When connecting to a Windows virtual machine using SSH, you can use both username/password and SSH keys for authentication.
+
+
+Azure Compute > PaaS > Azure App Service
+> [!important]
+> **Question: What is a Azure App Service?** 
+> <br> Azure App Service enables you to build and host web apps, mobile back ends, and RESTful APIs in the programming language of your choice without managing infrastructure.
+
+
+> [!important]
+> **Question: What are ?** 
+> 1. x - Web Apps
+> 2. x - API Apps
+> 3. x - Logic Apps
+> 4. x - Mobile Apps
+> 5. x - Function Apps
+
+
+Azure App Service enables you to build and host web apps, mobile back ends, and RESTful APIs in the programming language of your choice without managing infrastructure. It offers auto-scaling and high availability, supports both Windows and Linux, and enables automated deployments from GitHub, Azure DevOps, or any Git repo.
+Azure App Service is an HTTP-based service for hosting web applications, REST APIs, and mobile back ends. You can develop in your favorite language, be it .NET, .NET Core, Java, Node.js, PHP, and Python. Applications run and scale with ease on both Windows and Linux-based environments.
+App Service adds the power of Microsoft Azure to your application, such as security, load balancing, autoscaling, and automated management. Additionally, you can take advantage of its DevOps capabilities, such as continuous deployment from Azure DevOps, GitHub, Docker Hub, and other sources, package management, staging environments, custom domain, and TLS/SSL certificates.
+With App Service, you pay for the Azure compute resources you use. The compute resources you use are determined by the App Service plan that you run your apps on. For more information, see Azure App Service plans overview.
+## App Service Types
+**Web App**
+Web App is one of the most widely used Azure services. You can use this to host your web applications or APIs. A Web App is basically an abstraction of a web server, like Internet Information Services (IIS) or Tomcat, that you use to host HTTP-driven applications. Web App can host applications that are written in .NET, Node.js, PHP, Java, or Python, and there are extensions that you can use to run even more languages.
+Web App for Containers
+Web App for Containers helps you easily deploy and run containerized web apps at scale. Just pull container images from Docker Hub or a private Azure Container Registry, and Web App for Containers will deploy the containerized app with your preferred dependencies to production in seconds. The platform automatically takes care of OS patching, capacity provisioning, and load balancing.
+**Mobile App**
+Mobile App provides a backend for your mobile applications. You host an API in Mobile App that your mobile applications connect with through the cross-platform client SDK. This is available for iOS, Android, Windows, and Xamarin for iOS and Android and Xamarin Forms. Mobile App provides unique features like Offline Sync and Push Notifications that help you to create a modern, performant, and secure mobile experience. You can write your Mobile App backend in .NET or Node.js.
+**API Apps (Web services)**
+It’s the new version of web services. Create and deploy RESTful APIs in seconds, as powerful as you need them. Leverage your existing tools to create and deploy RESTful APIs without the hassle of managing infrastructure. Microsoft Azure App Service API Apps offers secure and flexible development, deployment, and scaling options for any sized RESTful API application.
+**Web Job**
+Web Job is a dependent on a web app so in order to create a web job you must have a web app. Web Job is a code behind task which activates on schedule or on at particular event to do a particular task for an associated web app. This helps web app to only process the necessary task to respond quickly to the user and leave the long processes and less important task for the web job. For example, azif user uploads an image and you need to shrink the image size which could take a bit longer so can just offer user to upload image on web app and response quickly once the image uploaded and then schedule a web job or active it thought a queue message to shrink the image size.
+## App Service plan
+App service plan is a web hosting plan. You can add multiple web apps into a single web service plan. It defines a set of compute resources for a web app to run. In App Service, an app runs in an App Service plan. An App Service plan defines a set of compute resources for a web app to run. It also defines the cost for the app service. It’s actually the financial model of the web apps.
+An app service always runs in an App Service plan. An App Service plan defines a set of compute resources for a web app to run.
+When you create an App Service plan in a certain region (for example, West Europe), a set of compute resources is created for that plan in that region. Whatever apps you put into this App Service plan run on these compute resources as defined by your App Service plan. Each App Service plan defines:
+- Operating System (Windows, Linux)
+- Region (West US, East US, and so on)
+- Number of VM instances
+- Size of VM instances (Small, Medium, Large)
+- Pricing tier (Free, Shared, Basic, Standard, Premium, PremiumV2, PremiumV3, Isolated, IsolatedV2)
+The pricing tier of an App Service plan determines what App Service features you get and how much you pay for the plan. The pricing tiers available to your App Service plan depend on the operating system selected at creation time. There are the following categories of pricing tiers:
+- Shared compute: Free and Shared, the two base tiers, runs an app on the same Azure VM as other App Service apps, including apps of other customers. These tiers allocate CPU quotas to each app that runs on the shared resources, and the resources cannot scale out. These tiers are intended to be used only for development and testing purposes.
+- Dedicated compute: The Basic, Standard, Premium, PremiumV2, and PremiumV3 tiers run apps on dedicated Azure VMs. Only apps in the same App Service plan share the same compute resources. The higher the tier, the more VM instances are available to you for scale-out.
+- Isolated: The Isolated and IsolatedV2 tiers run dedicated Azure VMs on dedicated Azure Virtual Networks. It provides network isolation on top of compute isolation to your apps. It provides the maximum scale-out capabilities.
+Each tier also provides a specific subset of App Service features. These features include custom domains and TLS/SSL certificates, autoscaling, deployment slots, backups, Traffic Manager integration, and more. The higher the tier, the more features are available. To find out which features are supported in each pricing tier.
+
+## App Service Deployment 
+Every development team has unique requirements that can make implementing an efficient deployment pipeline difficult on any cloud service. This article introduces the three main components of deploying to App Service: deployment sources, build pipelines, and deployment mechanisms. This article also covers some best practices and tips for specific language stacks.
+
+### Deployment Components
+**Deployment Source**
+A deployment source is the location of your application code. For production apps, the deployment source is usually a repository hosted by version control software such as
+- GitHub
+- BitBucket
+- Azure Repos.
+For development and test scenarios, the deployment source may be a project on your local machine.
+**Build Pipeline**
+Once you decide on a deployment source, your next step is to choose a build pipeline. A build pipeline reads your source code from the deployment source and executes a series of steps (such as compiling code, minifying HTML and JavaScript, running tests, and packaging components) to get the application in a runnable state. The specific commands executed by the build pipeline depend on your language stack. These operations can be executed on a build server such as Azure Pipelines, or executed locally.
+**Deployment Mechanism**
+The deployment mechanism is the action used to put your built application into the /home/site/wwwroot directory of your web app. The /wwwroot directory is a mounted storage location shared by all instances of your web app. When the deployment mechanism puts your application in this directory, your instances receive a notification to sync the new files. App Service supports the following deployment mechanisms:
+- Deployment tools such as Azure Pipelines, Jenkins, and editor plugins use one of these deployment mechanisms.
+- Kudu endpoints: Kudu is the open-source developer productivity tool that runs as a separate process in Windows App Service, and as a second container in Linux App Service. Kudu handles continuous deployments and provides HTTP endpoints for deployment, such as zipdeploy/.
+- FTP and WebDeploy: Using your site or user credentials, you can upload files via FTP or WebDeploy. These mechanisms don't go through Kudu.
+
+### Use deployment slots
+Whenever possible, use deployment slots when deploying a new production build. When using a Standard App Service Plan tier or better, you can deploy your app to a staging environment, validate your changes, and do smoke tests. When you're ready, you can swap your staging and production slots. The swap operation warms up the necessary worker instances to match your production scale, thus eliminating downtime.
+**Continuously deploy code**
+If your project has designated branches for testing, QA, and staging, then each of those branches should be continuously deployed to a staging slot. (This is known as the Gitflow design.) This allows your stakeholders to easily assess and test the deployed branch.
+Continuous deployment should never be enabled for your production slot. Instead, your production branch (often main) should be deployed onto a nonproduction slot. When you're ready to release the base branch, swap it into the production slot. Swapping into production—instead of deploying to production—prevents downtime and allows you to roll back the changes by swapping again.
+ 
+**Continuously deploy containers**
+For custom containers from Docker or other container registries, deploy the image into a staging slot and swap into production to prevent downtime. The automation is more complex than code deployment because you must push the image to a container registry and update the image tag on the webapp.
+For each branch you want to deploy to a slot, set up automation to do the following on each commit to the branch.
+1.	Build and tag the image. As part of the build pipeline, tag the image with the git commit ID, timestamp, or other identifiable information. It’s best not to use the default “latest” tag. Otherwise, it’s difficult to trace back what code is currently deployed, which makes debugging far more difficult.
+2.	Push the tagged image. Once the image is built and tagged, the pipeline pushes the image to our container registry. In the next step, the deployment slot will pull the tagged image from the container registry.
+3.	Update the deployment slot with the new image tag. When this property is updated, the site will automatically restart and pull the new container image.
+ 
+**Use Azure DevOps**
+App Service has built-in continuous delivery for containers through the Deployment Center. Navigate to your app in the Azure portal and select Deployment Center under Deployment. Follow the instructions to select your repository and branch. This will configure a DevOps build and release pipeline to automatically build, tag, and deploy your container when new commits are pushed to your selected branch.
+
+**Use GitHub Actions**
+You can also automate your container deployment with GitHub Actions. The workflow file below will build and tag the container with the commit ID, push it to a container registry, and update the specified web app with the new image tag.
+
+**Use other automation providers**
+The steps listed earlier apply to other automation utilities such as CircleCI or Travis CI. However, you need to use the Azure CLI to update the deployment slots with new image tags in the final step.
+
+### Environment variables and App settings in Azure App Service
+In Azure App Service, certain settings are available to the deployment or runtime environment as environment variables. Some of these settings can be customized when you set them manually as app settings. This reference shows the variables you can use or customize.
+In App Service, app settings are variables passed as environment variables to the application code. For Linux apps and custom containers, App Service passes app settings to the container using the --env flag to set the environment variable in the container. In either case, they're injected into your app environment at app startup. When you add, remove, or edit app settings, App Service triggers an app restart.
+For ASP.NET and ASP.NET Core developers, setting app settings in App Service are like setting them in <appSettings> in Web.config or appsettings.json, but the values in App Service override the ones in Web.config or appsettings.json. You can keep development settings (for example, local MySQL password) in Web.config or appsettings.json and production secrets (for example, Azure MySQL database password) safely in App Service. The same code uses your development settings when you debug locally, and it uses your production secrets when deployed to Azure.
+
+### Azure App Service Scaling & Performance
+There are two workflows for scaling, scale up and scale out.
+**Add CDN**
+You can also add CDN to web app to provide fast, reliable, and secure access between your users and your applications’ static and dynamic web content across the globe.
+
+**Scale Up/Down**
+Get more CPU, memory, disk space, and extra features like dedicated virtual machines (VMs), custom domains and certificates, staging slots, autoscaling, and more. You scale up by changing the pricing tier of the App Service plan that your app belongs to.
+
+**Scale Out/In**
+Increase the number of VM instances that run your app. You can scale out to as many as 30 instances, depending on your pricing tier. App Service Environments in Isolated tier further increases your scale-out count to 100 instances. For more information about scaling out, see Scale instance count manually or automatically. There, you find out how to use autoscaling, which is to scale instance count automatically based on predefined rules and schedules.
+**Scale Out Methods**
+- Manual: You manually scale out the app service plan. 
+- Automatic: Automatic scaling is a new scale out option that automatically handles scaling decisions for your web apps and App Service Plans.
+- Rule based: Define your own rules when to scale out the app service plan, for example if CPU reaches 75%.
+
+
+## Azure App Service Backup & Restore
+In Azure App Service, you can easily restore app backups. You can also make on-demand custom backups or configure scheduled custom backups. You can restore a backup by overwriting an existing app by restoring to a new app or slot.
+**Azure App Service Backup Types**
+There are two types of backups in App Service.
+- Automatic backups made for your app regularly as long as it's in a supported pricing tier. 
+- Custom backups require initial configuration, and can be made on-demand or on a schedule.
+
+## Azure App Service monitoring
+Azure App Service provides several monitoring options for monitoring resources for availability, performance, and operation. Options such as 
+- Diagnostic Settings
+- Application Insights
+- Log stream
+- Metrics
+- Quotas and alerts
+- Activity logs.
+
+
