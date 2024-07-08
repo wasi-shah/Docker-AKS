@@ -1125,3 +1125,8 @@ Similar to Azure Logic Apps, Azure Functions give you the ability to preprocess 
 
 **Azure DevOps and GitHub**
 Azure Monitor Application Insights gives you the ability to create Work Item Integration with monitoring data embedding in it. Additional options include release annotations and continuous monitoring.
+
+## Azure Advisor
+
+Azure Advisor offers actionable recommendations to help you optimize your Azure resources for reliability, security, operational excellence, performance, and cost.
+Advisor is a personalized cloud consultant that helps you follow best practices to optimize your Azure deployments. It analyses your resource configuration and usage telemetry and then recommends solutions that can help you improve the cost effectiveness, performance, Reliability (formerly called High availability), and security of your Azure resources.
