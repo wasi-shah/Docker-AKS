@@ -1238,13 +1238,30 @@ Azure Compute > PaaS > Azure App Service
 
 
 > [!important]
-> **Question: What are ?** 
-> 1. x - Web Apps
-> 2. x - API Apps
-> 3. x - Logic Apps
-> 4. x - Mobile Apps
-> 5. x - Function Apps
+> **Question: What are App Service Types?** 
+> 1. Web Apps
+> 2. API Apps
+> 3. Logic Apps
+> 4. Mobile Apps
+> 5. Function Apps
 
+> [!important]
+> **Question: What is a Azure App Service Plan?** 
+> <br> App service plan is a web hosting plan. You can add multiple web apps into a single web service plan. It defines a set of compute resources for a web app to run.
+
+
+> [!important]
+> **Question: What are App Service Deployment Source?** 
+> 1. GitHub
+> 2. BitBucket
+> 3. Azure Repos
+> 4. Azure Pipelines or Jenkins etc
+> 5. FTP and WebDeploy
+
+> [!important]
+> **Question: What are App Service Scaling?** 
+> 1. Scale Up/Down: Increase/decrease CPU, memory, disk space, and extra features like dedicated virtual machines (VMs)
+> 2. Scale Out/In: Increase/decrease the number of VM instances that run your app.
 
 Azure App Service enables you to build and host web apps, mobile back ends, and RESTful APIs in the programming language of your choice without managing infrastructure. It offers auto-scaling and high availability, supports both Windows and Linux, and enables automated deployments from GitHub, Azure DevOps, or any Git repo.
 Azure App Service is an HTTP-based service for hosting web applications, REST APIs, and mobile back ends. You can develop in your favorite language, be it .NET, .NET Core, Java, Node.js, PHP, and Python. Applications run and scale with ease on both Windows and Linux-based environments.
