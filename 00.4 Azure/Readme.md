@@ -1437,7 +1437,18 @@ Additionally, applications built on Azure Container Apps can dynamically scale b
 - CPU or memory load
 
 # Azure Messaging Services
+![image](https://github.com/wasi-shah/Docker-AKS/assets/51749920/686213e4-dfb6-4c91-9919-82be98bfa8d7)
+
 Messaging services on Azure provide the interconnectivity between components and applications that are written in different languages and hosted in the same cloud, multiple clouds, or on-premises. Use message queues or topics to send messages without concerns of consumer availability and to help balance varying workload throughput.
+
+## Events vs. messages
+**Event**
+
+An event is a lightweight notification of a condition or a state change. The publisher of the event has no expectation about how the event is handled.
+
+**Message**
+
+A message is raw data produced by a service to be consumed or stored elsewhere. The message contains the data that triggered the message pipeline. The publisher of the message has an expectation about how the consumer handles the message. A contract exists between the two sides. For example, the publisher sends a message with the raw data, and expects the consumer to create a file from that data and send a response when the work is done.
 
 ## Azure Event Grid
 Simplify your event-based apps with Event Grid, a single service for managing routing of all events from any source to any destination. Designed for high availability, consistent performance, and dynamic scale, Event Grid lets you focus on your app logic rather than infrastructure.
