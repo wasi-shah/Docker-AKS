@@ -1451,6 +1451,8 @@ An event is a lightweight notification of a condition or a state change. The pub
 A message is raw data produced by a service to be consumed or stored elsewhere. The message contains the data that triggered the message pipeline. The publisher of the message has an expectation about how the consumer handles the message. A contract exists between the two sides. For example, the publisher sends a message with the raw data, and expects the consumer to create a file from that data and send a response when the work is done.
 
 ## Azure Event Grid
+![image](https://github.com/wasi-shah/Docker-AKS/assets/51749920/48f19fec-edc8-42d6-a579-88fd87eb8eb5)
+
 Simplify your event-based apps with Event Grid, a single service for managing routing of all events from any source to any destination. Designed for high availability, consistent performance, and dynamic scale, Event Grid lets you focus on your app logic rather than infrastructure.
 Event Grid connects data sources and event handlers. For example, use Event Grid to instantly trigger a serverless function to run image analysis each time a new photo is added to a blob storage container.
 Azure Event Grid is a highly scalable, fully managed Pub Sub message distribution service that offers flexible message consumption patterns using the MQTT and HTTP protocols. With Azure Event Grid, you can build data pipelines with device data, integrate applications, and build event-driven serverless architectures. Event Grid enables clients to publish and subscribe to messages over the MQTT v3.1.1 and v5.0 protocols to support Internet of Things (IoT) solutions. Through HTTP, Event Grid enables you to build event-driven solutions where a publisher service announces its system state changes (events) to subscriber applications. Event Grid can be configured to send events to subscribers (push delivery) or subscribers can connect to Event Grid to read events (pull delivery). Event Grid supports CloudEvents 1.0 specification to provide interoperability across systems.
@@ -1463,6 +1465,8 @@ Data distribution using push and pull delivery modes. At any point in a data pip
 When using push delivery, Event Grid can send data to destinations that include your own application webhooks and Azure services.
 
 ## Azure Event Hubs
+![image](https://github.com/wasi-shah/Docker-AKS/assets/51749920/ea4a9c74-4044-452c-9be3-262972a50e1f)
+
 Azure Event Hubs is a cloud native data streaming service that can stream millions of events per second, with low latency, from any source to any destination. Event Hubs is compatible with Apache Kafka, and it enables you to run existing Kafka workloads without any code changes.
 Using Event Hubs to ingest and store streaming data, businesses can harness the power of streaming data to gain valuable insights, drive real-time analytics, and respond to events as they happen, enhancing overall efficiency and customer experience.
 
@@ -1473,11 +1477,13 @@ Reliable cloud messaging as a service (MaaS) and simple hybrid integration. Azur
 ### Service Bus Message Types
 
 **Azure Messaging Queue (NOT A AZURE STORAGE QUEUE)**
+![image](https://github.com/wasi-shah/Docker-AKS/assets/51749920/2b135f89-dea7-46ca-b8d1-7544c01fd8c5)
 
 Queues offer First In, First Out (FIFO) message delivery to one or more competing consumers. That is, receivers typically receive and process messages in the order in which they were added to the queue. And, only one message consumer receives and processes each message.		
 A key benefit of using queues is to achieve temporal decoupling of application components. In other words, the producers (senders) and consumers (receivers) don't have to send and receive messages at the same time, because messages are stored durably in the queue. Furthermore, the producer doesn't have to wait for a reply from the consumer to continue to process and send messages.	
  
 **Topics and subscriptions**
+![image](https://github.com/wasi-shah/Docker-AKS/assets/51749920/0ff4694b-e22f-40d5-a555-37c043f99988)
 
 Topics and subscriptions provide a one-to-many form of communication in a publish and subscribe pattern. It's useful for scaling to large numbers of recipients. Each published message is made available to each subscription registered with the topic. Publisher sends a message to a topic and one or more subscribers receive a copy of the message.
  
