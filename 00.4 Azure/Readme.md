@@ -1153,3 +1153,37 @@ Azure Monitor Application Insights gives you the ability to create Work Item Int
 
 Azure Advisor offers actionable recommendations to help you optimize your Azure resources for reliability, security, operational excellence, performance, and cost.
 Advisor is a personalized cloud consultant that helps you follow best practices to optimize your Azure deployments. It analyses your resource configuration and usage telemetry and then recommends solutions that can help you improve the cost effectiveness, performance, Reliability (formerly called High availability), and security of your Azure resources.
+
+
+# Containers
+As you develop and deploy applications, you quickly run into challenges common to any production-grade system. For instance, you might ask yourself questions like:
+- How can I be confident that what works on my machine works in production?
+- How can I manage settings between different environments?
+- How do I reliably deploy my application?
+Some organizations choose to use virtual machines to deal with these problems. However, virtual machines can be costly, sometimes slow, and too large to move around the network.
+Instead of using a fully virtualized environment, some developers turn to containers.
+
+**What is a container?**
+Think for a moment about goods traveling around in a shipping container. When you see large metal boxes on cargo ships, you notice they're all the same size and shape. These containers make it easy to stack and move goods all around the world, regardless of what’s inside.
+Software containers work the same way, but in the digital world. Just like how a shipping container can hold toys, clothes, or electronics, a software container packages up everything an application needs to run. Whether on your computer, in a test environment, or in production a cloud service like Microsoft Azure, a container works the same way in diverse contexts.
+
+**Benefits of using containers**
+Containers package your applications in an easy-to-transport unit. Here are a few benefits of using containers:
+- Consistency: Goods in a shipping container remain safe and unchanged during transport. Similarly, a software container guarantees consistent application behavior among different environments.
+- Flexibility: Despite the diverse contents of a shipping container, transportation methods remain standardized. Software containers encapsulate different apps and technologies, but are maintained in a standardized fashion.
+- Efficiency: Just as shipping containers optimize transport by allowing efficient stacking on ships and trucks, software containers optimize the use of computing resources. This optimization allows multiple containers to operate simultaneously on a single server.
+- Simplicity: Moving shipping containers requires specific, yet standardized tools. Similarly, Azure Container Apps simplifies how you use containers, which allows you focus on app development without worrying about the details of container management.
+
+**Images**
+A container image is a static file with executable code that can create a container on a computing system. A container image is immutable meaning it cannot be changed, and can be deployed consistently in any environment. It is a core component of a containerized architecture.
+Container images include everything a container needs to run—the container engine such as Docker or CoreOS, system libraries, utilities, configuration settings, and specific workloads that should run on the container. 
+Container image has everything that your app needs except OS. The image shares the operating system kernel of the host, so it does not need to include a full operating system.
+A container image is composed of layers, added on to a parent image (also known as a base image). Layers make it possible to reuse components and configurations across images. Constructing layers in an optimal manner can help reduce container size and improve performance.
+A container image is a ready-to-run software package containing everything needed to run an application: the code and any runtime it requires, application and system libraries, and default values for any essential settings.
+Containers are intended to be stateless and immutable: you should not change the code of a container that is already running. If you have a containerized application and want to make changes, the correct process is to build a new image that includes the change, then recreate the container to start from the updated image.
+
+**Azure Container Registry**
+Azure Container Registry stores docker images. 
+Azure Container Registry allows you to build, store, and manage container images and artifacts in a private registry for all types of container deployments. Use Azure container registries with your existing container development and deployment pipelines. Use Azure Container Registry Tasks to build container images in Azure on-demand, or automate builds triggered by source code updates, updates to a container's base image, or timers.
+Developers can push to a container registry as part of a container development workflow. For example, target a container registry from a continuous integration and delivery tool such as Azure Pipelines or Jenkins.
+Configure ACR Tasks to automatically rebuild application images when their base images are updated, or automate image builds when your team commits code to a Git repository. Create multi-step tasks to automate building, testing, and patching multiple container images in parallel in the cloud.
