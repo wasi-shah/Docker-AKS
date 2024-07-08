@@ -984,7 +984,12 @@ Azure Cache for Redis provides an in-memory data store based on the Redis softwa
 
 
 # Azure Monitor
-Full observability into your applications, infrastructure, and network. All events that happen in Azure feeds into Azure Monitor. Azure Monitor is a comprehensive monitoring solution for collecting, analysing, and responding to monitoring data from your cloud and on-premises environments. You can use Azure Monitor to maximize the availability and performance of your applications and services. It helps you understand how your applications are performing and allows you to manually and programmatically respond to system events.
+> [!important]
+> **Question: What's the difference between Azure Monitor, Log Analytics, and Application Insights??** 
+> <br> In September 2018, Microsoft combined Azure Monitor, Log Analytics, and Application Insights into a single service to provide powerful end-to-end monitoring of your applications and the components they rely on. Features in Log Analytics and Application Insights haven't changed, although some features have been rebranded to Azure Monitor to better reflect their new scope. The log data engine and query language of Log Analytics is now referred to as Azure Monitor Logs.
+
+Full observability into your applications, infrastructure, and network. All events that happen in Azure feeds into Azure Monitor. Azure Monitor is a comprehensive monitoring solution for collecting, analysing, and responding to monitoring data from your cloud and on-premises environments. You can use Azure Monitor to maximize the availability and performance of your applications and services. It helps you understand your applications' performance and allows you to manually and programmatically respond to system events.
+![image](https://github.com/wasi-shah/Docker-AKS/assets/51749920/89e9c638-7418-4966-b10d-26787698ba99)
 
 ## Resources of Azure Monitoring
 Azure Monitor can monitor these types of resources in Azure, other clouds, or on-premises:
@@ -1001,8 +1006,13 @@ You can also export monitoring data from Azure Monitor into other systems so you
 - Integrate with ticketing and other ITSM systems
 
 ## Monitoring Data Source
+Azure Monitor can collect data from multiple sources.
+![image](https://github.com/wasi-shah/Docker-AKS/assets/51749920/31bcf106-375a-4558-8ac2-434fb4cee05a)
+
+
 Azure Monitor collects and routes monitoring data using a few different mechanisms depending on the data being routed and the destination. Much like a road system built over time, not all roads lead to all locations. Some are legacy, some new, and some are better to take than others given how Azure Monitor has evolved over time. 
 Azure Monitor has a common data platform that consolidates data from a variety of sources. Currently, different sources of data for Azure Monitor use different methods to deliver their data, and each typically require different types of configurations.
+![image](https://github.com/wasi-shah/Docker-AKS/assets/51749920/1fc88215-6b72-496c-8648-d4ab7a5a2870)
 
 ### Metrics
 Metrics are numerical values that describe an aspect of a system at a particular point in time. Azure Monitor Metrics is a time-series database, optimized for analyzing time-stamped data. Azure Monitor collects metrics at regular intervals. Metrics are identified with a timestamp, a name, a value, and one or more defining labels. They can be aggregated using algorithms, compared to other metrics, and analyzed for trends over time. It supports native Azure Monitor metrics and Prometheus metrics.
@@ -1024,6 +1034,9 @@ Distributed tracing allows you to see the path of a request as it travels throug
 Changes are a series of events in your application and resources. They're tracked and stored when you use the Change Analysis service, which uses Azure Resource Graph as its store. Change Analysis helps you understand which changes, such as deploying updated code, may have caused issues in your systems.
 
 ## Azure Monitor Insights
+![image](https://github.com/wasi-shah/Docker-AKS/assets/51749920/d3da37fa-a2fc-45f9-9089-d404603ba4ab)
+
+
 Some Azure resource providers have curated visualizations that provide a customized monitoring experience and require minimal configuration. Insights are large, scalable, curated visualizations.
 
 **Application Insights**
@@ -1039,6 +1052,8 @@ VM Insights monitors your Azure VMs. It analyses the performance and health of y
 Network Insights provides a comprehensive and visual representation through topologies, of health and metrics for all deployed network resources, without requiring any configuration. It also provides access to network monitoring capabilities like Connection Monitor, flow logging for network security groups (NSGs), and Traffic Analytics and other diagnostic features.
 
 ## Tools to Visualise Azure Monitor data
+![image](https://github.com/wasi-shah/Docker-AKS/assets/51749920/808412c6-eefd-4182-a5fc-e4518b352665)
+
 Visualizations such as charts and tables are effective tools for summarizing monitoring data and presenting it to different audiences. Azure Monitor has its own features for visualizing monitoring data and uses other Azure services for publishing it to different audiences. Power BI and Grafana are not officially part of the Azure Monitor product, but they're a core integration and part of the Azure Monitor story.
 
 **Azure Monitoring Dashboard**
@@ -1055,6 +1070,8 @@ Grafana is an open platform that excels in operational dashboards. All versions 
 Grafana has popular plug-ins and dashboard templates for non-Microsoft APM tools such as Dynatrace, New Relic, and AppDynamics as well. You can use these resources to visualize Azure platform data alongside other metrics from higher in the stack collected by these other tools. It also has AWS CloudWatch and GCP BigQuery plug-ins for multicloud monitoring in a single pane of glass.
 
 ## Tools to Analyse Azure Monitor data
+![image](https://github.com/wasi-shah/Docker-AKS/assets/51749920/6414df22-6b9a-42b0-b5a0-e55f599488c3)
+
 
 **Metrics explorer**
 Use the Azure Monitor metrics explorer user interface in the Azure portal to investigate the health and utilization of your resources. Metrics explorer helps you plot charts, visually correlate trends, and investigate spikes and dips in metric values. Metrics explorer contains features for applying dimensions and filtering, and for customizing charts. These features help you analyze exactly the data you need in a visually intuitive way.
@@ -1067,6 +1084,8 @@ Change Analysis is a subscription-level Azure resource provider that checks reso
 
 
 ## Response Action tools for Azure Monitor
+![image](https://github.com/wasi-shah/Docker-AKS/assets/51749920/0fb696a9-f550-4684-8bd0-7b482ddd15a1)
+
 An effective monitoring solution proactively responds to critical events, without the need for an individual or team to notice the issue. The response could be a text or email to an administrator, or an automated process that attempts to correct an error condition.
 
 **Artificial Intelligence for IT Operations (AIOps)**
@@ -1082,6 +1101,8 @@ Alert rules use action groups, which can perform actions such as sending email o
 It allows you to dynamically control the number of resources running to handle the load on your application. You can create rules that use Azure Monitor metrics to determine when to automatically add resources when the load increases or remove resources that are sitting idle. You can specify a minimum and maximum number of instances, and the logic for when to increase or decrease resources to save money and to increase performance.
 
 ## Azure Monitor Integration for custom solution
+![image](https://github.com/wasi-shah/Docker-AKS/assets/51749920/55cccbca-60df-44a2-bb63-d2bf41b28abe)
+
 Data which is available inside your Azure Monitor can be accesses to create a custom solution. You may need to integrate Azure Monitor with other systems or to build custom solutions that use your monitoring data or take custom actions. These Azure services work with Azure Monitor to provide integration capabilities. Below are only a few of the possible integrations.
 
 **Event Hubs**
