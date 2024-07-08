@@ -1187,3 +1187,36 @@ Azure Container Registry stores docker images.
 Azure Container Registry allows you to build, store, and manage container images and artifacts in a private registry for all types of container deployments. Use Azure container registries with your existing container development and deployment pipelines. Use Azure Container Registry Tasks to build container images in Azure on-demand, or automate builds triggered by source code updates, updates to a container's base image, or timers.
 Developers can push to a container registry as part of a container development workflow. For example, target a container registry from a continuous integration and delivery tool such as Azure Pipelines or Jenkins.
 Configure ACR Tasks to automatically rebuild application images when their base images are updated, or automate image builds when your team commits code to a Git repository. Create multi-step tasks to automate building, testing, and patching multiple container images in parallel in the cloud.
+
+# Azure Compute > IaaS > Azure Virtual Machine
+Azure virtual machines are one of several types of on-demand, scalable computing resources that Azure offers. Typically, you choose a virtual machine when you need more control over the computing environment than the other choices offer.
+
+**Parts of a VM**
+When you create a virtual machine, you're also creating resources that support the virtual machine. These resources come with their own costs that should be considered.
+
+**Virtual network**	For giving your virtual machine the ability to communicate with other resources
+**A virtual Network Interface Card (NIC)**	For connecting to the virtual network
+**A private IP address and sometimes a public IP address.**	For communication and data exchange on your network and with external networks
+**Network security group (NSG)**	For managing the network traffic too and from your VM. For example, you might need to open port 22 for SSH access, but you might want to block traffic to port 80. Blocking and allowing port access is done through the NSG.
+**OS Disk and possibly separate disks for data.**	It's a best practice to keep your data on a separate disk from your operating system, in case you ever have a VM fail, you can simply detach the data disk, and attach it to a new VM.
+**In some cases, a license for the OS**	For providing your virtual machine runs to run the OS
+
+## VM Availability
+There are multiple options to manage the availability of your virtual machines in Azure.
+- Availability Zones are physically separated zones within an Azure region. Availability zones guarantee virtual machine connectivity to at least one instance at least 99.99% of the time when you've two or more instances deployed across two or more Availability Zones in the same Azure region.
+- Scaling
+  - Vertical - Adding more CPU to existing machine.
+  - Horizontal - Adding more VMs on demand using VMSS
+    - Virtual Machine Scale Sets let you create and manage a group of load balanced virtual machines. The number of virtual machine instances can automatically increase or decrease in response to demand or a defined schedule. Scale sets provide high availability to your applications, and allow you to centrally manage, configure, and update many virtual machines. Virtual machines in a scale set can also be deployed into multiple availability zones, a single availability zone, or regionally.
+
+## Connecting to VM
+
+**RDP**
+It’s your usual way to connect to VM.
+
+**Bastion**
+Azure Bastion is a fully managed PaaS service that you provision to securely connect to virtual machines via private IP address. It provides secure and seamless RDP/SSH connectivity to your virtual machines directly over TLS from the Azure portal, or via the native SSH or RDP client already installed on your local computer. When you connect via Azure Bastion, your virtual machines don't need a public IP address, agent, or special client software.
+Azure Bastion is a service that you can deploy to let you connect to a virtual machine using your browser and the Azure portal, or via the native SSH or RDP client already installed on your local computer. The Azure Bastion service is a fully platform-managed PaaS service that you deploy inside your virtual network. It provides secure and seamless RDP/SSH connectivity to your virtual machines directly from the Azure portal over TLS. When you connect via Azure Bastion, your virtual machines don't need a public IP address, agent, or special client software.
+
+**SSH**
+When connecting to a Windows virtual machine using SSH, you can use both username/password and SSH keys for authentication.
