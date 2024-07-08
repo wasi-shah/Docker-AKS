@@ -1192,13 +1192,20 @@ Configure ACR Tasks to automatically rebuild application images when their base 
 Azure virtual machines are one of several types of on-demand, scalable computing resources that Azure offers. Typically, you choose a virtual machine when you need more control over the computing environment than the other choices offer.
 
 **Parts of a VM**
+
 When you create a virtual machine, you're also creating resources that support the virtual machine. These resources come with their own costs that should be considered.
 
-**Virtual network**	For giving your virtual machine the ability to communicate with other resources
+**Virtual network**
+For giving your virtual machine the ability to communicate with other resources
+
 **A virtual Network Interface Card (NIC)**	For connecting to the virtual network
+
 **A private IP address and sometimes a public IP address.**	For communication and data exchange on your network and with external networks
+
 **Network security group (NSG)**	For managing the network traffic too and from your VM. For example, you might need to open port 22 for SSH access, but you might want to block traffic to port 80. Blocking and allowing port access is done through the NSG.
+
 **OS Disk and possibly separate disks for data.**	It's a best practice to keep your data on a separate disk from your operating system, in case you ever have a VM fail, you can simply detach the data disk, and attach it to a new VM.
+
 **In some cases, a license for the OS**	For providing your virtual machine runs to run the OS
 
 ## VM Availability
