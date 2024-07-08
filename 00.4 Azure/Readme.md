@@ -1251,16 +1251,21 @@ Azure App Service is an HTTP-based service for hosting web applications, REST AP
 App Service adds the power of Microsoft Azure to your application, such as security, load balancing, autoscaling, and automated management. Additionally, you can take advantage of its DevOps capabilities, such as continuous deployment from Azure DevOps, GitHub, Docker Hub, and other sources, package management, staging environments, custom domain, and TLS/SSL certificates.
 With App Service, you pay for the Azure compute resources you use. The compute resources you use are determined by the App Service plan that you run your apps on. For more information, see Azure App Service plans overview.
 ## App Service Types
+
 **Web App**
 Web App is one of the most widely used Azure services. You can use this to host your web applications or APIs. A Web App is basically an abstraction of a web server, like Internet Information Services (IIS) or Tomcat, that you use to host HTTP-driven applications. Web App can host applications that are written in .NET, Node.js, PHP, Java, or Python, and there are extensions that you can use to run even more languages.
 Web App for Containers
 Web App for Containers helps you easily deploy and run containerized web apps at scale. Just pull container images from Docker Hub or a private Azure Container Registry, and Web App for Containers will deploy the containerized app with your preferred dependencies to production in seconds. The platform automatically takes care of OS patching, capacity provisioning, and load balancing.
+
 **Mobile App**
 Mobile App provides a backend for your mobile applications. You host an API in Mobile App that your mobile applications connect with through the cross-platform client SDK. This is available for iOS, Android, Windows, and Xamarin for iOS and Android and Xamarin Forms. Mobile App provides unique features like Offline Sync and Push Notifications that help you to create a modern, performant, and secure mobile experience. You can write your Mobile App backend in .NET or Node.js.
+
 **API Apps (Web services)**
 It’s the new version of web services. Create and deploy RESTful APIs in seconds, as powerful as you need them. Leverage your existing tools to create and deploy RESTful APIs without the hassle of managing infrastructure. Microsoft Azure App Service API Apps offers secure and flexible development, deployment, and scaling options for any sized RESTful API application.
+
 **Web Job**
 Web Job is a dependent on a web app so in order to create a web job you must have a web app. Web Job is a code behind task which activates on schedule or on at particular event to do a particular task for an associated web app. This helps web app to only process the necessary task to respond quickly to the user and leave the long processes and less important task for the web job. For example, azif user uploads an image and you need to shrink the image size which could take a bit longer so can just offer user to upload image on web app and response quickly once the image uploaded and then schedule a web job or active it thought a queue message to shrink the image size.
+
 ## App Service plan
 App service plan is a web hosting plan. You can add multiple web apps into a single web service plan. It defines a set of compute resources for a web app to run. In App Service, an app runs in an App Service plan. An App Service plan defines a set of compute resources for a web app to run. It also defines the cost for the app service. It’s actually the financial model of the web apps.
 An app service always runs in an App Service plan. An App Service plan defines a set of compute resources for a web app to run.
