@@ -1231,9 +1231,11 @@ Azure Bastion is a service that you can deploy to let you connect to a virtual m
 When connecting to a Windows virtual machine using SSH, you can use both username/password and SSH keys for authentication.
 
 
-Azure Compute > PaaS > Azure App Service
+# Azure Compute > PaaS > Azure App Service
+![image](https://github.com/wasi-shah/Docker-AKS/assets/51749920/da85a578-cc76-4656-8a3b-ec4fd0358207)
+
 > [!important]
-> **Question: What is a Azure App Service?** 
+> **Question: What is an Azure App Service?** 
 > <br> Azure App Service enables you to build and host web apps, mobile back ends, and RESTful APIs in the programming language of your choice without managing infrastructure.
 
 
@@ -1379,6 +1381,8 @@ Azure App Service provides several monitoring options for monitoring resources f
 
 
 # Azure Compute > Containers > IaaS > Azure Container Instance (ACI)
+![image](https://github.com/wasi-shah/Docker-AKS/assets/51749920/d4d9948b-6ee7-4be2-a709-7fe7eaa98e12)
+
 Run Docker containers on-demand in a managed, serverless Azure environment. Azure Container Instances is a solution for any scenario that can operate in isolated containers, without orchestration. Run event-driven applications, quickly deploy from your container development pipelines, and run data processing and build jobs.
 
 Azure Container Instance is a serverless service. Azure Container Instances is a great solution for any scenario that can operate in isolated containers, including simple applications, task automation, and build jobs.
@@ -1406,3 +1410,6 @@ Azure Container Instances can schedule both Windows and Linux containers with th
 
 **Virtual network deployment**
 Azure Container Instances enables deployment of container instances into an Azure virtual network. When deployed into a subnet within your virtual network, container instances can communicate securely with other resources in the virtual network, including those that are on premises (through VPN gateway or ExpressRoute).
+
+# Azure Compute > Containers > PaaS > Azure Container App
+![image](https://github.com/wasi-shah/Docker-AKS/assets/51749920/9dec63c5-5ba7-45cb-8509-36f18977a1a2)
