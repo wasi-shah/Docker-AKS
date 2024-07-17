@@ -1,4 +1,82 @@
 # Key concepts for new Azure Pipelines
+> [!important]
+> **Question: What is a Azure Pipeline?** 
+> <br>Azure Pipelines automates build, test and publish process.
+
+> [!important]
+> **Question: What is a Pipeline Hierarchy** 
+> <br>Pipelines are made of stages, jobs and steps.
+> -  Pipeline > Stage - A stage is a way to logically divide your pipeline. For example, you could have a stage for Build, Test and Deploy
+> - Pipeline > Stage > Job - Each job runs on one agent. A job can also be agentless.
+> - Pipeline > Stage > Job > Step/Tasks - A step can be a task or script and is the smallest building block of a pipeline. A Task is a pre-packaged script that performs an action for example [Build artifact / Publish artifact / Invoke an API]
+
+> [!important]
+> **Question: What is a Pipeline Run?** 
+> <br>A run represents one execution of a pipeline. It collects the logs associated with running the steps and the results of running tests. During a run, Azure Pipelines will first process the pipeline and then send the run to one or more agents.
+
+> [!important]
+> **Question: What is an Artifact?** 
+> <br>An artifact is a collection of files or packages published by a run.
+
+
+> [!important]
+> **Question: What is an Agent?** 
+> <br>When your build or deployment runs, the system begins one or more jobs. An agent is computing infrastructure with installed agent software that runs one job at a time. For example, your job could run on a Microsoft-hosted Ubuntu agent or your own hosted custom agent.
+
+
+
+> [!important]
+> **Question: What is an Environment?** 
+> <br>An environment is a collection of resources where you deploy your application. One environment can contain one or more virtual machines, containers, web apps, or any service.
+
+> [!important]
+> **Question: What is Pipeline Parameters?** 
+> <br>Parameters are only available at template parsing time. Pipeline parameters can't be changed by a pipeline while it's running.
+
+
+> [!important]
+> **Question: What is a Variable?** 
+> <br>Variables are more widely available during your pipeline run. Variables give you a convenient way to get key bits of data into various parts of the pipeline. 
+
+> [!important]
+> **Question: What are the types of variables?** 
+> 1. User-defined Variables - Allows you to define your own variables
+> 2. System variables - System variables get set with their current value when you run the pipeline and has a predefined values. For example, the predefined variable Build.BuildId gives the ID of each build
+> 3. Environment variables - Environment variables are specific to the operating system/agent you're using for example variables like Agent.OS and Agent.Version
+
+> [!important]
+> **Question: What is a Variable group?** 
+> <br>Variable groups are a set of variables that you can use across multiple pipelines. They allow you to manage and organize variables that are common to various stages in one place.
+
+
+> [!important]
+> **Question: What is a Variable template?** 
+> <br>Use templates to define variables in one file that are used in multiple pipelines. With templates, variables can be defined in one separate YAML file and can reference in another YAML file or pipeline.
+
+
+
+
+> [!important]
+> **Question: What are the main triggers of a pipeline?** 
+> 1. Manual trigger 
+> 2. Push to a Repo
+> 3. Scheduled time
+> 4. After another build finished
+
+> [!important]
+> **Question: What is a Continuous Integration (CI)?** 
+> <br>Continuous Integration (CI) automatically merge, build and test code and produce artifacts.
+
+> [!important]
+> **Question: What is a Continuous Delivery (CD)?** 
+> <br>Continuous Delivery (CD) is a process by which code is built, tested, and deployed to one or more test and production environments.
+
+
+> [!important]
+> **Question: What is a Continuous testing?** 
+> <br>Continuous testing with Azure DevOps Server ensures your app still works after every check-in and build, enabling you to find problems earlier by running tests automatically with each build.
+
+
 
 Azure Pipelines automatically builds and tests code projects. It supports all major languages and project types and combines continuous integration, continuous delivery, and continuous testing to build, test, and deliver your code to any destination.
 
