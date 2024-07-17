@@ -40,9 +40,9 @@
 
 > [!important]
 > **Question: What are the types of variables?** 
-> 1. User-defined Variables - Allows you to define your own variables
-> 2. System variables - System variables get set with their current value when you run the pipeline and has a predefined values. For example, the predefined variable Build.BuildId gives the ID of each build
-> 3. Environment variables - Environment variables are specific to the operating system/agent you're using for example variables like Agent.OS and Agent.Version
+> 1. **User-defined Variables** - Allows you to define your own variables
+> 2. **System variables**- System variables get set with their current value when you run the pipeline and has a predefined values. For example, the predefined variable Build.BuildId gives the ID of each build
+> 3. **Environment variables** - Environment variables are specific to the operating system/agent you're using for example variables like Agent.OS and Agent.Version
 
 > [!important]
 > **Question: What is a Variable group?** 
