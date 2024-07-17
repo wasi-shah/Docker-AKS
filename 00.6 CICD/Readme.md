@@ -8,7 +8,7 @@
 > <br>Pipelines are made of stages, jobs and steps.
 > -  Pipeline > **Stage** - A stage is a way to logically divide your pipeline. For example, you could have a stage for Build, Test and Deploy
 > - Pipeline > Stage > **Job** - Each job runs on one agent. A job can also be agentless.
-> - Pipeline > Stage > Job > **Step/Tasks** - A step can be a task or script and is the smallest building block of a pipeline. A Task is a pre-packaged script that performs an action for example [Build artifact / Publish artifact / Invoke an API]
+> - Pipeline > Stage > Job > **Step [Tasks/Script]** - A step can be a task or script and is the smallest building block of a pipeline. A Task is a pre-packaged script that performs an action for example [Build artifact / Publish artifact / Invoke an API]
 
 > [!important]
 > **Question: What is a Pipeline Run?** 
