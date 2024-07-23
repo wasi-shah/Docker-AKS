@@ -1,7 +1,4 @@
 # Docker
-> [!important]
-> **Question: What is a ?** 
-> <br>
 
 > [!important]
 > **Question: What is a Docker?** 
