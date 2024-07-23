@@ -1,4 +1,62 @@
 # Docker
+> [!important]
+> **Question: What is a ?** 
+> <br>
+
+> [!important]
+> **Question: What is a Docker?** 
+> <br>Docker is a tool for running containerized apps.
+
+
+> [!important]
+> **Question: What is a containerized app?** 
+> <br>A containerized app includes the app and the filesystem that makes up the environment (runtime, system tools, system libraries and settings) in which it runs.
+
+
+> [!important]
+> **Question: What is a Docker/Container Image?** 
+> <br>Docker images are a lightweight, standalone, executable package of software that includes everything needed to run an application: code, runtime, system tools, system libraries and settings.
+
+
+> [!important]
+> **Question: What is a Container?** 
+> <br>A container is an executable/runtime instance on a container image.
+
+
+> [!important]
+> **Question: What is a Docker daemon (dockerd)?** 
+> <br>Docker daemon (dockerd) is an API Server that listens for Docker API requests and manages Docker objects such as images, containers, networks, and volumes. A daemon can also communicate with other daemons to manage Docker services.
+
+
+> [!important]
+> **Question: What is a Docker client?** 
+> <br>Docker client is a client side tool that use commands such as docker run to sends these commands to dockerd.
+
+> [!important]
+> **Question: What is a Docker Desktop?** 
+> <br>Docker Desktop is an easy-to-install application for your Mac, Windows or Linux environment that enables you to build and share containerized applications and microservices.
+
+
+> [!important]
+> **Question: What is a DOCKER HUB?** 
+> <br>Docker Hub is a service provided by Docker for finding and sharing container images with your team
+
+
+> [!important]
+> **Question: What is a Docker registries?** 
+> <br>A Docker registry stores Docker images. Docker Hub is a public registry that anyone can use, and Docker looks for images on Docker Hub by default. You can even run your own private registry.
+
+
+> [!important]
+> **Question: What are main docker commands?** 
+> - **Login to ACR** - docker login myregistryname.azurecr.io
+> - **Pull an image from a Docker Hub** - docker pull <image_name>
+> - **Build an image from local source code** - docker build -t wasishah102/mycustomnginx_image .
+> - **Tag an image before push to registry** - docker tag wasishah102/mycustomnginx_image wasishah102/mycustomnginx_image
+> - **Pish na image to a  registry** - docker push wasishah102/mycustomnginx_image
+
+
+
 ![da](https://github.com/wasi-shah/Docker-AKS/assets/51749920/66a7221f-466e-4b72-b869-9b9bd0c6bbdd)
 
 Docker is a tool for running containerized apps. A containerized app includes the app and the filesystem that makes up the environment in which it runs. For example, a containerized app could consist of a database and other associated software and configuration information needed to run the app.
