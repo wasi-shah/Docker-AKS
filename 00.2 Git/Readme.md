@@ -1,4 +1,18 @@
 # Git
+> [!important]
+> **Question: What is a Git?** 
+> <br>Git is a free and open source distributed version control system.
+
+
+> [!important]
+> **Question: What are Git main commands?** 
+> - **Add new files to local git**: git add .
+> - **Do Commit**: git commit -am "V1 Base Commit"
+> - **Link Github Remote Repository**: git remote add origin URL
+> - **Push to Remote Repository**: git push
+> - **Pull changes github repo to local repo**: git pull
+> - **Check status to find staged, un-staged, and untracked files**: git status
+
 Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
 
 ## Github Repo and Check-In Code
