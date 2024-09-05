@@ -43,7 +43,7 @@ The fully managed Azure Kubernetes Service (AKS) ia a PAAS and makes deploying a
 > [!important]
 > **Question: What is a Namespaces and four initial namespaces?** 
 > <br> **Namespaces provide a mechanism for isolating groups of resources within a single cluster.** 
-> <br> **Initial namespaces are default, kube-node-lease, kube-public & kube-system.**
+> <br> **Initial namespaces are default, kube-system, kube-public & kube-node-lease**
 
 > [!important]
 > **Question: What ae the three objec Management technique available in Kubernetes?** 
