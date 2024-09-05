@@ -129,9 +129,9 @@ The fully managed Azure Kubernetes Service (AKS) ia a PAAS and makes deploying a
 > [!important]
 > **Question: What are the four types of scaling available in Kubernetes?** 
 > <br> **1. - ReplicaSets: An object which create/delete pods to match the desired number of pods.** 
-> <br> **2. - Vertical Pod Autoscaler (VPA): automatically change your pod CPU/Memory limited based on it’s usage both up and down.**
-> <br> **3. - Horizontal Pod Autoscaler (HPA): An object which create/delete pods to match the performance for example, if the pod exceeds 50% CPU then create a new pod.**
-> <br> **4. - Cluster Autoscaler: Automatically adds or removes nodes in a cluster based on all pods’ requested resources & HPA. Cluster Autoscaler works with Horizonal Pod Scaler to automatically adds or removes nodes in a cluster based on demand.**
+> <br> **2. - Vertical Pod Autoscaler (VPA): (add/remove resources to existing pod) automatically change your pod CPU/Memory limited based on it’s usage both up and down.**
+> <br> **3. - Horizontal Pod Autoscaler (HPA): (add/remove new pods) An object which create/delete pods to match the performance for example, if the pod exceeds 50% CPU then create a new pod.**
+> <br> **4. - Cluster Autoscaler: (add/remove nodes) Automatically adds or removes nodes in a cluster based on all pods’ requested resources & HPA. Cluster Autoscaler works with Horizonal Pod Scaler to automatically adds or removes nodes in a cluster based on demand.**
 
 
 > [!important]
