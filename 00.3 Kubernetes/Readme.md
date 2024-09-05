@@ -99,7 +99,13 @@ The fully managed Azure Kubernetes Service (AKS) ia a PAAS and makes deploying a
 
 > [!important]
 > **Question: Can you control pod scheduling and how?** 
-> <br> **There are many ways you can control pod scheduling. For example through NodeName, NodeSelector, Labels, Affinity and anti-affinity, Taint and Toleration, and forcing Pod CPU/Memory resource requirements.** 
+> <br> **There are many ways you can control pod scheduling. For example through 
+> NodeName, 
+> NodeSelector, 
+> Labels, 
+> Affinity and anti-affinity, 
+> Taint and Toleration, 
+> and forcing Pod CPU/Memory resource requirements.** 
 
 > [!important]
 > **Question: What is a WordLoad and it's four types?** 
