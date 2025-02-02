@@ -6,3 +6,9 @@
 4. **I: Interface Segregation Principle (ISP):** Interface should have one responsibility. Better to have several specific interfaces rather than one general-purpose interface.
 5. **D: Dependency Inversion Principle (DIP):** Write code that depends upon abstractions rather than upon concrete details. “High-level modules should not depend on low-level modules.
 
+## What are Delegates?
+A: Delegate is a pointer to  a method.
+Delegates Types:
+1.	Func – return value
+2.	Action – do not return value
+3.	Predicate – Returns Boolean
