@@ -102,7 +102,7 @@ The lambda expression is a shorter way of representing anonymous method using so
 ```	
 var result = (int x) => x * x;
 	Console.WriteLine(result(5)); // Output: 25
-    ```
+```
 * (two input-parameters) => expression
 	        ```
             var result1= (int x, int y) => x+y;
@@ -112,7 +112,8 @@ var result = (int x) => x * x;
 ```	        var result2 = (int x) => { 
 	            return x * x;
 	        };
-	        Console.WriteLine(result2(5)); // Output: 25```
+	        Console.WriteLine(result2(5)); // Output: 25
+```
 * Lambda with delegate
 ```
 	        // take an int input, multiply it with 3 and return the result 
@@ -120,10 +121,10 @@ var result = (int x) => x * x;
 	
 	        // calls multiply() by passing 5 as an input
 	        Console.WriteLine(multiply(5)); // Output: 15
-            ```
+```
 * Passing Lambda expression in a function call
 	You can pass lambda express in any action call that take a value. 
-    ```
+```
 	        // array containing integer values 
 	        int[] numbers = { 2, 13, 1, 4, 13, 5 };
 	
@@ -136,10 +137,10 @@ var result = (int x) => x * x;
 	
 	        // calls multiply() by passing 5 as an input
 	        Console.WriteLine(multiply(5)); // Output: 15
-            ```
+```
 * Passing Lambda expression in a function call
 	You can pass lambda express in any action call that take a value. 
-    ```
+```
 	        // array containing integer values 
 	        int[] numbers = { 2, 13, 1, 4, 13, 5 };
 	
