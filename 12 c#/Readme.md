@@ -34,6 +34,17 @@ foreach (var testScore in scoreQuery)
     Console.WriteLine(testScore);
 }
 
+
+
+var testScores2 = scores
+    .Where(s => s > 80)
+    .OrderByDescending(s => s);
+
+foreach (var testScore in testScores2)
+{
+    Console.WriteLine(testScore);
+}
+
 // Output: 93 90 82 82 
 
 ```
