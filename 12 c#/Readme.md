@@ -64,7 +64,7 @@ foreach (var testScore in testScores2)
 
 ```
 
-LAMBDA:
+### LAMBDA:
 A lambda expression can also be seen as an anonymous function. A function that doesn’t have a name and doesn’t belong to any class. 
 The lambda expression is a shorter way of representing anonymous method using some special syntax.
 *	With lambda you can write inline function and call them.
