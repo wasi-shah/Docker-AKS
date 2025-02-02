@@ -12,3 +12,28 @@ Delegates Types:
 1.	Func – return value
 2.	Action – do not return value
 3.	Predicate – Returns Boolean
+
+## LINQ Language Integrated Query:
+A: Allow to query a database or array without SQL.
+1. LINQ allows you perform filtering, ordering, and grouping operations on data sources with a minimum of code.
+2. Allow to query with filters on in memory, xml, Json or database objects like sql query and return the results.
+```
+// Data source.
+int[] scores = [90, 71, 82, 93, 75, 82];
+
+// Query Expression.
+IEnumerable<int> scoreQuery = //query variable
+    from score in scores //required
+    where score > 80 // optional
+    orderby score descending // optional
+    select score; //must end with select or group
+
+// Execute the query to produce the results
+foreach (var testScore in scoreQuery)
+{
+    Console.WriteLine(testScore);
+}
+
+// Output: 93 90 82 82 
+
+```
