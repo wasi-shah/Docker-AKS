@@ -716,7 +716,7 @@ class InMemoryTaskService : ITaskService
 }
 ```
 
-Step 3: Register a DI with the **service container**
+Step 3: Register a DI with the **service container** with In Memory Service (no databse involved)
 ```
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<ITaskService, InMemoryTaskService>();
