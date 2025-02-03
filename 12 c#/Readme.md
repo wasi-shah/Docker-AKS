@@ -517,8 +517,10 @@ Now you can use it in a controller and views
 ```
 
 ## C# APIS (Minimal API)
+According to the Microsoft Docs: Minimal APIs are architected to create HTTP APIs with minimal dependencies. They are ideal for microservices and apps that want to include only the minimum files, features, and dependencies in ASP.NET Core.
 > API sits at the end point and perform action and response result.
 > API retuns code in header and data/empty in body
+> You dont add many files or dependencies
 
 API Codes
 ```
@@ -749,4 +751,85 @@ app.MapPost("/todos", (Todo todo, ITaskService service) =>
 
 #### Creating and calling a service in API using DI & MS SQL Database Context 
 
+```
+
+Download nuget packages
+Microsoft.EntityFrameworkCore
+dotnet add package Microsoft.EntityFrameworkCore
+
+Microsoft.EntityFramework.Design
+dotnet add package Microsoft.EntityFrameworkCore.Design
+
+Microsoft.EntityFramework.Tools
+dotnet add package Microsoft.EntityFrameworkCore.Tools
+
+Microsoft.EntityFrameWork.SqlServer
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+
+Microsoft.Extensions.Configuration
+dotnet add package Microsoft.Extensions.Configuration
+
+Microsoft.Extensions.DependencyInjection
+dotnet add package Microsoft.Extensions.DependencyInjection
+
+
+Microsoft.Extensions.Hosting
+dotnet add package Microsoft.Extensions.Hosting
+
+Microsoft.AspNetCore.Hosting
+dotnet package add Microsoft.AspNetCore.Hosting
+
+create class
+
+//Models/Todo.cs
+
+using System;
+namespace minimalapi.Models;
+public class Todo
+{
+public int Id { get; set; }
+public string Name { get; set; } = null!;
+public DateTime DueDate { get; set; }
+public bool IsCompleted { get; set; }
+}
+
+//create context in Data folder
+using System;
+using Microsoft.EntityFrameworkCore;
+using minimalapi.Models;
+namespace minimalapi.Data;
+
+public class MyToDoContext : DbContext
+{
+    public MyToDoContext(DbContextOptions<MyToDoContext> options) : base(options)
+    {
+    }
+
+    public DbSet<Todo> Todos => Set<Todo>();
+}
+
+
+Add DI in Program.cs
+builder.Services.AddDbContext<MyToDoContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ToDoConnectionString")));
+
+Init Secret in Project
+dotnet user-secrets init
+
+Add Secret 
+dotnet user-secrets set "ConnectionStrings:ToDoConnectionString" "Server=.\SQLExpress;Database=Todos;User Id=dev;Password=Password123.; TrustServerCertificate=True;"
+
+Create Migration
+dotnet-ef migrations add MyInitialMigration
+
+Perform Database Create/Update 
+dotnet-ef database update
+
+// now in Program.cs you can use data from database
+app.MapGet("/todos", async (MyToDoContext context) => Results.Ok(await context.Todos.ToListAsync()));
+
+
+
+
+```
 
