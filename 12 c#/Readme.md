@@ -156,6 +156,7 @@ IN EF, you create a context which is a link to the database.
 To SQL server or Express you need Microsoft.EntityFrameWork.SqlServer nuget packages in addition to some compulsory packages
 ## Database Scaffolding
 > Code First
+```
 Create a project
 Download nuget packages
 Microsoft.EntityFrameworkCore
@@ -175,7 +176,7 @@ Create Migration
 dotnet-ef migrations add MyInitialMigration
 Perform Database Create/Update 
 dotnet-ef database update
-
+```
 
 
 
