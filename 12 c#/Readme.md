@@ -209,7 +209,7 @@ i.dotnet-ef dbcontext scaffold "Server=.\SQLExpress;Database=contoso;User Id=dev
 Create Model classess and Context either manually or using Code first or Database first
 In Program.cs create a context object and use it directly (see other example for using through DI)
 > Display Records
-````
+```
 using ContosoPizza.Data;
 Console.WriteLine("Hello World!");
 ContosoContext context = new ContosoContext();
