@@ -669,7 +669,7 @@ builder.Services.AddScoped<ITaskService, InMemoryTaskService>();
 services.AddSingleton<IConfiguration, Configuration>();
 builder.Services.AddSingleton<ITaskService, InMemoryTaskService>();
 ```
-##### Creating and calling a service in API using DI
+#### Creating and calling a service in API using DI (no database involved)
 
 Step 1: Create Interface
 ```
@@ -716,7 +716,7 @@ class InMemoryTaskService : ITaskService
 }
 ```
 
-Step 3: Register a DI with the **service container** with In Memory Service (no databse involved)
+Step 3: Register a DI with the **service container** with In Memory Service 
 ```
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<ITaskService, InMemoryTaskService>();
@@ -744,6 +744,8 @@ app.MapPost("/todos", (Todo todo, ITaskService service) =>
     return Results.Created($"/todos/{todo.Id}", todo);
 }
 )
-
-
 ```
+
+#### Creating and calling a service in API using DI & MS SQL Database Context 
+
+
