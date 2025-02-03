@@ -474,3 +474,129 @@ foreach (var customer in context.Customers)
 Now you can use it in a controller and views 
 ``` 
 
+## C# APIS (Minimal API)
+> API sits at the end point and perform action and response result.
+> API retuns code in header and data/empty in body
+
+API Codes
+```
+200	OK	Results.Ok(object);
+201	Created	Results.Created($"/todos/{todo.Id}", todo);
+202	Accepted	
+203	NonAuthoritative	
+204	No Contents	Results.NoContent();
+404	Not Found	Results.NotFound();
+
+400	BadRequest
+401	Unauthorized
+402	PaymentRequired
+403	Forbidden
+404	Not Found
+
+```
+
+
+### Middleware
+Middleware is software that's assembled into an app pipeline to handle requests and responses.
+Middleware executes before and after each request in nested way. ASP.net has builtin middleware for example 
+Any functionality that is common in your application can be written as custom middleware. For example you can see ASP.NET code builtin middleware and your middleware
+
+Middleware usually registers with .Use keyword which means you are registering a middleware in a pipeline
+
+#### app.UseRewriter
+URL Rewriting Middleware in ASP.NET Core
+
+```
+app.UseRewriter(new RewriteOptions().AddRedirect("tasks/(.*)", "todos/$1"));
+
+Result
+/tasks/1 will be redirect to /todos/1
+/tasks/2 will be redirect to /todos/2
+Redirects all incoming request from tasks/ to todos/
+```
+#### app.Use()
+Adds a middleware in pipeline- for example below will log incoming request details on console
+```
+{
+    Console.WriteLine($"[{context.Request.Method} {context.Request.Path} {DateTime.Now}] Started");
+    await next();
+    Console.WriteLine($"[{context.Request.Method} {context.Request.Path} {DateTime.Now}] Ended");
+
+});
+```
+
+### Route Handler as Middleware
+A Route handler is the block of code which is mapped to a URL and HTTP Method and executes when the URL is requested with the HTTP Method
+
+Route Handler Example
+URL: GET http://localhost:5171/todos
+```
+var todos = new List<Todo>();
+app.MapGet("/todos", () => Results.Ok(todos));
+```
+You can also map handler with Parametrised Get and Post
+```
+app.MapGet("/todos/{id}", Results<Ok<Todo>,NotFound> (int id) =>
+{
+    var targetTodo = todos.SingleOrDefault(t => id==t.Id);
+   return targetTodo is null 
+   ? TypedResults.NotFound()
+   : TypedResults.Ok(targetTodo);
+});
+
+app.MapPost("/todos", (Todo todo) =>
+{
+    todos.Add(todo);
+    return Results.Created($"/todos/{todo.Id}", todo);
+});
+```
+#### Filters in ASP.Net Core
+Filters in ASP.NET Core allow code to run before or after specific stages in the request processing pipeline.
+Fiter Types
+* Authorization filters:
+ * Run first.
+ * Determine whether the user is authorized for the request.
+ * Short-circuit the pipeline if the request is not authorized.
+* Resource filters:
+ * Run after authorization.
+ * OnResourceExecuting runs code before the rest of the filter pipeline. For example, OnResourceExecuting runs code before model binding.
+ * OnResourceExecuted runs code after the rest of the pipeline has completed.
+* Action filters:
+ * Run immediately before and after an action method is called.
+ * Can change the arguments passed into an action.
+ * Can change the result returned from the action.
+ * Are not supported in Razor Pages.
+* Endpoint filters:
+ * Run immediately before and after an action method is called.
+ * Can change the arguments passed into an action.
+ * Can change the result returned from the action.
+ * Are not supported in Razor Pages.
+ * Can be invoked on both actions and route handler-based endpoints.
+```
+app.MapPost("/todos", (Todo todo) =>
+{
+    todos.Add(todo);
+    return Results.Created($"/todos/{todo.Id}", todo);
+}
+)
+.AddEndpointFilter(async (context, next) => {
+    var taskArgument = context.GetArgument<Todo>(0);
+    var errors = new Dictionary<string, string[]>();
+    if(taskArgument.DueDate < DateTime.Now)
+    {
+        errors.Add("DueDate", ["DueDate must be in the future"]);
+    }
+    if(errors.Count>0)
+    {
+       return Results.ValidationProblem(errors);
+    }
+     return await next(context);
+ });
+``` 
+
+* Exception filters apply global policies to unhandled exceptions that occur before the response body has been written to.
+* Result filters:
+ * Run immediately before and after the execution of action results.
+ * Run only when the action method executes successfully.
+ * Are useful for logic that must surround view or formatter execution.
+
