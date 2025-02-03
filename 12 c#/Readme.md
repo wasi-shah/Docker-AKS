@@ -362,15 +362,20 @@ foreach (var product in context.Products)
 
 1.Create Razor Page project using builtin template
 dotnet new razor -o ContosoPizza   
+
 2.Open in VS Code
-a.code -r ContosoPizza
+code -r ContosoPizza
+
 3.Add Packages
-a.Microsoft.EntityFrameworkCore
-i.dotnet add package Microsoft.EntityFrameworkCore
-b.Microsoft.EntityFramework.Design
-i.dotnet add package Microsoft.EntityFrameworkCore.Design
-c.Microsoft.EntityFramework.Tools
-i.dotnet add package Microsoft.EntityFrameworkCore.Tools
+Microsoft.EntityFrameworkCore
+dotnet add package Microsoft.EntityFrameworkCore
+
+Microsoft.EntityFramework.Design
+dotnet add package Microsoft.EntityFrameworkCore.Design
+
+Microsoft.EntityFramework.Tools
+dotnet add package Microsoft.EntityFrameworkCore.Tools
+
 d.Microsoft.EntityFrameWork.SqlServer
 i.dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 4.Install Ef Tool
