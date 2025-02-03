@@ -167,6 +167,7 @@ Microsoft.EntityFramework.Tools
 dotnet add package Microsoft.EntityFrameworkCore.Tools
 Microsoft.EntityFrameWork.SqlServer
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+Createa Context class in Data folder for example  Data\ContsoContext.cs
 In context you use the optionsBuilder.UseSqlServer(“connection string”) if you are using sql server and sql server express.
 Code-First: Create new database and perform following operations to create a database
 Database command 
