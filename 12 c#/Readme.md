@@ -204,7 +204,7 @@ e.Re-Scaffold Database when database changed – If there is a chance that the d
 i.dotnet-ef dbcontext scaffold "Server=.\SQLExpress;Database=contoso;User Id=dev;Password=Password123.; TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer --context-dir Data --output-dir Models/Generated --data-annotations --context-namespace ContosoPizza.Data --namespace ContosoPizza.Models
 
 ```
-> C# Console App without DI
+### EF Core in Console App without DI
 
 Create Model classess and Context either manually or using Code first or Database first
 In Program.cs create a context object and use it directly (see other example for using through DI)
@@ -310,5 +310,52 @@ if (linq_products_onepizza_delete is Product)
 
 ```
 
-### EF Core in Console App
+### EF Core in Console App With DI
+Create Model classess and Context either manually or using Code first or Database first
+In Program.cs we use DI to inject context
+>Add packages
+
+dotnet add  package Microsoft.Extensions.Hosting
+dotnet add  package Microsoft.Extensions.DependencyInjection
+
+> Add secret
+
+dotnet user-secrets init
+dotnet user-secrets set "ConnectionStrings:ContosoConnectionString" "Server=.\SQLExpress;Database=contoso;User Id=dev;Password=Password123.; TrustServerCertificate=True;"
+
+> Add and use Nuget
+
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+
+
+> Program.cs
+
+```
+var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
+
+var builder = Host.CreateDefaultBuilder(args);
+// Add services to the container.
+builder.ConfigureServices((_, services) =>
+{
+    services.AddDbContextPool<ContosoPizzaContext>(options =>
+    options
+    .UseSqlServer(config.GetConnectionString("ContosoConnectionString")));
+
+});
+
+var host = builder.Build();
+
+// resolve service
+using var scope = host.Services.CreateScope();
+var context = scope.ServiceProvider.GetRequiredService<ContosoPizzaContext>();
+
+foreach (var product in context.Products)
+{
+    Console.WriteLine(product.Name);
+}
+```
+
 
