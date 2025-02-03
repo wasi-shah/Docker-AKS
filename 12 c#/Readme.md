@@ -353,7 +353,7 @@ Add packages
 ```
 dotnet add  package Microsoft.Extensions.Hosting
 dotnet add  package Microsoft.Extensions.DependencyInjection
-``
+```
 Add secret
 
 ```
