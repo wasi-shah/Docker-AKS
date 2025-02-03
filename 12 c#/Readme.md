@@ -149,3 +149,33 @@ var result = (int x) => x * x;
 	        int totalCount = numbers.Count(x => x == 13);  
 	        Console.WriteLine("Total number of 13: " + totalCount); // Output: 2
 ```
+## .Net core EF
+In Entity core we create a c# class and Entity framework maps it to a table.
+You can then perform CRUD and fetch operations on DB by using EF.
+IN EF, you create a context which is a link to the database.
+To SQL server or Express you need Microsoft.EntityFrameWork.SqlServer nuget packages in addition to some compulsory packages
+## Database Scaffolding
+> Code First
+1.	Create a project
+2.	Download nuget packages
+a.	Microsoft.EntityFrameworkCore
+i.	dotnet add package Microsoft.EntityFrameworkCore
+b.	Microsoft.EntityFramework.Design
+i.	dotnet add package Microsoft.EntityFrameworkCore.Design
+c.	Microsoft.EntityFramework.Tools
+i.	dotnet add package Microsoft.EntityFrameworkCore.Tools
+d.	Microsoft.EntityFrameWork.SqlServer
+i.	dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+3.	In context you use the optionsBuilder.UseSqlServer(“connection string”) if you are using sql server and sql server express.
+4.	Code-First: Create new database and perform following operations to create a database
+a.	Database command 
+i.	Install .Net Core Migration Tool
+1.	dotnet tool install -g dotnet-ef
+ii.	Create Migration
+1.	dotnet-ef migrations add MyInitialMigration
+iii.	Perform Database Create/Update 
+1.	dotnet-ef database update
+
+
+### EF Core in Console App
+
