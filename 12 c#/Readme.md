@@ -425,3 +425,52 @@ dotnet run
 Browse the product index page
 http://localhost:5198/Products
 ```
+
+### ASP.Net MVC Core with Entity Framework Core [DB First]
+```
+Install Migration tool to reverse engineer DB
+dotnet tool install -g dotnet-ef
+
+Add Nugets
+dotnet add package Microsoft.EntityFrameworkCore
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.EntityFrameworkCore.Tools
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+
+Reverse Engineer DB
+dotnet-ef dbcontext scaffold "Server=.\SQLExpress;Database=contoso;User Id=dev;Password=Password123.; TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer --context-dir Data --output-dir Models --data-annotations --context-namespace ContosoPizza.Data --namespace ContosoPizza.Models
+
+Init Secret in Project
+dotnet user-secrets init
+
+Add Secret 
+dotnet user-secrets set "ConnectionStrings:ContosoConnectionString" "Server=.\SQLExpress;Database=contoso;User Id=dev;Password=Password123.; TrustServerCertificate=True;"
+
+Disable this in ContosoContext.cs
+//     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//         => optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=contoso;User Id=dev;Password=Password123.; TrustServerCertificate=True;");
+
+Program.cs add this 
+// Add services to the container.
+builder.Services.AddDbContext<ContosoContext>(options =>
+    options
+    .UseSqlServer(builder.Configuration.GetConnectionString("ContosoConnectionString")));
+
+builder.Services.AddControllersWithViews();
+
+var app = builder.Build();
+
+
+Test in Program.cs
+// resolve service
+var scope = app.Services.CreateScope();
+var context = scope.ServiceProvider.GetRequiredService<ContosoContext>();   
+
+foreach (var customer in context.Customers)
+{
+    Console.WriteLine(customer.FirstName + " " + customer.LastName);
+}
+
+Now you can use it in a controller and views 
+``` 
+
