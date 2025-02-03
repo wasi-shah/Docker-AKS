@@ -601,3 +601,109 @@ app.MapPost("/todos", (Todo todo) =>
  * Run only when the action method executes successfully.
  * Are useful for logic that must surround view or formatter execution.
 
+### Dependency Injection in ASP.NET Core Web API using Service Container
+> Service Container
+> In .NET Core, a "Service Container" refers to the built-in dependency injection (DI) mechanism that manages the creation and lifetime of services within an application, allowing you to register different services and retrieve them when needed, essentially acting as a central repository for your application's dependencies
+
+DI are inserted into Service Container.
+You define Interface, Class and scope
+* Interface defines the empty methods 
+* Class defines the concrete implementations of those methods
+* Scope defines the lifetime
+#### Transient:
+* A new instance of the service is created every time it is requested. Use this for lightweight services that don't need to maintain state across requests. 
+* Creating new instances for every request (Transient) can impact performance, so use it cautiously. 
+```
+services.AddTransient<ICalculator, SimpleCalculator>();
+builder.Services.AddTransient<ITaskService, InMemoryTaskService>();
+```
+#### Scoped:
+* A single instance of the service is created for the duration of an HTTP request. Use this for services that need to share data within a single request. 
+```
+services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ITaskService, InMemoryTaskService>();
+```
+#### Singleton:
+* Only one instance of the service is created for the entire application lifecycle. Use this for services that are expensive to create and should be shared across the application.
+```
+services.AddSingleton<IConfiguration, Configuration>();
+builder.Services.AddSingleton<ITaskService, InMemoryTaskService>();
+```
+##### Creating and calling a service in API using DI
+
+Step 1: Create Interface
+```
+interface ITaskService
+{
+    Todo? GetTodoById(int id);
+    List<Todo> GetTodos();
+    Todo AddTodo(Todo todo);
+    void DeleteTodoById(int id);
+}
+```
+
+Step 2: Create Class
+```
+class InMemoryTaskService : ITaskService
+{
+    private List<Todo> _todos = new List<Todo>();
+
+    public List<Todo> GetTodos()
+    {
+        return _todos;
+    }
+    public Todo? GetTodoById(int id)
+    {
+        return _todos.SingleOrDefault(t => t.Id == id);
+    }
+
+    public Todo AddTodo(Todo task)
+    {
+        _todos.Add(task);
+        return task;
+    }
+
+    
+    public void DeleteTodoById(int id)
+    {
+        var targetTodo = _todos.SingleOrDefault(t => t.Id == id);
+        if(targetTodo is not null)
+        {
+            _todos.Remove(targetTodo);
+        }
+    }
+    
+}
+```
+
+Step 3: Register a DI with the **service container**
+```
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddSingleton<ITaskService, InMemoryTaskService>();
+var app = builder.Build();
+```
+
+Step 4: Mapping an Route Action handler and respond using service
+```
+// Mapping get
+app.MapGet("/todos", (ITaskService service) => Results.Ok(service.GetTodos()));
+
+// Mapping parametarised Get
+app.MapGet("/todos/{id}", Results<Ok<Todo>,NotFound> (int id, ITaskService service) =>
+{
+    var targetTodo = service.GetTodoById(id);
+   return targetTodo is null 
+   ? TypedResults.NotFound()
+   : TypedResults.Ok(targetTodo);
+});
+
+// Mapping Post
+app.MapPost("/todos", (Todo todo, ITaskService service) =>
+{
+    service.AddTodo(todo);
+    return Results.Created($"/todos/{todo.Id}", todo);
+}
+)
+
+
+```
