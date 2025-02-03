@@ -205,6 +205,7 @@ i.dotnet-ef dbcontext scaffold "Server=.\SQLExpress;Database=contoso;User Id=dev
 
 ```
 > C# Console App without DI
+
 Create Model classess and Context either manually or using Code first or Database first
 In Program.cs create a context object and use it directly (see other example for using through DI)
 > Display Records
