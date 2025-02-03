@@ -191,19 +191,6 @@ d.Microsoft.EntityFrameWork.SqlServer
 i.dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 3.In context you use the optionsBuilder.UseSqlServer(“connection string”) if you are using sql server and sql server express.
 
-```
-Create a project
-Download nuget packages
-a.Microsoft.EntityFrameworkCore
-i.dotnet add package Microsoft.EntityFrameworkCore
-b.Microsoft.EntityFramework.Design
-i.dotnet add package Microsoft.EntityFrameworkCore.Design
-c.Microsoft.EntityFramework.Tools
-i.dotnet add package Microsoft.EntityFrameworkCore.Tools
-d.Microsoft.EntityFrameWork.SqlServer
-i.dotnet add package Microsoft.EntityFrameworkCore.SqlServer
-3.In context you use the optionsBuilder.UseSqlServer(“connection string”) if you are using sql server and sql server express.
-
 5.Database First, Reverse Engineering : Add all nuget packages and run commands to scaffold Model and Data
 a.Install .Net Core Migration Tool
 i.dotnet tool install -g dotnet-ef
