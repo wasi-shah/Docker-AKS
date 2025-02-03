@@ -472,7 +472,8 @@ foreach (var customer in context.Customers)
 }
 
 Now you can use it in a controller and views 
-``` 
+
+```
 
 ## C# APIS (Minimal API)
 > API sits at the end point and perform action and response result.
