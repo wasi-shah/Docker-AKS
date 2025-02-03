@@ -358,4 +358,53 @@ foreach (var product in context.Products)
 }
 ```
 
+### ASP.Net Core Razor with Entity Framework Core [DB First]
+
+1.Create Razor Page project using builtin template
+dotnet new razor -o ContosoPizza   
+2.Open in VS Code
+a.code -r ContosoPizza
+3.Add Packages
+a.Microsoft.EntityFrameworkCore
+i.dotnet add package Microsoft.EntityFrameworkCore
+b.Microsoft.EntityFramework.Design
+i.dotnet add package Microsoft.EntityFrameworkCore.Design
+c.Microsoft.EntityFramework.Tools
+i.dotnet add package Microsoft.EntityFrameworkCore.Tools
+d.Microsoft.EntityFrameWork.SqlServer
+i.dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+4.Install Ef Tool
+a.dotnet tool install -g dotnet-ef
+5.Database Scaffolding: Reverse engineer Database using Database Scaffolding
+i.dotnet-ef dbcontext scaffold "Server=.\SQLExpress;Database=contoso;User Id=dev;Password=Password123.; TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer --context-dir Data --output-dir Models/Generated --data-annotations --context-namespace ContosoPizza.Data --namespace ContosoPizza.Models
+
+6.Move the connection in Program.cs for DI
+a.Delete the Onconfiguration method from ContosoContext.cs 
+7.protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+8.        => optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=contoso;User Id=dev;Password=Password123.; TrustServerCertificate=True;");
+9.
+
+a.Add DI to Program.cs
+10.builder.Services.AddDbContext<ContosoContext>(options =>
+11.    options.UseSqlServer(builder.Configuration.GetConnectionString("ContosoConnectionString")));
+12.Add Connection string to secret Manager
+a.Initialised .Net Secret  
+i.dotnet user-secrets init
+b.Create secret [Remember there is one \ in the connection string here.
+c.dotnet user-secrets set "ConnectionStrings:ContosoConnectionString" "Server=.\SQLExpress;Database=contoso;User Id=dev;Password=Password123.; TrustServerCertificate=True;" 
+d.Check if secret saves
+i.dotnet user-secrets list
+13.Create CRUD Razor Pages using Razor Page Scaffolding
+a.Install Microsoft.VisualStudio.Web.CodeGeneration.Design
+i.dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
+b.Install dotnet-aspnet-codegenerator tool
+i.dotnet tool install -g dotnet-aspnet-codegenerator
+c.Then use the dotnet code generator tool to scaffold the Razor pages (Product Page for example) by provider Context and Model Class
+d.Create a Folder [Products under Pages]
+14.Model Scaffolding: Create Scaffolding
+i.dotnet aspnet-codegenerator razorpage --model Product --dataContext ContosoContext --relativeFolderPath Pages/Products --referenceScriptLibraries
+15.Run the app
+a.dotnet run
+16.Browse the product index page
+a.http://localhost:5198/Products
 
