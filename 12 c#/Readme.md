@@ -191,7 +191,7 @@ d.Microsoft.EntityFrameWork.SqlServer
 i.dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 3.In context you use the optionsBuilder.UseSqlServer(“connection string”) if you are using sql server and sql server express.
 
-5.Database First, Reverse Engineering : Add all nuget packages and run commands to scaffold Model and Data
+4.Database First, Reverse Engineering : Add all nuget packages and run commands to scaffold Model and Data
 a.Install .Net Core Migration Tool
 i.dotnet tool install -g dotnet-ef
 b.Scaffold Database – Define target directories
@@ -204,8 +204,110 @@ e.Re-Scaffold Database when database changed – If there is a chance that the d
 i.dotnet-ef dbcontext scaffold "Server=.\SQLExpress;Database=contoso;User Id=dev;Password=Password123.; TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer --context-dir Data --output-dir Models/Generated --data-annotations --context-namespace ContosoPizza.Data --namespace ContosoPizza.Models
 
 ```
+> C# Console App without DI
+Create Model classess and Context either manually or using Code first or Database first
+In Program.cs create a context object and use it directly (see other example for using through DI)
+> Display Records
+````
+using ContosoPizza.Data;
+Console.WriteLine("Hello World!");
+ContosoContext context = new ContosoContext();
+foreach (var customer in context.Customers)
+{
+    Console.WriteLine(customer.FullName);
+}
+```
 
+> Save New Record
+```
+using ContosoPizza.Models;
+using ContosoPizza.Data;
+ContosoPizzaContext context = new ContosoPizzaContext();
+Product product = new Product()
+{
+    Name = "Pepperoni Pizza",
+    Price = 18.50m
+};
+context.Products.Add(product);
+context.SaveChanges();
 
+```
+> Fetching Record Directly all record no filter
+```
+using ContosoPizza.Models;
+using ContosoPizza.Data;
+ContosoPizzaContext context = new ContosoPizzaContext();
+//Direct
+foreach (var product in context.Products)
+{
+    Console.WriteLine(product.Name);
+}
+
+```
+> Fetching records – Fluent API
+```
+using ContosoPizza.Models;
+using ContosoPizza.Data;
+ContosoPizzaContext context = new ContosoPizzaContext();
+// Fluent API
+var products = context.Products
+    .Where(b => b.Price > 15)
+    .ToList();
+foreach (var product in products)
+{
+    Console.WriteLine(product.Name);
+}
+
+```
+> Fetching records – LINQ API
+```
+using ContosoPizza.Data;
+ContosoPizzaContext context = new ContosoPizzaContext();
+// Linq Query
+var linq_products = from b in context.Products
+                    where b.Price > 15
+                    select b;
+foreach (var product in linq_products)
+{
+    Console.WriteLine(product.Name);
+}
+
+```
+> Fetch and update a single record
+```
+using ContosoPizza.Models;
+using ContosoPizza.Data;
+ContosoPizzaContext context = new ContosoPizzaContext();
+// Update
+var linq_products_onepizza = context.Products
+    .Where(b => b.Name == "Pepperoni Pizza")
+    .FirstOrDefault();
+if (linq_products_onepizza is Product)
+{
+    Console.WriteLine("Pepperoni Pizza found");
+    linq_products_onepizza.Price = 19.99m;
+    context.SaveChanges();
+}
+
+```
+>Fetch and delete a single record
+```
+using ContosoPizza.Models;
+using ContosoPizza.Data;
+ContosoPizzaContext context = new ContosoPizzaContext();
+// Delete Pizza
+var linq_products_onepizza_delete = context.Products
+    .Where(b => b.Name == "Pepperoni Pizza")
+    .FirstOrDefault();
+if (linq_products_onepizza_delete is Product)
+{
+    Console.WriteLine("Pepperoni Pizza found");
+    context.Products.Remove(linq_products_onepizza_delete);
+    context.SaveChanges();
+    Console.WriteLine("Pepperoni Deleted");
+}
+
+```
 
 ### EF Core in Console App
 
