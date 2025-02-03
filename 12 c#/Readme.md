@@ -310,25 +310,65 @@ if (linq_products_onepizza_delete is Product)
 
 ```
 
-### EF Core in Console App With DI
-Create Model classess and Context either manually or using Code first or Database first
-In Program.cs we use DI to inject context
->Add packages
+### EF Core in Console App With DI - Code First
+**Create Model classess and Context
+**
+Create Models/Product.cs
+```
+namespace ContosoPizza.Models;
 
+public class Product
+{
+public int Id { get; set; }
+public string Name { get; set; } = null!;
+public decimal Price { get; set; }   
+}
+```
+
+Create Context
+```
+namespace ContosoPizza.Data
+{
+    public class ContosoPizzaContext : DbContext
+    {
+
+        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        // {
+        //     optionsBuilder.UseSqlServer(@"Server=.\SQLExpress;Database=contoso;User Id=dev;Password=Password123.; TrustServerCertificate=True;");            
+        // }
+            public ContosoPizzaContext(DbContextOptions<ContosoPizzaContext> options)
+        : base(options)
+    {
+    }
+
+       public DbSet<Product> Products { get; set; }
+   }
+}
+```
+Now follow instruction on how to migrate database for code first
+
+In Program.cs we use DI to inject context
+
+Add packages
+```
 dotnet add  package Microsoft.Extensions.Hosting
 dotnet add  package Microsoft.Extensions.DependencyInjection
+``
+Add secret
 
-> Add secret
-
+```
 dotnet user-secrets init
 dotnet user-secrets set "ConnectionStrings:ContosoConnectionString" "Server=.\SQLExpress;Database=contoso;User Id=dev;Password=Password123.; TrustServerCertificate=True;"
+```
 
-> Add and use Nuget
-
+Add and use Nuget
+```
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+```
+
 
 
 > Program.cs
