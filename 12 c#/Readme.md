@@ -92,33 +92,7 @@ Console.WriteLine(result(5)); // Output: 25
         };
         Console.WriteLine(result2(5)); // Output: 25
 ```
-* Lambda with delegate
 
-  
-**LAMBDA:**
-A lambda expression can also be seen as an anonymous function. A function that doesn’t have a name and doesn’t belong to any class. 
-The lambda expression is a shorter way of representing anonymous method using some special syntax.
-*With lambda you can write inline function and call them.
-*Lambda expressions is a way of defining anonymous functions.
-*A lambda expression is a short block of code which takes in parameters and returns a value. 
-*To create a lambda expression, you specify input parameters (if any) on the left side of the lambda operator and an expression or a statement block on the other side.
-*Basic Syntax
-* ( one input-parameter) => expression
-```
-var result = (int x) => x * x;
-Console.WriteLine(result(5)); // Output: 25
-```
-* (two input-parameters) => expression
-```
-            var result1= (int x, int y) => x+y;
-        Console.WriteLine(result1(5,3)); // Output: 8
-```
-* (input-parameters) => { <sequence-of-statements> }
-```        var result2 = (int x) => { 
-            return x * x;
-        };
-        Console.WriteLine(result2(5)); // Output: 25
-```
 * Lambda with delegate
 ```
         // take an int input, multiply it with 3 and return the result 
@@ -143,7 +117,7 @@ You can pass lambda express in any action call that take a value.
         // calls multiply() by passing 5 as an input
         Console.WriteLine(multiply(5)); // Output: 15
 ```
-* Passing Lambda expression in a function call
+* ** Passing Lambda expression in a function call**
 You can pass lambda express in any action call that take a value. 
 ```
         // array containing integer values 
