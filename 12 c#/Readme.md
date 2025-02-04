@@ -52,7 +52,7 @@ foreach (var testScore in scoreQuery)
 }
 
 
-
+//Method Syntax 
 var testScores2 = scores
     .Where(s => s > 80)
     .OrderByDescending(s => s);
@@ -69,12 +69,12 @@ foreach (var testScore in testScores2)
 ### LAMBDA:
 A lambda expression can also be seen as an anonymous function. A function that doesn’t have a name and doesn’t belong to any class. 
 The lambda expression is a shorter way of representing anonymous method using some special syntax.
-*With lambda you can write inline function and call them.
-*Lambda expressions is a way of defining anonymous functions.
-*A lambda expression is a short block of code which takes in parameters and returns a value. 
-*To create a lambda expression, you specify input parameters (if any) on the left side of the lambda operator and an expression or a statement block on the other side.
-*Basic Syntax
-* ( one input-parameter) => expression
+* With lambda you can write inline function and call them.
+* Lambda expressions is a way of defining anonymous functions.
+* A lambda expression is a short block of code which takes in parameters and returns a value. 
+* To create a lambda expression, you specify input parameters (if any) on the left side of the lambda operator and an expression or a statement block on the other side.
+* Basic Syntax
+            * ( one input-parameter) => expression
 ```
     var result = (int x) => x * x;
 Console.WriteLine(result(5)); // Output: 25
