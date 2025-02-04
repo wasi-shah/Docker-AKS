@@ -14,8 +14,8 @@
 
 # Azure Compute
 > [!important]
-> **Question: What are the three main compute types/model?** 
-> <br> **1. Public** - owned and run by third-party cloud service providers like Google Cloud, Azure and AWS
+> **Question: What are the three main compute types/models?** 
+> <br> **1. Public** - owned and run by third-party cloud services providers like Google Cloud, Azure, and AWS
 > <br> **2. Private** - you own all of the hardware or, at least, have complete control over it.
 > <br> **3. Hybrid** - Environments that mix at least one private computing environment (traditional IT infrastructure or private cloud, including edge) with one or more public clouds are called hybrid clouds.
 
@@ -23,7 +23,7 @@
 > **Question: What are four major compute services types/model?** 
 > <br>
 > <br> **1. Infrastructure as a service (IaaS)** - the service provider owns and operates the infrastructure/hardware, but customers will need to purchase and manage software, such as operating systems, middleware, data, and applications and also responsible for software for example VMs
-> <br> **2. Platform as a service (PaaS)** - the service provider owns and manage OS and hardware but the customer is responsible for the application and its configuration for example Web Apps
+> <br> **2. Platform as a service (PaaS)** - the service provider owns and manage OS and hardware but the customer is responsible for the application and its configuration for example, Web Apps
 > <br> **3. Software as a service (SaaS)** - the provider owns the hardware, OS and software but the customer is only responsible for installing, configuring and using the software - for example MS Office and Dropbox.
 > <br> **4. Serverless/Function as a Service** - The provider is responsible for everything but the customer is responsible for application and business logic for example Azure Functions, Azure Logic Apps, and Azure Event Grid.
 
@@ -32,8 +32,8 @@ The main three types of cloud computing are public, private, and hybrid. Within 
 ## Cloud Computing Types/Models
 
 ### Public
-Public clouds deliver resources, such as compute, storage, network, develop-and-deploy environments, and applications over the internet. They are owned and run by third-party cloud service providers like Google Cloud, Azure and AWS.
-In the public cloud model, you don’t own any hardware; your cloud vendor is responsible for purchasing and maintaining all hardware. The public cloud consists of all of the services and compute resources that you do not own yourself but that you use from your cloud provider. The provider is responsible for keeping everything running and adhering to Service-Level Agreements (SLAs). You pay for what you use, not for what you own.
+Public clouds deliver resources, such as compute, storage, network, develop-and-deploy environments, and applications over the internet. They are owned and run by third-party cloud services providers like Google Cloud, Azure, and AWS.
+In the public cloud model, you don’t own any hardware; your cloud vendor is responsible for purchasing and maintaining all hardware. The public cloud consists of all the services and compute resources you do not own yourself but use from your cloud provider. The provider is responsible for keeping everything running and adhering to Service-Level Agreements (SLAs). You pay for what you use, not for what you own.
 
 ### Private
 With a private cloud, you own all the hardware or, at least, have complete control over it. The hardware that runs your services and houses your data is somewhere in your on-premises data centre. Of course, this complete control comes at a price: you must purchase and maintain everything. You pay for what you own, not for what you use. But, how do you set up a private cloud platform in a traditional on-premises datacentre. Fortunately, Azure provides a unique solution designed specifically to work in this environment: Azure Stack. In a nutshell, Azure Stack is your own private instance of Azure in a box that you can run in your on-premises datacentre.
