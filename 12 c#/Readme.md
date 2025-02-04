@@ -137,18 +137,18 @@ To SQL server or Express you need Microsoft.EntityFrameWork.SqlServer nuget pack
 > Code First
 ```
 Create a project
+
 Download nuget packages
-Microsoft.EntityFrameworkCore
 dotnet add package Microsoft.EntityFrameworkCore
-Microsoft.EntityFramework.Design
 dotnet add package Microsoft.EntityFrameworkCore.Design
-Microsoft.EntityFramework.Tools
 dotnet add package Microsoft.EntityFrameworkCore.Tools
-Microsoft.EntityFrameWork.SqlServer
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer
-Createa Context class in Data folder for example  Data\ContsoContext.cs
+
+Create a Context class in Data folder for example  Data\ContsoContext.cs
 In context you use the optionsBuilder.UseSqlServer(“connection string”) if you are using sql server and sql server express.
+
 Code-First: Create new database and perform following operations to create a database
+
 Database command 
 Install .Net Core Migration Tool
 dotnet tool install -g dotnet-ef
@@ -161,25 +161,27 @@ dotnet-ef database update
 ```
 1.Create a project
 2.Download nuget packages
-a.Microsoft.EntityFrameworkCore
-i.dotnet add package Microsoft.EntityFrameworkCore
-b.Microsoft.EntityFramework.Design
-i.dotnet add package Microsoft.EntityFrameworkCore.Design
-c.Microsoft.EntityFramework.Tools
-i.dotnet add package Microsoft.EntityFrameworkCore.Tools
-d.Microsoft.EntityFrameWork.SqlServer
-i.dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+
+dotnet add package Microsoft.EntityFrameworkCore
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.EntityFrameworkCore.Tools
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+
 3.In context you use the optionsBuilder.UseSqlServer(“connection string”) if you are using sql server and sql server express.
 
 4.Database First, Reverse Engineering : Add all nuget packages and run commands to scaffold Model and Data
+
 a.Install .Net Core Migration Tool
-i.dotnet tool install -g dotnet-ef
+dotnet tool install -g dotnet-ef
+
 b.Scaffold Database – Define target directories
 i.dotnet-ef dbcontext scaffold "Server=.\SQLExpress;Database=contoso;User Id=dev;Password=Password123.; TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer --context-dir Data --output-dir Models  
 c.Scaffold Database – Save Data Annotation in Model 
-i.dotnet-ef dbcontext scaffold "Server=.\SQLExpress;Database=contoso;User Id=dev;Password=Password123.; TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer --context-dir Data --output-dir Models --data-annotations
+dotnet-ef dbcontext scaffold "Server=.\SQLExpress;Database=contoso;User Id=dev;Password=Password123.; TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer --context-dir Data --output-dir Models --data-annotations
+
 d.Scaffold Database – Define Name Spaces, Context Name space and model name spaces
-i.dotnet-ef dbcontext scaffold "Server=.\SQLExpress;Database=contoso;User Id=dev;Password=Password123.; TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer --context-dir Data --output-dir Models --data-annotations --context-namespace ContosoPizza.Data --namespace ContosoPizza.Models
+dotnet-ef dbcontext scaffold "Server=.\SQLExpress;Database=contoso;User Id=dev;Password=Password123.; TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer --context-dir Data --output-dir Models --data-annotations --context-namespace ContosoPizza.Data --namespace ContosoPizza.Models
+
 e.Re-Scaffold Database when database changed – If there is a chance that the database will change or have changed and you need to reverser engineer again so you mush protect your business logic and scaffold model in a separate folder like Models\Generated and then use a partial class for example Products.cs in Models\
 i.dotnet-ef dbcontext scaffold "Server=.\SQLExpress;Database=contoso;User Id=dev;Password=Password123.; TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer --context-dir Data --output-dir Models/Generated --data-annotations --context-namespace ContosoPizza.Data --namespace ContosoPizza.Models
 
