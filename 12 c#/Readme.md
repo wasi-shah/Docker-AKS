@@ -389,23 +389,16 @@ Open in VS Code
 code -r ContosoPizza
 
 Add Packages
-Microsoft.EntityFrameworkCore
 dotnet add package Microsoft.EntityFrameworkCore
-
-Microsoft.EntityFramework.Design
 dotnet add package Microsoft.EntityFrameworkCore.Design
-
-Microsoft.EntityFramework.Tools
 dotnet add package Microsoft.EntityFrameworkCore.Tools
-
-Microsoft.EntityFrameWork.SqlServer
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 
 Install Ef Tool
 dotnet tool install -g dotnet-ef
 
 Database Scaffolding: Reverse engineer Database using Database Scaffolding
-.dotnet-ef dbcontext scaffold "Server=.\SQLExpress;Database=contoso;User Id=dev;Password=Password123.; TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer --context-dir Data --output-dir Models/Generated --data-annotations --context-namespace ContosoPizza.Data --namespace ContosoPizza.Models
+dotnet-ef dbcontext scaffold "Server=.\SQLExpress;Database=contoso;User Id=dev;Password=Password123.; TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer --context-dir Data --output-dir Models/Generated --data-annotations --context-namespace ContosoPizza.Data --namespace ContosoPizza.Models
 
 Move the connection in Program.cs for DI
 Delete the Onconfiguration method from ContosoContext.cs 
@@ -735,30 +728,15 @@ app.MapPost("/todos", (Todo todo, ITaskService service) =>
 ```
 
 Download nuget packages
-Microsoft.EntityFrameworkCore
+
 dotnet add package Microsoft.EntityFrameworkCore
-
-Microsoft.EntityFramework.Design
 dotnet add package Microsoft.EntityFrameworkCore.Design
-
-Microsoft.EntityFramework.Tools
 dotnet add package Microsoft.EntityFrameworkCore.Tools
-
-Microsoft.EntityFrameWork.SqlServer
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer
-
-Microsoft.Extensions.Configuration
 dotnet add package Microsoft.Extensions.Configuration
-
-Microsoft.Extensions.DependencyInjection
 dotnet add package Microsoft.Extensions.DependencyInjection
-
-
-Microsoft.Extensions.Hosting
 dotnet add package Microsoft.Extensions.Hosting
-
-Microsoft.AspNetCore.Hosting
-dotnet package add Microsoft.AspNetCore.Hosting
+dotnet add package Microsoft.AspNetCore.Hosting
 
 create class
 
