@@ -15,17 +15,19 @@ Delegates Types:
 
 ## LINQ Language Integrated Query:
 A: Allow to query a database or array without SQL.
-1. LINQ allows you perform filtering, ordering, and grouping operations on data sources with a minimum of code.
-2. Allow to query with filters on in memory, xml, Json or database objects like sql query and return the results.
+1. LINQ allows you to perform filtering, ordering, and grouping operations on data sources with a minimum of code.
+2. Allows query with filters in memory, XML, JSON, or database objects like SQL query and returns the results.
 
 ### Linq Syntax:
 You can search any collection using
+
 1.Query Syntax : Query syntax is similar to SQL (Structured Query Language) for the database.
 ```
 var result = from s in stringList
             where s.Contains("Tutorials") 
             select s;
 ```
+
 2.Method Syntax : Uses Lambda expression
 ```
 var result = stringList.Where(s => s.Contains("Tutorials"));
