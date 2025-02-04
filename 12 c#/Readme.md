@@ -810,6 +810,20 @@ dotnet dev-certs https --trust
 dotnet run --launch-profile https
 ```
 
+Add Swagger - Edit Program.cs
+```
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI(c=>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+    });
+}
+```
+
 Add Folder Models
 Add Class TodoItem.cs
 ```
@@ -862,7 +876,7 @@ builder.Services.AddDbContext<TodoContext>(opt =>
     opt.UseInMemoryDatabase("TodoList"));
 ```
 
-Now, Create a controller in Controller folder [Controllers\TodoController.cs]
+Now, Create a controller in the Controller folder [Controllers\TodoController.cs]
 ```
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
