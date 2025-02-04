@@ -792,3 +792,195 @@ app.MapGet("/todos", async (MyToDoContext context) => Results.Ok(await context.T
 
 ```
 
+## Create a web API (MVC) with ASP.NET Core & In-memory storage
+Create a project.
+```
+dotnet new webapi --use-controllers -o TodoApi
+dotnet add package Microsoft.EntityFrameworkCore.InMemory
+dotnet add package Swashbuckle.AspNetCore
+```
+open project
+```
+cd TodoApi
+```
+
+Configure SSL
+```
+dotnet dev-certs https --trust
+dotnet run --launch-profile https
+```
+
+Add Folder Models
+Add Class TodoItem.cs
+```
+using System;
+namespace TodoApi.Models;
+public class TodoItem
+{
+    public long Id { get; set; }
+    public string? Name { get; set; }
+    public bool IsComplete { get; set; }
+}
+```
+Add a database context
+Add a TodoContext.cs file to the Data  folder.
+```
+using System;
+using Microsoft.EntityFrameworkCore;
+using TodoApi.Models;
+
+namespace TodoApi.Data;
+
+public class TodoContext : DbContext
+{
+    public TodoContext(DbContextOptions<TodoContext> options)
+        : base(options)
+    {
+    }
+
+    public DbSet<TodoItem> TodoItems { get; set; } = null!;
+
+}
+```
+
+Register the database context
+In ASP.NET Core, services such as the DB context must be registered with the dependency injection (DI) container. The container provides the service to controllers.
+
+Adds the database context to the DI container.
+Specifies that the database context will use an in-memory database.
+
+Update Program.cs with the following highlighted code:
+```
+using Microsoft.EntityFrameworkCore;
+using TodoApi.Data;
+using TodoApi.Models;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllers();
+builder.Services.AddDbContext<TodoContext>(opt =>
+    opt.UseInMemoryDatabase("TodoList"));
+```
+
+Now, Create a controller in Controller folder [Controllers\TodoController.cs]
+```
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using TodoApi.Data;
+using TodoApi.Models;
+
+namespace TodoApi.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class TodoController : ControllerBase
+    {
+        private readonly TodoContext _context;
+
+        public TodoController(TodoContext context)
+        {
+            _context = context;
+        }
+
+        // GET: api/Todo
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<TodoItem>>> GetTodoItems()
+        {
+            return await _context.TodoItems.ToListAsync();
+        }
+
+        // GET: api/Todo/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<TodoItem>> GetTodoItem(long id)
+        {
+            var todoItem = await _context.TodoItems.FindAsync(id);
+
+            if (todoItem == null)
+            {
+                return NotFound();
+            }
+
+            return todoItem;
+        }
+
+        // POST: api/Todo
+        [HttpPost]
+        public async Task<ActionResult<TodoItem>> PostTodoItem(TodoItem item)
+        {
+            _context.TodoItems.Add(item);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetTodoItem), new { id = item.Id }, item);
+        }
+
+        // PUT: api/Todo/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutTodoItem(long id, TodoItem item)
+        {
+            if (id != item.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(item).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        // DELETE: api/Todo/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteTodoItem(long id)
+        {
+            var todoItem = await _context.TodoItems.FindAsync(id);
+
+            if (todoItem == null)
+            {
+                return NotFound();
+            }
+
+            _context.TodoItems.Remove(todoItem);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+    }
+
+}
+```
+Now, run the app 
+```
+donet run
+```
+Using TodoApi.http file - send request
+
+```
+@TodoApi_HostAddress = http://localhost:5115
+
+###
+Post {{TodoApi_HostAddress}}/api/Todo
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "My new item 1",
+  "isComplete": true
+}
+
+###
+Post {{TodoApi_HostAddress}}/api/Todo
+Content-Type: application/json
+
+{
+  "id": 2,
+  "name": "My new item 2",
+  "isComplete": true
+}
+
+
+###
+GET {{TodoApi_HostAddress}}/api/Todo
+```
+
+
