@@ -449,6 +449,12 @@ Supports:
 - SSL/TLS offloading
 
 
+
+
+## Azure Virtual Network
+![Azure Virtual Network](https://github.com/wasi-shah/Docker-AKS/assets/51749920/da47b0d7-bc68-42ab-93c6-6911022af7b2)
+
+
 > [!important]
 > **Question: What is Azure Virtual Network?** 
 > <br> Azure Virtual Network is your private network in Azure. You can deploy VMs and other types of Azure resources in a virtual network. Examples of resources include App Service Environments, Azure Kubernetes Service (AKS), and Azure Virtual Machine Scale Sets. 
@@ -485,11 +491,6 @@ Supports:
 > [!important]
 > **Question: What is Network security groups?** 
 > <br> NSG defines which traffic is allowed and which traffic is blocked. It’s a security guard. NSG can be attached to A Network interface and A Subnet and can define Inbound and Outbound traffic rules.
-
-
-
-## Azure Virtual Network
-![Azure Virtual Network](https://github.com/wasi-shah/Docker-AKS/assets/51749920/da47b0d7-bc68-42ab-93c6-6911022af7b2)
 
 Azure Virtual Network is a service that provides the fundamental building block for your private network in Azure. An instance of the service (a virtual network) enables many types of Azure resources to securely communicate with each other, the internet, and on-premises networks. These Azure resources include virtual machines (VMs).
 A virtual network is similar to a traditional network that you'd operate in your own datacenter. But it brings extra benefits of the Azure infrastructure, such as scale, availability, and isolation.
