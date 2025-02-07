@@ -997,4 +997,141 @@ Content-Type: application/json
 GET {{TodoApi_HostAddress}}/api/Todo
 ```
 
+### Adding Docker container support for web API (MVC) with ASP.NET Core & In-memory storage
+
+> Using dotnet publish
+
+**With dotnet -t:PublishContainer you don't need to create Dockerfile**
+Edit csproj file and add 
+<ContainerRepository>api-mvc-in-mem</ContainerRepository>
+
+**Create Image - This wil create a container image **
+dotnet publish -t:PublishContainer
+
+**- Run Container**
+- Run with a random container name 
+docker run -p api-mvc-in-mem:latest
+
+- Run with your own container name
+docker run --name api-app api-mvc-in-mem 
+
+- Run on a specific port and assign a name to container
+docker run -p 5115:8080 --name my-api-app api-mvc-in-mem
+
+
+**- Test App using todoapi.http**
+```
+@TodoApi_HostAddress = http://localhost:5115
+
+###
+GET {{TodoApi_HostAddress}}/api/Todo
+
+###
+Post {{TodoApi_HostAddress}}/api/Todo
+Content-Type: application/json
+
+{
+  "id": 2,
+  "name": "My new item 2",
+  "isComplete": true
+}
+
+###
+GET {{TodoApi_HostAddress}}/api/Todo
+```
+
+**- Stop Container**
+docker stop my-api-app
+
+**- Remove container**
+docker rm my-api-app
+
+**- Remove image**
+docker rmi api-mvc-in-mem
+
+
+
+> Using Docker
+
+**- Generating Docker files**
+You can add Docker files to your workspace by opening the Command Palette (Ctrl+Shift+P) and using Docker: Add Docker Files to Workspace command. 
+
+**- Fix Docker file**
+-- fix path of .csproj file
+-- Fix IP ENV ASPNETCORE_URLS=http://8080:5115
+
+**Docker File**
+The docker file is inside the project folder
+```
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
+WORKDIR /app
+EXPOSE 5115
+
+ENV ASPNETCORE_URLS=http://8080:5115
+
+USER app
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+ARG configuration=Release
+WORKDIR /src
+COPY ["TodoApi.csproj", "./"]
+RUN dotnet restore "TodoApi.csproj"
+COPY . .
+WORKDIR "/src/."
+RUN dotnet build "TodoApi.csproj" -c $configuration -o /app/build
+
+FROM build AS publish
+ARG configuration=Release
+RUN dotnet publish "TodoApi.csproj" -c $configuration -o /app/publish /p:UseAppHost=false
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "TodoApi.dll"]
+```
+
+**- Build an image**
+- docker build . -t api-mvc-in-mem
+
+**- Run Container**
+- Run with random container name 
+docker run -p api-mvc-in-mem:latest
+
+**- Run with your own container name**
+docker run --name api-app api-mvc-in-mem 
+
+**- Run on a specific port and assign a name of container**
+docker run -p 55998:8080 --name my-api-app api-mvc-in-mem
+
+**- Test App using todoapi.http**
+```
+@TodoApi_HostAddress = http://localhost:5115
+
+###
+GET {{TodoApi_HostAddress}}/api/Todo
+
+###
+Post {{TodoApi_HostAddress}}/api/Todo
+Content-Type: application/json
+
+{
+  "id": 2,
+  "name": "My new item 2",
+  "isComplete": true
+}
+
+###
+GET {{TodoApi_HostAddress}}/api/Todo
+```
+
+**- Stop Container**
+docker stop my-api-app
+
+**- Remove container**
+docker rm my-api-app
+
+**- Remove image**
+docker rmi api-mvc-in-mem
+
+
+
 
