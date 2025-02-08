@@ -1003,21 +1003,28 @@ GET {{TodoApi_HostAddress}}/api/Todo
 
 **With dotnet -t:PublishContainer you don't need to create Dockerfile**
 Edit csproj file and add 
+```
 <ContainerRepository>api-mvc-in-mem</ContainerRepository>
-
+```
 **Create Image - This wil create a container image **
+```
 dotnet publish -t:PublishContainer
-
+```
 **- Run Container**
 - Run with a random container name 
+
+```
 docker run -p api-mvc-in-mem:latest
+```
 
 - Run with your own container name
+```
 docker run --name api-app api-mvc-in-mem 
-
+```
 - Run on a specific port and assign a name to container
+```
 docker run -p 5115:8080 --name my-api-app api-mvc-in-mem
-
+```
 
 **- Test App using todoapi.http**
 ```
@@ -1090,18 +1097,23 @@ ENTRYPOINT ["dotnet", "TodoApi.dll"]
 ```
 
 **- Build an image**
-- docker build . -t api-mvc-in-mem
-
+```
+docker build . -t api-mvc-in-mem
+```
 **- Run Container**
 - Run with random container name 
+
+```
 docker run -p api-mvc-in-mem:latest
-
+```
 **- Run with your own container name**
+```
 docker run --name api-app api-mvc-in-mem 
-
+```
 **- Run on a specific port and assign a name of container**
+```
 docker run -p 55998:8080 --name my-api-app api-mvc-in-mem
-
+```
 **- Test App using todoapi.http**
 ```
 @TodoApi_HostAddress = http://localhost:5115
