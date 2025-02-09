@@ -1134,7 +1134,14 @@ Content-Type: application/json
 ###
 GET {{TodoApi_HostAddress}}/api/Todo
 ```
+**Connect to Container Terminal**
+```
+docker exec -it api-mvc-in-mem /bin/sh
 
+## Print Env
+printenv
+
+```
 **- Stop Container**
 docker stop my-api-app
 
@@ -1143,6 +1150,13 @@ docker rm my-api-app
 
 **- Remove image**
 docker rmi api-mvc-in-mem
+
+### Publish MVC API to Docker Hub
+```
+docker build -t api-mvc-in-mem .
+docker tag api-mvc-in-mem wasishah102/api-mvc-in-mem
+docker push wasishah102/api-mvc-in-mem
+```
 
 
 
