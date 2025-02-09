@@ -1158,6 +1158,27 @@ docker tag api-mvc-in-mem wasishah102/api-mvc-in-mem
 docker push wasishah102/api-mvc-in-mem
 ```
 
+### Managing Environment variable in docker
 
+With docker, you can set environment variables in docker-compose.yml
+For example
+```
+services:
+  todoapi:
+    image: mcr.microsoft.com/dotnet/aspnet:5.0
+    container_name: todoapi
+    ports:
+      - "5000:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+```
 
-
+Now you can set ASPNETCORE_ENVIRONMENT depending on the environment 
+You might notice the environment is set up with the environment with “Development” for our ASP.NET application.
+You might ask, if “Development” is set like this, I will need to change “Staging” or “Production” every time we need to build for a different environment.
+Don’t worry, you can just remove the environment: in the docker-compose.yml when running the service. Then, pass in custom environment variables in command.
+```
+docker-compose up -e ASPNETCORE_ENVIRONMENT=Production
+```
+By doing this, in CI/CD like GitHub Actions, you can write the instruction to listen different branch commit to build different env by running different docker-compose command.
