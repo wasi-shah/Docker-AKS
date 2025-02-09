@@ -1151,13 +1151,6 @@ docker rm my-api-app
 **- Remove image**
 docker rmi api-mvc-in-mem
 
-### Publish MVC API to Docker Hub
-```
-docker build -t api-mvc-in-mem .
-docker tag api-mvc-in-mem wasishah102/api-mvc-in-mem
-docker push wasishah102/api-mvc-in-mem
-```
-
 ### Managing Environment variable in docker
 
 With docker, you can set environment variables in docker-compose.yml
@@ -1182,3 +1175,10 @@ Don’t worry, you can just remove the environment: in the docker-compose.yml wh
 docker-compose up -e ASPNETCORE_ENVIRONMENT=Production
 ```
 By doing this, in CI/CD like GitHub Actions, you can write the instruction to listen different branch commit to build different env by running different docker-compose command.
+
+### Publish MVC API to Docker Hub
+```
+docker build -t api-mvc-in-mem .
+docker tag api-mvc-in-mem wasishah102/api-mvc-in-mem
+docker push wasishah102/api-mvc-in-mem
+```
