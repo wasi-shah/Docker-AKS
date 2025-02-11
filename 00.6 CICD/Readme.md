@@ -842,3 +842,37 @@ To view and configure the Default agent pool for YAML setting:
 
 > [!note]
 > Default agent pool for YAML is configured on a per-pipeline basis.
+
+## Github actions
+Github action is same as Azure CICD pipeline. GitHub Actions is a continuous integration and continuous delivery (CI/CD) platform that allows you to automate your build, test, and deployment pipeline.
+> [!NOTE]
+> For GitHub to discover any GitHub Actions workflows in your repository, you must save the workflow files in a directory called .github/workflows
+
+- Create a folder .github/workflows
+- Create yaml or yml file inside the .github/workflows
+- for example .github/workflows/mycicd.yaml
+  - the yaml can define the steps for cicd.
+ 
+### Structure of Github Actions
+![image](https://github.com/user-attachments/assets/c5fe5330-2d1b-4604-902f-7cd2efe309f8)
+
+
+#### GitHub Action Events
+You can configure a GitHub Actions workflow to be triggered when an event occurs in your repository, such as a pull request being opened or an issue being created.
+
+#### Runners
+A runner is a server that runs your workflows when they're triggered. Each runner can run a single job at a time. GitHub provides Ubuntu Linux, Microsoft Windows, and macOS runners to run your workflows. Each workflow run executes in a fresh, newly-provisioned virtual machine.
+
+#### Jobs
+Each job will run inside its own virtual machine runner, or inside a container, and has one or more steps.
+
+#### Steps
+A step runs 
+- a script that you define
+- an action.
+
+
+
+
+
+ 
