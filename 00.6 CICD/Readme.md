@@ -848,6 +848,7 @@ Github action is same as Azure CICD pipeline. GitHub Actions is a continuous int
 > [!NOTE]
 > For GitHub to discover any GitHub Actions workflows in your repository, you must save the workflow files in a directory called .github/workflows
 
+[**Event**] > [**Runner**] > [ **Job** > **Steps** > [**Script/Action**] ] 
 - Create a folder .github/workflows
 - Create yaml or yml file inside the .github/workflows
 - for example .github/workflows/mycicd.yaml
