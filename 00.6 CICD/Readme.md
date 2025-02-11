@@ -874,6 +874,47 @@ A step runs
 #### GitHub Actions secrets
 For example you wishto deploy app to Azure, secret allows you to create connection b/w azure and Githun actions. Build and deploy activities often require access to sensitive information such as API keys, tokens, and passwords. 
 
+#### Sample Github Action to create .net core cicd
+```
+jobs:
+  publish:
 
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Install dependencies
+      run: dotnet restore
+      
+    - name: Build
+      run: |
+        cd DotNet.WebApp
+        dotnet build --configuration Release --no-restore
+        dotnet publish -c Release -o ../dotnet-webapp -r linux-x64 --self-contained true /p:UseAppHost=true
+    - name: Test
+      run: |
+        cd DotNet.WebApp.Tests
+        dotnet test --no-restore --verbosity normal
+      
+    - uses: azure/webapps-deploy@v2
+      name: Deploy
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+        package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/dotnet-webapp'
+```
+- There is a single job, named publish that will run on the latest version of Ubuntu.
+- The actions/setup-dotnet@v3 GitHub Action is used to set up the .NET SDK with the specified version from the DOTNET_VERSION environment variable.
+- The dotnet restore command is called.
+- The dotnet build command is called.
+- The dotnet publish command is called.
+- The dotnet test command is called.
+- The azure/webapps-deploy@v2 GitHub Action deploys the app with the given publish-profile and package.
+- The publish-profile is assigned from the AZURE_PUBLISH_PROFILE repository secret.
 
  
