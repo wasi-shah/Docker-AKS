@@ -871,7 +871,8 @@ A step runs
 - a script that you define
 - an action.
 
-
+#### GitHub Actions secrets
+For example you wishto deploy app to Azure, secret allows you to create connection b/w azure and Githun actions. Build and deploy activities often require access to sensitive information such as API keys, tokens, and passwords. 
 
 
 
