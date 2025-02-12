@@ -1183,6 +1183,57 @@ docker tag api-mvc-in-mem wasishah102/api-mvc-in-mem
 docker push wasishah102/api-mvc-in-mem
 ```
 
+#### create pipeline and push to docker hub
+1. Create a Azure DevOps project
+2. Create a service connection from azure Devops Project to github to fetch the project (in pipeline)
+3. Create a service connection from Azure Devop project to Docker Hub
+
+Demo CICD [Build / Test / Code Coverage (see next section) / Publish to docker ]
+```
+trigger:
+- main
+
+resources:
+- repo: self
+
+variables:
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: Build
+  displayName: Build image
+  jobs:
+  - job: Build
+    displayName: Build & Test
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: Test
+      inputs:
+        command: test
+        projects: '**/*[Tt]est*/*.csproj'
+        arguments: '--configuration $(BuildConfiguration) --collect:"XPlat Code Coverage"'
+
+    - task: PublishCodeCoverageResults@2
+      displayName: 'Publish Code Coverage'
+      inputs:
+        codeCoverageTool: Cobertura
+        summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/coverage.cobertura.xml'
+        failIfCoverageEmpty: true
+
+    - task: Docker@2
+      displayName: Docker Build and Push 
+      inputs:
+        containerRegistry: 'azure-docker-connection'
+        repository: 'wasishah102/api-mvc-in-mem'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+        tags: '$(tag)'
+  
+```
+
+
 ### Adding Tests and code coverage
 1. Add a test project
 2. Add reference to project
