@@ -1182,3 +1182,59 @@ docker build -t api-mvc-in-mem .
 docker tag api-mvc-in-mem wasishah102/api-mvc-in-mem
 docker push wasishah102/api-mvc-in-mem
 ```
+
+### Adding Tests and code coverage
+1. Add a test project
+2. Add reference to project
+3. Add tests to test your API controllers
+4. Add Code coverate Support
+
+**Add Code coverage tool**
+```
+dotnet add package coverlet.collector
+```
+
+Run Test without code coverage collection
+```
+dotnet test
+```
+With Collection via Coverlet [Generates XML file]
+```
+dotnet test --collect:"XPlat Code Coverage"
+```
+With collection with built-in dotnet coverage collctor  [Generates XML File]
+```
+dotnet test --collect:"Code Coverage"
+```
+**How to export code coverage xml file to html?**
+Now that you're able to collect data from unit test runs, you can generate reports using ReportGenerator. To install the ReportGenerator NuGet package as a .NET global tool, use the dotnet tool install command:
+```
+dotnet tool install -g dotnet-reportgenerator-globaltool
+
+reportgenerator -reports:coverage.cobertura.xml -targetdir:coveragereport
+```
+#### Addign Test and code coverage in CICD
+CICD > Test with Code Coverage
+```
+    - task: DotNetCoreCLI@2
+      displayName: Test
+      inputs:
+        command: test
+        projects: '**/*[Tt]est*/*.csproj'
+        arguments: '--configuration $(BuildConfiguration) --collect:"XPlat Code Coverage"'
+```
+![image](https://github.com/user-attachments/assets/fa93c1d1-9941-4072-bb64-184285e87694)
+
+CICD > Cover Coverage Report Publish
+```
+    - task: PublishCodeCoverageResults@2
+      displayName: 'Publish Code Coverage'
+      inputs:
+        codeCoverageTool: Cobertura
+        summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/coverage.cobertura.xml'
+        failIfCoverageEmpty: true
+```
+![image](https://github.com/user-attachments/assets/5d1f39ec-f4c2-424b-91e7-ef34a81fdbe0)
+
+
+
