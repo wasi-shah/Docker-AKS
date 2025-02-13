@@ -245,9 +245,17 @@ The fully managed Azure Kubernetes Service (AKS) ia a PAAS and makes deploying a
 -  **Metrics Server is the complementary  addon already included in Kubernetes.** 
 
 > [!important]
-> **Question: What is ‘Heapster’ in Kubernetes??** 
+> **Question: What is ‘Heapster’ in Kubernetes?** 
 -  **A Heapster is a performance monitoring and metrics collection system for data collected by the Kublet.** 
 
+> [!important]
+> **Question: What is a Role in Kubernetes?** 
+- A Role can only be used to grant access to resources within a single namespace.
+
+
+> [!important]
+> **Question: What is a ClusterRole in Kubernetes?** 
+-  A ClusterRole can be used to grant the same permissions as a Role, but because they are cluster-scoped for example allow to access Node.
 
 
 ## Other interview Questions
