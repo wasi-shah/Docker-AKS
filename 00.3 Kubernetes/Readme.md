@@ -192,7 +192,7 @@ The fully managed Azure Kubernetes Service (AKS) ia a PAAS and makes deploying a
 > [!important]
 > **Question: Why we need storage in Kubernetes and What are the two storage options available?** 
 > <br> **We need storage becuase the container state is not saved so all of the files that were created or modified during the lifetime of the container are lost. During a crash, kubelet restarts the container with a clean state..**
-> <br> **1. Volumes - A semi=erment storage and it's type defines where data is stored and when it’s data will be deleted** 
+> <br> **1. Volumes - A semi perment storage and it's type defines where data is stored and when it’s data will be deleted** 
 > <br> **2. Persistance Volumes -  A perment storage in the cluster to save the data permanently.**
 
 > [!important]
