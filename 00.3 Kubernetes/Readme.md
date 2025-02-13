@@ -140,8 +140,8 @@ The fully managed Azure Kubernetes Service (AKS) ia a PAAS and makes deploying a
 - NodeSelector: You can label your nodes for example ‘forntend’ and then use nodeSelector is pod definition to only assign these pods to a matching label.
 - Affinity and anti-affinity: NodeAffinity is advance from of nodeSelector in which we can define a query to match the node. You can use the In, NotIn, Exists and DoesNotExist values in the operator field for Pod affinity and anti-affinity.
 - Taint and Toleration,
- - Taint: You can taint a node and it's effect [No Execute | No Schedule | Prefer No Schedule]. Taints allow a node to repel a set of pods.
- - Toleration: Tolerations are applied to pods. Tolerations allow the scheduler to schedule pods with matching taints. Tolerations allow scheduling but don't guarantee scheduling:
+	- Taint: You can taint a node and it's effect [No Execute | No Schedule | Prefer No Schedule]. Taints allow a node to repel a set of pods.
+	- Toleration: Tolerations are applied to pods. Tolerations allow the scheduler to schedule pods with matching taints. Tolerations allow scheduling but don't guarantee scheduling:
 - Pod CPU/Memory resource requirements.
 
 > [!important]
