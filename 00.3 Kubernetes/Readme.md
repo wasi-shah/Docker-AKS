@@ -197,12 +197,13 @@ The fully managed Azure Kubernetes Service (AKS) ia a PAAS and makes deploying a
 
 > [!important]
 > **Question: What are the three ways to attach volumes to pod?** 
-<br> **1. Directly** - Create a PV and assign a PV name is pod definition 
-<br> **2. Persistence Volume Claim**
-  - You create 1.PV and the
-  - 2.Claim you define how much space you need.
-  - The claim then attached to the pod.
-<br> **3. Storage Classes** - It creates the PV automatically to satisfy a PersistentVolumeClaim (PVC) for example create a sstorage calss using azure-file
+- **1. Directly** - Create a PV and assign a PV name is pod definition 
+- **2. Persistence Volume Claim**
+  - 1 You create PV
+  - 2 Create PV claim and define how much space you need.
+  - 3 The claim then attached to the pod.
+
+- **3. Storage Classes** - It creates the PV automatically to satisfy a PersistentVolumeClaim (PVC) for example create a sstorage calss using azure-file
 
 > [!important]
 > **Question: Name few types of volumes?** 
