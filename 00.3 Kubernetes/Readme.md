@@ -104,6 +104,25 @@ The fully managed Azure Kubernetes Service (AKS) ia a PAAS and makes deploying a
 > <br> **2. Volume.**
 
 > [!important]
+> **Question: How can pass values to a Pod/Container?** 
+- Command
+- Args
+- Env : allows you to set environment variables for a container, specifying a value directly for each variable that you name.
+- EnvFrom
+ - configMapRef
+ - secretRef
+- volumeMounts
+- volumes
+
+> [!important]
+> **Question: Whatis a ConfigMaps?** 
+> <br> A ConfigMap is an API object used to store non-confidential data in key-value pairs. Pods can consume ConfigMaps as environment variables, command-line arguments, or as configuration files in a volume. A ConfigMap allows you to decouple environment-specific configuration from your container images, so that your applications are easily portable. You can pass config map  as volume or enviroment.
+
+> [!important]
+> **Question: Whatis a Secrets?** 
+> <br> A Secret is an object that contains a small amount of sensitive data such as a password, a token, or a key. You can pass secrets as volume or enviroment.
+  
+> [!important]
 > **Question: How can you retrieve values back from pod?** 
 > <br> **You can shell into the container using exec and display file content or print environment variables.** 
 
