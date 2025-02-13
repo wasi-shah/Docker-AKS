@@ -125,7 +125,7 @@ The fully managed Azure Kubernetes Service (AKS) ia a PAAS and makes deploying a
 > <br>and forcing Pod CPU/Memory resource requirements.** 
 
 > [!important]
-> **Question: What is a WordLoad and it's four types?** 
+> **Question: What is a WorkLoad and it's four types?** 
 > <br> **A Workload is the actual execution of application. It can be following four types** 
 > <br> **1. Deployment - For running a stateless application workload on your cluster, where any Pod in the Deployment is interchangeable and can be replaced if needed.**
 > <br> **2. StatefulSet - For running one or more related Pods that do track state. It matches each Pod with a PersistentVolume.**
