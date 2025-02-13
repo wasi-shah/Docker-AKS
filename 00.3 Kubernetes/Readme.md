@@ -45,7 +45,8 @@ The fully managed Azure Kubernetes Service (AKS) ia a PAAS and makes deploying a
 > <br> **You can add add-ons to extend functionality**
 > > <br> **Addons runs as a demonset.**
 > <br> for example
-- DNS, Web UI (Dashboard)
+- DNS
+- Web UI (Dashboard)
 - Container Resource Monitoring
 - Cluster-level Logging
 - Network Plugins.
