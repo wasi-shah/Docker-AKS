@@ -20,7 +20,11 @@ The fully managed Azure Kubernetes Service (AKS) ia a PAAS and makes deploying a
 > [!important]
 > **Question: What is a master node and it's components?** 
 > <br> **The master node is responsible for running several Kubernetes processes that are absolutely necessary to run and manage the cluster.** 
-> <br> **Master node components are API Server, Scheduler, Controller Manager & ETCD.** 
+> <br> **Master node components are
+- API Server
+- Scheduler
+- Controller Manager
+- ETCD.** 
 
 
 > [!important]
