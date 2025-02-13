@@ -197,26 +197,26 @@ The fully managed Azure Kubernetes Service (AKS) ia a PAAS and makes deploying a
 
 > [!important]
 > **Question: What are the three ways to attach volumes to pod?** 
-- <br> **1. Directly** - Create a PV and assign a PV name is pod definition 
-- <br> **2. Persistence Volume Claim**
+<br> **1. Directly** - Create a PV and assign a PV name is pod definition 
+<br> **2. Persistence Volume Claim**
   - You create 1.PV and the
   - 2.Claim you define how much space you need.
   - The claim then attached to the pod.
-- <br> **3. Storage Classes** - It creates the PV automatically to satisfy a PersistentVolumeClaim (PVC) for example create a sstorage calss using azure-file
+<br> **3. Storage Classes** - It creates the PV automatically to satisfy a PersistentVolumeClaim (PVC) for example create a sstorage calss using azure-file
 
 > [!important]
 > **Question: Name few types of volumes?** 
-- <br> **1. emptyDir**  - it's a temprary storage. All containers in the Pod can read and write the same files in the emptyDir volume. When a Pod is removed from a node for any reason, the data in the emptyDir is deleted permanently.
-- <br> **2. hostPath** - hostPath is node level storage (not for production). If node is deleted the hostpath data is deleted.
-- <br> **2. downwardAPI** - A downwardAPI volume makes downward API data available to applications. Within the volume, you can find the exposed data as read-only files in plain text format.
+- **1. emptyDir**  - it's a temprary storage. All containers in the Pod can read and write the same files in the emptyDir volume. When a Pod is removed from a node for any reason, the data in the emptyDir is deleted permanently.
+- **2. hostPath** - hostPath is node level storage (not for production). If node is deleted the hostpath data is deleted.
+- **2. downwardAPI** - A downwardAPI volume makes downward API data available to applications. Within the volume, you can find the exposed data as read-only files in plain text format.
 
 
 > [!important]
 > **Question: What are the four items you an monitor in Kubernetes?** 
-> <br> **1. applications** 
-> <br> **2. hosts**
-> <br> **3. containers**
-> <br> **4. Kubernetes**
+- **1. applications** 
+- **2. hosts**
+- **3. containers**
+- **4. Kubernetes**
 
 
 > [!important]
