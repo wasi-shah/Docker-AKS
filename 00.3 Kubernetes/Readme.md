@@ -20,17 +20,20 @@ The fully managed Azure Kubernetes Service (AKS) ia a PAAS and makes deploying a
 > [!important]
 > **Question: What is a master node and it's components?** 
 > <br> **The master node is responsible for running several Kubernetes processes that are absolutely necessary to run and manage the cluster.** 
-> <br> **Master node components are
+> <br> Master node components are
 - API Server
 - Scheduler
 - Controller Manager
-- ETCD.** 
+- ETCD. 
 
 
 > [!important]
 > **Question: What is a worker node and it's components?** 
 > <br> **The worker nodes are the part of the Kubernetes clusters which execute the containers and applications on them.** 
-> <br>**Workernode components are Kubelet Service, Kube-proxy Service & Container Runtime.** 
+> <br>Workernode components are
+- Kubelet Service
+- Kube-proxy Service
+- Container Runtime.
 
 > [!important]
 > **Question: How many nodes can a cluster have?** 
