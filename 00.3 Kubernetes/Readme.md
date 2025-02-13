@@ -154,7 +154,12 @@ The fully managed Azure Kubernetes Service (AKS) ia a PAAS and makes deploying a
 > [!important]
 > **Question: What is the Kubernetes networking unique IP law and how CNI addon helps?** 
 > <br> **Kubernetes wants all pods/Nodes IPs to be unique. For this you can use 3rd party tool called CNI (Container Network Interface) API like:** 
-> <br> **WeaveNet, Cisco, Flannel, VMware, NSX, Cilium to make sure IP uniqueness.**
+- WeaveNet
+- Cisco
+- Flannel
+- VMware
+- NSX
+- Cilium
 
 > [!important]
 > **Question: What is a DNS service and why we need it DNS addons? Name three important DNS Addons** 
