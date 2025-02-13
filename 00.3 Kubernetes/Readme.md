@@ -11,16 +11,16 @@ The fully managed Azure Kubernetes Service (AKS) ia a PAAS and makes deploying a
 
 > [!important]
 > **Question: What Kubernetes does?** 
-> <br> **Kubernetes deploy, manage, and scale the containerised applications:** 
+-  **Kubernetes deploy, manage, and scale the containerised applications:** 
 
 > [!important]
 > **Question: What is a Kubernetes cluster?** 
-> <br> **A Kubernetes cluster consists of a set of worker machines, called nodes, that run containerized applications. Every cluster has at least one master and worker node.** 
+-  **A Kubernetes cluster consists of a set of worker machines, called nodes, that run containerized applications. Every cluster has at least one master and worker node.** 
 
 > [!important]
 > **Question: What is a master node and it's components?** 
-> <br> **The master node is responsible for running several Kubernetes processes that are absolutely necessary to run and manage the cluster.** 
-> <br> Master node components are
+-  **The master node is responsible for running several Kubernetes processes that are absolutely necessary to run and manage the cluster.** 
+-  Master node components are
 - API Server
 - Scheduler
 - Controller Manager
@@ -29,22 +29,22 @@ The fully managed Azure Kubernetes Service (AKS) ia a PAAS and makes deploying a
 
 > [!important]
 > **Question: What is a worker node and it's components?** 
-> <br> **The worker nodes are the part of the Kubernetes clusters which execute the containers and applications on them.** 
-> <br>Workernode components are
+-  **The worker nodes are the part of the Kubernetes clusters which execute the containers and applications on them.** 
+- Workernode components are
 - Kubelet Service
 - Kube-proxy Service
 - Container Runtime.
 
 > [!important]
 > **Question: How many nodes can a cluster have?** 
-> <br> **Kubernetes v1.29 supports clusters with up to 5,000 nodes.** 
+-  **Kubernetes v1.29 supports clusters with up to 5,000 nodes.** 
 
 
 > [!important]
 > **Question: How can you extend the functionality of Kubernetes?** 
-> <br> **You can add add-ons to extend functionality**
-> > <br> **Addons runs as a demonset.**
-> <br> for example
+-  **You can add add-ons to extend functionality**
+> -  **Addons runs as a demonset.**
+-  for example
 - DNS
 - Web UI (Dashboard)
 - Container Resource Monitoring
@@ -55,8 +55,8 @@ The fully managed Azure Kubernetes Service (AKS) ia a PAAS and makes deploying a
 
 > [!important]
 > **Question: What is a Namespaces and four initial namespaces?** 
-> <br> **Namespaces provide a mechanism for isolating groups of resources within a single cluster.** 
-> <br> Initial namespaces are
+-  **Namespaces provide a mechanism for isolating groups of resources within a single cluster.** 
+-  Initial namespaces are
 - default
 - kube-system
 - kube-public
@@ -64,44 +64,44 @@ The fully managed Azure Kubernetes Service (AKS) ia a PAAS and makes deploying a
 
 > [!important]
 > **Question: What ae the three objecy Management technique available in Kubernetes?** 
-> <br> **1. Imperative commands - for example kubectl create deployment nginx --image nginx.** 
-> <br> **2. Imperative object configuration - for example  kubectl create -f nginx.yaml**
-> <br> **3. Declarative object configuration - for example kubectl apply -f configs/**
+-  **1. Imperative commands - for example kubectl create deployment nginx --image nginx.** 
+-  **2. Imperative object configuration - for example  kubectl create -f nginx.yaml**
+-  **3. Declarative object configuration - for example kubectl apply -f configs/**
 
 
 
 > [!important]
 > **Question: What is a pod?** 
-> <br> **A pod is the smallest object and works like a VM and always has an internal IP address assigned.** 
-> <br> **Pod runs container inside. Pod represents a set of running containers on your cluster.**
+-  **A pod is the smallest object and works like a VM and always has an internal IP address assigned.** 
+-  **Pod runs container inside. Pod represents a set of running containers on your cluster.**
 
 
 > [!important]
 > **Question: How many pods can you have on a single node**
-> <br>**110 to 265**
+- **110 to 265**
 
 
 
 > [!important]
 > **Question: What are the three types of Pods?** 
-> <br> **1. Application pods.** 
-> <br> **2. Static Pods.**
-> <br> **3. Demonsets.**
+-  **1. Application pods.** 
+-  **2. Static Pods.**
+-  **3. Demonsets.**
 
 > [!important]
 > **Question: What are the two types of containers pod can have?** 
-> <br> **1. Application Container.** 
-> <br> **2. InitContainer.**
+-  **1. Application Container.** 
+-  **2. InitContainer.**
 
 
 > [!important]
 > **Question: Can you have multiple initContainer in  a single pod.**
-> <br> **Yes, if you specify multiple init containers for a Pod, kubelet runs each init container sequentially.**
+-  **Yes, if you specify multiple init containers for a Pod, kubelet runs each init container sequentially.**
 
 > [!important]
 > **Question: What are the two ways you can pass values to a Pod/Container?** 
-> <br> **1. Environment.** 
-> <br> **2. Volume.**
+-  **1. Environment.** 
+-  **2. Volume.**
 
 > [!important]
 > **Question: How can pass values to a Pod/Container?** 
@@ -115,64 +115,65 @@ The fully managed Azure Kubernetes Service (AKS) ia a PAAS and makes deploying a
 - volumes
 
 > [!important]
-> **Question: Whatis a ConfigMaps?** 
-> <br> A ConfigMap is an API object used to store non-confidential data in key-value pairs. Pods can consume ConfigMaps as environment variables, command-line arguments, or as configuration files in a volume. A ConfigMap allows you to decouple environment-specific configuration from your container images, so that your applications are easily portable. You can pass config map  as volume or enviroment.
+> **Question: What is a ConfigMaps?** 
+-  A ConfigMap is an API object used to store non-confidential data in key-value pairs. Pods can consume ConfigMaps as environment variables, command-line arguments, or as configuration files in a volume. A ConfigMap allows you to decouple environment-specific configuration from your container images, so that your applications are easily portable. You can pass config map  as volume or enviroment.
 
 > [!important]
-> **Question: Whatis a Secrets?** 
-> <br> A Secret is an object that contains a small amount of sensitive data such as a password, a token, or a key. You can pass secrets as volume or enviroment.
+> **Question: What is a Secrets?** 
+-  A Secret is an object that contains a small amount of sensitive data such as a password, a token, or a key. You can pass secrets as volume or enviroment.
   
 > [!important]
 > **Question: How can you retrieve values back from pod?** 
-> <br> **You can shell into the container using exec and display file content or print environment variables.** 
+-  **You can shell into the container using exec and display file content or print environment variables.** 
 
 > [!important]
 > **Question: How you monitor pod health and what are the three probes available?** 
-> <br> **Kubernetes track, check and react to three probes.** 
-> <br> **1. Startup probes - to know when a container application has started.**
-> <br> **2. Liveness Probe - Checks if app is still alive – if not kill and start new pod.**
-> <br> **3. Readiness Probes - Checks if the pod is less busy for the incoming request. If not, it passes the traffic to less busy pod. It does not kill the pod.**
+-  **Kubernetes track, check and react to three probes.** 
+-  **1. Startup probes - to know when a container application has started.**
+-  **2. Liveness Probe - Checks if app is still alive – if not kill and start new pod.**
+-  **3. Readiness Probes - Checks if the pod is less busy for the incoming request. If not, it passes the traffic to less busy pod. It does not kill the pod.**
 
 > [!important]
 > **Question: Can you control pod scheduling and how?** 
-> <br> **There are many ways you can control pod scheduling. For example through 
-> <br>NodeName, 
-> <br>NodeSelector, 
-> <br>Labels, 
-> <br>Affinity and anti-affinity, 
-> <br>Taint and Toleration, 
-> <br>and forcing Pod CPU/Memory resource requirements.** 
+-  **There are many ways you can control pod scheduling. For example through 
+- NodeName: Each node has a name and then define a node name is pod definition 
+- NodeSelector: You can label your nodes for example ‘forntend’ and then use nodeSelector is pod definition to only assign these pods to a matching label.
+- Affinity and anti-affinity: NodeAffinity is advance from of nodeSelector in which we can define a query to match the node. You can use the In, NotIn, Exists and DoesNotExist values in the operator field for Pod affinity and anti-affinity.
+- Taint and Toleration,
+ - Taint: You can taint a node and it's effect [No Execute | No Schedule | Prefer No Schedule]. Taints allow a node to repel a set of pods.
+ - Toleration: Tolerations are applied to pods. Tolerations allow the scheduler to schedule pods with matching taints. Tolerations allow scheduling but don't guarantee scheduling:
+- Pod CPU/Memory resource requirements.
 
 > [!important]
 > **Question: What is a WorkLoad and it's four types?** 
-> <br> **A Workload is the actual execution of application. It can be following four types** 
-> <br> **1. Deployment - For running a stateless application workload on your cluster, where any Pod in the Deployment is interchangeable and can be replaced if needed.**
-> <br> **2. StatefulSet - For running one or more related Pods that do track state. It matches each Pod with a PersistentVolume.**
-> <br> **3. DaemonSet - For running Pods on all nodes. Addons runs as a demonset.**
-> <br> **4. Job & CronJob - Job define a task that runs to completion, just once. CronJob rubs a Job multiple times according a schedule.**
+-  **A Workload is the actual execution of application. It can be following four types** 
+-  **1. Deployment - For running a stateless application workload on your cluster, where any Pod in the Deployment is interchangeable and can be replaced if needed.**
+-  **2. StatefulSet - For running one or more related Pods that do track state. It matches each Pod with a PersistentVolume.**
+-  **3. DaemonSet - For running Pods on all nodes. Addons runs as a demonset.**
+-  **4. Job & CronJob - Job define a task that runs to completion, just once. CronJob rubs a Job multiple times according a schedule.**
 
 > [!important]
 > **Question: What are the two deployment Strategies available?** 
-> <br> **1. RollingUpdate - Pods are killed and create one-by-one** 
-> <br> **2. Recreate - All existing Pods are killed then create**
+-  **1. RollingUpdate - Pods are killed and create one-by-one** 
+-  **2. Recreate - All existing Pods are killed then create**
 
 > [!important]
 > **Question: What are the two types of applications?** 
-> <br> **1. Stateless - By default, the pods are stateless so when the pod deletes its data also deletes.** 
-> <br> **2. StatefullSet - The StatefulSet provisions a PersistentVolumeClaim in a single yaml file. To help prevent data loss, PersistentVolumes and PersistentVolumeClaims are not deleted when a StatefulSet is deleted**
+-  **1. Stateless - By default, the pods are stateless so when the pod deletes its data also deletes.** 
+-  **2. StatefullSet - The StatefulSet provisions a PersistentVolumeClaim in a single yaml file. To help prevent data loss, PersistentVolumes and PersistentVolumeClaims are not deleted when a StatefulSet is deleted**
 
 
 > [!important]
 > **Question: What are the four types of scaling available in Kubernetes?** 
-> <br> **1. - ReplicaSets: An object which create/delete pods to match the desired number of pods.** 
-> <br> **2. - Vertical Pod Autoscaler (VPA): (add/remove resources to existing pod) automatically change your pod CPU/Memory limited based on it’s usage both up and down.**
-> <br> **3. - Horizontal Pod Autoscaler (HPA): (add/remove new pods) An object which create/delete pods to match the performance for example, if the pod exceeds 50% CPU then create a new pod.**
-> <br> **4. - Cluster Autoscaler: (add/remove nodes) Automatically adds or removes nodes in a cluster based on all pods’ requested resources & HPA. Cluster Autoscaler works with Horizonal Pod Scaler to automatically adds or removes nodes in a cluster based on demand.**
+-  **1. - ReplicaSets: An object which create/delete pods to match the desired number of pods.** 
+-  **2. - Vertical Pod Autoscaler (VPA): (add/remove resources to existing pod) automatically change your pod CPU/Memory limited based on it’s usage both up and down.**
+-  **3. - Horizontal Pod Autoscaler (HPA): (add/remove new pods) An object which create/delete pods to match the performance for example, if the pod exceeds 50% CPU then create a new pod.**
+-  **4. - Cluster Autoscaler: (add/remove nodes) Automatically adds or removes nodes in a cluster based on all pods’ requested resources & HPA. Cluster Autoscaler works with Horizonal Pod Scaler to automatically adds or removes nodes in a cluster based on demand.**
 
 
 > [!important]
 > **Question: What is the Kubernetes networking unique IP law and how CNI addon helps?** 
-> <br> **Kubernetes wants all pods/Nodes IPs to be unique. For this you can use 3rd party tool called CNI (Container Network Interface) API like:** 
+-  **Kubernetes wants all pods/Nodes IPs to be unique. For this you can use 3rd party tool called CNI (Container Network Interface) API like:** 
 - WeaveNet
 - Cisco
 - Flannel
@@ -182,37 +183,37 @@ The fully managed Azure Kubernetes Service (AKS) ia a PAAS and makes deploying a
 
 > [!important]
 > **Question: What is a DNS service and why we need it DNS addons? Name three important DNS Addons** 
-> <br> **DNS service assing a name to an IP so we can call objects by using a name (instead of IP).** 
-> <br> **1. coreDNS - When you create a new pod or service, it records its endpoint IP and access url so it can resolve it. For example now you can use 'web-service-default.svc.cluster.local' instead of '10.97.206.196'**
-> <br> **2. External DNS - It's an addon to map a domain name to ingress service**
-> <br> **3. Cert Manager - It's an addon to install and renew SSL**
+-  **DNS service assing a name to an IP so we can call objects by using a name (instead of IP).** 
+-  **1. coreDNS - When you create a new pod or service, it records its endpoint IP and access url so it can resolve it. For example now you can use 'web-service-default.svc.cluster.local' instead of '10.97.206.196'**
+-  **2. External DNS - It's an addon to map a domain name to ingress service**
+-  **3. Cert Manager - It's an addon to install and renew SSL**
 
 > [!important]
 > **Question: What is a service and it's four types?** 
-> <br> **Service is a method for exposing a network application that is running as one or more Pods in your cluster.** 
-> <br> **1. ClusterIP (default service) - Expose a workload locally as a service.**
-> <br> **2. NodePort (To Internet through a Worker Node) - Expose a workload to a cluster port.**
-> <br> **3. LoadBalancer (To Internet) - Exposes the Service/Workload externally using an external load balancer.**
-> <br> **4. ExternalName (From Internet) - It is used to connect the pods to an external MySQL database sitting on Azure through a CNAME.**
+-  **Service is a method for exposing a network application that is running as one or more Pods in your cluster.** 
+-  **1. ClusterIP (default service) - Expose a workload locally as a service.**
+-  **2. NodePort (To Internet through a Worker Node) - Expose a workload to a cluster port.**
+-  **3. LoadBalancer (To Internet) - Exposes the Service/Workload externally using an external load balancer.**
+-  **4. ExternalName (From Internet) - It is used to connect the pods to an external MySQL database sitting on Azure through a CNAME.**
 
 
 > [!important]
 > **Question: What is a Ingress service and it's two types?** 
-> <br> **It's like a level 7 load balance same as application gateway which can pass the control to another service based on the url.** 
-> <br> **1. Simple fanout - example [ Abc.com/foo to service1:80 ] & [ Abc.com/bar service2:80 ].**
-> <br> **2. Sub domain level ingress - example [ foo.abc.com service1:80 ] & [ bar.abc.com service2:80 ].**
+-  **It's like a level 7 load balance same as application gateway which can pass the control to another service based on the url.** 
+-  **1. Simple fanout - example [ Abc.com/foo to service1:80 ] & [ Abc.com/bar service2:80 ].**
+-  **2. Sub domain level ingress - example [ foo.abc.com service1:80 ] & [ bar.abc.com service2:80 ].**
 
 > [!important]
 > **Question: Why you need an Ingress Control Addon and naem one Ingress controler?** 
-> <br> **In order for an Ingress to work in your cluster, there must be an ingress controller running. You need to select at least one ingress controller and make sure it is set up in your cluster.** 
-> <br> **AGID - AKS Application Gateway Ingress Controller is an ingress controller that configures the Azure Application Gateway..**
+-  **In order for an Ingress to work in your cluster, there must be an ingress controller running. You need to select at least one ingress controller and make sure it is set up in your cluster.** 
+-  **AGID - AKS Application Gateway Ingress Controller is an ingress controller that configures the Azure Application Gateway..**
 
 
 > [!important]
 > **Question: Why we need storage in Kubernetes and What are the two storage options available?** 
-> <br> **We need storage becuase the container state is not saved so all of the files that were created or modified during the lifetime of the container are lost. During a crash, kubelet restarts the container with a clean state..**
-> <br> **1. Volumes - A semi perment storage and it's type defines where data is stored and when it’s data will be deleted** 
-> <br> **2. Persistance Volumes -  A perment storage in the cluster to save the data permanently.**
+-  **We need storage becuase the container state is not saved so all of the files that were created or modified during the lifetime of the container are lost. During a crash, kubelet restarts the container with a clean state..**
+-  **1. Volumes - A semi perment storage and it's type defines where data is stored and when it’s data will be deleted** 
+-  **2. Persistance Volumes -  A perment storage in the cluster to save the data permanently.**
 
 > [!important]
 > **Question: What are the three ways to attach volumes to pod?** 
@@ -241,11 +242,11 @@ The fully managed Azure Kubernetes Service (AKS) ia a PAAS and makes deploying a
 
 > [!important]
 > **Question: What is the default monitoring addon already included in Kubernetes?** 
-> <br> **Metrics Server is the complementary  addon already included in Kubernetes.** 
+-  **Metrics Server is the complementary  addon already included in Kubernetes.** 
 
 > [!important]
 > **Question: What is ‘Heapster’ in Kubernetes??** 
-> <br> **A Heapster is a performance monitoring and metrics collection system for data collected by the Kublet.** 
+-  **A Heapster is a performance monitoring and metrics collection system for data collected by the Kublet.** 
 
 
 
@@ -253,55 +254,55 @@ The fully managed Azure Kubernetes Service (AKS) ia a PAAS and makes deploying a
 
 > [!important]
 > **Question: What are federated clusters??** 
-> <br> **The aggregation of multiple clusters that treat them as a single logical cluster refers to cluster federation. In this, multiple clusters may be managed as a single cluster..** 
+-  **The aggregation of multiple clusters that treat them as a single logical cluster refers to cluster federation. In this, multiple clusters may be managed as a single cluster..** 
 
 
 > [!important]
 > **Question: Give examples of recommended security measures for Kubernetes?** 
-> <br> **Examples of standard Kubernetes security measures include defining resource quotas, support for auditing, restriction of etcd access, regular security updates to the environment, network segmentation, definition of strict resource policies, continuous scanning for security vulnerabilities, and using images from authorized repositories.** 
+-  **Examples of standard Kubernetes security measures include defining resource quotas, support for auditing, restriction of etcd access, regular security updates to the environment, network segmentation, definition of strict resource policies, continuous scanning for security vulnerabilities, and using images from authorized repositories.** 
 
 
 > [!important]
 > **Question: How to monitor the Kubernetes cluster?** 
-> <br> **Monitoring a Kubernetes cluster involves setting up various tools and practices to collect and analyze data on the cluster’s health, performance, and resource usage.** 
+-  **Monitoring a Kubernetes cluster involves setting up various tools and practices to collect and analyze data on the cluster’s health, performance, and resource usage.** 
 
 
 > [!important]
 > **Question: How to get the central logs from POD?** 
-> <br> **To collect central logs from Pods running in a Kubernetes cluster, you can use a centralized logging solution. One popular approach is to use the ELK Stack, which consists of three main components: Elasticsearch, Logstash (or Fluentd), and Kibana.** 
+-  **To collect central logs from Pods running in a Kubernetes cluster, you can use a centralized logging solution. One popular approach is to use the ELK Stack, which consists of three main components: Elasticsearch, Logstash (or Fluentd), and Kibana.** 
 
 
 > [!important]
 > **Question: What is a Network Policy in Kubernetes?** 
-> <br> **Kubernetes Network Policies are an application-centric build that let you specify how pod is allowed to communicate with various network.** 
+-  **Kubernetes Network Policies are an application-centric build that let you specify how pod is allowed to communicate with various network.** 
 
 
 > [!important]
 > **Question: What is a Helm chart, and how is it used?** 
-> <br> **Helm utilizes a packaging format called charts, which are collection of files which describe the cohesive set of Kubernetes resources. Whether you are deploying a simple component, like a memcached pod, or a complex web app stack which involves HTTP servers, databases, caches, and more, all the files you need are contained in a single chart. Helm chart packages provide all the resources you need to deploy an application to a Kubernetes cluster, which involves YAML configuration files for secrets, services, deployments, and config maps that provide the app’s desired state.**
+-  **Helm utilizes a packaging format called charts, which are collection of files which describe the cohesive set of Kubernetes resources. Whether you are deploying a simple component, like a memcached pod, or a complex web app stack which involves HTTP servers, databases, caches, and more, all the files you need are contained in a single chart. Helm chart packages provide all the resources you need to deploy an application to a Kubernetes cluster, which involves YAML configuration files for secrets, services, deployments, and config maps that provide the app’s desired state.**
 
 
 > [!important]
 > **Question: Explain the concept of Pod Disruption Budgets.** 
-> <br> **It is intended for application owners who want to build highly available applications and also serves as a guide for cluster administrators who are building automated cluster actions such as autoscaling and upgrades. Pod disruption budgets, or PDBs for short, are policies that specify the desired state of the cluster and the orchestrators’ attempt to maintain it. For PDBs, this consists of defining a maximum quantity of failed pods or the lowest number of pod replicas that must stay in the cluster at any given time.** 
+-  **It is intended for application owners who want to build highly available applications and also serves as a guide for cluster administrators who are building automated cluster actions such as autoscaling and upgrades. Pod disruption budgets, or PDBs for short, are policies that specify the desired state of the cluster and the orchestrators’ attempt to maintain it. For PDBs, this consists of defining a maximum quantity of failed pods or the lowest number of pod replicas that must stay in the cluster at any given time.** 
 
 
 > [!important]
 > **Question: What are the different ways to provide external network connectivity to K8??** 
-> <br> **1. Nodeport (it will expose one port on each node to communicate with it)** 
-> <br> **2. Load balancers (L4 layer of TCP/IP protocol)** 
-> <br> **3. Ingress (L7 layer of TCP/IP Protocol)** 
+-  **1. Nodeport (it will expose one port on each node to communicate with it)** 
+-  **2. Load balancers (L4 layer of TCP/IP protocol)** 
+-  **3. Ingress (L7 layer of TCP/IP Protocol)** 
 
 > [!important]
 > **Question: How is Kubernetes different from Docker Swarm?** 
-> <br> **Docker Swarm can’t do auto-scaling.** 
-> <br> **Docker Swarm doesn’t have a GUI.** 
-> <br> **Docker Swarm does automatic load balancing of traffic between containers in a cluster.** 
+-  **Docker Swarm can’t do auto-scaling.** 
+-  **Docker Swarm doesn’t have a GUI.** 
+-  **Docker Swarm does automatic load balancing of traffic between containers in a cluster.** 
 
 > [!important]
 > **Question: How do you perform maintenance on the K8 node?** 
-> <br> **kubectl cordon.** 
-> <br> **kubectl drain -ignore-demon set.** 
+-  **kubectl cordon.** 
+-  **kubectl drain -ignore-demon set.** 
 
 
 
