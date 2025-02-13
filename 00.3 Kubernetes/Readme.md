@@ -11,7 +11,7 @@ The fully managed Azure Kubernetes Service (AKS) ia a PAAS and makes deploying a
 
 > [!important]
 > **Question: What Kubernetes does?** 
-> <br> **Kubernetes manage, scale, and deploy  containerised applications:** 
+> <br> **Kubernetes deploy, manage, and scale the containerised applications:** 
 
 > [!important]
 > **Question: What is a Kubernetes cluster?** 
