@@ -42,18 +42,27 @@ The fully managed Azure Kubernetes Service (AKS) ia a PAAS and makes deploying a
 
 > [!important]
 > **Question: How can you extend the functionality of Kubernetes?** 
-> <br> **You can add add-ons to extend functionality** 
-> <br> **for example DNS, Web UI (Dashboard), Container Resource Monitoring, Cluster-level Logging and Network Plugins.**
-> <br> **Addons runs as a demonset.**
+> <br> **You can add add-ons to extend functionality**
+> > <br> **Addons runs as a demonset.**
+> <br> for example
+- DNS, Web UI (Dashboard)
+- Container Resource Monitoring
+- Cluster-level Logging
+- Network Plugins.
+
 
 
 > [!important]
 > **Question: What is a Namespaces and four initial namespaces?** 
 > <br> **Namespaces provide a mechanism for isolating groups of resources within a single cluster.** 
-> <br> **Initial namespaces are default, kube-system, kube-public & kube-node-lease**
+> <br> Initial namespaces are
+- default
+- kube-system
+- kube-public
+- kube-node-lease
 
 > [!important]
-> **Question: What ae the three objec Management technique available in Kubernetes?** 
+> **Question: What ae the three objecy Management technique available in Kubernetes?** 
 > <br> **1. Imperative commands - for example kubectl create deployment nginx --image nginx.** 
 > <br> **2. Imperative object configuration - for example  kubectl create -f nginx.yaml**
 > <br> **3. Declarative object configuration - for example kubectl apply -f configs/**
