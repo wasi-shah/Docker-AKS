@@ -1288,4 +1288,32 @@ CICD > Cover Coverage Report Publish
 ![image](https://github.com/user-attachments/assets/5d1f39ec-f4c2-424b-91e7-ef34a81fdbe0)
 
 
+### Publish to AKS
+
+Adding Kubernetes Deployment
+
+- Create Kuberetes Cluster
+
+
+# Create a new AKS cluster in the Free tier
+$RESOURCE_GROUP="rg-aks-api-mvc-in-mem"
+$CLUSTER_NAME ="aks-my-cluster-08889"
+
+az group create --name $RESOURCE_GROUP --location uksouth
+
+
+az aks create --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME --tier free  --generate-ssh-keys
+
+az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME --overwrite-existing
+
+Test Locally 
+
+kubectl apply -f manifests/dep.yaml
+
+kubectl get pod,deploy,svc
+
+create cicd to deploy to aks
+- create service connection
+
+
 
