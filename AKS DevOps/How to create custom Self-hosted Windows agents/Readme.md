@@ -111,6 +111,13 @@ Make sure the docker is running on Windows where you have installed the agent
 Also, make sure the path variabl is set to load all dependencies.
 
 
+## Make sure the docker client is Open on Windows client (or running in system try)
+> [!Important]
+> Make sure the expose daemon on tcp is ticked
+ERROR: error during connect: in the default daemon configuration on Windows, the docker client must be run with elevated privileges to connect
+
+> Solution
+> Just open docker desktop–>settings–>general–>tick the field expose daemon on tcp–>apply&restart
 
 ## Attache Agent to Pipeline
 ```
