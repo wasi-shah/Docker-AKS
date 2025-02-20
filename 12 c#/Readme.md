@@ -1315,5 +1315,136 @@ kubectl get pod,deploy,svc
 create cicd to deploy to aks
 - create service connection
 
+### Publish to Local Cluster.
+
+- Create local CICD agent (see docs)
+
+- First things first you should connect your local Kubernetes cluster with Azure devops.
+```
+Get the output of the below command and paste it on the box.
+kubectl config view --raw
+```
+- go on Project settings -> Service connections and select Kubernetes
+- selecte kubeconfig
+- paste the output of previous command on the box
+-  Then select untrusted certificates and add press verify and save.
+-  On the tasks of the release pipeline you should select the agent pool, as a result your self hosted agent.
+-  In CICD (job) section define your agent pool name
+```
+   pool: MyCustomAgentPool
+```
+- Complete pipeline example
+```
+trigger:
+- main
+
+resources:
+- repo: self
+
+variables:
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: AKS
+  displayName: To AKS Stage
+  jobs:
+  - job: AKSjob
+    displayName: to AKS Job
+  
+    steps:
+ #   - task: CmdLine@2
+ #     inputs:
+ #       script: |
+ #             echo "$(Pipeline.Workspace)"
+ #             tree $(Pipeline.Workspace)
+ #   - task: CmdLine@2
+ #     inputs:
+#        script: |
+#          echo Write your commands here          
+#          cat $(Pipeline.Workspace)/s/TodoApi/manifests/dep.yaml
+    - task: CmdLine@2
+      inputs:
+        script: |
+          kubectl config view
+    - task: Kubernetes@1
+      displayName: 'default config view'
+      inputs:
+        connectionType: 'Kubernetes Service Connection'
+        kubernetesServiceEndpoint: 'kube-local-cluster-3'
+        namespace: 'default'
+        command: 'config'
+        arguments: 'view'
+        secretType: 'dockerRegistry'
+        containerRegistryType: 'Azure Container Registry'
+    - task: Kubernetes@1
+      displayName: 'config get-context'
+      inputs:
+        connectionType: 'Kubernetes Service Connection'
+        kubernetesServiceEndpoint: 'kube-local-cluster-3'
+        namespace: 'default'
+        command: 'config'
+        arguments: 'get-contexts'
+        secretType: 'dockerRegistry'
+        containerRegistryType: 'Azure Container Registry'    
 
 
+    - task: Kubernetes@1
+      displayName: 'set-context docker-desktop --user=docker-desktop'
+      inputs:
+        connectionType: 'Kubernetes Service Connection'
+        kubernetesServiceEndpoint: 'kube-local-cluster-3'
+        command: 'config'
+        arguments: 'set-context docker-desktop --user=docker-desktop'
+        secretType: 'dockerRegistry'
+        containerRegistryType: 'Azure Container Registry' 
+    - task: Kubernetes@1
+      displayName: 'auth whoami'
+      inputs:
+        connectionType: 'Kubernetes Service Connection'
+        kubernetesServiceEndpoint: 'kube-local-cluster-3'
+        command: 'auth'
+        arguments: 'whoami'
+        secretType: 'dockerRegistry'
+        containerRegistryType: 'Azure Container Registry' 
+
+    - task: Kubernetes@1
+      displayName: 'config get-contest - again'
+      inputs:
+        connectionType: 'Kubernetes Service Connection'
+        kubernetesServiceEndpoint: 'kube-local-cluster-3'
+        namespace: 'default'
+        command: 'config'
+        arguments: 'get-contexts'
+        secretType: 'dockerRegistry'
+        containerRegistryType: 'Azure Container Registry' 
+    - task: Kubernetes@1
+      displayName: 'cluster-info'
+      inputs:
+        connectionType: 'Kubernetes Service Connection'
+        kubernetesServiceEndpoint: 'kube-local-cluster-3'
+        namespace: 'default'
+        command: 'cluster-info'
+        secretType: 'dockerRegistry'
+        containerRegistryType: 'Azure Container Registry'
+    - task: Kubernetes@1
+      displayName: 'version'
+      inputs:
+        connectionType: 'Kubernetes Service Connection'
+        kubernetesServiceEndpoint: 'kube-local-cluster-3'
+        namespace: 'default'
+        command: 'version'
+        secretType: 'dockerRegistry'
+        containerRegistryType: 'Azure Container Registry'
+
+
+    - task: KubernetesManifest@1
+      displayName: 'Deploy manifests yaml'
+      inputs:
+        kubernetesServiceConnection: kube-local-cluster-3
+        namespace: default
+        manifests: |
+           $(Pipeline.Workspace)/s/TodoApi/manifests/dep.yaml
+           $(Pipeline.Workspace)/s/TodoApi/manifests/services.yaml
+        containers: wasishah102/api-mvc-in-mem
+    
+```
