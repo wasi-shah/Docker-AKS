@@ -1448,3 +1448,12 @@ stages:
         containers: wasishah102/api-mvc-in-mem
     
 ```
+
+You can now browser using port 8081 becuase the app is mapped to 8080 but service is mapped to 8081
+![image](https://github.com/user-attachments/assets/e97cd1ea-a771-4382-8eca-e14a8381f2fc)
+
+```
+http://kubernetes.docker.internal:8010/swagger/index.html
+or
+http://localhost:8010/swagger/index.html
+```
