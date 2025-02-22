@@ -449,7 +449,7 @@ http://localhost:5198/Products
 ```
 <hr>
 
-# ASP.Net MVC Core with Entity Framework Core [DB First]
+# ASP.Net MVC Core with Entity Framework Core SL Server (Express) [DB First]
 > 8-mvc
 
 ```
