@@ -646,7 +646,8 @@ builder.Services.AddScoped<ITaskService, InMemoryTaskService>();
 services.AddSingleton<IConfiguration, Configuration>();
 builder.Services.AddSingleton<ITaskService, InMemoryTaskService>();
 ```
-#### Creating and calling a service in API using DI (no database involved)
+<hr>
+# Minimal API using DI (only uses classes and no in-mem or sql database database involved)
 
 Step 1: Create Interface
 ```
@@ -722,11 +723,11 @@ app.MapPost("/todos", (Todo todo, ITaskService service) =>
 }
 )
 ```
+<hr>
 
-#### Creating and calling a service in API using DI & MS SQL Database Context 
+# Minimal API using DI & MS SQL Database Context 
 
 ```
-
 Download nuget packages
 
 dotnet add package Microsoft.EntityFrameworkCore
@@ -792,7 +793,7 @@ app.MapGet("/todos", async (MyToDoContext context) => Results.Ok(await context.T
 
 ```
 
-## Create a web API (MVC) with ASP.NET Core & In-memory storage
+# API (MVC) with ASP.NET Core & In-memory storage
 Create a project.
 ```
 dotnet new webapi --use-controllers -o TodoApi
