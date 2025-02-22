@@ -295,7 +295,7 @@ if (linq_products_onepizza_delete is Product)
 ```
 <hr>
 
-### EF Core in Console App With DI - Code First 
+# EF Core in Console App With DI - Code First 
 > 6-EntityFramework-CodeFirst
 
 **Create Model classess and Context
@@ -384,8 +384,10 @@ foreach (var product in context.Products)
     Console.WriteLine(product.Name);
 }
 ```
+<hr>
 
-### ASP.Net Core Razor with Entity Framework Core [DB First]
+# ASP.Net Core Razor with Entity Framework Core [DB First]
+> 7-EntityFramework-Razor-WebApp
 ```
 Create Razor Page project using builtin template
 dotnet new razor -o ContosoPizza   
@@ -445,8 +447,11 @@ dotnet run
 Browse the product index page
 http://localhost:5198/Products
 ```
+<hr>
 
-### ASP.Net MVC Core with Entity Framework Core [DB First]
+# ASP.Net MVC Core with Entity Framework Core [DB First]
+> 8-mvc
+
 ```
 Install Migration tool to reverse engineer DB
 dotnet tool install -g dotnet-ef
@@ -495,7 +500,7 @@ Now you can use it in a controller and views
 
 ```
 
-## C# APIS (Minimal API)
+# C# APIS (Minimal API)
 According to the Microsoft Docs: Minimal APIs are architected to create HTTP APIs with minimal dependencies. They are ideal for microservices and apps that want to include only the minimum files, features, and dependencies in ASP.NET Core.
 > API sits at the end point and perform action and response result.
 > API retuns code in header and data/empty in body
@@ -654,6 +659,7 @@ builder.Services.AddSingleton<ITaskService, InMemoryTaskService>();
 <hr>
 
 # Minimal API using DI (only uses classes and no in-mem or sql database database involved)
+> 9-minimal-api-in-memory
 
 Step 1: Create Interface
 ```
@@ -732,6 +738,7 @@ app.MapPost("/todos", (Todo todo, ITaskService service) =>
 <hr>
 
 # Minimal API using DI & MS SQL Database Context 
+> 10-minimal-api-sqlserver
 
 ```
 Download nuget packages
@@ -793,13 +800,12 @@ dotnet-ef database update
 
 // now in Program.cs you can use data from database
 app.MapGet("/todos", async (MyToDoContext context) => Results.Ok(await context.Todos.ToListAsync()));
-
-
-
-
 ```
+<hr>
 
-# API (MVC) with ASP.NET Core & In-memory storage
+# API (MVC) with ASP.NET Core & In-memory storage (Testing, CICD, Docker, Kubenetes)
+> 11-Api-MVC-In-Mem
+
 Create a project.
 ```
 dotnet new webapi --use-controllers -o TodoApi
