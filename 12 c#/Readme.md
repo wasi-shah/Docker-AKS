@@ -502,7 +502,7 @@ Now you can use it in a controller and views
 
 # API Codes
 - 1xx - Informational
-- 2xx - Seccess
+- 2xx - Success
 - 3xx - Redirect
 - 4xx - Client Side Error
 - 5xx - Server Side Error
