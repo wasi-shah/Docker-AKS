@@ -293,8 +293,11 @@ if (linq_products_onepizza_delete is Product)
 }
 
 ```
+<hr>
 
-### EF Core in Console App With DI - Code First
+### EF Core in Console App With DI - Code First 
+> 6-EntityFramework-CodeFirst
+
 **Create Model classess and Context
 **
 Create Models/Product.cs
