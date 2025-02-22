@@ -1242,6 +1242,52 @@ stages:
 3. Add tests to test your API controllers
 4. Add Code coverate Support
 
+Adding Test Project
+- Right click on the solution and click add project
+- Name project as [Api-MVC-In-Mem.Test]
+- Create a class [TodoControllerTest.cs]
+```
+using System;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Moq;
+using TodoApi.Controllers;
+using TodoApi.Data;
+using TodoApi.Models;
+
+namespace Api_MVC_In_Mem_Test;
+
+public class TodoControllerTest
+{
+
+[Fact]
+public async Task TestTodoApiAsync()
+{
+    // Arrange
+     var option = new DbContextOptionsBuilder<TodoContext>()
+        .UseInMemoryDatabase(databaseName: "testdatabase")
+        .Options;
+    // Insert seed data into the database using one instance of the context
+    using (var context = new TodoContext(option))
+    {
+        context.TodoItems.Add(new TodoItem { Id = 1, Name = "Test1" });
+        context.TodoItems.Add(new TodoItem { Id = 2, Name = "Test2" });
+        context.SaveChanges();
+    }
+    // Use a clean instance of the context to run the test
+    using (var context = new TodoContext(option))
+    {
+        var controller = new TodoController(context);
+        var result = await controller.GetTodoItems();
+        var items = result.Value.ToList();
+        // Assert
+        Assert.Equal(2, items.Count);
+  
+    }
+}
+}
+```
+
 **Add Code coverage tool**
 ```
 dotnet add package coverlet.collector
@@ -1251,6 +1297,8 @@ Run Test without code coverage collection
 ```
 dotnet test
 ```
+![image](https://github.com/user-attachments/assets/48063a15-e75a-4ce5-99dc-803c2abb272b)
+
 With Collection via Coverlet [Generates XML file]
 ```
 dotnet test --collect:"XPlat Code Coverage"
@@ -1266,7 +1314,7 @@ dotnet tool install -g dotnet-reportgenerator-globaltool
 
 reportgenerator -reports:coverage.cobertura.xml -targetdir:coveragereport
 ```
-#### Addign Test and code coverage in CICD
+#### Adding Test and code coverage in CICD
 CICD > Test with Code Coverage
 ```
     - task: DotNetCoreCLI@2
