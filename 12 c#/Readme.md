@@ -647,6 +647,7 @@ services.AddSingleton<IConfiguration, Configuration>();
 builder.Services.AddSingleton<ITaskService, InMemoryTaskService>();
 ```
 <hr>
+
 # Minimal API using DI (only uses classes and no in-mem or sql database database involved)
 
 Step 1: Create Interface
