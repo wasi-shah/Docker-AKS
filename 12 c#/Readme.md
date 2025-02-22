@@ -500,13 +500,12 @@ Now you can use it in a controller and views
 
 ```
 
-# C# APIS (Minimal API)
-According to the Microsoft Docs: Minimal APIs are architected to create HTTP APIs with minimal dependencies. They are ideal for microservices and apps that want to include only the minimum files, features, and dependencies in ASP.NET Core.
-> API sits at the end point and perform action and response result.
-> API retuns code in header and data/empty in body
-> You dont add many files or dependencies
-
-API Codes
+# API Codes
+- 1xx - Informational
+- 2xx - Seccess
+- 3xx - Redirect
+- 4xx - Client Side Error
+- 5xx - Server Side Error
 ```
 200	OK	Results.Ok(object);
 201	Created	Results.Created($"/todos/{todo.Id}", todo);
@@ -522,6 +521,14 @@ API Codes
 404	Not Found
 
 ```
+
+# C# APIS (Minimal API)
+According to the Microsoft Docs: Minimal APIs are architected to create HTTP APIs with minimal dependencies. They are ideal for microservices and apps that want to include only the minimum files, features, and dependencies in ASP.NET Core.
+> API sits at the end point and perform action and response result.
+> API retuns code in header and data/empty in body
+> You dont add many files or dependencies
+
+
 
 
 ### Middleware
