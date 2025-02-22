@@ -186,7 +186,9 @@ e.Re-Scaffold Database when database changed – If there is a chance that the d
 i.dotnet-ef dbcontext scaffold "Server=.\SQLExpress;Database=contoso;User Id=dev;Password=Password123.; TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer --context-dir Data --output-dir Models/Generated --data-annotations --context-namespace ContosoPizza.Data --namespace ContosoPizza.Models
 
 ```
-### EF Core in Console App without DI
+<hr>
+
+# EF Core in Console App without DI
 
 Create Model classess and Context either manually or using Code first or Database first
 In Program.cs create a context object and use it directly (see other example for using through DI)
