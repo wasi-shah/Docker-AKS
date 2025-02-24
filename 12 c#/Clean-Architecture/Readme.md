@@ -19,9 +19,9 @@ Depends on:
 
 
 > [!TIP]
-> No one reference to Presentation project.
-> Presentation reference to everything.
-> Everyone reference to Domain.
+> - No one reference to Presentation project.
+> - Presentation reference to everything.
+> - Everyone reference to Domain.
 
 ## Presentation (API/WebUI)
 - Intract with the user through a UI or through API for other services
