@@ -1,15 +1,17 @@
 # Clean Architecture
+![image](https://github.com/user-attachments/assets/25532bef-a654-43e8-8a9b-834f16f140c4)
+
 ## Domain 
-- contains Entity and Business logic that can be calculated by hand
+- contains Entity and Business logic that can be calculated by hand. It includes entities, value objects, domain services, and domain events.
 
 ## Application
-- contains Application logic - deals with request and it's validity
+Contains Application logic - deals with request and it's validity. Contains the application layer, which implements the use cases of the system. It includes commands, queries, handlers, and DTOs.
 
 Depends on:
 - Domain
 
 ## Infrastructure
-- contains connection to database and other resources
+Contains the infrastructure layer, which implements the technical details of the system. It includes database access, logging, configuration, and external services.
 
 Depends on:
 - Domain
@@ -23,4 +25,39 @@ Depends on:
 - Infra
 - Application
 
+# Project: 12-TodoApi-CleanArchitecture-MVC-AzureDB-Docker-Kubernetes
+```
+mkdir 12-TodoApi-CleanArchitecture-MVC-AzureDB-Docker-Kubernetes
+cd 12-TodoApi-CleanArchitecture-MVC-AzureDB-Docker-Kubernetes
+
+# Add solution and must have clean architecture projects
+dotnet new sln -n Todo-CleanArchitecure
+dotnet new webapi --use-controllers -o Todo.Presentation.API
+dotnet new classlib -o Todo.Domain
+dotnet new classlib -o Todo.Application
+dotnet new classlib -o Todo.Infrastructure
+
+# Add projects to one solution
+dotnet sln Todo-CleanArchitecure.sln add .\Todo.Presentation.API\Todo.Presentation.API.csproj
+dotnet sln Todo-CleanArchitecure.sln add .\Todo.Domain\Todo.Domain.csproj
+dotnet sln Todo-CleanArchitecure.sln add .\Todo.Application\Todo.Application.csproj
+dotnet sln Todo-CleanArchitecure.sln add .\Todo.Infrastructure\Todo.Infrastructure.csproj
+
+# Create Test folder and create test projects (using Class Libarary) in that folder
+dotnet new classlib -o .\Tests\Todo.Presentation.API.Test
+dotnet new classlib -o .\Tests\Todo.Infrastructure.Test
+dotnet new classlib -o .\Tests\Todo.Application.Test
+
+# In Domain project create Entities folder
+
+# In Entities Folder create Poco class that will be mapped to database as code first
+ToDoItem.cs
+ToDoList.cs
+User.cs
+
+# In Domain create Enum flolder
+Create PriorityLevel.cs
+
+
+```
 
