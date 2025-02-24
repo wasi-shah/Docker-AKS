@@ -17,12 +17,18 @@ Depends on:
 - Domain
 - Application 
 
+
+> [!TIP]
+> No one reference to Presentation project.
+> Presentation reference to everything.
+> Everyone reference to Domain.
+
 ## Presentation (API/WebUI)
 - Intract with the user through a UI or through API for other services
 
 Depends on:
 - Domian
-- Infra
+- Infrastructure
 - Application
 
 # Project: 12-TodoApi-CleanArchitecture-MVC-AzureDB-Docker-Kubernetes
@@ -48,7 +54,20 @@ dotnet new classlib -o .\Tests\Todo.Presentation.API.Test
 dotnet new classlib -o .\Tests\Todo.Infrastructure.Test
 dotnet new classlib -o .\Tests\Todo.Application.Test
 
-# In Domain project create Entities folder
+# References
+## Application Project
+- Domain
+
+## Infrastructure Poject
+- Domain
+- Application
+
+## Presentation.API
+- Domain
+- Infrastructure
+- Application
+
+## In Domain project create Entities folder
 
 # In Entities Folder create Poco class that will be mapped to database as code first
 ToDoItem.cs
@@ -58,6 +77,9 @@ User.cs
 # In Domain create Enum flolder
 Create PriorityLevel.cs
 
+
+
+## Application 
 
 ```
 
