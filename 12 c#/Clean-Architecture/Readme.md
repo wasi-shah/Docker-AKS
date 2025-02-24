@@ -69,6 +69,19 @@ dotnet new classlib -o .\Tests\Todo.Application.Test
 - Infrastructure
 - Application
 
+
+## Install EF core package in Infrastructure
+cd todo.infrastructure
+dotnet add package Microsoft.EntityFrameworkCore
+dotnet add package Microsoft.EntityFrameworkCore.InMemory
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+
+## Install Scalar in Presentation
+cd Todo.Presentation.API
+dotnet add package Scalar.AspNetCore
+
+
+
 ## In Domain project create Entities folder
 
 # In Entities Folder create Poco class that will be mapped to database as code first
