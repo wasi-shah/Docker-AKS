@@ -33,6 +33,8 @@ Depends on:
 
 # Project: 12-TodoApi-CleanArchitecture-MVC-AzureDB-Docker-Kubernetes
 ```
+Source original https://github.com/learnsmartcoding/CleanArchitecture-ToDoApp-DotNet8-WebApi/tree/main
+
 mkdir 12-TodoApi-CleanArchitecture-MVC-AzureDB-Docker-Kubernetes
 cd 12-TodoApi-CleanArchitecture-MVC-AzureDB-Docker-Kubernetes
 
@@ -70,16 +72,22 @@ dotnet new classlib -o .\Tests\Todo.Application.Test
 ## In Domain project create Entities folder
 
 # In Entities Folder create Poco class that will be mapped to database as code first
-ToDoItem.cs
-ToDoList.cs
-User.cs
+.\Todo.Domain\Entities\ToDoItem.cs
+.\Todo.Domain\Entities\ToDoList.cs
+.\Todo.Domain\Entities\User.cs
 
 # In Domain create Enum flolder
-Create PriorityLevel.cs
+Create .\Todo.Domain\Enum\PriorityLevel.cs
 
 
-
-## Application 
+## Application - Contain logic and interfaces
+Create Interface - These will be implementes in other places
+.\Todo.Application\Interfaces\IToDoItemRepository.cs
+.\Todo.Application\Interfaces\IToDoItemService.cs
+.\Todo.Application\Interfaces\IToDoListRepository.cs
+.\Todo.Application\Interfaces\IToDoListService.cs
+.\Todo.Application\Interfaces\IUserRepository.cs
+.\Todo.Application\Interfaces\IUserService.cs
 
 ```
 
