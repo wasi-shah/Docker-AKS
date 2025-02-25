@@ -81,7 +81,25 @@ dotnet add .\Todo.Infrastructure\Todo.Infrastructure.csproj package Microsoft.En
 ## Install Scalar in Presentation
 dotnet add .\Todo.Presentation.API\Todo.Presentation.API.csproj package Scalar.AspNetCore
 
+# Add Unit test packages to Test Projects
 
+dotnet add .\TodoApp.Tests\Todo.Application.Test\Todo.Application.Test.csproj package Microsoft.NET.Test.Sdk
+dotnet add .\TodoApp.Tests\Todo.Application.Test\Todo.Application.Test.csproj package coverlet.collector
+dotnet add .\TodoApp.Tests\Todo.Application.Test\Todo.Application.Test.csproj package Moq
+dotnet add .\TodoApp.Tests\Todo.Application.Test\Todo.Application.Test.csproj package xunit
+dotnet add .\TodoApp.Tests\Todo.Application.Test\Todo.Application.Test.csproj package xunit.runner.visualstudio
+
+dotnet add .\TodoApp.Tests\Todo.Presentation.API.Test\Todo.Presentation.API.Test.csproj package Microsoft.NET.Test.Sdk
+dotnet add .\TodoApp.Tests\Todo.Presentation.API.Test\Todo.Presentation.API.Test.csproj package coverlet.collector
+dotnet add .\TodoApp.Tests\Todo.Presentation.API.Test\Todo.Presentation.API.Test.csproj package Moq
+dotnet add .\TodoApp.Tests\Todo.Presentation.API.Test\Todo.Presentation.API.Test.csproj package xunit
+dotnet add .\TodoApp.Tests\Todo.Presentation.API.Test\Todo.Presentation.API.Test.csproj package xunit.runner.visualstudio
+
+dotnet add .\TodoApp.Tests\Todo.Infrastructure.Test\Todo.Infrastructure.Test.csproj package Microsoft.NET.Test.Sdk
+dotnet add .\TodoApp.Tests\Todo.Infrastructure.Test\Todo.Infrastructure.Test.csproj package coverlet.collector
+dotnet add .\TodoApp.Tests\Todo.Infrastructure.Test\Todo.Infrastructure.Test.csproj package Moq
+dotnet add .\TodoApp.Tests\Todo.Infrastructure.Test\Todo.Infrastructure.Test.csproj package xunit
+dotnet add .\TodoApp.Tests\Todo.Infrastructure.Test\Todo.Infrastructure.Test.csproj package xunit.runner.visualstudio
 
 ## In Domain project create Entities folder
 
