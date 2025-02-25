@@ -167,3 +167,14 @@ dotnet user-secrets set "ConnectionStrings:DbContext" "Server=.\SQLExpress;Datab
 
 ```
 
+# Run Test
+```
+dotnet test --collect:"XPlat Code Coverage"
+dotnet tool install -g dotnet-reportgenerator-globaltool
+
+cd to where the coverage.cobertura.xml generated
+
+reportgenerator -reports:coverage.cobertura.xml -targetdir:coveragereport
+open html file in browser
+```
+
