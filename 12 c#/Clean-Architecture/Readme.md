@@ -55,22 +55,32 @@ dotnet sln Todo-CleanArchitecure.sln add .\Todo.Presentation.API\Todo.Presentati
 dotnet sln Todo-CleanArchitecure.sln add .\Todo.Domain\Todo.Domain.csproj
 dotnet sln Todo-CleanArchitecure.sln add .\Todo.Application\Todo.Application.csproj
 dotnet sln Todo-CleanArchitecure.sln add .\Todo.Infrastructure\Todo.Infrastructure.csproj
+
 dotnet sln Todo-CleanArchitecure.sln add .\TodoApp.Tests\Todo.Application.Test\Todo.Application.Test.csproj
 dotnet sln Todo-CleanArchitecure.sln add .\TodoApp.Tests\Todo.Presentation.API.Test\Todo.Presentation.API.Test.csproj
 dotnet sln Todo-CleanArchitecure.sln add .\TodoApp.Tests\Todo.Infrastructure.Test\Todo.Infrastructure.Test.csproj
+## NO NEED TO TEST DOMAIN PROJECT ##
 
 # References
 ## Application Project
 - Domain
+dotnet add .\Todo.Application\Todo.Application.csproj reference .\Todo.Domain\Todo.Domain.csproj
 
 ## Infrastructure Poject
 - Domain
 - Application
+dotnet add .\Todo.Infrastructure\Todo.Infrastructure.csproj reference .\Todo.Domain\Todo.Domain.csproj
+dotnet add .\Todo.Infrastructure\Todo.Infrastructure.csproj reference .\Todo.Application\Todo.Application.csproj
 
 ## Presentation.API
 - Domain
 - Infrastructure
 - Application
+dotnet add .\Todo.Presentation.API\Todo.Presentation.API.csproj reference .\Todo.Domain\Todo.Domain.csproj
+dotnet add .\Todo.Presentation.API\Todo.Presentation.API.csproj reference .\Todo.Infrastructure\Todo.Infrastructure.csproj
+dotnet add .\Todo.Presentation.API\Todo.Presentation.API.csproj reference .\Todo.Application\Todo.Application.csproj
+
+
 
 
 ## Install EF core package in Infrastructure
