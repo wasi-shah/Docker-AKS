@@ -61,7 +61,7 @@ dotnet sln Todo-CleanArchitecure.sln add .\TodoApp.Tests\Todo.Presentation.API.T
 dotnet sln Todo-CleanArchitecure.sln add .\TodoApp.Tests\Todo.Infrastructure.Test\Todo.Infrastructure.Test.csproj
 ## NO NEED TO TEST DOMAIN PROJECT ##
 ```
-## References
+## Project References according to Clean Architecture
 ```
 ## Application Project
 - Domain
@@ -81,7 +81,34 @@ dotnet add .\Todo.Presentation.API\Todo.Presentation.API.csproj reference .\Todo
 dotnet add .\Todo.Presentation.API\Todo.Presentation.API.csproj reference .\Todo.Infrastructure\Todo.Infrastructure.csproj
 dotnet add .\Todo.Presentation.API\Todo.Presentation.API.csproj reference .\Todo.Application\Todo.Application.csproj
 ```
-## Install Packages need to run the roject
+## Project References for Unit Test
+```
+#Todo.Application.Test References
+- Application
+- Domain
+
+dotnet add .\TodoApp.Tests\Todo.Application.Test\Todo.Application.Test.csproj reference .\Todo.Application\Todo.Application.csproj
+dotnet add .\TodoApp.Tests\Todo.Application.Test\Todo.Application.Test.csproj reference .\Todo.Domain\Todo.Domain.csproj
+
+# Todo.Infrastructure.Test References
+- Infrastructure
+- Domain
+
+dotnet add .\TodoApp.Tests\Todo.Infrastructure.Test\Todo.Infrastructure.Test.csproj reference .\Todo.Infrastructure\Todo.Infrastructure.csproj
+dotnet add .\TodoApp.Tests\Todo.Infrastructure.Test\Todo.Infrastructure.Test.csproj reference .\Todo.Domain\Todo.Domain.csproj
+
+# TodoApp.WebAPI.Tests References
+- Presentation.API
+- Application
+- Domain
+
+dotnet add .\TodoApp.Tests\Todo.Presentation.API.Test\Todo.Presentation.API.Test.csproj reference .\Todo.Presentation.API\Todo.Presentation.API.csproj
+dotnet add .\TodoApp.Tests\Todo.Presentation.API.Test\Todo.Presentation.API.Test.csproj reference .\Todo.Application\Todo.Application.csproj
+dotnet add .\TodoApp.Tests\Todo.Presentation.API.Test\Todo.Presentation.API.Test.csproj reference .\Todo.Domain\Todo.Domain.csproj
+
+```
+
+## Install Packages need to run the Project
 ```
 ## Install EF core package in Infrastructure
 dotnet add .\Todo.Infrastructure\Todo.Infrastructure.csproj package Microsoft.EntityFrameworkCore
