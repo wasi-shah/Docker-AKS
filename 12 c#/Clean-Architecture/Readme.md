@@ -45,16 +45,19 @@ dotnet new classlib -o Todo.Domain
 dotnet new classlib -o Todo.Application
 dotnet new classlib -o Todo.Infrastructure
 
+# Create Test folder and create test projects (using Class Libarary) in that folder
+dotnet new classlib -o .\TodoApp.Tests\Todo.Presentation.API.Test
+dotnet new classlib -o .\TodoApp.Tests\Todo.Infrastructure.Test
+dotnet new classlib -o .\TodoApp.Tests\Todo.Application.Test
+
 # Add projects to one solution
 dotnet sln Todo-CleanArchitecure.sln add .\Todo.Presentation.API\Todo.Presentation.API.csproj
 dotnet sln Todo-CleanArchitecure.sln add .\Todo.Domain\Todo.Domain.csproj
 dotnet sln Todo-CleanArchitecure.sln add .\Todo.Application\Todo.Application.csproj
 dotnet sln Todo-CleanArchitecure.sln add .\Todo.Infrastructure\Todo.Infrastructure.csproj
-
-# Create Test folder and create test projects (using Class Libarary) in that folder
-dotnet new classlib -o .\Tests\Todo.Presentation.API.Test
-dotnet new classlib -o .\Tests\Todo.Infrastructure.Test
-dotnet new classlib -o .\Tests\Todo.Application.Test
+dotnet sln Todo-CleanArchitecure.sln add .\TodoApp.Tests\Todo.Application.Test\Todo.Application.Test.csproj
+dotnet sln Todo-CleanArchitecure.sln add .\TodoApp.Tests\Todo.Presentation.API.Test\Todo.Presentation.API.Test.csproj
+dotnet sln Todo-CleanArchitecure.sln add .\TodoApp.Tests\Todo.Infrastructure.Test\Todo.Infrastructure.Test.csproj
 
 # References
 ## Application Project
@@ -71,14 +74,12 @@ dotnet new classlib -o .\Tests\Todo.Application.Test
 
 
 ## Install EF core package in Infrastructure
-cd todo.infrastructure
-dotnet add package Microsoft.EntityFrameworkCore
-dotnet add package Microsoft.EntityFrameworkCore.InMemory
-dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+dotnet add .\Todo.Infrastructure\Todo.Infrastructure.csproj package Microsoft.EntityFrameworkCore
+dotnet add .\Todo.Infrastructure\Todo.Infrastructure.csproj package Microsoft.EntityFrameworkCore.InMemory
+dotnet add .\Todo.Infrastructure\Todo.Infrastructure.csproj package Microsoft.EntityFrameworkCore.SqlServer
 
 ## Install Scalar in Presentation
-cd Todo.Presentation.API
-dotnet add package Scalar.AspNetCore
+dotnet add .\Todo.Presentation.API\Todo.Presentation.API.csproj package Scalar.AspNetCore
 
 
 
@@ -101,6 +102,12 @@ Create Interface - These will be implementes in other places
 .\Todo.Application\Interfaces\IToDoListService.cs
 .\Todo.Application\Interfaces\IUserRepository.cs
 .\Todo.Application\Interfaces\IUserService.cs
+
+## Add secret
+Add secret
+cd Todo.Presentation.API
+dotnet user-secrets init
+dotnet user-secrets set "ConnectionStrings:DbContext" "Server=.\SQLExpress;Database=CleanArchitectureToDoAppDemo;User Id=dev;Password=Password123.; TrustServerCertificate=True;"
 
 ```
 
