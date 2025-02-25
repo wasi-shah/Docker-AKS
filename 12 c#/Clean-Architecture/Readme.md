@@ -60,8 +60,9 @@ dotnet sln Todo-CleanArchitecure.sln add .\TodoApp.Tests\Todo.Application.Test\T
 dotnet sln Todo-CleanArchitecure.sln add .\TodoApp.Tests\Todo.Presentation.API.Test\Todo.Presentation.API.Test.csproj
 dotnet sln Todo-CleanArchitecure.sln add .\TodoApp.Tests\Todo.Infrastructure.Test\Todo.Infrastructure.Test.csproj
 ## NO NEED TO TEST DOMAIN PROJECT ##
-
-# References
+```
+## References
+```
 ## Application Project
 - Domain
 dotnet add .\Todo.Application\Todo.Application.csproj reference .\Todo.Domain\Todo.Domain.csproj
@@ -79,10 +80,9 @@ dotnet add .\Todo.Infrastructure\Todo.Infrastructure.csproj reference .\Todo.App
 dotnet add .\Todo.Presentation.API\Todo.Presentation.API.csproj reference .\Todo.Domain\Todo.Domain.csproj
 dotnet add .\Todo.Presentation.API\Todo.Presentation.API.csproj reference .\Todo.Infrastructure\Todo.Infrastructure.csproj
 dotnet add .\Todo.Presentation.API\Todo.Presentation.API.csproj reference .\Todo.Application\Todo.Application.csproj
-
-
-
-
+```
+## Install Packages need to run the roject
+```
 ## Install EF core package in Infrastructure
 dotnet add .\Todo.Infrastructure\Todo.Infrastructure.csproj package Microsoft.EntityFrameworkCore
 dotnet add .\Todo.Infrastructure\Todo.Infrastructure.csproj package Microsoft.EntityFrameworkCore.InMemory
@@ -92,7 +92,6 @@ dotnet add .\Todo.Infrastructure\Todo.Infrastructure.csproj package Microsoft.En
 dotnet add .\Todo.Presentation.API\Todo.Presentation.API.csproj package Scalar.AspNetCore
 
 # Add Unit test packages to Test Projects
-
 dotnet add .\TodoApp.Tests\Todo.Application.Test\Todo.Application.Test.csproj package Microsoft.NET.Test.Sdk
 dotnet add .\TodoApp.Tests\Todo.Application.Test\Todo.Application.Test.csproj package coverlet.collector
 dotnet add .\TodoApp.Tests\Todo.Application.Test\Todo.Application.Test.csproj package Moq
@@ -110,9 +109,9 @@ dotnet add .\TodoApp.Tests\Todo.Infrastructure.Test\Todo.Infrastructure.Test.csp
 dotnet add .\TodoApp.Tests\Todo.Infrastructure.Test\Todo.Infrastructure.Test.csproj package Moq
 dotnet add .\TodoApp.Tests\Todo.Infrastructure.Test\Todo.Infrastructure.Test.csproj package xunit
 dotnet add .\TodoApp.Tests\Todo.Infrastructure.Test\Todo.Infrastructure.Test.csproj package xunit.runner.visualstudio
-
+```
 ## In Domain project create Entities folder
-
+```
 # In Entities Folder create Poco class that will be mapped to database as code first
 .\Todo.Domain\Entities\ToDoItem.cs
 .\Todo.Domain\Entities\ToDoList.cs
@@ -121,8 +120,9 @@ dotnet add .\TodoApp.Tests\Todo.Infrastructure.Test\Todo.Infrastructure.Test.csp
 # In Domain create Enum flolder
 Create .\Todo.Domain\Enum\PriorityLevel.cs
 
-
+```
 ## Application - Contain logic and interfaces
+```
 Create Interface - These will be implementes in other places
 .\Todo.Application\Interfaces\IToDoItemRepository.cs
 .\Todo.Application\Interfaces\IToDoItemService.cs
@@ -130,8 +130,9 @@ Create Interface - These will be implementes in other places
 .\Todo.Application\Interfaces\IToDoListService.cs
 .\Todo.Application\Interfaces\IUserRepository.cs
 .\Todo.Application\Interfaces\IUserService.cs
-
+```
 ## Add secret
+```
 Add secret
 cd Todo.Presentation.API
 dotnet user-secrets init
